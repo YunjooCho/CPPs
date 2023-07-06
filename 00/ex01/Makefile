@@ -6,14 +6,14 @@
 #    By: yunjcho <yunjcho@student.42seoul.kr>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/06/14 15:31:29 by yunjcho           #+#    #+#              #
-#    Updated: 2023/06/18 20:17:01 by yunjcho          ###   ########seoul.kr   #
+#    Updated: 2023/07/06 15:58:49 by yunjcho          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = phoneBook
 CC = c++
 CXXFLAGS = -Wall -Werror -Wextra -std=c++98
-SRCS = phoneBook.cpp
+SRCS = main.cpp PhoneBook.cpp Contact.cpp
 OBJS = $(SRCS:.cpp=.o)
 
 ifdef SANITIZE
