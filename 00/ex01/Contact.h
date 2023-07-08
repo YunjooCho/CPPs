@@ -6,30 +6,34 @@
 /*   By: yunjcho <yunjcho@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/06 16:18:24 by yunjcho           #+#    #+#             */
-/*   Updated: 2023/07/06 20:28:03 by yunjcho          ###   ########.fr       */
+/*   Updated: 2023/07/08 18:06:07 by yunjcho          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CONTACT_H
 # define CONTACT_H
 
-# include <string>
+#include <iostream>
+#include <string>
 
 class Contact {
 	private:
-			int			id;
 			std::string	firstName;
 			std::string	lastName;
 			std::string	nickname;
 			std::string	phoneNumber;
 			std::string	darkestSecret;
 	public:
-		void setVariables(int idx, std::string firstName, \
-			std::string lastName, std::string nickname, \
-			std::string phoneNumber, std::string darkestSecret);
+		void		createNewContact(Contact *contact, int idx);
+		void 		setVariables(std::string firstName, \
+						std::string lastName, std::string nickname, \
+						std::string phoneNumber, std::string darkestSecret);
 		std::string	getFirstName(void);
-		std::string	getLasttName(void);
+		std::string	getLastName(void);
 		std::string	getNickname(void);
+		std::string	getPhoneNumber(void);
+		std::string	getDarkestSecret(void);
+		void		chagePrintString(std::string str);
 };
 
 #endif
