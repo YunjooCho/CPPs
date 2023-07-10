@@ -6,7 +6,7 @@
 /*   By: yunjcho <yunjcho@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/06 15:54:22 by yunjcho           #+#    #+#             */
-/*   Updated: 2023/07/10 18:35:35 by yunjcho          ###   ########.fr       */
+/*   Updated: 2023/07/10 18:41:20 by yunjcho          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,7 @@ void	PhoneBook::createNewContact(Contact *contact, int idx)
 	contact->setVariables(firstName, lastName, nickname, phoneNumber, darkestSecret);
 }
 
-void	PhoneBook::appendContact(int idx, Contact *contact)
+void	PhoneBook::appendContact(Contact *contact, int idx)
 {
 	contactArr[idx] = *contact;
 }

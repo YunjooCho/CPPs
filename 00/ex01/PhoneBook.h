@@ -6,7 +6,7 @@
 /*   By: yunjcho <yunjcho@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/06 16:45:19 by yunjcho           #+#    #+#             */
-/*   Updated: 2023/07/10 18:36:43 by yunjcho          ###   ########.fr       */
+/*   Updated: 2023/07/10 18:41:37 by yunjcho          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ class PhoneBook {
 	public:
 			int		checkPhoneNumber(std::string phoneNumber);
 			void	createNewContact(Contact *contact, int idx);
-			void	appendContact(int idx, Contact *contact);
+			void	appendContact(Contact *contact, int idx);
 			void	printContacts(void);
 			Contact *getContact(int idx);
 			void	printOneContact(int idx);

@@ -6,7 +6,7 @@
 /*   By: yunjcho <yunjcho@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/18 20:51:47 by yunjcho           #+#    #+#             */
-/*   Updated: 2023/07/10 18:35:12 by yunjcho          ###   ########.fr       */
+/*   Updated: 2023/07/10 18:51:12 by yunjcho          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,8 @@ void	Contact::chagePrintString(std::string str)
 	}
 	else
 	{
+		int	len = 10 - str.length() + 1;
+		std::cout << std::setw(len);
 		for (size_t i = 0; i < str.length(); i++)
 			std::cout << str[i];
 	}

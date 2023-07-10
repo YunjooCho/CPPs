@@ -6,7 +6,7 @@
 /*   By: yunjcho <yunjcho@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/18 19:36:58 by yunjcho           #+#    #+#             */
-/*   Updated: 2023/07/10 18:38:33 by yunjcho          ###   ########.fr       */
+/*   Updated: 2023/07/10 18:44:40 by yunjcho          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ int main(void)
 		if (command == "ADD")
 		{
 			phoneBook.createNewContact(&contact, idx);
-			phoneBook.appendContact(idx, &contact);
+			phoneBook.appendContact(&contact, idx);
 			idx++;
 			if (idx == 9)
 				idx = 0;
@@ -52,7 +52,7 @@ int main(void)
 			if (phoneBook.getContact(std::atoi(num.c_str()))->getFirstName().length() <= 0)
 				std::cout << "** 해당 인덱스에 데이터가 존재하지 않습니다. **" << std::endl;
 			else
-				phoneBook.printOneContact(idx);
+				phoneBook.printOneContact(std::atoi(num.c_str()));
 		}
 		else if (command == "EXIT")
 		{
