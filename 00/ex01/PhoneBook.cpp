@@ -6,15 +6,11 @@
 /*   By: yunjcho <yunjcho@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/06 15:54:22 by yunjcho           #+#    #+#             */
-/*   Updated: 2023/07/08 18:17:10 by yunjcho          ###   ########.fr       */
+/*   Updated: 2023/07/10 12:50:05 by yunjcho          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <string>
-#include <iostream>
-#include <iomanip>
-#include "PhoneBook.h"
-#include "Contact.h"
+#include "Utils.h"
 
 void	PhoneBook::appendContact(int idx, Contact *contact)
 {

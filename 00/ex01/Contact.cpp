@@ -6,67 +6,91 @@
 /*   By: yunjcho <yunjcho@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/18 20:51:47 by yunjcho           #+#    #+#             */
-/*   Updated: 2023/07/08 21:27:39 by yunjcho          ###   ########.fr       */
+/*   Updated: 2023/07/10 16:04:27 by yunjcho          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <string>
-#include <iostream>
-#include <iomanip>
-#include "Contact.h"
+#include "Utils.h"
 
+int	check_phoneNumber(std::string phoneNumber)
+{
+	for (int i = 0; i < (int)phoneNumber.length(); i++)
+	{
+		if (phoneNumber[i] < '0' || phoneNumber[i] > '9')
+			return (0);
+	}
+	return (1);
+}
 
 void	Contact::createNewContact(Contact *contact, int idx)
 {
-	int			result;
-	std::string	firstName;
-	std::string	lastName;
-	std::string	nickname;
-	std::string	phoneNumber;
-	std::string	darkestSecret;
+	char	*firstName = NULL;
+	char	*lastName = NULL;
+	char	*nickname = NULL;
+	char	*phoneNumber = NULL;
+	char	*darkestSecret = NULL;
 
 	std::cout << idx << ")) 이름을 입력하세요 : " << std::endl;
-	std::cin >> firstName;
-	if (firstName.length() <= 0 || std::cin.eof() == true)
+	std::cin.getline(firstName, 10000);
+	// std::cin >> firstName;
+	while (strlen(firstName) <= 0)
 	{
 		std::cout << "** 아무 것도 입력되지 않았습니다. 다시 입력해 주세요. ** " << std::endl;
-		std::clearerr(stdin); //EOF 와 오류 표시자를 재설정
-		std::cin.clear();     //표준 입력 버퍼 비우기
+		clear_buffer();
+		std::cout << idx << ")) 이름을 입력하세요 : " << std::endl;
+		std::cin.getline(firstName, 10000);
+		// std::cin >> firstName;
 	}
 	std::cout << idx << ")) 성을 입력하세요 : " << std::endl;
-	std::cin >> lastName;
-	if (lastName.length() <= 0 || std::cin.eof() == true)
+	std::cin.getline(lastName, 10000);
+	// std::cin >> lastName;
+	while (strlen(lastName) <= 0)
 	{
 		std::cout << "** 아무 것도 입력되지 않았습니다. 다시 입력해 주세요. ** " << std::endl;
-		std::clearerr(stdin); //EOF 와 오류 표시자를 재설정
-		std::cin.clear();     //표준 입력 버퍼 비우기
+		clear_buffer();
+		std::cout << idx << ")) 성을 입력하세요 : " << std::endl;
+		std::cin >> lastName;
 	}
 	std::cout << idx << ")) 별명을 입력하세요 : " << std::endl;
-	std::cin >> nickname;
-	if (nickname.length() <= 0 || std::cin.eof() == true)
+	std::cin.getline(nickname, 10000);
+	// std::cin >> nickname;
+	while (strlen(nickname) <= 0)
 	{
 		std::cout << "** 아무 것도 입력되지 않았습니다. 다시 입력해 주세요. ** " << std::endl;
-		std::clearerr(stdin); //EOF 와 오류 표시자를 재설정
-		std::cin.clear();     //표준 입력 버퍼 비우기
+		clear_buffer();
+		std::cout << idx << ")) 별명을 입력하세요 : " << std::endl;
+		std::cin.getline(nickname, 10000);
+		// std::cin >> nickname;
 	}
-	std::cout << idx << ")) 전화번호를 입력하세요 : " << std::endl;
-	std::cin >> phoneNumber;
-	if (phoneNumber.length() <= 0 || std::cin.eof() == true)
-	{
-		std::cout << "** 아무 것도 입력되지 않았습니다. 다시 입력해 주세요. ** " << std::endl;
-		std::clearerr(stdin); //EOF 와 오류 표시자를 재설정
-		std::cin.clear();     //표준 입력 버퍼 비우기
+	std::cout << idx << ")) 전화번호를 입력하세요 : ('-'는 제외)" << std::endl;
+	std::cin.getline(phoneNumber, 10000);
+	//std::cin >> phoneNumber;
+	while (strlen(phoneNumber) <= 0 || check_phoneNumber(phoneNumber) == 0)
+	{	
+		if (strlen(phoneNumber) <= 0)
+			std::cout << "** 아무 것도 입력되지 않았습니다. 다시 입력해 주세요. ** " << std::endl;
+		else
+		{
+			if (!check_phoneNumber(phoneNumber))
+				std::cout << "** 전화번호가 유효하지 않습니다. **" << std::endl;
+			else
+				break;
+		}
+		clear_buffer();
+		std::cout << idx << ")) 전화번호를 입력하세요 : " << std::endl;
+		std::cin.getline(phoneNumber, 10000);
+		//std::cin >> phoneNumber;
 	}
-	result = std::atoi(phoneNumber.c_str());
-	std::cout << result << std::endl;
-
 	std::cout << idx << ")) 비밀을 입력하세요 : " << std::endl;
-	std::cin >> darkestSecret;
-	if (darkestSecret.length() <= 0 || std::cin.eof() == true)
+	std::cin.getline(darkestSecret, 10000);
+	// std::cin >> darkestSecret;
+	while (strlen(darkestSecret) <= 0)
 	{
 		std::cout << "** 아무 것도 입력되지 않았습니다. 다시 입력해 주세요. ** " << std::endl;
-		std::clearerr(stdin); //EOF 와 오류 표시자를 재설정
-		std::cin.clear();     //표준 입력 버퍼 비우기
+		clear_buffer();
+		std::cout << idx << ")) 비밀을 입력하세요 : " << std::endl;
+		std::cin.getline(darkestSecret, 10000);
+		// std::cin >> darkestSecret;
 	}
 	std::cout << "** 입력이 완료 되었습니다. **" << std::endl;
 	contact->setVariables(firstName, lastName, nickname, phoneNumber, darkestSecret);

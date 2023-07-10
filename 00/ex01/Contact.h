@@ -6,15 +6,15 @@
 /*   By: yunjcho <yunjcho@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/06 16:18:24 by yunjcho           #+#    #+#             */
-/*   Updated: 2023/07/08 18:06:07 by yunjcho          ###   ########.fr       */
+/*   Updated: 2023/07/10 13:00:25 by yunjcho          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CONTACT_H
 # define CONTACT_H
 
-#include <iostream>
-#include <string>
+# include <iostream>
+# include <string>
 
 class Contact {
 	private:
