@@ -6,7 +6,7 @@
 /*   By: yunjcho <yunjcho@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/18 20:51:47 by yunjcho           #+#    #+#             */
-/*   Updated: 2023/07/10 17:45:24 by yunjcho          ###   ########.fr       */
+/*   Updated: 2023/07/10 17:48:50 by yunjcho          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ void	Contact::createNewContact(Contact *contact, int idx)
 		std::cout << idx << ")) 별명을 입력하세요 : " << std::endl;
 		std::getline(std::cin, nickname);
 	}
-	std::cout << idx << ")) 전화번호를 입력하세요 : " << std::endl;
+	std::cout << idx << ")) 전화번호를 입력하세요 : ('-' 제외)" << std::endl;
 	std::getline(std::cin, phoneNumber);
 	while (phoneNumber.length() <= 0 || checkPhoneNumber(phoneNumber) == 0)
 	{	
@@ -72,7 +72,7 @@ void	Contact::createNewContact(Contact *contact, int idx)
 			std::cout << "** 전화번호가 유효하지 않습니다. **" << std::endl;
 		else
 			break;
-		std::cout << idx << ")) 전화번호를 입력하세요 : " << std::endl;
+		std::cout << idx << ")) 전화번호를 입력하세요 : ('-' 제외)" << std::endl;
 		std::getline(std::cin, phoneNumber);
 	}
 	std::cout << idx << ")) 비밀을 입력하세요 : " << std::endl;
