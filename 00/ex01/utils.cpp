@@ -1,30 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   PhoneBook.h                                        :+:      :+:    :+:   */
+/*   utils.cpp                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yunjcho <yunjcho@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/07/06 16:45:19 by yunjcho           #+#    #+#             */
-/*   Updated: 2023/07/10 18:36:43 by yunjcho          ###   ########.fr       */
+/*   Created: 2023/07/10 17:54:39 by yunjcho           #+#    #+#             */
+/*   Updated: 2023/07/10 18:06:24 by yunjcho          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PHONEBOOK_H
-# define PHONEBOOK_H
+#include "utils.h"
 
-# include "Contact.h"
+std::string	upperString(std::string str)
+{
+	for (size_t i = 0; i < str.length(); i++)
+		str[i] = std::toupper(str[i]);
+	return (str);
+}
 
-class PhoneBook {
-	private:
-			Contact	contactArr[8];
-	public:
-			int		checkPhoneNumber(std::string phoneNumber);
-			void	createNewContact(Contact *contact, int idx);
-			void	appendContact(int idx, Contact *contact);
-			void	printContacts(void);
-			Contact *getContact(int idx);
-			void	printOneContact(int idx);
-};
-
-#endif
+void	meetEof(void)
+{
+	if (std::cin.eof()) 
+	{
+		clearerr(stdin);
+		std::cin.clear();
+	}
+}

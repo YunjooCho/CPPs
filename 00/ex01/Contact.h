@@ -6,7 +6,7 @@
 /*   By: yunjcho <yunjcho@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/06 16:18:24 by yunjcho           #+#    #+#             */
-/*   Updated: 2023/07/10 13:00:25 by yunjcho          ###   ########.fr       */
+/*   Updated: 2023/07/10 18:37:23 by yunjcho          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@ class Contact {
 			std::string	phoneNumber;
 			std::string	darkestSecret;
 	public:
-		void		createNewContact(Contact *contact, int idx);
 		void 		setVariables(std::string firstName, \
 						std::string lastName, std::string nickname, \
 						std::string phoneNumber, std::string darkestSecret);

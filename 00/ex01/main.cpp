@@ -6,27 +6,11 @@
 /*   By: yunjcho <yunjcho@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/18 19:36:58 by yunjcho           #+#    #+#             */
-/*   Updated: 2023/07/10 17:45:24 by yunjcho          ###   ########.fr       */
+/*   Updated: 2023/07/10 18:38:33 by yunjcho          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Utils.h"
-
-std::string	upperString(std::string str)
-{
-	for (size_t i = 0; i < str.length(); i++)
-		str[i] = std::toupper(str[i]);
-	return (str);
-}
-
-void	meetEof(void)
-{
-	if (std::cin.eof()) 
-	{
-		clearerr(stdin);
-		std::cin.clear();
-	}
-}
+#include "utils.h"
 
 int main(void)
 {
@@ -45,7 +29,7 @@ int main(void)
 		std::getline(std::cin, command);
 		if (command == "ADD")
 		{
-			contact.createNewContact(&contact, idx);
+			phoneBook.createNewContact(&contact, idx);
 			phoneBook.appendContact(idx, &contact);
 			idx++;
 			if (idx == 9)
@@ -66,12 +50,9 @@ int main(void)
 				meetEof();
 			}
 			if (phoneBook.getContact(std::atoi(num.c_str()))->getFirstName().length() <= 0)
-			{
 				std::cout << "** 해당 인덱스에 데이터가 존재하지 않습니다. **" << std::endl;
-			}
 			else
 				phoneBook.printOneContact(idx);
-			std::cin.clear();
 		}
 		else if (command == "EXIT")
 		{
