@@ -6,46 +6,46 @@
 /*   By: yunjcho <yunjcho@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/18 20:51:47 by yunjcho           #+#    #+#             */
-/*   Updated: 2023/07/10 18:51:12 by yunjcho          ###   ########.fr       */
+/*   Updated: 2023/07/11 15:40:27 by yunjcho          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "utils.h"
+#include "Contact.hpp"
 
 void	Contact::setVariables(std::string _firstName, \
 	std::string _lastName, std::string _nickname, \
 	std::string _phoneNumber, std::string _darkestSecret)
 {
-	firstName = _firstName;
-	lastName = _lastName;
-	nickname = _nickname;
-	phoneNumber = _phoneNumber;
-	darkestSecret = _darkestSecret;
+	this->firstName = _firstName;
+	this->lastName = _lastName;
+	this->nickname = _nickname;
+	this->phoneNumber = _phoneNumber;
+	this->darkestSecret = _darkestSecret;
 }
 
 std::string	Contact::getFirstName(void)
 {
-	return firstName;
+	return this->firstName;
 }
 
 std::string	Contact::getLastName(void)
 {
-	return lastName;
+	return this->lastName;
 }
 
 std::string	Contact::getNickname(void)
 {
-	return nickname;
+	return this->nickname;
 }
 
 std::string	Contact::getPhoneNumber(void)
 {
-	return phoneNumber;
+	return this->phoneNumber;
 }
 
 std::string	Contact::getDarkestSecret(void)
 {
-	return darkestSecret;
+	return this->darkestSecret;
 }
 
 void	Contact::chagePrintString(std::string str)

@@ -6,11 +6,11 @@
 /*   By: yunjcho <yunjcho@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/18 19:36:58 by yunjcho           #+#    #+#             */
-/*   Updated: 2023/07/10 18:44:40 by yunjcho          ###   ########.fr       */
+/*   Updated: 2023/07/11 11:19:40 by yunjcho          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "utils.h"
+#include "utils.hpp"
 
 int main(void)
 {
@@ -32,8 +32,6 @@ int main(void)
 			phoneBook.createNewContact(&contact, idx);
 			phoneBook.appendContact(&contact, idx);
 			idx++;
-			if (idx == 9)
-				idx = 0;
 		}
 		else if (command == "SEARCH")
 		{

@@ -6,11 +6,12 @@
 /*   By: yunjcho <yunjcho@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/06 15:54:22 by yunjcho           #+#    #+#             */
-/*   Updated: 2023/07/10 18:41:20 by yunjcho          ###   ########.fr       */
+/*   Updated: 2023/07/11 11:15:30 by yunjcho          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "utils.h"
+#include "PhoneBook.hpp"
+#include "utils.hpp"
 
 int	PhoneBook::checkPhoneNumber(std::string phoneNumber)
 {
@@ -95,6 +96,7 @@ void	PhoneBook::createNewContact(Contact *contact, int idx)
 
 void	PhoneBook::appendContact(Contact *contact, int idx)
 {
+	idx %= 8;
 	contactArr[idx] = *contact;
 }
 

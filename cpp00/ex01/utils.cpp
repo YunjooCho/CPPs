@@ -6,11 +6,11 @@
 /*   By: yunjcho <yunjcho@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/10 17:54:39 by yunjcho           #+#    #+#             */
-/*   Updated: 2023/07/10 18:06:24 by yunjcho          ###   ########.fr       */
+/*   Updated: 2023/07/11 10:41:46 by yunjcho          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "utils.h"
+#include "utils.hpp"
 
 std::string	upperString(std::string str)
 {

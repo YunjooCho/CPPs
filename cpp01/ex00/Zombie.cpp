@@ -1,30 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   PhoneBook.h                                        :+:      :+:    :+:   */
+/*   Zombie.cpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yunjcho <yunjcho@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/07/06 16:45:19 by yunjcho           #+#    #+#             */
-/*   Updated: 2023/07/10 18:41:37 by yunjcho          ###   ########.fr       */
+/*   Created: 2023/07/11 12:26:39 by yunjcho           #+#    #+#             */
+/*   Updated: 2023/07/11 15:46:02 by yunjcho          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PHONEBOOK_H
-# define PHONEBOOK_H
+#include "Zombie.hpp"
 
-# include "Contact.h"
+//Constructor
+Zombie::Zombie(std::string name)
+{
+	this->name = name;
+}
 
-class PhoneBook {
-	private:
-			Contact	contactArr[8];
-	public:
-			int		checkPhoneNumber(std::string phoneNumber);
-			void	createNewContact(Contact *contact, int idx);
-			void	appendContact(Contact *contact, int idx);
-			void	printContacts(void);
-			Contact *getContact(int idx);
-			void	printOneContact(int idx);
-};
+//Destructor
+Zombie::~Zombie()
+{
+	std::cout << this->name << " : I'll be BACK..." << std::endl;
+}
 
-#endif
+//Method
+void	Zombie::announce(void)
+{
+	std::cout << this->name << " : BraiiiiiiinnnzzzZ..." << std::endl;
+}

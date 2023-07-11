@@ -1,25 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Utils.h                                            :+:      :+:    :+:   */
+/*   Zombie.hpp                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yunjcho <yunjcho@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/07/10 12:48:01 by yunjcho           #+#    #+#             */
-/*   Updated: 2023/07/10 18:14:03 by yunjcho          ###   ########.fr       */
+/*   Created: 2023/07/10 19:39:23 by yunjcho           #+#    #+#             */
+/*   Updated: 2023/07/10 19:49:59 by yunjcho          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef UTILS_H
-# define UTILS_H
+#ifndef ZOMBIE_HPP
+# define ZOMBIE_HPP
 
 # include <iostream>
-# include <iomanip>
-# include <string>
-# include "PhoneBook.h"
-# include "Contact.h"
 
-std::string	upperString(std::string str);
-void		meetEof(void);
+class Zombie {
+	private:
+		std::string	name;
+	public:
+		Zombie(std::string name);
+		~Zombie();
+		void 		announce(void);
+};
 
 #endif
