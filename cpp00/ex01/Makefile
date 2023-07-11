@@ -6,7 +6,7 @@
 #    By: yunjcho <yunjcho@student.42seoul.kr>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/06/14 15:31:29 by yunjcho           #+#    #+#              #
-#    Updated: 2023/07/10 18:00:50 by yunjcho          ###   ########.fr        #
+#    Updated: 2023/07/11 17:30:29 by yunjcho          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,7 +22,7 @@ endif
 
 all : $(NAME)
 
-%.o : %.c
+%.o : %.cpp
 	$(CC) $(CXXFLAGS) -c $< -o $@
 	
 $(NAME) : $(OBJS)

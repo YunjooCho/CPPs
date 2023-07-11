@@ -6,14 +6,14 @@
 #    By: yunjcho <yunjcho@student.42seoul.kr>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/06/14 15:31:29 by yunjcho           #+#    #+#              #
-#    Updated: 2023/07/11 17:30:13 by yunjcho          ###   ########.fr        #
+#    Updated: 2023/07/11 17:31:22 by yunjcho          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = megaphone
+NAME = hiBrain
 CC = c++
 CXXFLAGS = -Wall -Werror -Wextra -std=c++98
-SRCS = megaphone.cpp
+SRCS = main.cpp
 OBJS = $(SRCS:.cpp=.o)
 
 ifdef SANITIZE
