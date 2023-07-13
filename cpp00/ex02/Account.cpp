@@ -1,38 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Zombie.cpp                                         :+:      :+:    :+:   */
+/*   Account.cpp                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yunjcho <yunjcho@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/07/11 12:26:39 by yunjcho           #+#    #+#             */
-/*   Updated: 2023/07/13 14:25:23 by yunjcho          ###   ########.fr       */
+/*   Created: 2023/07/13 14:38:59 by yunjcho           #+#    #+#             */
+/*   Updated: 2023/07/13 14:53:52 by yunjcho          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Zombie.hpp"
+#include "Account.hpp"
+#include <iostream>
 
-//Constructor
-Zombie::Zombie() {}
 
-Zombie::Zombie(std::string name)
+void	Account::displayStatus(void) const
 {
-	this->name = name;
+	
 }
 
-//Destructor
-Zombie::~Zombie()
+static void	Account::displayAccountsInfos(void)
 {
-	std::cout << this->name << " : I'll be BACK..." << std::endl;
-}
+	int	idx;
 
-//Method
-void	Zombie::setName(std::string name)
-{
-	this->name = name;
-}
-
-void	Zombie::announce(void)
-{
-	std::cout << this->name << " : BraiiiiiiinnnzzzZ..." << std::endl;
+	idx = 0;
+	std::cout << "index:" << idx << ";amount:" <<  
 }

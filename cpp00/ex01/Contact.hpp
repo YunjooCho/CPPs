@@ -6,12 +6,12 @@
 /*   By: yunjcho <yunjcho@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/06 16:18:24 by yunjcho           #+#    #+#             */
-/*   Updated: 2023/07/11 10:44:28 by yunjcho          ###   ########.fr       */
+/*   Updated: 2023/07/13 12:28:45 by yunjcho          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef CONTACT_H
-# define CONTACT_H
+#ifndef CONTACT_HPP
+# define CONTACT_HPP
 
 # include <iostream>
 # include <iomanip>

@@ -1,38 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Zombie.cpp                                         :+:      :+:    :+:   */
+/*   HumanB.hpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yunjcho <yunjcho@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/07/11 12:26:39 by yunjcho           #+#    #+#             */
-/*   Updated: 2023/07/13 14:25:23 by yunjcho          ###   ########.fr       */
+/*   Created: 2023/07/13 14:06:14 by yunjcho           #+#    #+#             */
+/*   Updated: 2023/07/13 14:10:10 by yunjcho          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Zombie.hpp"
 
-//Constructor
-Zombie::Zombie() {}
+#ifndef HUMANB_HPP
+# define HUMANB_HPP
 
-Zombie::Zombie(std::string name)
-{
-	this->name = name;
-}
+# include "Weapon.hpp"
 
-//Destructor
-Zombie::~Zombie()
-{
-	std::cout << this->name << " : I'll be BACK..." << std::endl;
-}
+class HumanB {
+	private:
+		std::string	name;
+		Weapon		weapon;
+	public:
+		HumanB(std::string name);
+		void	attack(void);
+		void	setWeapon(Weapon weapon);
+};
 
-//Method
-void	Zombie::setName(std::string name)
-{
-	this->name = name;
-}
-
-void	Zombie::announce(void)
-{
-	std::cout << this->name << " : BraiiiiiiinnnzzzZ..." << std::endl;
-}
+#endif

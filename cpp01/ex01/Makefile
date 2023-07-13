@@ -6,11 +6,11 @@
 #    By: yunjcho <yunjcho@student.42seoul.kr>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/06/14 15:31:29 by yunjcho           #+#    #+#              #
-#    Updated: 2023/07/11 15:57:18 by yunjcho          ###   ########.fr        #
+#    Updated: 2023/07/13 12:26:26 by yunjcho          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = moarBrainz
+NAME = ex01
 CC = c++
 CXXFLAGS = -Wall -Werror -Wextra -std=c++98
 SRCS = main.cpp Zombie.cpp zombieHorde.cpp
