@@ -6,7 +6,7 @@
 /*   By: yunjcho <yunjcho@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/06 15:54:22 by yunjcho           #+#    #+#             */
-/*   Updated: 2023/07/11 11:15:30 by yunjcho          ###   ########.fr       */
+/*   Updated: 2023/07/14 13:35:54 by yunjcho          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,7 +114,7 @@ void	PhoneBook::printContacts(void)
 		<< std::setw(10) << "First Name" << " | " \
 		<< std::setw(10) << "Last Name" << " | " \
 		<< std::setw(10) << "Nickname" << " | " << std::endl;
-	for (int i = 0; i < 4; i++)
+	for (int i = 0; i < 8; i++)
 	{
 		if (!contactArr[i].getFirstName().empty())
 		{
