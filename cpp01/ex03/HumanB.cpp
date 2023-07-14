@@ -6,7 +6,7 @@
 /*   By: yunjcho <yunjcho@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/13 14:00:23 by yunjcho           #+#    #+#             */
-/*   Updated: 2023/07/13 14:26:37 by yunjcho          ###   ########.fr       */
+/*   Updated: 2023/07/14 17:23:11 by yunjcho          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,13 +19,22 @@ HumanB::HumanB(std::string name)
 	this->weapon = NULL;
 }
 
+HumanB::HumanB(std::string name, Weapon& weapon)
+{
+	this->name = name;
+	this->weapon = &weapon;
+}
+
 //Method
 void	HumanB::attack(void)
 {
-	std::cout << this->name << " attack with their " << weapon.getType() << std::endl;
+	if (this->weapon)
+		std::cout << this->name << " attack with their " << this->weapon->getType() << std::endl;
+	else
+		std::cout << this->name << " doesn't have any weapons" << std::endl;
 }
 
-void	HumanB::setWeapon(Weapon weapon)
+void	HumanB::setWeapon(Weapon& weapon)
 {
-	this->weapon = weapon;
+	this->weapon = &weapon;
 }
