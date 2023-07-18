@@ -6,7 +6,7 @@
 /*   By: yunjcho <yunjcho@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/14 17:31:07 by yunjcho           #+#    #+#             */
-/*   Updated: 2023/07/17 20:27:56 by yunjcho          ###   ########.fr       */
+/*   Updated: 2023/07/18 13:36:35 by yunjcho          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,9 @@ int	main(int ac, char **av)
 		if (!filename.empty() && !s1.empty() && !s2.empty())
 		{
 			readFile.open(filename);
-			if (readFile.is_open())
+			filename += ".replace";
+			printFile.open(filename);
+			if (readFile.is_open() && printFile.is_open())
 			{
 				while (!readFile.eof())
 				{
@@ -39,27 +41,17 @@ int	main(int ac, char **av)
 					if (str.length() <= 0)
 					{
 						std::cerr << "File is empty" << std::endl;
-						break ;
+						readFile.close();
+						printFile.close();
+						return (1);
 					}
 					else
 					{
 						replace_str = std::strstr(str.c_str(), av[2]);
-						start_idx = strlen(str.c_str()) - strlen(replace_str.c_str()); //find()
-						std::cout << "replace_str : " << replace_str << std::endl;
-						std::cout << "idx : " << start_idx << std::endl; // insert() erase()
-						
-						char	*answer = NULL;
-						size_t i = 0;
-						while (i < start_idx)
-						{
-							size_t	j = 0;
-							answer[i] = str[j];
-							i++;
-							j++;
-						}
-						answer[i] = '\0';
-						std::cout << "answer : " << answer << std::endl;
-						// printFile.open(filename + ".replace"); // +=
+						start_idx = strlen(str.c_str()) - strlen(replace_str.c_str());
+						str.erase(start_idx, std::strlen(av[2]));
+						str.insert(start_idx, av[3]);
+						printFile << str << std::endl;
 					}
 				}
 			}
