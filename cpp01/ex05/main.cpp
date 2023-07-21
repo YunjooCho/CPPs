@@ -6,7 +6,7 @@
 /*   By: yunjcho <yunjcho@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/21 13:44:12 by yunjcho           #+#    #+#             */
-/*   Updated: 2023/07/21 15:20:56 by yunjcho          ###   ########.fr       */
+/*   Updated: 2023/07/21 15:54:18 by yunjcho          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,5 @@ int	main(void)
 		std::cin.clear();
 	}
 	delete harl;
-	system("leaks ex05");
 	return (0);
 }
