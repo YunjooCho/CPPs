@@ -5,43 +5,27 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: yunjcho <yunjcho@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/07/11 15:55:46 by yunjcho           #+#    #+#             */
-/*   Updated: 2023/07/21 14:58:55 by yunjcho          ###   ########.fr       */
+/*   Created: 2023/07/21 15:24:11 by yunjcho           #+#    #+#             */
+/*   Updated: 2023/07/21 15:52:04 by yunjcho          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Zombie.hpp"
+#include "Harl.hpp"
 
-Zombie*	zombieHorde(int N, std::string name);
-
-void	meetEof(void)
+int	main(int ac, char **av)
 {
-	if (std::cin.eof()) 
-	{
-		clearerr(stdin);
-		std::cin.clear();
-	}
-}
+	Harl	*harl;
 
-int main(void)
-{
-	int			N;
-	std::string	name;
-	Zombie		*array;
-
-	std::cout << "생성할 좀비 수를 입력하세요 : " << std::endl;
-	std::cin >> N;
-	meetEof();
-	std::cin.ignore(10000, '\n');
-	std::cout << "좀비 이름을 입력하세요 : " << std::endl;
-	std::getline(std::cin, name);
-	meetEof();
-	std::cin.clear();
-	array = zombieHorde(N, name);
-	for (int i = 0; i < N; i++)
+	harl = new Harl();
+	if (ac == 2)
 	{
-		array[i].announce();
+		if (av[1] && std::strlen(av[1]) >= 0)
+			harl->complain(av[1]);
+		else
+			std::cout << "Invalid String" << std::endl;
 	}
-	delete[] array;
+	else
+		std::cout << "Invalid Argument Count" << std::endl;
+	delete harl;
 	return (0);
 }

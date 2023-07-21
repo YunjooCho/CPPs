@@ -6,5 +6,7 @@
 *.out
 *.app
 *.ipa
+*.o
+*.d
 
 .DS_Store
