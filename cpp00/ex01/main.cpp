@@ -6,7 +6,7 @@
 /*   By: yunjcho <yunjcho@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/18 19:36:58 by yunjcho           #+#    #+#             */
-/*   Updated: 2023/07/11 11:19:40 by yunjcho          ###   ########.fr       */
+/*   Updated: 2023/07/24 18:25:15 by yunjcho          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int main(void)
 		std::getline(std::cin, command);
 		if (command == "ADD")
 		{
-			phoneBook.createNewContact(&contact, idx);
+			contact.createNewContact(&contact, idx);
 			phoneBook.appendContact(&contact, idx);
 			idx++;
 		}

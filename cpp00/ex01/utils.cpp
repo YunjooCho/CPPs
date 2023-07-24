@@ -6,7 +6,7 @@
 /*   By: yunjcho <yunjcho@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/10 17:54:39 by yunjcho           #+#    #+#             */
-/*   Updated: 2023/07/11 10:41:46 by yunjcho          ###   ########.fr       */
+/*   Updated: 2023/07/24 19:07:35 by yunjcho          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,4 +26,25 @@ void	meetEof(void)
 		clearerr(stdin);
 		std::cin.clear();
 	}
+}
+
+std::string	ltrim(const std::string &str)
+{
+	size_t start_idx; 
+	
+	start_idx = str.find_first_not_of(WHITESPACE);
+	return (start_idx == std::string::npos) ? "" : str.substr(start_idx);
+}
+
+std::string	rtrim(const std::string &str)
+{
+	size_t end_idx; 
+	
+	end_idx = str.find_last_not_of(WHITESPACE);
+	return (end_idx == std::string::npos) ? "" : str.substr(0, end_idx + 1);
+}
+
+std::string strtrim(const std::string &str)
+{
+	return rtrim(ltrim(str));
 }
