@@ -6,7 +6,7 @@
 /*   By: yunjcho <yunjcho@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/18 20:51:47 by yunjcho           #+#    #+#             */
-/*   Updated: 2023/07/24 20:26:44 by yunjcho          ###   ########.fr       */
+/*   Updated: 2023/07/27 18:24:09 by yunjcho          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,7 @@ void	Contact::createNewContact(Contact *contact, int idx)
 		firstName[find_idx] = ' ';
 		find_idx = firstName.find_first_of("\t", find_idx + 1);
 	}
+	
 	std::cout << idx + 1 << ")) 성을 입력하세요 : " << std::endl;
 	std::getline(std::cin, lastName);
 	meetEof();
