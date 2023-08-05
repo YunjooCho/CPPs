@@ -6,7 +6,7 @@
 /*   By: yunjcho <yunjcho@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/18 14:02:50 by yunjcho           #+#    #+#             */
-/*   Updated: 2023/08/05 20:37:51 by yunjcho          ###   ########.fr       */
+/*   Updated: 2023/08/05 20:48:50 by yunjcho          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,15 @@ void	Harl::error(void)
 		<< "the manager now." << std::endl;
 }
 
+std::string	Harl::stringToUppercase(std::string level)
+{
+	for (size_t i = 0; i < level.length(); i++)
+	{
+		level[i] = std::toupper(level[i]);
+	}
+	return (level);
+} 
+
 void	Harl::complain(std::string level)
 {
 	int	result = -1;
@@ -51,7 +60,7 @@ void	Harl::complain(std::string level)
 	};
 
 	if (!level.empty())
-		std::transform(level.begin(), level.end(), level.begin(), toupper);
+		level = stringToUppercase(level);
 	for (int i = 0; i < 4; i++)
 	{
 		if (!std::strcmp(level.c_str(), codes[i].key.c_str()))

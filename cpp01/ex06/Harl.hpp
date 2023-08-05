@@ -6,7 +6,7 @@
 /*   By: yunjcho <yunjcho@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/18 13:53:24 by yunjcho           #+#    #+#             */
-/*   Updated: 2023/07/21 15:11:12 by yunjcho          ###   ########.fr       */
+/*   Updated: 2023/08/05 20:49:27 by yunjcho          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define HARL_HPP
 
 #include <iostream>
+#include <string>
 
 enum Code
 {
@@ -36,7 +37,8 @@ class	Harl{
 		void	warning(void);
 		void	error(void);
 	public:
-		void	complain(std::string level);
+		void		complain(std::string level);
+		std::string	stringToUppercase(std::string level);
 };
 
 #endif
