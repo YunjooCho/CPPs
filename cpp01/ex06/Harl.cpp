@@ -6,7 +6,7 @@
 /*   By: yunjcho <yunjcho@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/18 14:02:50 by yunjcho           #+#    #+#             */
-/*   Updated: 2023/07/21 15:53:02 by yunjcho          ###   ########.fr       */
+/*   Updated: 2023/08/05 20:37:56 by yunjcho          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,8 @@ void	Harl::complain(std::string level)
 		{"DEBUG", DEBUG}, {"INFO", INFO}, {"WARNING", WARNING}, {"ERROR", ERROR}
 	};
 
+	if (!level.empty())
+		std::transform(level.begin(), level.end(), level.begin(), toupper);
 	for (int i = 0; i < 4; i++)
 	{
 		if (!std::strcmp(level.c_str(), codes[i].key.c_str()))
