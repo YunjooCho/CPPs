@@ -6,13 +6,12 @@
 /*   By: yunjcho <yunjcho@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/13 14:00:23 by yunjcho           #+#    #+#             */
-/*   Updated: 2023/07/14 17:23:11 by yunjcho          ###   ########.fr       */
+/*   Updated: 2023/08/07 11:20:00 by yunjcho          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "HumanB.hpp"
 
-//Constructor
 HumanB::HumanB(std::string name)
 {
 	this->name = name;
@@ -25,7 +24,6 @@ HumanB::HumanB(std::string name, Weapon& weapon)
 	this->weapon = &weapon;
 }
 
-//Method
 void	HumanB::attack(void)
 {
 	if (this->weapon)

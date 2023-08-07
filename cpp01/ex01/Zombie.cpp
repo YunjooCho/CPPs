@@ -6,13 +6,12 @@
 /*   By: yunjcho <yunjcho@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/11 12:26:39 by yunjcho           #+#    #+#             */
-/*   Updated: 2023/07/13 14:25:23 by yunjcho          ###   ########.fr       */
+/*   Updated: 2023/08/07 11:19:53 by yunjcho          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Zombie.hpp"
 
-//Constructor
 Zombie::Zombie() {}
 
 Zombie::Zombie(std::string name)
@@ -20,13 +19,11 @@ Zombie::Zombie(std::string name)
 	this->name = name;
 }
 
-//Destructor
 Zombie::~Zombie()
 {
 	std::cout << this->name << " : I'll be BACK..." << std::endl;
 }
 
-//Method
 void	Zombie::setName(std::string name)
 {
 	this->name = name;

@@ -6,7 +6,7 @@
 /*   By: yunjcho <yunjcho@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/18 14:02:50 by yunjcho           #+#    #+#             */
-/*   Updated: 2023/08/05 20:48:50 by yunjcho          ###   ########.fr       */
+/*   Updated: 2023/08/07 20:00:31 by yunjcho          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,11 +54,12 @@ std::string	Harl::stringToUppercase(std::string level)
 
 void	Harl::complain(std::string level)
 {
-	int	result = -1;
+	int	result;
 	t_codes codes[4] = {
 		{"DEBUG", DEBUG}, {"INFO", INFO}, {"WARNING", WARNING}, {"ERROR", ERROR}
 	};
 
+	result = -1;
 	if (!level.empty())
 		level = stringToUppercase(level);
 	for (int i = 0; i < 4; i++)
@@ -85,6 +86,7 @@ void	Harl::complain(std::string level)
 			this->error();
 			break ;
 		case -1:
+			std::cout << "Invalid Code" << std::endl;
 			exit(1);
 	}
 }
