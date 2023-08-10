@@ -6,12 +6,12 @@
 #    By: yunjcho <yunjcho@student.42seoul.kr>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/06/14 15:31:29 by yunjcho           #+#    #+#              #
-#    Updated: 2023/07/11 17:30:13 by yunjcho          ###   ########.fr        #
+#    Updated: 2023/08/10 13:56:19 by yunjcho          ###   ########seoul.kr   #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = megaphone
-CC = c++
+CXX = c++
 CXXFLAGS = -Wall -Werror -Wextra -std=c++98
 SRCS = megaphone.cpp
 OBJS = $(SRCS:.cpp=.o)
@@ -23,10 +23,10 @@ endif
 all : $(NAME)
 
 %.o : %.cpp
-	$(CC) $(CXXFLAGS) -c $< -o $@
+	$(CXX) $(CXXFLAGS) -c $< -o $@
 	
 $(NAME) : $(OBJS)
-	$(CC) $(CXXFLAGS) $^ -o $@ 
+	$(CXX) $(CXXFLAGS) $^ -o $@ 
 
 clean :
 	rm -rf $(OBJS)
