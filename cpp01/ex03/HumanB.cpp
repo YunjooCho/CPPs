@@ -6,17 +6,13 @@
 /*   By: yunjcho <yunjcho@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/13 14:00:23 by yunjcho           #+#    #+#             */
-/*   Updated: 2023/08/07 11:20:00 by yunjcho          ###   ########.fr       */
+/*   Updated: 2023/08/13 16:43:34 by yunjcho          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "HumanB.hpp"
 
-HumanB::HumanB(std::string name)
-{
-	this->name = name;
-	this->weapon = NULL;
-}
+HumanB::HumanB(std::string name) : name(name), weapon(NULL) {}
 
 HumanB::HumanB(std::string name, Weapon& weapon)
 {
