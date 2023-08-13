@@ -6,12 +6,12 @@
 #    By: yunjcho <yunjcho@student.42seoul.kr>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/06/14 15:31:29 by yunjcho           #+#    #+#              #
-#    Updated: 2023/08/07 11:20:59 by yunjcho          ###   ########.fr        #
+#    Updated: 2023/08/10 13:56:19 by yunjcho          ###   ########seoul.kr   #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = ex03
-CC = c++
+CXX = c++
 CXXFLAGS = -Wall -Werror -Wextra -std=c++98
 SRCS = main.cpp Weapon.cpp HumanA.cpp HumanB.cpp
 OBJS = $(SRCS:.cpp=.o)
@@ -19,10 +19,10 @@ OBJS = $(SRCS:.cpp=.o)
 all : $(NAME)
 
 %.o : %.cpp
-	$(CC) $(CXXFLAGS) -c $< -o $@
+	$(CXX) $(CXXFLAGS) -c $< -o $@
 	
 $(NAME) : $(OBJS)
-	$(CC) $(CXXFLAGS) $^ -o $@ 
+	$(CXX) $(CXXFLAGS) $^ -o $@ 
 
 clean :
 	rm -rf $(OBJS)

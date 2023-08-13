@@ -6,7 +6,7 @@
 /*   By: yunjcho <yunjcho@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/18 14:02:50 by yunjcho           #+#    #+#             */
-/*   Updated: 2023/08/07 20:00:31 by yunjcho          ###   ########.fr       */
+/*   Updated: 2023/08/10 13:56:19 by yunjcho          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ void	Harl::warning(void)
 void	Harl::error(void)
 {
 	std::cout << "[ ERROR ]" << std::endl;
-	std::cout << "This is unacceptable! I want to speak to "
+	std::cout << "This is unaCXXeptable! I want to speak to "
 		<< "the manager now." << std::endl;
 }
 
