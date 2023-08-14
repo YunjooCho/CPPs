@@ -6,7 +6,7 @@
 /*   By: yunjcho <yunjcho@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/18 14:02:50 by yunjcho           #+#    #+#             */
-/*   Updated: 2023/08/14 16:17:39 by yunjcho          ###   ########.fr       */
+/*   Updated: 2023/08/14 17:37:10 by yunjcho          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,40 +60,20 @@ void	Harl::complain(std::string level)
 	};
 
 	result = -1;
+	funPtr[0] = &Harl::debug;
+	funPtr[1] = &Harl::info;
+	funPtr[2] = &Harl::warning;
+	funPtr[3] = &Harl::error;
 	if (!level.empty())
 		level = stringToUppercase(level);
 	for (int i = 0; i < 4; i++)
 	{
 		if (!std::strcmp(level.c_str(), codes[i].key.c_str()))
 		{
-			result = codes[i].val;
-			break ;
+			(this->*funPtr[i])();
+			return ;
 		}
 	}
-
-	switch (result)
-	{
-		case DEBUG:
-			funPtr = &Harl::debug;
-			break ;
-		case INFO:
-			funPtr = &Harl::info;
-			break ;
-		case WARNING:
-			funPtr = &Harl::warning;
-			break ;
-		case ERROR:
-			funPtr = &Harl::error;
-			break ;
-		case -1:
-			funPtr = NULL;
-			break;
-	}
-	if (funPtr)
-		(this->*funPtr)();
-	else
-	{
-		std::cout << "Invalid Level" << std::endl;
-		exit(1);
-	}
+	std::cout << "Invalid Level" << std::endl;
+	exit(1);
 }
