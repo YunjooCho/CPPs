@@ -6,7 +6,7 @@
 /*   By: yunjcho <yunjcho@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/18 13:53:24 by yunjcho           #+#    #+#             */
-/*   Updated: 2023/08/05 20:48:16 by yunjcho          ###   ########.fr       */
+/*   Updated: 2023/08/14 16:16:05 by yunjcho          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ class	Harl{
 		void	warning(void);
 		void	error(void);
 	public:
+		void(Harl::*funPtr)(void);
 		void		complain(std::string level);
 		std::string	stringToUppercase(std::string level);
 };

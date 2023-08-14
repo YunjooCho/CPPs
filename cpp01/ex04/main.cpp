@@ -6,13 +6,10 @@
 /*   By: yunjcho <yunjcho@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/14 17:31:07 by yunjcho           #+#    #+#             */
-/*   Updated: 2023/08/07 19:52:46 by yunjcho          ###   ########.fr       */
+/*   Updated: 2023/08/14 15:04:40 by yunjcho          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <iostream>
-#include <fstream>
-#include <string>
 #include "utils.hpp"
 
 int	main(int ac, char **av)
@@ -25,8 +22,7 @@ int	main(int ac, char **av)
 		std::string		str;
 		std::ifstream	readFile;
 		std::ofstream	printFile;
-		int				startIdx;
-		const char		*replaceStr;
+		std::size_t		startIdx;
 
 		filename = strtrim(filename);
 		if (!filename.empty() || filename.length() > 0)
@@ -50,18 +46,15 @@ int	main(int ac, char **av)
 				while (!readFile.eof())
 				{
 					std::getline(readFile, str);
-					startIdx = -1;
-					if (strtrim(str).length() > 0)
+					startIdx = 0;
+					while (str.find(av[2], startIdx) != std::string::npos)
 					{
-						replaceStr = std::strstr(str.c_str(), av[2]);
-						if (replaceStr)
-						{
-							startIdx =  str.length() - std::strlen(replaceStr);
-							str.erase((size_t)startIdx, std::strlen(av[2]));
-							str.insert((size_t)startIdx, av[3]);
-						}
+						startIdx = str.find(av[2], startIdx);
+						str.erase(startIdx, std::strlen(av[2]));
+						str.insert(startIdx, av[3]);
 					}
 					printFile << str << std::endl;
+					str.clear();
 				}
 				readFile.close();
 				printFile.close();

@@ -6,7 +6,7 @@
 /*   By: yunjcho <yunjcho@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/07 14:39:02 by yunjcho           #+#    #+#             */
-/*   Updated: 2023/08/07 14:39:22 by yunjcho          ###   ########.fr       */
+/*   Updated: 2023/08/14 14:25:02 by yunjcho          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # include <iostream>
 # include <iomanip>
 # include <string>
+#include <fstream>
 
 const std::string WHITESPACE = " \n\r\t\f\v";
 
