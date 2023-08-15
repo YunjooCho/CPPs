@@ -6,7 +6,7 @@
 /*   By: yunjcho <yunjcho@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/13 12:27:56 by yunjcho           #+#    #+#             */
-/*   Updated: 2023/08/13 16:43:57 by yunjcho          ###   ########.fr       */
+/*   Updated: 2023/08/15 16:58:47 by yunjcho          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,12 +28,12 @@ int main()
 		HumanB jim("Jim");
 		jim.attack();
 		jim.setWeapon(club);
-		// jim.attack();
+		jim.attack();
 		club.setType("some other type of club");
 		jim.attack();
 
-		// HumanB jimson("Jimson", club);
-		// jimson.attack();
+		HumanB jimson("Jimson", club);
+		jimson.attack();
 	}
 	return 0;
 }

@@ -1,29 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.cpp                                           :+:      :+:    :+:   */
+/*   Fixed.hpp                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yunjcho <yunjcho@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/21 15:24:11 by yunjcho           #+#    #+#             */
-/*   Updated: 2023/08/14 20:42:17 by yunjcho          ###   ########.fr       */
+/*   Updated: 2023/08/15 16:58:18 by yunjcho          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Fixed.hpp"
+#ifndef FIXED_HPP
+# define FIXED_HPP
+
 #include <iostream>
+#include <cmath>
 
-int main( void ) 
+class Fixed
 {
-  Fixed a;
-  Fixed b(a);
-  Fixed c;
-  
-  c = b;
+	public:
+		Fixed();
+		Fixed(const int _fixedPointNumber);
+		Fixed(const float _fixedPointNumber);
+		~Fixed();
+		Fixed(const Fixed &fixed);
+		Fixed&			operator=(const Fixed &fixed);
+		int				getRawBits(void) const;
+		void			setRawBits(int const raw);
+		float 			toFloat(void) const;
+		int				toInt(void) const;
+	private:
+		float				fixedPointNumber;
+		static const int	fractionalBits = 8;
+};
 
-  std::cout << a.getRawBits() << std::endl;
-  std::cout << b.getRawBits() << std::endl;
-  std::cout << c.getRawBits() << std::endl;
+std::ostream& operator<<(std::ostream& outputStream, const Fixed& fixed);
 
-  return 0;
-}
+#endif
+

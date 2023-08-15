@@ -6,7 +6,7 @@
 /*   By: yunjcho <yunjcho@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/21 15:24:11 by yunjcho           #+#    #+#             */
-/*   Updated: 2023/08/15 13:01:10 by yunjcho          ###   ########.fr       */
+/*   Updated: 2023/08/15 16:58:32 by yunjcho          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,16 @@ Fixed::Fixed(void)
 {
 	std::cout << "Default constructor called" << std::endl;
 	this->fixedPointNumber = 0;
+}
+
+Fixed::Fixed(const int _fixedPointNumber) : fixedPointNumber(_fixedPointNumber)
+{
+	std::cout << "Int constructor called" << std::endl;
+}
+
+Fixed::Fixed(const float _fixedPointNumber) : fixedPointNumber(_fixedPointNumber)
+{
+	std::cout << "Float constructor called" << std::endl;
 }
 
 Fixed&	Fixed::operator=(const Fixed& fixed)
@@ -33,7 +43,6 @@ Fixed::Fixed(const Fixed &fixed)
 
 int		Fixed::getRawBits(void) const
 {
-	std::cout << "getRawBits member function called" << std::endl;
 	return (this->fixedPointNumber);
 }
 
@@ -47,3 +56,18 @@ Fixed::~Fixed()
 	std::cout << "Destructor called" << std::endl;
 }
 
+// float	Fixed::toFloat(void) const
+// {
+// 	return (this->fixedPointNumber << 8);
+// }
+
+// int	Fixed::toInt(void) const
+// {
+// 	return (this->fixedPointNumber >> 2^this->fractionalBits);
+// }
+
+std::ostream& operator<<(std::ostream& outputStream, const Fixed& fixed)
+{
+	outputStream << fixed.getRawBits();
+	return (outputStream);
+}
