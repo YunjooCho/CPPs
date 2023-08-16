@@ -6,7 +6,7 @@
 /*   By: yunjcho <yunjcho@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/21 15:24:11 by yunjcho           #+#    #+#             */
-/*   Updated: 2023/08/16 20:41:55 by yunjcho          ###   ########.fr       */
+/*   Updated: 2023/08/16 20:52:17 by yunjcho          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,8 +101,13 @@ Fixed	Fixed::operator*(const Fixed &fixed) const
 
 Fixed	Fixed::operator/(const Fixed &fixed) const
 {
-	Fixed temp(toFloat() / fixed.toFloat());
-	return (temp);
+	if (fixed.getRawBits() != 0)
+	{
+		Fixed temp(toFloat() / fixed.toFloat());
+		return (temp);
+	}
+	else
+		return (0);
 }
 
 Fixed&	Fixed::operator++(void)
