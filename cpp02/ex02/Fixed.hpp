@@ -6,7 +6,7 @@
 /*   By: yunjcho <yunjcho@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/21 15:24:11 by yunjcho           #+#    #+#             */
-/*   Updated: 2023/08/16 20:47:14 by yunjcho          ###   ########.fr       */
+/*   Updated: 2023/08/16 20:49:10 by yunjcho          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,11 +54,11 @@ class Fixed
 		}
 		static Fixed&	max(Fixed &fixed1, Fixed &fixed2)
 		{
-			return (fixed1 > fixed2 ? fixed2 : fixed1);
+			return (fixed1 < fixed2 ? fixed2 : fixed1);
 		}
 		static const Fixed&	max(const Fixed &fixed1, const Fixed &fixed2)
 		{
-			return (fixed1 > fixed2 ? fixed2 : fixed1);
+			return (fixed1 < fixed2 ? fixed2 : fixed1);
 		}
 	private:
 		int					fixedPointNumber;
