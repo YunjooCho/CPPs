@@ -6,14 +6,14 @@
 #    By: yunjcho <yunjcho@student.42seoul.kr>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/06/14 15:31:29 by yunjcho           #+#    #+#              #
-#    Updated: 2023/08/19 19:50:23 by yunjcho          ###   ########seoul.kr   #
+#    Updated: 2023/08/19 19:51:02 by yunjcho          ###   ########seoul.kr   #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = a.out
 CXX = c++
 CXXFLAGS = -Wall -Werror -Wextra -std=c++98
-SRCS = main.cpp Fixed.cpp
+SRCS = main.cpp ClapTrap.cpp
 OBJS = $(SRCS:.cpp=.o)
 
 all : $(NAME)
