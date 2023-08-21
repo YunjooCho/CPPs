@@ -6,7 +6,7 @@
 /*   By: yunjcho <yunjcho@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/19 19:56:00 by yunjcho           #+#    #+#             */
-/*   Updated: 2023/08/21 19:12:53 by yunjcho          ###   ########.fr       */
+/*   Updated: 2023/08/21 19:12:36 by yunjcho          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,19 +67,19 @@ void	ClapTrap::printError(void)
 void	ClapTrap::printEnergyPoints(void)
 {
 	std::cout << "[INFO] ClapTrap " << this->name << "'s Energy Point is " \
-	<< this->energyPoints << std::endl;
+		<< this->energyPoints << std::endl;
 }
 
 void	ClapTrap::printHitPoints(void)
 {
 	std::cout << "[INFO] ClapTrap " << this->name << "'s Hit Point is " \
-	<< this->hitPoints << std::endl;
+		<< this->hitPoints << std::endl;
 }
 
 void	ClapTrap::printAttackDamage(void)
 {
-	std::cout << "[INFO] ClapTrap " << this->name << "'s Hit Point is " \
-	<< this->attackDamage << std::endl;
+	std::cout << "[INFO] ClapTrap " << this->name << "'s Attack Damage is " \
+		<< this->attackDamage << std::endl;
 }
 
 void	ClapTrap::attack(const std::string& target)
