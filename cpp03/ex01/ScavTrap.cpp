@@ -6,7 +6,7 @@
 /*   By: yunjcho <yunjcho@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 18:10:37 by yunjcho           #+#    #+#             */
-/*   Updated: 2023/08/22 16:33:27 by yunjcho          ###   ########.fr       */
+/*   Updated: 2023/08/22 19:55:41 by yunjcho          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 ScavTrap::ScavTrap() : ClapTrap()
 {
 	std::cout << "ScavTrap Default constructor called" << std::endl;
+	this->name = "annonymous";
 	this->hitPoints = 100;
 	this->energyPoints = 50;
 	this->attackDamage = 20;

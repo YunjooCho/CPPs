@@ -6,7 +6,7 @@
 /*   By: yunjcho <yunjcho@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/19 19:51:50 by yunjcho           #+#    #+#             */
-/*   Updated: 2023/08/22 18:40:59 by yunjcho          ###   ########.fr       */
+/*   Updated: 2023/08/22 19:13:46 by yunjcho          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 # include <iostream>
 # include <string>
+# include <stdio.h>
 
 # define HIT_POINT 10
 # define ENERGY_POINT 10
@@ -27,11 +28,11 @@ class ClapTrap
 		ClapTrap(std::string inputName);
 		ClapTrap(const ClapTrap& clapTrap);
 		ClapTrap&	operator=(const ClapTrap &clapTrap);
-		virtual	~ClapTrap();
-		std::string		getName(void) const;
-		unsigned int	getHitPoints(void) const;
-		unsigned int	getEnergyPoints(void) const;
-		unsigned int	getAttackDamage(void) const;
+		~ClapTrap();
+		virtual std::string		getName(void) const;
+		virtual unsigned int	getHitPoints(void) const;
+		virtual unsigned int	getEnergyPoints(void) const;
+		virtual unsigned int	getAttackDamage(void) const;
 		void			attack(const std::string& target);
 		void			takeDamage(unsigned int amount);
 		void			beRepaired(unsigned int amount);

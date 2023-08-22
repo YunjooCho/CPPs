@@ -6,7 +6,7 @@
 /*   By: yunjcho <yunjcho@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 18:12:33 by yunjcho           #+#    #+#             */
-/*   Updated: 2023/08/22 18:16:43 by yunjcho          ###   ########.fr       */
+/*   Updated: 2023/08/22 20:13:12 by yunjcho          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ int main(void)
 	ScavTrap scavTrapA("Yellow");
 	ScavTrap scavTrapB("Red");
 	ScavTrap scavTrapC("Blue");
+	ClapTrap clapTrap("Green");
 
 	std::cout << std::endl;
 	std::cout << "========= Default Constructor Instance ========="<<std::endl;
@@ -57,6 +58,8 @@ int main(void)
 	scavTrapA.guardGate();
 	scavTrapB.guardGate();
 	scavTrapC.guardGate();
+	// clapTrap.guardGate();
+	
 	std::cout << std::endl;
 	std::cout << "========= Destroy Instances ========="<<std::endl;
 	return (0);
