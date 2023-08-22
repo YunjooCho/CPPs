@@ -6,7 +6,7 @@
 /*   By: yunjcho <yunjcho@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/19 19:51:50 by yunjcho           #+#    #+#             */
-/*   Updated: 2023/08/21 20:37:41 by yunjcho          ###   ########.fr       */
+/*   Updated: 2023/08/22 16:32:31 by yunjcho          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,15 +23,16 @@
 class ClapTrap
 {
 	public:
+		ClapTrap();
 		ClapTrap(std::string inputName);
 		ClapTrap(const ClapTrap& clapTrap);
 		ClapTrap&	operator=(const ClapTrap &clapTrap);
-		virtual	~ClapTrap();
+		~ClapTrap();
 		std::string		getName(void) const;
 		unsigned int	getHitPoints(void) const;
 		unsigned int	getEnergyPoints(void) const;
 		unsigned int	getAttackDamage(void) const;
-		virtual void	attack(const std::string& target);
+		void			attack(const std::string& target);
 		void			takeDamage(unsigned int amount);
 		void			beRepaired(unsigned int amount);
 		virtual void	printError(void);

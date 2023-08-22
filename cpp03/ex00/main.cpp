@@ -6,7 +6,7 @@
 /*   By: yunjcho <yunjcho@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/19 19:56:20 by yunjcho           #+#    #+#             */
-/*   Updated: 2023/08/21 16:06:22 by yunjcho          ###   ########.fr       */
+/*   Updated: 2023/08/22 18:15:27 by yunjcho          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,24 @@
 
 int main(void)
 {
+	std::cout << "========= Create Instances ========="<<std::endl;
+	ClapTrap clapTrap0;
 	ClapTrap clapTrapA("Yellow");
 	ClapTrap clapTrapB("Red");
 
 	std::cout << std::endl;
+	std::cout << "========= Default Constructor Instance ========="<<std::endl;
+	clapTrap0.attack(clapTrapA.getName());
+	clapTrapA.takeDamage(clapTrap0.getAttackDamage());
+	clapTrap0.takeDamage(4);
+	clapTrap0.beRepaired(1);
+
+	std::cout << std::endl;
+	std::cout << "========= Name Constructor Instances - Check attack() & takeDamage() ========="<<std::endl;
 	clapTrapA.attack(clapTrapB.getName());
 	clapTrapB.takeDamage(clapTrapA.getAttackDamage());
 	std::cout << std::endl;
-	for (int i = HIT_POINT - 1; i > 0; i--)
+	while (clapTrapA.getEnergyPoints())
 	{
 		clapTrapA.attack(clapTrapB.getName());
 		clapTrapB.takeDamage(clapTrapA.getAttackDamage());
@@ -29,18 +39,17 @@ int main(void)
 	std::cout << std::endl;
 	clapTrapA.attack(clapTrapB.getName());
 	clapTrapA.beRepaired(6);
-
-	std::cout << std::endl;
 	clapTrapB.beRepaired(6);
-	std::cout << std::endl;
-	clapTrapB.takeDamage(8);
 
-	for (unsigned int i = 0; i < ENERGY_POINT - 1; i++)
+	std::cout << std::endl;
+	std::cout << "========= Name Constructor Instances - Check takeDamage() & beRepaired() ========="<<std::endl;
+	clapTrapB.takeDamage(9);
+	while (clapTrapB.getEnergyPoints())
 	{
-		clapTrapB.beRepaired(2);
+		clapTrapB.beRepaired(1);
 	}
-	clapTrapB.beRepaired(2);
+	clapTrapB.beRepaired(1);
 	std::cout << std::endl;
-
+	std::cout << "========= Destroy Instances ========="<<std::endl;
 	return (0);
 }
