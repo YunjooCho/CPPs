@@ -6,11 +6,9 @@
 /*   By: yunjcho <yunjcho@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/21 15:24:11 by yunjcho           #+#    #+#             */
-/*   Updated: 2023/08/23 17:06:26 by yunjcho          ###   ########.fr       */
+/*   Updated: 2023/08/23 17:38:14 by yunjcho          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-#include "Fixed.hpp"
 
 #include "Fixed.hpp"
 
