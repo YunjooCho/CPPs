@@ -6,7 +6,7 @@
 /*   By: yunjcho <yunjcho@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/21 15:24:11 by yunjcho           #+#    #+#             */
-/*   Updated: 2023/08/23 18:56:04 by yunjcho          ###   ########.fr       */
+/*   Updated: 2023/08/23 21:46:06 by yunjcho          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,50 +35,32 @@ Fixed&	Fixed::operator=(const Fixed& fixed)
 
 bool	Fixed::operator>(const Fixed &fixed) const
 {
-	if (this->fixedPointNumber > fixed.getRawBits())
-		return (1);
-	else
-		return (0);
+	return (this->fixedPointNumber > fixed.getRawBits());
 }
 
 bool	Fixed::operator<(const Fixed &fixed) const
 {
-	if (this->fixedPointNumber < fixed.getRawBits())
-		return (1);
-	else
-		return (0);
+	return (this->fixedPointNumber < fixed.getRawBits());
 }
 
 bool	Fixed::operator>=(const Fixed &fixed) const
 {
-	if (this->fixedPointNumber >= fixed.getRawBits())
-		return (1);
-	else
-		return (0);
+	return (this->fixedPointNumber >= fixed.getRawBits());
 }
 
 bool	Fixed::operator<=(const Fixed &fixed) const
 {
-	if (this->fixedPointNumber <= fixed.getRawBits())
-		return (1);
-	else
-		return (0);
+	return (this->fixedPointNumber <= fixed.getRawBits());
 }
 
 bool	Fixed::operator==(const Fixed &fixed) const
 {
-	if (this->fixedPointNumber == fixed.getRawBits())
-		return (1);
-	else
-		return (0);
+	return (this->fixedPointNumber == fixed.getRawBits());
 }
 
 bool	Fixed::operator!=(const Fixed &fixed) const
 {
-	if (this->fixedPointNumber != fixed.getRawBits())
-		return (1);
-	else
-		return (0);
+	return (this->fixedPointNumber != fixed.getRawBits());
 }
 
 Fixed	Fixed::operator+(const Fixed &fixed) const
@@ -101,13 +83,8 @@ Fixed	Fixed::operator*(const Fixed &fixed) const
 
 Fixed	Fixed::operator/(const Fixed &fixed) const
 {
-	if (fixed.getRawBits() != 0)
-	{
-		Fixed temp(toFloat() / fixed.toFloat());
-		return (temp);
-	}
-	else
-		return (0);
+	Fixed temp(toFloat() / fixed.toFloat());
+	return (temp);
 }
 
 Fixed&	Fixed::operator++(void)
@@ -160,7 +137,8 @@ Fixed::~Fixed() {}
 
 float	Fixed::toFloat(void) const
 {
-	return ((float)this->fixedPointNumber / (1 << this->fractionalBits));
+	// return ((float)this->fixedPointNumber / (1 << this->fractionalBits));
+	return (static_cast<float>(this->fixedPointNumber / (1 << this->fractionalBits)));
 }
 
 int	Fixed::toInt(void) const
@@ -170,7 +148,8 @@ int	Fixed::toInt(void) const
 
 std::ostream& operator<<(std::ostream& outputStream, const Fixed& fixed)
 {
-	outputStream << ((float)fixed.getRawBits() / (1 << fixed.getFractionalBits()));
+	// outputStream << ((float)fixed.getRawBits() / (1 << fixed.getFractionalBits()));
+	outputStream << static_cast<float>(fixed.getRawBits()) / (1 << fixed.getFractionalBits());
 	return (outputStream);
 }
 
