@@ -6,7 +6,7 @@
 /*   By: yunjcho <yunjcho@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/21 15:24:11 by yunjcho           #+#    #+#             */
-/*   Updated: 2023/08/16 20:49:10 by yunjcho          ###   ########.fr       */
+/*   Updated: 2023/08/23 18:56:35 by yunjcho          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,22 +44,10 @@ class Fixed
 		void			setRawBits(int const raw);
 		float 			toFloat(void) const;
 		int				toInt(void) const;
-		static Fixed&	min(Fixed &fixed1, Fixed &fixed2)
-		{
-			return (fixed1 > fixed2 ? fixed1 : fixed2);
-		}
-		static const Fixed&	min(const Fixed &fixed1, const Fixed &fixed2)
-		{
-			return (fixed1 > fixed2 ? fixed1 : fixed2);
-		}
-		static Fixed&	max(Fixed &fixed1, Fixed &fixed2)
-		{
-			return (fixed1 < fixed2 ? fixed2 : fixed1);
-		}
-		static const Fixed&	max(const Fixed &fixed1, const Fixed &fixed2)
-		{
-			return (fixed1 < fixed2 ? fixed2 : fixed1);
-		}
+		static Fixed&	min(Fixed &fixed1, Fixed &fixed2);
+		static const Fixed&	min(const Fixed &fixed1, const Fixed &fixed2);
+		static Fixed&	max(Fixed &fixed1, Fixed &fixed2);
+		static const Fixed&	max(const Fixed &fixed1, const Fixed &fixed2);
 	private:
 		int					fixedPointNumber;
 		static const int	fractionalBits = 8;

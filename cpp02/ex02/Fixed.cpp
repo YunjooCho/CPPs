@@ -6,7 +6,7 @@
 /*   By: yunjcho <yunjcho@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/21 15:24:11 by yunjcho           #+#    #+#             */
-/*   Updated: 2023/08/22 16:33:57 by yunjcho          ###   ########.fr       */
+/*   Updated: 2023/08/23 18:56:04 by yunjcho          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -156,9 +156,7 @@ void	Fixed::setRawBits(int const raw)
 	std::cout << raw << std::endl;
 }
 
-Fixed::~Fixed()
-{
-}
+Fixed::~Fixed() {}
 
 float	Fixed::toFloat(void) const
 {
@@ -174,4 +172,24 @@ std::ostream& operator<<(std::ostream& outputStream, const Fixed& fixed)
 {
 	outputStream << ((float)fixed.getRawBits() / (1 << fixed.getFractionalBits()));
 	return (outputStream);
+}
+
+Fixed&	Fixed::min(Fixed &fixed1, Fixed &fixed2)
+{
+	return (fixed1 > fixed2 ? fixed1 : fixed2);
+}
+
+const Fixed&	Fixed::min(const Fixed &fixed1, const Fixed &fixed2)
+{
+	return (fixed1 > fixed2 ? fixed1 : fixed2);
+}
+
+Fixed&	Fixed::max(Fixed &fixed1, Fixed &fixed2)
+{
+	return (fixed1 < fixed2 ? fixed2 : fixed1);
+}
+
+const Fixed&	Fixed::max(const Fixed &fixed1, const Fixed &fixed2)
+{
+	return (fixed1 < fixed2 ? fixed2 : fixed1);
 }
