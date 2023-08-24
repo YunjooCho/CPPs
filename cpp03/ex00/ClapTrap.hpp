@@ -6,7 +6,7 @@
 /*   By: yunjcho <yunjcho@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/19 19:51:50 by yunjcho           #+#    #+#             */
-/*   Updated: 2023/08/22 18:40:59 by yunjcho          ###   ########.fr       */
+/*   Updated: 2023/08/24 21:45:16 by yunjcho          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,12 @@
 # include <iostream>
 # include <string>
 
-# define HIT_POINT 10
-# define ENERGY_POINT 10
-# define ATTACK_DAMAGE 0
+enum pointsInfo
+{
+	CLAP_HP = 10,
+	CLAP_EP = 10,
+	CLAP_AD = 0
+};
 
 class ClapTrap
 {
@@ -27,7 +30,7 @@ class ClapTrap
 		ClapTrap(std::string inputName);
 		ClapTrap(const ClapTrap& clapTrap);
 		ClapTrap&	operator=(const ClapTrap &clapTrap);
-		virtual	~ClapTrap();
+		~ClapTrap();
 		std::string		getName(void) const;
 		unsigned int	getHitPoints(void) const;
 		unsigned int	getEnergyPoints(void) const;
@@ -35,10 +38,10 @@ class ClapTrap
 		void			attack(const std::string& target);
 		void			takeDamage(unsigned int amount);
 		void			beRepaired(unsigned int amount);
-		virtual void	printError(void);
-		virtual void	printEnergyPoints(void);
-		virtual void	printHitPoints(void);
-		virtual void	printAttackDamage(void);
+		void			printError(void);
+		void			printEnergyPoints(void);
+		void			printHitPoints(void);
+		void			printAttackDamage(void);
 	private:
 		std::string		name;
 		unsigned int	hitPoints;

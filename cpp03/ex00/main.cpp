@@ -6,7 +6,7 @@
 /*   By: yunjcho <yunjcho@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/19 19:56:20 by yunjcho           #+#    #+#             */
-/*   Updated: 2023/08/22 18:15:27 by yunjcho          ###   ########.fr       */
+/*   Updated: 2023/08/24 21:44:01 by yunjcho          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,13 +36,13 @@ int main(void)
 		clapTrapA.attack(clapTrapB.getName());
 		clapTrapB.takeDamage(clapTrapA.getAttackDamage());
 	}
-	std::cout << std::endl;
 	clapTrapA.attack(clapTrapB.getName());
-	clapTrapA.beRepaired(6);
-	clapTrapB.beRepaired(6);
 
 	std::cout << std::endl;
 	std::cout << "========= Name Constructor Instances - Check takeDamage() & beRepaired() ========="<<std::endl;
+	clapTrapA.beRepaired(6);
+	clapTrapB.beRepaired(6);
+	std::cout << std::endl;
 	clapTrapB.takeDamage(9);
 	while (clapTrapB.getEnergyPoints())
 	{

@@ -6,19 +6,20 @@
 /*   By: yunjcho <yunjcho@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/19 19:56:00 by yunjcho           #+#    #+#             */
-/*   Updated: 2023/08/22 16:33:38 by yunjcho          ###   ########.fr       */
+/*   Updated: 2023/08/24 21:35:59 by yunjcho          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ClapTrap.hpp"
 
-ClapTrap::ClapTrap() : name("anonnymous"), hitPoints(HIT_POINT), energyPoints(ENERGY_POINT), attackDamage(ATTACK_DAMAGE) 
+ClapTrap::ClapTrap() : name("anonnymous"), hitPoints(CLAP_HP), energyPoints(CLAP_EP), attackDamage(CLAP_AD) 
 {
 	std::cout << "ClapTrap Default constructor called" << std::endl;
 }
 
-ClapTrap::ClapTrap(std::string inputName) : name(inputName), hitPoints(HIT_POINT), energyPoints(ENERGY_POINT), attackDamage(ATTACK_DAMAGE) 
+ClapTrap::ClapTrap(std::string inputName) : name(inputName), hitPoints(CLAP_HP), energyPoints(CLAP_EP), attackDamage(CLAP_AD) 
 {
+	std::cout << "ClapTrap Name constructor called" << std::endl;
 	std::cout << "ClapTrap " << this->name << " Created now!" << std::endl;
 };
 
@@ -103,8 +104,8 @@ void	ClapTrap::attack(const std::string& target)
 void	ClapTrap::takeDamage(unsigned int amount)
 {
 	std::cout << "ClapTrap " << this->name << " was damaged " << amount << " points." << std::endl;
-	if (this->hitPoints > amount)
-		this->hitPoints = this->hitPoints - amount;
+	if (this->getHitPoints() > amount)
+		this->hitPoints -= amount;
 	else
 		this->hitPoints = 0;
 	this->printHitPoints();
@@ -117,10 +118,10 @@ void	ClapTrap::beRepaired(unsigned int amount)
 		std::cout << "ClapTrap " << this->name << " repaired " << amount << " points!" << std::endl;
 		this->energyPoints--;
 		this->printEnergyPoints();
-		if (HIT_POINT >= this->hitPoints + amount)
-			this->hitPoints = this->hitPoints + amount;
+		if (CLAP_HP >= this->hitPoints + amount)
+			this->hitPoints += amount;
 		else
-			this->hitPoints = HIT_POINT;
+			this->hitPoints = 10;
 		this->printHitPoints();
 	}
 	else
