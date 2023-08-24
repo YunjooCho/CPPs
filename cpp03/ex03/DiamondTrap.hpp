@@ -1,38 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   FragTrap.hpp                                       :+:      :+:    :+:   */
+/*   DiamondTrap.hpp                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yunjcho <yunjcho@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/08/22 19:38:54 by yunjcho           #+#    #+#             */
-/*   Updated: 2023/08/24 23:33:29 by yunjcho          ###   ########seoul.kr  */
+/*   Created: 2023/08/25 00:04:53 by yunjcho           #+#    #+#             */
+/*   Updated: 2023/08/25 00:08:32 by yunjcho          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FRAGTRAP_HPP
-# define FRAGTRAP_HPP
+#ifndef DIAMONDTRAP_HPP
+# define DIAMONDTRAP_HPP
 
-# include <iostream>
-# include <string>
-# include "ClapTrap.hpp"
+#include "ScavTrap.hpp"
+#include "FragTrap.hpp"
 
-enum fragInfo
-{
-	FRAG_HP = 100,
-	FRAG_EP = 100,
-	FRAG_AD = 30
-};
-
-class FragTrap : public ClapTrap
+class DiamondTrap
 {
 	public:
-		FragTrap();
-		FragTrap(std::string inputName);
-		FragTrap(const FragTrap& fragTrap);
-		FragTrap&	operator=(const FragTrap &fragTrap);
-		virtual ~FragTrap();
-		void	highFivesGuys(void);
+		DiamondTrap();
+		DiamondTrap(std::string inputName);
+		DiamondTrap(const DiamondTrap& diamondTrap);
+		DiamondTrap&	operator=(const DiamondTrap &diamondTrap);
+		virtual ~DiamondTrap();
+		virtual void	attack(const std::string& target);
+		void	whoAmI(void);
 };
 
 #endif

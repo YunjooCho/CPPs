@@ -6,7 +6,7 @@
 /*   By: yunjcho <yunjcho@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 20:53:42 by yunjcho           #+#    #+#             */
-/*   Updated: 2023/08/22 20:23:38 by yunjcho          ###   ########.fr       */
+/*   Updated: 2023/08/24 23:37:15 by yunjcho          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,6 @@ int main(void)
 	FragTrap fragTrapA("Yellow");
 	FragTrap fragTrapB("Red");
 	FragTrap fragTrapC("Blue");
-	ClapTrap clapTrap("Green");
-	// ScavTrap scavTrap("White");
 
 	std::cout << std::endl;
 	std::cout << "========= Default Constructor Instance ========="<<std::endl;
@@ -39,13 +37,13 @@ int main(void)
 		fragTrapA.attack(fragTrapB.getName());
 		fragTrapB.takeDamage(fragTrapA.getAttackDamage());
 	}
-	std::cout << std::endl;
 	fragTrapA.attack(fragTrapA.getName());
-	fragTrapA.beRepaired(6);
-	fragTrapB.beRepaired(6);
 
 	std::cout << std::endl;
 	std::cout << "========= Name Constructor Instances - Check takeDamage() & beRepaired() ========="<<std::endl;
+	fragTrapA.beRepaired(6);
+	fragTrapB.beRepaired(6);
+	std::cout << std::endl;
 	fragTrapC.takeDamage(90);
 	while (fragTrapC.getEnergyPoints())
 	{
@@ -59,8 +57,10 @@ int main(void)
 	fragTrapA.highFivesGuys();
 	fragTrapB.highFivesGuys();
 	fragTrapC.highFivesGuys();
+	// ClapTrap clapTrap("Green");
 	// clapTrap.highFivesGuys();
-	// fragTrapC.guardGate();
+	// ScavTrap scavTrap("White");
+	// scavTrap.guardGate();
 	
 	std::cout << std::endl;
 	std::cout << "========= Destroy Instances ========="<<std::endl;
