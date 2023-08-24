@@ -6,7 +6,7 @@
 /*   By: yunjcho <yunjcho@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/19 19:51:50 by yunjcho           #+#    #+#             */
-/*   Updated: 2023/08/24 23:31:27 by yunjcho          ###   ########seoul.kr  */
+/*   Updated: 2023/08/25 00:13:25 by yunjcho          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ enum scavInfo
 	SCAV_AD = 20
 };
 
-class ScavTrap : public ClapTrap
+class ScavTrap : virtual public ClapTrap
 {
 	public:
 		ScavTrap();

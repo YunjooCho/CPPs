@@ -6,7 +6,7 @@
 /*   By: yunjcho <yunjcho@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 19:38:54 by yunjcho           #+#    #+#             */
-/*   Updated: 2023/08/24 23:33:29 by yunjcho          ###   ########seoul.kr  */
+/*   Updated: 2023/08/25 00:13:20 by yunjcho          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ enum fragInfo
 	FRAG_AD = 30
 };
 
-class FragTrap : public ClapTrap
+class FragTrap : virtual public ClapTrap
 {
 	public:
 		FragTrap();
