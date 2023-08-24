@@ -6,7 +6,7 @@
 /*   By: yunjcho <yunjcho@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/19 19:51:50 by yunjcho           #+#    #+#             */
-/*   Updated: 2023/08/22 19:58:36 by yunjcho          ###   ########.fr       */
+/*   Updated: 2023/08/24 23:11:15 by yunjcho          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,13 @@
 # include <string>
 # include "ClapTrap.hpp"
 
+enum scavInfo
+{
+	SCAV_HP = 100,
+	SCAV_EP = 50,
+	SCAV_AD = 20
+};
+
 class ScavTrap : public ClapTrap
 {
 	public:
@@ -24,13 +31,10 @@ class ScavTrap : public ClapTrap
 		ScavTrap(std::string inputName);
 		ScavTrap(const ScavTrap& scavTrap);
 		ScavTrap&	operator=(const ScavTrap &scavTrap);
-		~ScavTrap();
-		void	attack(const std::string& target);
-		void	printError(void);
-		void	printEnergyPoints(void);
-		void	printHitPoints(void);
-		void	printAttackDamage(void);
-		void	guardGate(void);
+		virtual ~ScavTrap();
+		virtual void	attack(const std::string& target);
+		void			guardGate(void);
+		// void			beRepaired(unsigned int amount); // 결과값 테스트용
 };
 
 #endif

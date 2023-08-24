@@ -6,7 +6,7 @@
 /*   By: yunjcho <yunjcho@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 19:38:54 by yunjcho           #+#    #+#             */
-/*   Updated: 2023/08/22 19:59:01 by yunjcho          ###   ########.fr       */
+/*   Updated: 2023/08/24 23:31:17 by yunjcho          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,13 @@
 # include <string>
 # include "ClapTrap.hpp"
 
+enum scavInfo
+{
+	SCAV_HP = 100,
+	SCAV_EP = 100,
+	SCAV_AD = 30
+};
+
 class FragTrap : public ClapTrap
 {
 	public:
@@ -24,11 +31,7 @@ class FragTrap : public ClapTrap
 		FragTrap(std::string inputName);
 		FragTrap(const FragTrap& fragTrap);
 		FragTrap&	operator=(const FragTrap &fragTrap);
-		~FragTrap();
-		void	printError(void);
-		void	printEnergyPoints(void);
-		void	printHitPoints(void);
-		void	printAttackDamage(void);
+		virtual ~FragTrap();
 		void	highFivesGuys(void);
 };
 

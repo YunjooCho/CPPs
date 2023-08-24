@@ -6,7 +6,7 @@
 /*   By: yunjcho <yunjcho@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/19 19:56:20 by yunjcho           #+#    #+#             */
-/*   Updated: 2023/08/24 21:44:01 by yunjcho          ###   ########seoul.kr  */
+/*   Updated: 2023/08/24 22:34:05 by yunjcho          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,7 @@ int main(void)
 		clapTrapB.beRepaired(1);
 	}
 	clapTrapB.beRepaired(1);
+
 	std::cout << std::endl;
 	std::cout << "========= Destroy Instances ========="<<std::endl;
 	return (0);

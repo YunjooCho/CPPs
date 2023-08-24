@@ -6,7 +6,7 @@
 /*   By: yunjcho <yunjcho@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 18:10:37 by yunjcho           #+#    #+#             */
-/*   Updated: 2023/08/22 19:55:41 by yunjcho          ###   ########.fr       */
+/*   Updated: 2023/08/24 23:20:56 by yunjcho          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,23 +16,17 @@ ScavTrap::ScavTrap() : ClapTrap()
 {
 	std::cout << "ScavTrap Default constructor called" << std::endl;
 	this->name = "annonymous";
-	this->hitPoints = 100;
-	this->energyPoints = 50;
-	this->attackDamage = 20;
-	this->printHitPoints();
-	this->printEnergyPoints();
-	this->printAttackDamage();
+	this->hitPoints = SCAV_HP;
+	this->energyPoints = SCAV_EP;
+	this->attackDamage = SCAV_AD;
 };
 
 ScavTrap::ScavTrap(std::string inputName) : ClapTrap(inputName)
 {
-	std::cout << "ScavTrap " << this->name << " Created now!" << std::endl;
-	this->hitPoints = 100;
-	this->energyPoints = 50;
-	this->attackDamage = 20;
-	this->printHitPoints();
-	this->printEnergyPoints();
-	this->printAttackDamage();
+	std::cout << "ScavTrap Name constructor called" << std::endl;
+	this->hitPoints = SCAV_HP;
+	this->energyPoints = SCAV_EP;
+	this->attackDamage = SCAV_AD;
 }
 
 ScavTrap&	ScavTrap::operator=(const ScavTrap& scavTrap)
@@ -56,30 +50,6 @@ ScavTrap::~ScavTrap()
 	std::cout << "ScavTrap " << this->name << " : I'll be BACK..." << std::endl;
 }
 
-void	ScavTrap::printError(void)
-{
-	std::cout << "[ERROR] ScavTrap " << this->name << " can't Anything!" << std::endl;
-	std::cout << "[ERROR] Because he has no energy point or hit point." << std::endl;
-}
-
-void	ScavTrap::printEnergyPoints(void)
-{
-	std::cout << "[INFO] ScavTrap " << this->name << "'s Energy Point is " \
-		<< this->energyPoints << std::endl;
-}
-
-void	ScavTrap::printHitPoints(void)
-{
-	std::cout << "[INFO] ScavTrap " << this->name << "'s Hit Point is " \
-		<< this->hitPoints << std::endl;
-}
-
-void	ScavTrap::printAttackDamage(void)
-{
-	std::cout << "[INFO] ScavTrap " << this->name << "'s Attack Damage is " \
-		<< this->attackDamage << std::endl;
-}
-
 void	ScavTrap::attack(const std::string& target)
 {
 	if (this->hitPoints > 0 && this->energyPoints > 0)
@@ -87,10 +57,14 @@ void	ScavTrap::attack(const std::string& target)
 		std::cout << "ScavTrap " << this->name << " attacks " << target << ", causing " \
 			<< this->attackDamage << " points of damage!" << std::endl;
 		this->energyPoints--;
-		this->printEnergyPoints();
+		std::cout << "[INFO] ScavTrap " << this->name << "'s Energy Point is " \
+			<< this->energyPoints << std::endl;
 	}
 	else
-		this->printError();
+	{
+		std::cout << "[ERROR] ScavTrap " << this->name << " can't Anything!" << std::endl;
+		std::cout << "[ERROR] Because he has no energy point or hit point." << std::endl;
+	}
 }
 
 void	ScavTrap::guardGate(void)
@@ -100,8 +74,12 @@ void	ScavTrap::guardGate(void)
 		std::cout << "[INFO] ScavTrap " << this->name << " is Gate keeper mode now." \
 			<< std::endl;
 		this->energyPoints--;
-		this->printEnergyPoints();
+		std::cout << "[INFO] ScavTrap " << this->name << "'s Energy Point is " \
+			<< this->energyPoints << std::endl;
 	}
 	else
-		this->printError();
+	{
+		std::cout << "[ERROR] ScavTrap " << this->name << " can't Anything!" << std::endl;
+		std::cout << "[ERROR] Because he has no energy point or hit point." << std::endl;
+	}
 }

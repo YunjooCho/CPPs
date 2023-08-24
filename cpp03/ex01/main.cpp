@@ -6,7 +6,7 @@
 /*   By: yunjcho <yunjcho@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 18:12:33 by yunjcho           #+#    #+#             */
-/*   Updated: 2023/08/22 20:13:12 by yunjcho          ###   ########.fr       */
+/*   Updated: 2023/08/24 23:09:52 by yunjcho          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@ int main(void)
 	ScavTrap scavTrapA("Yellow");
 	ScavTrap scavTrapB("Red");
 	ScavTrap scavTrapC("Blue");
-	ClapTrap clapTrap("Green");
 
 	std::cout << std::endl;
 	std::cout << "========= Default Constructor Instance ========="<<std::endl;
@@ -38,14 +37,14 @@ int main(void)
 		scavTrapA.attack(scavTrapB.getName());
 		scavTrapB.takeDamage(scavTrapA.getAttackDamage());
 	}
-	std::cout << std::endl;
 	scavTrapA.attack(scavTrapA.getName());
-	scavTrapA.beRepaired(6);
-	scavTrapB.beRepaired(6);
 
 	std::cout << std::endl;
 	std::cout << "========= Name Constructor Instances - Check takeDamage() & beRepaired() ========="<<std::endl;
-	scavTrapC.takeDamage(90);
+	scavTrapA.beRepaired(6);
+	scavTrapB.beRepaired(6);
+	std::cout << std::endl;
+	scavTrapC.takeDamage(99);
 	while (scavTrapC.getEnergyPoints())
 	{
 		scavTrapC.beRepaired(1);
@@ -58,6 +57,7 @@ int main(void)
 	scavTrapA.guardGate();
 	scavTrapB.guardGate();
 	scavTrapC.guardGate();
+	// ClapTrap clapTrap("Green");
 	// clapTrap.guardGate();
 	
 	std::cout << std::endl;
