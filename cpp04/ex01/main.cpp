@@ -6,7 +6,7 @@
 /*   By: yunjcho <yunjcho@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/25 15:09:47 by yunjcho           #+#    #+#             */
-/*   Updated: 2023/08/26 00:54:23 by yunjcho          ###   ########seoul.kr  */
+/*   Updated: 2023/08/26 01:11:26 by yunjcho          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,5 +92,7 @@ int main()
 	std::cout << dog2.getBrain()->getIdea(0) << std::endl;
 	std::cout << dog3.getBrain()->getIdea(0) << std::endl;
 
+	//sanitize 지우기
+	//segfault 처리
 	return (0);
 }
