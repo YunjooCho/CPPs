@@ -6,7 +6,7 @@
 /*   By: yunjcho <yunjcho@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/25 12:40:07 by yunjcho           #+#    #+#             */
-/*   Updated: 2023/08/25 16:10:20 by yunjcho          ###   ########.fr       */
+/*   Updated: 2023/08/26 01:05:21 by yunjcho          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,8 @@ class Dog : public Animal
 		Dog&	operator=(const Dog &dog);
 		virtual ~Dog();
 		virtual void	makeSound(void) const;
+		Brain	*getBrain(void) const;
+		void	setBrain(Brain* brain);
 	private:
 		Brain	*brain;
 };

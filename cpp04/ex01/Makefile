@@ -6,7 +6,7 @@
 #    By: yunjcho <yunjcho@student.42seoul.kr>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/06/14 15:31:29 by yunjcho           #+#    #+#              #
-#    Updated: 2023/08/25 16:27:02 by yunjcho          ###   ########.fr        #
+#    Updated: 2023/08/26 01:09:34 by yunjcho          ###   ########seoul.kr   #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,6 +15,11 @@ CXX = c++
 CXXFLAGS = -Wall -Werror -Wextra -std=c++98
 SRCS = main.cpp Animal.cpp Dog.cpp Cat.cpp Brain.cpp
 OBJS = $(SRCS:.cpp=.o)
+
+ifdef SANITIZE
+	CXXFLAGS += -g -fsanitize=address
+endif
+
 
 all : $(NAME)
 
@@ -34,4 +39,7 @@ re :
 	make fclean 
 	make all
 
-.PHONY: all clean fclean re
+sanitize :
+	make SANITIZE=1 re
+
+.PHONY: all clean fclean re sanitize

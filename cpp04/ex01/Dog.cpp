@@ -6,7 +6,7 @@
 /*   By: yunjcho <yunjcho@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/25 12:42:33 by yunjcho           #+#    #+#             */
-/*   Updated: 2023/08/25 16:16:55 by yunjcho          ###   ########.fr       */
+/*   Updated: 2023/08/26 01:05:54 by yunjcho          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,10 +24,7 @@ Dog&	Dog::operator=(const Dog& dog)
 	std::cout << this->type << " Copy assignment operator called" << std::endl;
 	if (this->type != dog.getType())
 		this->type = dog.getType();
-	// for (int i = 0; i < 100; i++)
-	// {
-	// 	this->brain->getIdea(i) = this->brain->getIdea(i);
-	// }
+	this->brain = new Brain();
 	this->brain = dog.brain;
 	return (*this);
 }
@@ -40,11 +37,25 @@ Dog::Dog(const Dog& dog) : Animal(dog)
 
 Dog::~Dog()
 {
-	std::cout << this->type << " Destructor called" << std::endl;
 	delete brain;
+	std::cout << this->type << " Destructor called" << std::endl;
 }
 
 void	Dog::makeSound(void) const
 {
 	std::cout << this-> type << " : Bow! wow!" << std::endl;
+}
+
+Brain *Dog::getBrain(void) const
+{
+	return (this->brain);
+}
+
+void	Dog::setBrain(Brain* brain)
+{
+	Brain *newBrain = new Brain();
+	for (size_t i = 0; i < 100; i++)
+	{
+		newBrain->setIdea(brain->getIdea(i), i);
+	}
 }

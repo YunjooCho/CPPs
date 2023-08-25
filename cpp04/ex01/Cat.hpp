@@ -6,7 +6,7 @@
 /*   By: yunjcho <yunjcho@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/25 12:50:54 by yunjcho           #+#    #+#             */
-/*   Updated: 2023/08/25 20:22:28 by yunjcho          ###   ########.fr       */
+/*   Updated: 2023/08/26 01:05:06 by yunjcho          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,8 @@ class Cat : public Animal
 		Cat&	operator=(const Cat &cat);
 		virtual ~Cat();
 		virtual void	makeSound(void) const;
-		Brain	getBrain(void) const;
-		void	setBrain(Brain& brain);
+		Brain	*getBrain(void) const;
+		void	setBrain(Brain* brain);
 	private:
 		Brain	*brain;
 };
