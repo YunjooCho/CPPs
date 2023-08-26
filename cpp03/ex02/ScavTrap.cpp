@@ -6,7 +6,7 @@
 /*   By: yunjcho <yunjcho@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 18:10:37 by yunjcho           #+#    #+#             */
-/*   Updated: 2023/08/24 23:20:56 by yunjcho          ###   ########seoul.kr  */
+/*   Updated: 2023/08/26 21:45:24 by yunjcho          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,17 +31,20 @@ ScavTrap::ScavTrap(std::string inputName) : ClapTrap(inputName)
 
 ScavTrap&	ScavTrap::operator=(const ScavTrap& scavTrap)
 {
-	std::cout << "Copy assignment operator called" << std::endl;
-	this->name = scavTrap.getName();
-	this->hitPoints = scavTrap.getHitPoints();
-	this->energyPoints = scavTrap.getEnergyPoints();
-	this->attackDamage = scavTrap.getAttackDamage();
+	std::cout << "ScavTrap Copy assignment operator called" << std::endl;
+	if (this != &scavTrap)
+	{
+		this->name = scavTrap.getName();
+		this->hitPoints = scavTrap.getHitPoints();
+		this->energyPoints = scavTrap.getEnergyPoints();
+		this->attackDamage = scavTrap.getAttackDamage();
+	}
 	return (*this);
 }
 
 ScavTrap::ScavTrap(const ScavTrap& scavTrap) : ClapTrap(scavTrap)
 {
-	std::cout << "Copy constructor called" << std::endl;
+	std::cout << "ScavTrap Copy constructor called" << std::endl;
 	*this = scavTrap;
 }
 
