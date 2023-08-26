@@ -6,7 +6,7 @@
 /*   By: yunjcho <yunjcho@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/19 19:56:00 by yunjcho           #+#    #+#             */
-/*   Updated: 2023/08/24 23:26:45 by yunjcho          ###   ########seoul.kr  */
+/*   Updated: 2023/08/27 01:28:26 by yunjcho          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,10 +25,13 @@ ClapTrap::ClapTrap(std::string inputName) : name(inputName), hitPoints(CLAP_HP),
 ClapTrap&	ClapTrap::operator=(const ClapTrap& clapTrap)
 {
 	std::cout << "ClapTrap Copy assignment operator called" << std::endl;
-	this->name = clapTrap.getName();
-	this->hitPoints = clapTrap.getHitPoints();
-	this->energyPoints = clapTrap.getEnergyPoints();
-	this->attackDamage = clapTrap.getAttackDamage();
+	if (this != &clapTrap)
+	{
+		this->name = clapTrap.getName();
+		this->hitPoints = clapTrap.getHitPoints();
+		this->energyPoints = clapTrap.getEnergyPoints();
+		this->attackDamage = clapTrap.getAttackDamage();
+	}
 	return (*this);
 }
 
