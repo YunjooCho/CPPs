@@ -6,7 +6,7 @@
 /*   By: yunjcho <yunjcho@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/25 15:09:47 by yunjcho           #+#    #+#             */
-/*   Updated: 2023/08/27 02:38:57 by yunjcho          ###   ########seoul.kr  */
+/*   Updated: 2023/08/27 02:48:44 by yunjcho          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,6 +107,8 @@ int main()
 	dog2.makeSound();
 	std::cout << "dog3. ";
 	dog3.makeSound();
+
+	// AAnimal tiger;
 
 	std::cout << std::endl;
 	std::cout << "================Destroy Instances=================" << std::endl;
