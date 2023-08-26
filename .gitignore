@@ -8,5 +8,5 @@
 *.ipa
 *.o
 *.d
-
+a.out
 .DS_Store

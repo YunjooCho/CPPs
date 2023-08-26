@@ -6,7 +6,7 @@
 /*   By: yunjcho <yunjcho@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/25 12:50:54 by yunjcho           #+#    #+#             */
-/*   Updated: 2023/08/27 02:02:15 by yunjcho          ###   ########seoul.kr  */
+/*   Updated: 2023/08/27 02:42:20 by yunjcho          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 #include "AAnimal.hpp"
 #include "Brain.hpp"
 
-class Cat : public Animal
+class Cat : public AAnimal
 {
 	public:
 		Cat();

@@ -6,7 +6,7 @@
 /*   By: yunjcho <yunjcho@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/25 12:51:48 by yunjcho           #+#    #+#             */
-/*   Updated: 2023/08/25 13:16:43 by yunjcho          ###   ########.fr       */
+/*   Updated: 2023/08/27 02:09:52 by yunjcho          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ Cat::Cat() : Animal()
 Cat&	Cat::operator=(const Cat& cat)
 {
 	std::cout << this->type << " Copy assignment operator called" << std::endl;
-	if (this->type != cat.getType())
+	if (this != &cat)
 		this->type = cat.getType();
 	return (*this);
 }

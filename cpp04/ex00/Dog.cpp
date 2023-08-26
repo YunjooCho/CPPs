@@ -6,7 +6,7 @@
 /*   By: yunjcho <yunjcho@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/25 12:42:33 by yunjcho           #+#    #+#             */
-/*   Updated: 2023/08/25 13:46:02 by yunjcho          ###   ########.fr       */
+/*   Updated: 2023/08/27 01:40:46 by yunjcho          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ Dog::Dog() : Animal()
 Dog&	Dog::operator=(const Dog& dog)
 {
 	std::cout << this->type << " Copy assignment operator called" << std::endl;
-	if (this->type != dog.getType())
+	if (this != &dog)
 		this->type = dog.getType();
 	return (*this);
 }

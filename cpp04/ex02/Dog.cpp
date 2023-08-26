@@ -6,13 +6,13 @@
 /*   By: yunjcho <yunjcho@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/25 12:42:33 by yunjcho           #+#    #+#             */
-/*   Updated: 2023/08/27 01:47:10 by yunjcho          ###   ########seoul.kr  */
+/*   Updated: 2023/08/27 02:39:46 by yunjcho          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Dog.hpp"
 
-Dog::Dog() : Animal()
+Dog::Dog() : AAnimal()
 {
 	this->type = "Dog";
 	this->brain = new Brain();
@@ -31,7 +31,7 @@ Dog&	Dog::operator=(const Dog& dog)
 	return (*this);
 }
 
-Dog::Dog(const Dog& dog) : Animal(dog)
+Dog::Dog(const Dog& dog) : AAnimal(dog)
 {
 	std::cout << this->type << " Copy constructor called" << std::endl;
 	this->brain = new Brain();
@@ -46,7 +46,7 @@ Dog::~Dog()
 
 void	Dog::makeSound(void) const
 {
-	std::cout << this-> type << " : Meow! " << std::endl;
+	std::cout << this-> type << " : Bow! wow! " << std::endl;
 }
 
 Brain *Dog::getBrain(void) const

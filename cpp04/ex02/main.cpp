@@ -6,7 +6,7 @@
 /*   By: yunjcho <yunjcho@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/25 15:09:47 by yunjcho           #+#    #+#             */
-/*   Updated: 2023/08/27 02:02:10 by yunjcho          ###   ########seoul.kr  */
+/*   Updated: 2023/08/27 02:38:57 by yunjcho          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,8 @@
 int main()
 {
 	std::cout << "================Create Instances(have a Brain) - Dog, Cat================" << std::endl;
-	const Animal* j = new Dog();
-	const Animal* i = new Cat();
+	const AAnimal* j = new Dog();
+	const AAnimal* i = new Cat();
 
 	std::cout << std::endl;
 	std::cout << "================Destroy Instances - Check Brain Instance leaks================" << std::endl;
@@ -27,7 +27,7 @@ int main()
 
 	std::cout << std::endl;
 	std::cout << "================Create Instances Array - Half Cats, Half Dogs=================" << std::endl;
-	Animal	*animals[10];
+	AAnimal	*animals[10];
 
 	std::cout << std::endl;
 	for (int i = 0; i < 10; i++)
@@ -92,6 +92,21 @@ int main()
 	std::cout << dog2.getBrain()->getIdea(0) << std::endl;
 	std::cout << dog3.getBrain()->getIdea(0) << std::endl;
 
+	std::cout << std::endl;
+	std::cout << "================makeSound()=================" << std::endl;
+	std::cout << "cat1. ";
+	cat1.makeSound();
+	std::cout << "cat2. ";
+	cat2.makeSound();
+	std::cout << "cat3. ";
+	cat3.makeSound();
+	std::cout << std::endl;
+	std::cout << "dog1. ";
+	dog1.makeSound();
+	std::cout << "dog2. ";
+	dog2.makeSound();
+	std::cout << "dog3. ";
+	dog3.makeSound();
 
 	std::cout << std::endl;
 	std::cout << "================Destroy Instances=================" << std::endl;

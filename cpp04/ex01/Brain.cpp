@@ -6,7 +6,7 @@
 /*   By: yunjcho <yunjcho@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/25 15:46:15 by yunjcho           #+#    #+#             */
-/*   Updated: 2023/08/26 20:54:13 by yunjcho          ###   ########.fr       */
+/*   Updated: 2023/08/27 01:42:26 by yunjcho          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,6 @@ void	Brain::setIdea(std::string idea, int idx)
 {
 	for (int i = 0; i < 100; i++)
 	{
-		this->ideas[idx] = idea;
+		this->ideas[idx] = std::string(idea);
 	}
 }
