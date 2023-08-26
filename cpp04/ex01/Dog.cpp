@@ -6,7 +6,7 @@
 /*   By: yunjcho <yunjcho@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/25 12:42:33 by yunjcho           #+#    #+#             */
-/*   Updated: 2023/08/26 01:05:54 by yunjcho          ###   ########seoul.kr  */
+/*   Updated: 2023/08/26 21:33:17 by yunjcho          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,16 +22,20 @@ Dog::Dog() : Animal()
 Dog&	Dog::operator=(const Dog& dog)
 {
 	std::cout << this->type << " Copy assignment operator called" << std::endl;
-	if (this->type != dog.getType())
+	if (this != &dog)
+	{
 		this->type = dog.getType();
-	this->brain = new Brain();
-	this->brain = dog.brain;
+		if (this->brain != dog.getBrain())
+			delete this->brain;
+		this->brain = new Brain(*dog.brain);
+	}
 	return (*this);
 }
 
 Dog::Dog(const Dog& dog) : Animal(dog)
 {
 	std::cout << this->type << " Copy constructor called" << std::endl;
+	this->brain = new Brain();
 	*this = dog;
 }
 
@@ -43,7 +47,7 @@ Dog::~Dog()
 
 void	Dog::makeSound(void) const
 {
-	std::cout << this-> type << " : Bow! wow!" << std::endl;
+	std::cout << this-> type << " : Meow! " << std::endl;
 }
 
 Brain *Dog::getBrain(void) const
@@ -51,11 +55,10 @@ Brain *Dog::getBrain(void) const
 	return (this->brain);
 }
 
-void	Dog::setBrain(Brain* brain)
+void	Dog::setBrain(Brain* _brain)
 {
-	Brain *newBrain = new Brain();
 	for (size_t i = 0; i < 100; i++)
 	{
-		newBrain->setIdea(brain->getIdea(i), i);
+		this->brain->setIdea(_brain->getIdea(i), i);
 	}
 }

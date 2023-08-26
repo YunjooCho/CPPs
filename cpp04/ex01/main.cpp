@@ -6,7 +6,7 @@
 /*   By: yunjcho <yunjcho@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/25 15:09:47 by yunjcho           #+#    #+#             */
-/*   Updated: 2023/08/26 01:11:26 by yunjcho          ###   ########seoul.kr  */
+/*   Updated: 2023/08/26 21:34:06 by yunjcho          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,8 @@
 #include "Dog.hpp"
 #include "Cat.hpp"
 
-void	_leaks()
-{
-	system("leaks a.out");
-}
-
 int main()
 {
-	atexit(_leaks);
 	std::cout << "================Create Instances(have a Brain) - Dog, Cat================" << std::endl;
 	const Animal* j = new Dog();
 	const Animal* i = new Cat();
@@ -51,6 +45,7 @@ int main()
 		std::cout << "No." << i << "'s type is " << animals[i]->getType() << std::endl;
 		delete animals[i];
 	}
+	
 
 	std::cout << std::endl;
 	std::cout << "================Check Shallow & Deep Copy=================" << std::endl;
@@ -58,6 +53,7 @@ int main()
 	cat1.getBrain()->setIdea("I like fish", 0);
 	Cat cat2(cat1);
 	Cat cat3;
+
 	cat3 = cat1;
 
 	std::cout << std::endl;
@@ -73,26 +69,29 @@ int main()
 	std::cout << cat2.getBrain()->getIdea(0) << std::endl;
 	std::cout << cat3.getBrain()->getIdea(0) << std::endl;
 
+	std::cout << std::endl;
 	Dog dog1;
 	dog1.getBrain()->setIdea("I like meat", 0);
 	Dog dog2(dog1);
 	Dog dog3;
+	
 	dog3 = dog1;
 
 	std::cout << std::endl;
-	std::cout << "================Before change Idea - Cat=================" << std::endl;
+	std::cout << "================Before change Idea - Dog=================" << std::endl;
 	std::cout << dog1.getBrain()->getIdea(0) << std::endl;
 	std::cout << dog2.getBrain()->getIdea(0) << std::endl;
 	std::cout << dog3.getBrain()->getIdea(0) << std::endl;
 
 	std::cout << std::endl;
-	std::cout << "================After change Idea - Cat=================" << std::endl;
+	std::cout << "================After change Idea - Dog=================" << std::endl;
 	dog1.getBrain()->setIdea("I like ball", 0);
 	std::cout << dog1.getBrain()->getIdea(0) << std::endl;
 	std::cout << dog2.getBrain()->getIdea(0) << std::endl;
 	std::cout << dog3.getBrain()->getIdea(0) << std::endl;
 
-	//sanitize 지우기
-	//segfault 처리
+
+	std::cout << std::endl;
+	std::cout << "================Destroy Instances=================" << std::endl;
 	return (0);
 }
