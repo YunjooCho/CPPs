@@ -6,19 +6,19 @@
 /*   By: yunjcho <yunjcho@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/25 15:09:47 by yunjcho           #+#    #+#             */
-/*   Updated: 2023/08/27 02:43:14 by yunjcho          ###   ########seoul.kr  */
+/*   Updated: 2023/08/27 02:48:44 by yunjcho          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Animal.hpp"
+#include "AAnimal.hpp"
 #include "Dog.hpp"
 #include "Cat.hpp"
 
 int main()
 {
 	std::cout << "================Create Instances(have a Brain) - Dog, Cat================" << std::endl;
-	const Animal* j = new Dog();
-	const Animal* i = new Cat();
+	const AAnimal* j = new Dog();
+	const AAnimal* i = new Cat();
 
 	std::cout << std::endl;
 	std::cout << "================Destroy Instances - Check Brain Instance leaks================" << std::endl;
@@ -27,7 +27,7 @@ int main()
 
 	std::cout << std::endl;
 	std::cout << "================Create Instances Array - Half Cats, Half Dogs=================" << std::endl;
-	Animal	*animals[10];
+	AAnimal	*animals[10];
 
 	std::cout << std::endl;
 	for (int i = 0; i < 10; i++)
@@ -107,6 +107,8 @@ int main()
 	dog2.makeSound();
 	std::cout << "dog3. ";
 	dog3.makeSound();
+
+	// AAnimal tiger;
 
 	std::cout << std::endl;
 	std::cout << "================Destroy Instances=================" << std::endl;

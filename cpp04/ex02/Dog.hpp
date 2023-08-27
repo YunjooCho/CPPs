@@ -1,29 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Cat.hpp                                            :+:      :+:    :+:   */
+/*   Dog.hpp                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yunjcho <yunjcho@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/08/25 12:50:54 by yunjcho           #+#    #+#             */
-/*   Updated: 2023/08/27 02:43:50 by yunjcho          ###   ########seoul.kr  */
+/*   Created: 2023/08/25 12:40:07 by yunjcho           #+#    #+#             */
+/*   Updated: 2023/08/27 02:40:16 by yunjcho          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef CAT_HPP
-# define CAT_HPP
+#ifndef DOG_HPP
+# define DOG_HPP
 
 #include <iostream>
-#include "Animal.hpp"
+#include "AAnimal.hpp"
 #include "Brain.hpp"
 
-class Cat : public Animal
+class Dog : public AAnimal
 {
 	public:
-		Cat();
-		Cat(const Cat& cat);
-		Cat&	operator=(const Cat &cat);
-		virtual ~Cat();
+		Dog();
+		Dog(const Dog& dog);
+		Dog&	operator=(const Dog &dog);
+		virtual ~Dog();
 		virtual void	makeSound(void) const;
 		Brain	*getBrain(void) const;
 		void	setBrain(Brain* brain);

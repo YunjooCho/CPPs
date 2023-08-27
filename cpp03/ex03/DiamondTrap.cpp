@@ -6,7 +6,7 @@
 /*   By: yunjcho <yunjcho@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/25 00:24:34 by yunjcho           #+#    #+#             */
-/*   Updated: 2023/08/25 01:55:43 by yunjcho          ###   ########seoul.kr  */
+/*   Updated: 2023/08/27 01:28:57 by yunjcho          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,11 +34,14 @@ DiamondTrap::DiamondTrap(std::string _inputName) : ClapTrap(_inputName + "_clap_
 DiamondTrap&	DiamondTrap::operator=(const DiamondTrap& diamondTrap)
 {
 	std::cout << "Copy assignment operator called" << std::endl;
-	this->_name = diamondTrap.getName();
-    this->ClapTrap::name = diamondTrap.ClapTrap::getName();
-	this->FragTrap::hitPoints = diamondTrap.FragTrap::getHitPoints();
-	this->ScavTrap::energyPoints = diamondTrap.ScavTrap::getEnergyPoints();
-	this->FragTrap::attackDamage = diamondTrap.FragTrap::getAttackDamage();
+	if (this != &diamondTrap)
+	{
+		this->_name = diamondTrap.getName();
+		this->ClapTrap::name = diamondTrap.ClapTrap::getName();
+		this->FragTrap::hitPoints = diamondTrap.FragTrap::getHitPoints();
+		this->ScavTrap::energyPoints = diamondTrap.ScavTrap::getEnergyPoints();
+		this->FragTrap::attackDamage = diamondTrap.FragTrap::getAttackDamage();
+	}
 	return (*this);
 }
 

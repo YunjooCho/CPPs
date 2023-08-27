@@ -6,7 +6,7 @@
 /*   By: yunjcho <yunjcho@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/25 12:42:33 by yunjcho           #+#    #+#             */
-/*   Updated: 2023/08/26 21:33:17 by yunjcho          ###   ########.fr       */
+/*   Updated: 2023/08/27 02:33:27 by yunjcho          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,7 @@ Dog&	Dog::operator=(const Dog& dog)
 	if (this != &dog)
 	{
 		this->type = dog.getType();
-		if (this->brain != dog.getBrain())
-			delete this->brain;
+		delete this->brain;
 		this->brain = new Brain(*dog.brain);
 	}
 	return (*this);
@@ -47,7 +46,7 @@ Dog::~Dog()
 
 void	Dog::makeSound(void) const
 {
-	std::cout << this-> type << " : Meow! " << std::endl;
+	std::cout << this-> type << " : Bow! wow! " << std::endl;
 }
 
 Brain *Dog::getBrain(void) const

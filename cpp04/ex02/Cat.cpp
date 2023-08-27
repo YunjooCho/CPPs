@@ -6,13 +6,13 @@
 /*   By: yunjcho <yunjcho@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/25 12:51:48 by yunjcho           #+#    #+#             */
-/*   Updated: 2023/08/27 02:43:54 by yunjcho          ###   ########seoul.kr  */
+/*   Updated: 2023/08/27 02:42:30 by yunjcho          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Cat.hpp"
 
-Cat::Cat() : Animal()
+Cat::Cat() : AAnimal()
 {
 	this->type = "Cat";
 	this->brain = new Brain();
@@ -31,7 +31,7 @@ Cat&	Cat::operator=(const Cat& cat)
 	return (*this);
 }
 
-Cat::Cat(const Cat& cat) : Animal(cat)
+Cat::Cat(const Cat& cat) : AAnimal(cat)
 {
 	std::cout << this->type << " Copy constructor called" << std::endl;
 	this->brain = new Brain();

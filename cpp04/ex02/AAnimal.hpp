@@ -1,34 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Cat.hpp                                            :+:      :+:    :+:   */
+/*   AAnimal.hpp                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yunjcho <yunjcho@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/08/25 12:50:54 by yunjcho           #+#    #+#             */
-/*   Updated: 2023/08/27 02:43:50 by yunjcho          ###   ########seoul.kr  */
+/*   Created: 2023/08/25 12:23:56 by yunjcho           #+#    #+#             */
+/*   Updated: 2023/08/27 02:38:35 by yunjcho          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef CAT_HPP
-# define CAT_HPP
+#ifndef AANIMAL_HPP
+# define AANIMAL_HPP
 
 #include <iostream>
-#include "Animal.hpp"
-#include "Brain.hpp"
 
-class Cat : public Animal
+class AAnimal
 {
 	public:
-		Cat();
-		Cat(const Cat& cat);
-		Cat&	operator=(const Cat &cat);
-		virtual ~Cat();
-		virtual void	makeSound(void) const;
-		Brain	*getBrain(void) const;
-		void	setBrain(Brain* brain);
-	private:
-		Brain	*brain;
+		AAnimal();
+		AAnimal(const AAnimal& animal);
+		AAnimal&	operator=(const AAnimal &animal);
+		virtual ~AAnimal();
+		std::string		getType(void) const;
+		virtual void	makeSound(void) const = 0;
+	protected:
+		std::string	type;
 };
 
 #endif

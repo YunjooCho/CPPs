@@ -6,7 +6,7 @@
 /*   By: yunjcho <yunjcho@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 19:53:20 by yunjcho           #+#    #+#             */
-/*   Updated: 2023/08/24 23:35:33 by yunjcho          ###   ########seoul.kr  */
+/*   Updated: 2023/08/27 01:30:27 by yunjcho          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,10 +32,13 @@ FragTrap::FragTrap(std::string inputName) : ClapTrap(inputName)
 FragTrap&	FragTrap::operator=(const FragTrap& fragTrap)
 {
 	std::cout << "Copy assignment operator called" << std::endl;
-	this->name = fragTrap.getName();
-	this->hitPoints = fragTrap.getHitPoints();
-	this->energyPoints = fragTrap.getEnergyPoints();
-	this->attackDamage = fragTrap.getAttackDamage();
+	if (this != &fragTrap)
+	{
+		this->name = fragTrap.getName();
+		this->hitPoints = fragTrap.getHitPoints();
+		this->energyPoints = fragTrap.getEnergyPoints();
+		this->attackDamage = fragTrap.getAttackDamage();
+	}
 	return (*this);
 }
 

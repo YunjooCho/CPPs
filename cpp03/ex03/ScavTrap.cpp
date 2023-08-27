@@ -6,7 +6,7 @@
 /*   By: yunjcho <yunjcho@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 18:10:37 by yunjcho           #+#    #+#             */
-/*   Updated: 2023/08/24 23:20:56 by yunjcho          ###   ########seoul.kr  */
+/*   Updated: 2023/08/27 01:32:01 by yunjcho          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,10 +32,13 @@ ScavTrap::ScavTrap(std::string inputName) : ClapTrap(inputName)
 ScavTrap&	ScavTrap::operator=(const ScavTrap& scavTrap)
 {
 	std::cout << "Copy assignment operator called" << std::endl;
-	this->name = scavTrap.getName();
-	this->hitPoints = scavTrap.getHitPoints();
-	this->energyPoints = scavTrap.getEnergyPoints();
-	this->attackDamage = scavTrap.getAttackDamage();
+	if (this != &scavTrap)
+	{
+		this->name = scavTrap.getName();
+		this->hitPoints = scavTrap.getHitPoints();
+		this->energyPoints = scavTrap.getEnergyPoints();
+		this->attackDamage = scavTrap.getAttackDamage();
+	}
 	return (*this);
 }
 
