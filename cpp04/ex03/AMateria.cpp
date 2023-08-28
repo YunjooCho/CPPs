@@ -6,7 +6,7 @@
 /*   By: yunjcho <yunjcho@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/28 21:45:15 by yunjcho           #+#    #+#             */
-/*   Updated: 2023/08/28 21:47:18 by yunjcho          ###   ########.fr       */
+/*   Updated: 2023/08/29 00:41:54 by yunjcho          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 AMateria::AMateria()
 {
 	std::cout << "AMateria Default constructor called" << std::endl;
-	this->type = ""
+	this->type = "";
 }
 
 AMateria&	AMateria::operator=(const AMateria& aMateria)
