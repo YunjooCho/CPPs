@@ -6,7 +6,7 @@
 /*   By: yunjcho <yunjcho@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/28 16:43:16 by yunjcho           #+#    #+#             */
-/*   Updated: 2023/08/29 03:14:13 by yunjcho          ###   ########seoul.kr  */
+/*   Updated: 2023/08/29 08:41:21 by yunjcho          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,8 +61,11 @@ void 	MateriaSource::learnMateria(AMateria* materiaSource)
 {
 	for (size_t i = 0; i < 4; i++)
 	{
-		if (manual[i] == NULL)
-			manual[i] = materiaSource;
+		if (this->manual[i] == NULL && materiaSource != NULL)
+		{
+			this->manual[i] = materiaSource;
+			break ;
+		}
 	}
 }
 
