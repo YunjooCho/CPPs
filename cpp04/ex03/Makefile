@@ -6,18 +6,18 @@
 #    By: yunjcho <yunjcho@student.42seoul.kr>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/06/14 15:31:29 by yunjcho           #+#    #+#              #
-#    Updated: 2023/08/28 21:50:42 by yunjcho          ###   ########.fr        #
+#    Updated: 2023/08/29 02:01:10 by yunjcho          ###   ########seoul.kr   #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = a.out
 CXX = c++
 CXXFLAGS = -Wall -Werror -Wextra -std=c++98
-SRCS = main.cpp Character.cpp MateriaSource.cpp AMateria.cpp Ice.cpp Cure.cpp # Floor.cpp
+SRCS = main.cpp Character.cpp MateriaSource.cpp AMateria.cpp Ice.cpp Cure.cpp
 OBJS = $(SRCS:.cpp=.o)
 
 ifdef SANITIZE
-	CXXFLAGS += -g -fsanitize=address
+	CXXFLAGS += -g3 -fsanitize=address
 endif
 
 all : $(NAME)

@@ -6,7 +6,7 @@
 /*   By: yunjcho <yunjcho@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/28 15:41:28 by yunjcho           #+#    #+#             */
-/*   Updated: 2023/08/29 01:36:56 by yunjcho          ###   ########seoul.kr  */
+/*   Updated: 2023/08/29 01:56:15 by yunjcho          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 Character::Character() : ICharacter()
 {
 	this->name = "ammonymous";
-	// std::cout << "Character "<< this->name << " Default constructor called" << std::endl;
 	for (int i = 0; i < 4; i++)
 	{
 		this->slot[i] = NULL;
@@ -25,7 +24,6 @@ Character::Character() : ICharacter()
 Character::Character(std::string name) : ICharacter()
 {
 	this->name = name;
-	// std::cout << "Character "<< this->name << " Default constructor called" << std::endl;
 	for (int i = 0; i < 4; i++)
 	{
 		this->slot[i] = NULL;
@@ -34,24 +32,20 @@ Character::Character(std::string name) : ICharacter()
 
 Character&	Character::operator=(const Character& character)
 {
-	// std::cout << "Character Copy assignment operator called" << std::endl;
-	if (this != &character)
+	this->name = std::string(character.getName());
+	for (int i = 0; i < 4; i++)
 	{
-		this->name = std::string(character.getName());
-		for (int i = 0; i < 4; i++)
+		if (this->slot[i] != NULL)
 		{
-			if (this->slot[i] != NULL)
-			{
-				delete this->slot[i];
-			}
-			if (character.slot[i] != NULL)
-			{
-				slot[i] = character.slot[i]->clone();
-			}
-			else
-			{
-				slot[i] = NULL;
-			}
+			delete this->slot[i];
+		}
+		if (character.slot[i] != NULL)
+		{
+			slot[i] = character.slot[i]->clone();
+		}
+		else
+		{
+			slot[i] = NULL;
 		}
 	}
 	return (*this);
@@ -59,17 +53,18 @@ Character&	Character::operator=(const Character& character)
 
 Character::Character(const Character& character) : ICharacter()
 {
-	// std::cout << "Character Copy constructor called" << std::endl;
 	*this = character;
 }
 
 Character::~Character()
 {
-	// std::cout << "Character " << this->name << " Destructor called" << std::endl;
 	for (int i = 0; i < 4; i++)
 	{
 		if (this->slot[i] != NULL)
+		{
 			delete this->slot[i];
+			this->slot[i] = NULL;
+		}
 	}
 }
 

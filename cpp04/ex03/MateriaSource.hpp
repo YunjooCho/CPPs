@@ -6,7 +6,7 @@
 /*   By: yunjcho <yunjcho@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/27 21:34:58 by yunjcho           #+#    #+#             */
-/*   Updated: 2023/08/29 01:29:51 by yunjcho          ###   ########seoul.kr  */
+/*   Updated: 2023/08/29 02:08:43 by yunjcho          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 # define AMATERIASOURCE_HPP
 
 #include <iostream>
-#include "IMaterialSource.hpp"
+#include "IMateriaSource.hpp"
 #include "AMateria.hpp"
 
 class MateriaSource : public IMateriaSource

@@ -6,7 +6,7 @@
 /*   By: yunjcho <yunjcho@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/28 16:43:16 by yunjcho           #+#    #+#             */
-/*   Updated: 2023/08/29 01:20:21 by yunjcho          ###   ########seoul.kr  */
+/*   Updated: 2023/08/29 02:02:36 by yunjcho          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 MateriaSource::MateriaSource() : IMateriaSource()
 {
-	// std::cout << "MateriaSource Default constructor called" << std::endl;
 	for (int i = 0; i < 4; i++)
 	{
 		this->manual[i] = NULL;
@@ -23,7 +22,6 @@ MateriaSource::MateriaSource() : IMateriaSource()
 
 MateriaSource&	MateriaSource::operator=(const MateriaSource& materiaSource)
 {
-	std::cout << "MateriaSource Copy assignment operator called" << std::endl;
 	if (this != &materiaSource)
 	{
 		for (int i = 0; i < 4; i++)
@@ -39,13 +37,11 @@ MateriaSource&	MateriaSource::operator=(const MateriaSource& materiaSource)
 
 MateriaSource::MateriaSource(const MateriaSource& materiaSource) : IMateriaSource(materiaSource)
 {
-	std::cout << "MateriaSource Copy constructor called" << std::endl;
 	*this = materiaSource;
 }
 
 MateriaSource::~MateriaSource()
 {
-	std::cout << "MateriaSource Destructor called" << std::endl;
 }
 
 void 	MateriaSource::learnMateria(AMateria* materiaSource)
