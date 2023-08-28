@@ -6,13 +6,13 @@
 /*   By: yunjcho <yunjcho@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/28 16:43:16 by yunjcho           #+#    #+#             */
-/*   Updated: 2023/08/29 02:02:36 by yunjcho          ###   ########seoul.kr  */
+/*   Updated: 2023/08/29 03:14:13 by yunjcho          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "MateriaSource.hpp"
 
-MateriaSource::MateriaSource() : IMateriaSource()
+MateriaSource::MateriaSource()
 {
 	for (int i = 0; i < 4; i++)
 	{
@@ -27,40 +27,57 @@ MateriaSource&	MateriaSource::operator=(const MateriaSource& materiaSource)
 		for (int i = 0; i < 4; i++)
 		{
 			if (this->manual[i] != NULL)
-				delete manual[i];
+				delete this->manual[i];
 			if (materiaSource.manual[i] != NULL)
-				manual[i] = materiaSource.manual[i]->clone();
+			{
+				this->manual[i] = materiaSource.manual[i]->clone();
+			}
+			else
+			{
+				this->manual[i] = NULL;
+			}
 		}
 	}
 	return (*this);
 }
 
-MateriaSource::MateriaSource(const MateriaSource& materiaSource) : IMateriaSource(materiaSource)
+MateriaSource::MateriaSource(const MateriaSource& materiaSource)
 {
 	*this = materiaSource;
 }
 
 MateriaSource::~MateriaSource()
 {
+	for (int i = 0; i < 4; i++)
+	{
+		if (this->manual[i] != NULL)
+		{
+			delete this->manual[i];
+		}
+	}
 }
 
 void 	MateriaSource::learnMateria(AMateria* materiaSource)
 {
 	for (size_t i = 0; i < 4; i++)
 	{
-		if (!manual[i])
+		if (manual[i] == NULL)
 			manual[i] = materiaSource;
 	}
 }
 
 AMateria*	MateriaSource::createMateria(std::string const &type)
 {
-	for (size_t i = 0; i < 4; i++)
+	for (int i = 0; i < 4; i++)
 	{
 		if (this->manual[i] != NULL)
 		{
-			if (this->manual[i]->getType().compare(type))
-				return (manual[i]->clone());
+			if (this->manual[i]->getType().compare(type) == 0)
+			{
+				AMateria *tmp = this->manual[i];
+				this->manual[i] = NULL;
+				return (tmp);
+			}
 		}
 	}
 	return (0);

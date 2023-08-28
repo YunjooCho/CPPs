@@ -6,17 +6,14 @@
 /*   By: yunjcho <yunjcho@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/27 18:10:04 by yunjcho           #+#    #+#             */
-/*   Updated: 2023/08/29 00:49:08 by yunjcho          ###   ########seoul.kr  */
+/*   Updated: 2023/08/29 02:43:06 by yunjcho          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef ICHARACTER_HPP
 # define ICHARACTER_HPP
 
-#include <iostream>
 #include "AMateria.hpp"
-
-class AMateria;
 
 class ICharacter
 {

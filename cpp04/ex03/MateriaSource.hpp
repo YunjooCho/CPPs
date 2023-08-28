@@ -6,7 +6,7 @@
 /*   By: yunjcho <yunjcho@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/27 21:34:58 by yunjcho           #+#    #+#             */
-/*   Updated: 2023/08/29 02:08:43 by yunjcho          ###   ########seoul.kr  */
+/*   Updated: 2023/08/29 02:44:25 by yunjcho          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,9 @@
 
 #include <iostream>
 #include "IMateriaSource.hpp"
-#include "AMateria.hpp"
+#include "ICharacter.hpp"
+#include "Ice.hpp"
+#include "Cure.hpp"
 
 class MateriaSource : public IMateriaSource
 {

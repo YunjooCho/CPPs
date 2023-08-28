@@ -6,7 +6,7 @@
 /*   By: yunjcho <yunjcho@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/28 15:15:16 by yunjcho           #+#    #+#             */
-/*   Updated: 2023/08/29 00:51:13 by yunjcho          ###   ########seoul.kr  */
+/*   Updated: 2023/08/29 03:15:04 by yunjcho          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 #include <iostream>
 #include "AMateria.hpp"
+#include "ICharacter.hpp"
 
 class Ice : public AMateria
 {
