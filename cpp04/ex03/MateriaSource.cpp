@@ -6,7 +6,7 @@
 /*   By: yunjcho <yunjcho@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/28 16:43:16 by yunjcho           #+#    #+#             */
-/*   Updated: 2023/08/29 00:39:14 by yunjcho          ###   ########seoul.kr  */
+/*   Updated: 2023/08/29 01:20:21 by yunjcho          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,11 @@
 
 MateriaSource::MateriaSource() : IMateriaSource()
 {
-	std::cout << "MateriaSource Default constructor called" << std::endl;
+	// std::cout << "MateriaSource Default constructor called" << std::endl;
+	for (int i = 0; i < 4; i++)
+	{
+		this->manual[i] = NULL;
+	}
 }
 
 MateriaSource&	MateriaSource::operator=(const MateriaSource& materiaSource)
@@ -57,8 +61,11 @@ AMateria*	MateriaSource::createMateria(std::string const &type)
 {
 	for (size_t i = 0; i < 4; i++)
 	{
-		if (this->manual[i]->getType().compare(type))
-			return (manual[i]->clone());
+		if (this->manual[i] != NULL)
+		{
+			if (this->manual[i]->getType().compare(type))
+				return (manual[i]->clone());
+		}
 	}
 	return (0);
 }
