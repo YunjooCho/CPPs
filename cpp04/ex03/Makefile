@@ -6,14 +6,14 @@
 #    By: yunjcho <yunjcho@student.42seoul.kr>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/06/14 15:31:29 by yunjcho           #+#    #+#              #
-#    Updated: 2023/08/27 03:15:46 by yunjcho          ###   ########seoul.kr   #
+#    Updated: 2023/08/28 21:50:42 by yunjcho          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = a.out
 CXX = c++
 CXXFLAGS = -Wall -Werror -Wextra -std=c++98
-SRCS = main.cpp
+SRCS = main.cpp Character.cpp MateriaSource.cpp AMateria.cpp Ice.cpp Cure.cpp # Floor.cpp
 OBJS = $(SRCS:.cpp=.o)
 
 ifdef SANITIZE

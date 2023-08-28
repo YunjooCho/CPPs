@@ -1,35 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   AMateria.hpp                                       :+:      :+:    :+:   */
+/*   Floor.hpp                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yunjcho <yunjcho@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/08/27 17:00:09 by yunjcho           #+#    #+#             */
-/*   Updated: 2023/08/28 21:47:37 by yunjcho          ###   ########.fr       */
+/*   Created: 2023/08/28 20:28:11 by yunjcho           #+#    #+#             */
+/*   Updated: 2023/08/28 20:49:59 by yunjcho          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef AMATERIA_HPP
-# define AMATERIA_HPP
+#ifndef FLOOR_HPP
+# define FLOOR_HPP
 
 #include <iostream>
-#include "MateriaSource.hpp"
+#include "Character.hpp"
 
-class AMateria
+Class Floor
 {
 	public:
-		AMateria();
-		AMateria(std::string const &type);
-		AMateria(const AMateria& aMateria);
-		AMateria&	operator=(const AMateria &aMateria);
-		virtual ~AMateria();
-		std::string const	&getType() const;
-		virtual AMateria*	createMateria(std::string const &type);
-		virtual AMateria*	clone() const = 0;
-		virtual void		use(ICharacter& target);
+		Floor();
+		Floor(const Floor& floor);
+		Floor&	operator=(const Floor &floor);
+		virtual ~Floor();
+		AMateria	&getMateriaFromCharac(int idx,  ICharacter& target);
+		AMateria	&getMateriaFromTrash(int idx);
+		void		setMateriaAtTrash(AMateria &materia);
 	private:
-		std::string	type;
-};
+		AMateria	*trash[10];
+}
 
 #endif
