@@ -6,7 +6,7 @@
 /*   By: yunjcho <yunjcho@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/28 15:41:28 by yunjcho           #+#    #+#             */
-/*   Updated: 2023/08/28 22:03:32 by yunjcho          ###   ########.fr       */
+/*   Updated: 2023/08/28 22:10:13 by yunjcho          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,14 @@ Character::Character() : ICharacter()
 {
 	this->name = "ammonymous";
 	std::cout << "Character "<< this->name << " Default constructor called" << std::endl;
+	//TODO - for문으로 slot NULL 대입
 }
 
 Character::Character(std::string name) : ICharacter(name)
 {
 	this->name = "ammonymous";
 	std::cout << "Character "<< this->name << " Default constructor called" << std::endl;
+	//TODO - for문으로 slot NULL 대입
 }
 
 Character&	Character::operator=(const Character& character)
@@ -39,7 +41,6 @@ Character&	Character::operator=(const Character& character)
 			}
 			if (character.slot[i] != NULL)
 				slot[i] = character.slot[i]->clone();
-			// this->setSlotAtIndex(new AMateria(character.getSlotIndex(i)), i);
 		}
 	}
 	return (*this);

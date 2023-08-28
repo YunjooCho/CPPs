@@ -6,7 +6,7 @@
 /*   By: yunjcho <yunjcho@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/27 17:00:09 by yunjcho           #+#    #+#             */
-/*   Updated: 2023/08/28 21:47:37 by yunjcho          ###   ########.fr       */
+/*   Updated: 2023/08/28 22:11:59 by yunjcho          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 #include <iostream>
 #include "MateriaSource.hpp"
+#include "ICharacter.hpp"
 
 class AMateria
 {

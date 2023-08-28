@@ -6,7 +6,7 @@
 /*   By: yunjcho <yunjcho@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/27 20:09:40 by yunjcho           #+#    #+#             */
-/*   Updated: 2023/08/28 22:02:05 by yunjcho          ###   ########.fr       */
+/*   Updated: 2023/08/28 22:12:20 by yunjcho          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,11 +30,9 @@ class Character : public ICharacter
 		virtual void				equip(AMateria* m);                   // ICharacter 의 추상메서드 구현
 		virtual void				unequip(int idx);                     // ICharacter 의 추상메서드 구현
 		virtual void				use(int idx, ICharacter& target);     // ICharacter 의 추상메서드 구현
-		// void						setSlotAtIndex(int idx);              // '='오버로딩용 setter & getter
-		// AMateria					*&getSlotAtIndex(int idx);            // '='오버로딩용 setter & getter
 	private:
 		std::string	name;
 		AMateria	*slot[4];
-}
+};
 
 #endif

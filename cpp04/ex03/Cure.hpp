@@ -6,7 +6,7 @@
 /*   By: yunjcho <yunjcho@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/28 15:15:16 by yunjcho           #+#    #+#             */
-/*   Updated: 2023/08/28 15:20:24 by yunjcho          ###   ########.fr       */
+/*   Updated: 2023/08/28 22:16:31 by yunjcho          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@ class Cure : public AMateria
 		Cure(const Cure& cure);
 		Cure&	operator=(const Cure &cure);
 		virtual ~Cure();
-		virtual AMateria*	clone() const;
 		virtual void 		use(ICharacter& target);
 	private:
 		std::string	type;
