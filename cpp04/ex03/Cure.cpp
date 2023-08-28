@@ -6,7 +6,7 @@
 /*   By: yunjcho <yunjcho@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/28 21:48:01 by yunjcho           #+#    #+#             */
-/*   Updated: 2023/08/28 22:22:14 by yunjcho          ###   ########.fr       */
+/*   Updated: 2023/08/29 00:40:43 by yunjcho          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ Cure::~Cure()
 	std::cout << "Cure Destructor called" << std::endl;
 }
 
-virtual void	Cure::use(ICharacter& target)
+void	Cure::use(ICharacter& target)
 {
 	std::cout << "Cure: \"* heals " << target.getName() << "'s wounds *\"" << std::endl;
 }

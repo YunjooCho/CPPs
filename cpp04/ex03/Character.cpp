@@ -6,7 +6,7 @@
 /*   By: yunjcho <yunjcho@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/28 15:41:28 by yunjcho           #+#    #+#             */
-/*   Updated: 2023/08/28 22:10:13 by yunjcho          ###   ########.fr       */
+/*   Updated: 2023/08/29 00:40:22 by yunjcho          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ Character::Character() : ICharacter()
 	//TODO - for문으로 slot NULL 대입
 }
 
-Character::Character(std::string name) : ICharacter(name)
+Character::Character(std::string name) : ICharacter()
 {
 	this->name = "ammonymous";
 	std::cout << "Character "<< this->name << " Default constructor called" << std::endl;
@@ -31,7 +31,7 @@ Character&	Character::operator=(const Character& character)
 	std::cout << "Character Copy assignment operator called" << std::endl;
 	if (this != &character)
 	{
-		this->name = std::string(charcter.getName());
+		this->name = std::string(character.getName());
 		for (int i = 0; i < 4; i++)
 		{
 			if (this->slot[i] != NULL)
@@ -59,7 +59,7 @@ Character::~Character()
 	delete[] slot;
 }
 
-virtual std::string const	Character::&getName() const
+std::string const	Character::&getName() const
 {
 	return (this->name);
 }
@@ -74,7 +74,7 @@ AMateria	Character::*&getSlotAtIndex(int idx)
 	return (this->slot[idx]);
 }
 
-virtual void	equip(AMateria* m)
+void	equip(AMateria* m)
 {
 	for (size_t i = 0; i < this->slot.size(); i++)
 	{
@@ -84,7 +84,7 @@ virtual void	equip(AMateria* m)
 	// delete m;
 }
 
-virtual void	unequip(int idx)
+void	unequip(int idx)
 {
 	if (this->slot[idx] == NULL)
 		return ;

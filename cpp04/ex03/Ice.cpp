@@ -6,7 +6,7 @@
 /*   By: yunjcho <yunjcho@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/28 21:48:01 by yunjcho           #+#    #+#             */
-/*   Updated: 2023/08/28 22:21:41 by yunjcho          ###   ########.fr       */
+/*   Updated: 2023/08/29 00:40:53 by yunjcho          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ Ice::~Ice()
 	std::cout << "Ice Destructor called" << std::endl;
 }
 
-virtual void	Ice::use(ICharacter& target)
+void	Ice::use(ICharacter& target)
 {
 	std::cout << "Ice : \"* shoots an ice bolt at " << target.getName() << "*\"" << std::endl;
 }
