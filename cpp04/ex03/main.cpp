@@ -6,7 +6,7 @@
 /*   By: yunjcho <yunjcho@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/27 17:07:25 by yunjcho           #+#    #+#             */
-/*   Updated: 2023/08/29 15:49:36 by yunjcho          ###   ########.fr       */
+/*   Updated: 2023/08/30 22:16:16 by yunjcho          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,14 +18,8 @@
 #include "Ice.hpp"
 #include "Cure.hpp"
 
-void	_leaks(void)
-{
-	system("leaks a.out");
-}
-
 int main()
 {
-	atexit(_leaks);
 	IMateriaSource* src = new MateriaSource();
 	src->learnMateria(new Ice());
 	src->learnMateria(new Cure());
@@ -42,6 +36,11 @@ int main()
 
 	me->use(0, *bob);
 	me->use(1, *bob);
+	me->use(2, *bob); //anything
+	
+	me->unequip(0);
+	me->unequip(1);
+	me->unequip(2);  //anything
 	
 	delete bob;
 	delete me;

@@ -6,7 +6,7 @@
 /*   By: yunjcho <yunjcho@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/28 15:41:28 by yunjcho           #+#    #+#             */
-/*   Updated: 2023/08/29 03:26:04 by yunjcho          ###   ########seoul.kr  */
+/*   Updated: 2023/08/30 22:05:13 by yunjcho          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,10 @@ Character::Character()
 	{
 		this->slot[i] = NULL;
 	}
+	for (int i = 0; i < 4; i++)
+	{
+		this->skillTree[i] = NULL;
+	}
 }
 
 Character::Character(std::string name)
@@ -28,25 +32,48 @@ Character::Character(std::string name)
 	{
 		this->slot[i] = NULL;
 	}
+	for (int i = 0; i < 4; i++)
+	{
+		this->skillTree[i] = NULL;
+	}
 }
 
 Character&	Character::operator=(const Character& character)
 {
-	this->name = std::string(character.getName());
-	for (int i = 0; i < 4; i++)
+	if (this != & character)
 	{
-		if (this->slot[i] != NULL)
+		this->name = std::string(character.getName());
+		for (int i = 0; i < 4; i++)
 		{
-			delete this->slot[i];
+			if (this->slot[i] != NULL)
+			{
+				delete this->slot[i];
+			}
+			if (character.slot[i] != NULL)
+			{
+				this->slot[i] = character.slot[i]->clone();
+			}
+			else
+			{
+				this->slot[i] = NULL;
+			}
 		}
-		if (character.slot[i] != NULL)
+		for (int i = 0; i < 4; i++)
 		{
-			this->slot[i] = character.slot[i]->clone();
+			if (this->skillTree[i] != NULL)
+			{
+				delete this->skillTree[i];
+			}
+			if (character.skillTree[i] != NULL)
+			{
+				this->skillTree[i] = character.skillTree[i]->clone();
+			}
+			else
+			{
+				this->skillTree[i] = NULL;
+			}
 		}
-		else
-		{
-			this->slot[i] = NULL;
-		}
+		
 	}
 	return (*this);
 }
@@ -66,6 +93,14 @@ Character::~Character()
 			this->slot[i] = NULL;
 		}
 	}
+	for (int i = 0; i < 4; i++)
+	{
+		if (this->skillTree[i] != NULL)
+		{
+			delete this->skillTree[i];
+			this->skillTree[i] = NULL;
+		}
+	}
 }
 
 std::string const	&Character::getName(void) const
@@ -83,13 +118,26 @@ void	Character::equip(AMateria* m)
 			return ;
 		}
 	}
-	delete m;
+	if (m)
+		delete m;
 }
 
 void	Character::unequip(int idx)
 {
 	if ((idx >= 0 && idx <= 3) && this->slot[idx] == NULL)
 		return ;
+	AMateria *tmp = this->slot[idx];
+	for (size_t i = 0; i < 4; i++)
+	{
+		if (this->skillTree[i] == NULL)
+		{
+			this->skillTree[i] = tmp;
+			this->slot[idx] = NULL;
+			return ;
+		}
+	}
+	if (tmp)
+		delete tmp;
 	this->slot[idx] = NULL;
 }
 
