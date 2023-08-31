@@ -6,7 +6,7 @@
 /*   By: yunjcho <yunjcho@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/28 15:15:16 by yunjcho           #+#    #+#             */
-/*   Updated: 2023/08/29 02:45:13 by yunjcho          ###   ########seoul.kr  */
+/*   Updated: 2023/08/31 15:14:33 by yunjcho          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,6 @@ class Cure : public AMateria
 		virtual ~Cure();
 		virtual AMateria*	clone(void) const;
 		virtual void 		use(ICharacter& target);
-	private:
-		std::string	type;
 };
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: yunjcho <yunjcho@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/25 12:42:33 by yunjcho           #+#    #+#             */
-/*   Updated: 2023/08/27 02:39:46 by yunjcho          ###   ########seoul.kr  */
+/*   Updated: 2023/08/31 14:31:03 by yunjcho          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,7 @@ Dog&	Dog::operator=(const Dog& dog)
 	if (this != &dog)
 	{
 		this->type = dog.getType();
-		delete this->brain;
-		this->brain = new Brain(*dog.brain);
+		*(this->brain) = *(dog.brain);
 	}
 	return (*this);
 }

@@ -6,7 +6,7 @@
 /*   By: yunjcho <yunjcho@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/28 21:48:01 by yunjcho           #+#    #+#             */
-/*   Updated: 2023/08/29 08:43:40 by yunjcho          ###   ########seoul.kr  */
+/*   Updated: 2023/08/31 15:16:55 by yunjcho          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,18 +19,13 @@ Cure::Cure() : AMateria("cure")
 Cure&	Cure::operator=(const Cure& cure)
 {
 	if (this != &cure)
-		this->type = cure.getType();
+		this->_type = cure.getType();
 	return (*this);
 }
 
-Cure::Cure(const Cure& cure) : AMateria(cure)
-{
-	*this = cure;
-}
+Cure::Cure(const Cure& cure) : AMateria(cure.getType()) {}
 
-Cure::~Cure()
-{
-}
+Cure::~Cure() {}
 
 AMateria*	Cure::clone(void) const
 {

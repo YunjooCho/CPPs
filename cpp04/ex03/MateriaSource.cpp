@@ -6,7 +6,7 @@
 /*   By: yunjcho <yunjcho@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/28 16:43:16 by yunjcho           #+#    #+#             */
-/*   Updated: 2023/08/29 08:41:21 by yunjcho          ###   ########seoul.kr  */
+/*   Updated: 2023/08/31 14:46:55 by yunjcho          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,8 +77,8 @@ AMateria*	MateriaSource::createMateria(std::string const &type)
 		{
 			if (this->manual[i]->getType().compare(type) == 0)
 			{
-				AMateria *tmp = this->manual[i];
-				this->manual[i] = NULL;
+				
+				AMateria *tmp = this->manual[i]->clone();
 				return (tmp);
 			}
 		}

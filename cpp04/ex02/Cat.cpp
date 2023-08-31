@@ -6,7 +6,7 @@
 /*   By: yunjcho <yunjcho@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/25 12:51:48 by yunjcho           #+#    #+#             */
-/*   Updated: 2023/08/27 02:42:30 by yunjcho          ###   ########seoul.kr  */
+/*   Updated: 2023/08/31 14:30:06 by yunjcho          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,7 @@ Cat&	Cat::operator=(const Cat& cat)
 	if (this != &cat)
 	{
 		this->type = cat.getType();
-		delete this->brain;
-		this->brain = new Brain(*cat.brain);
+		*(this->brain) = *(cat.brain);
 	}
 	return (*this);
 }

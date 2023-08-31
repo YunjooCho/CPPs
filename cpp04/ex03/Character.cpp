@@ -6,7 +6,7 @@
 /*   By: yunjcho <yunjcho@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/28 15:41:28 by yunjcho           #+#    #+#             */
-/*   Updated: 2023/08/30 22:05:13 by yunjcho          ###   ########seoul.kr  */
+/*   Updated: 2023/08/31 14:58:17 by yunjcho          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,7 +124,7 @@ void	Character::equip(AMateria* m)
 
 void	Character::unequip(int idx)
 {
-	if ((idx >= 0 && idx <= 3) && this->slot[idx] == NULL)
+	if (idx < 0 || idx > 3 || this->slot[idx] == NULL)
 		return ;
 	AMateria *tmp = this->slot[idx];
 	for (size_t i = 0; i < 4; i++)
@@ -136,8 +136,6 @@ void	Character::unequip(int idx)
 			return ;
 		}
 	}
-	if (tmp)
-		delete tmp;
 	this->slot[idx] = NULL;
 }
 
