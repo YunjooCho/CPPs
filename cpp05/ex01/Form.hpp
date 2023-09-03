@@ -6,7 +6,7 @@
 /*   By: yunjcho <yunjcho@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/02 21:30:23 by yunjcho           #+#    #+#             */
-/*   Updated: 2023/09/02 22:09:19 by yunjcho          ###   ########.fr       */
+/*   Updated: 2023/09/03 21:32:51 by yunjcho          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,8 @@
 # define FORM_HPP
 
 #include <iostream>
-#include "Bureaucrat.hpp"
+
+class Bureaucrat;
 
 class Form
 {
@@ -32,13 +33,18 @@ class Form
 		class GradeTooHighException : public std::exception 
 		{
 			public:
+				GradeTooHighException(const int _errCode);
 				const char *what(void) const throw();
-				
+			private:
+				const int	errCode;
 		};
 		class GradeTooLowException : public std::exception 
 		{
 			public:
+				GradeTooLowException(const int _errCode);
 				const char *what(void) const throw();
+			private:
+				const int	errCode;
 		};
 	private:
 		const std::string	formName;
@@ -46,5 +52,7 @@ class Form
 		const int			signGrade;
 		const int			executeGrade;
 };
+
+std::ostream& operator<<(std::ostream& outputStream, const Form& form);
 
 #endif

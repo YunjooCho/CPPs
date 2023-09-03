@@ -6,14 +6,14 @@
 #    By: yunjcho <yunjcho@student.42seoul.kr>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/06/14 15:31:29 by yunjcho           #+#    #+#              #
-#    Updated: 2023/09/02 16:48:36 by yunjcho          ###   ########.fr        #
+#    Updated: 2023/09/03 20:23:00 by yunjcho          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = a.out
 CXX = c++
 CXXFLAGS = -Wall -Werror -Wextra -std=c++98
-SRCS = main.cpp Bureaucrat.cpp
+SRCS = main.cpp Bureaucrat.cpp Form.cpp
 OBJS = $(SRCS:.cpp=.o)
 
 ifdef SANITIZE

@@ -6,11 +6,12 @@
 /*   By: yunjcho <yunjcho@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/01 16:03:54 by yunjcho           #+#    #+#             */
-/*   Updated: 2023/09/02 22:18:13 by yunjcho          ###   ########.fr       */
+/*   Updated: 2023/09/03 22:00:54 by yunjcho          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Bureaucrat.hpp"
+#include "Form.hpp"
 
 Bureaucrat::Bureaucrat() : name("anonymous"), grade(1) {}
 
@@ -63,19 +64,40 @@ void	Bureaucrat::decreaseGrade(const unsigned int amount)
 		throw Bureaucrat::GradeTooLowException();
 }
 
+void	Bureaucrat::signForm(Form &form)
+{
+	try
+	{
+		form.beSigned(*this);
+	}
+	catch(const std::exception& e)
+	{
+		std::cout << e.what() << std::endl;
+	}
+	if (form.getIsSigned() == false)
+	{
+		std::cout << "[FAILURE] " << this->name << " couldn’t sign " << form.getFormName() \
+			<< " because ";
+		throw Form::GradeTooLowException(3);
+	}
+	else
+	{
+		std::cout << "[SUCCESS] " << this->name << " signed " << form.getFormName() << std::endl;
+	}
+}
+
 const char *Bureaucrat::GradeTooHighException::what(void) const throw()
 {
-	return "Grade is too High!";
+	return "[Exception] Bureaucrat's Grade is too High!";
 }
 
 const char *Bureaucrat::GradeTooLowException::what(void) const throw()
 {
-	return "Grade is too Low!";
+	return "[Exception] Bureaucrat's Grade is too Low!";
 }
 
 std::ostream& operator<<(std::ostream& outputStream, const Bureaucrat& bureaucrat)
 {
-	outputStream << bureaucrat.getName() << ", bureaucrat grade " << bureaucrat.getGrade();
+	outputStream <<  "[Bureaucrat::INFO] " << bureaucrat.getName() << ", bureaucrat grade " << bureaucrat.getGrade();
 	return (outputStream);
 }
-

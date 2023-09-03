@@ -6,7 +6,7 @@
 /*   By: yunjcho <yunjcho@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/01 14:42:28 by yunjcho           #+#    #+#             */
-/*   Updated: 2023/09/02 22:09:08 by yunjcho          ###   ########.fr       */
+/*   Updated: 2023/09/03 20:23:29 by yunjcho          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 # define BUREAUCRAT_HPP
 
 #include <iostream>
+
+class Form;
 
 class Bureaucrat
 {
