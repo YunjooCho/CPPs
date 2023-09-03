@@ -6,7 +6,7 @@
 /*   By: yunjcho <yunjcho@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/01 16:03:54 by yunjcho           #+#    #+#             */
-/*   Updated: 2023/09/03 22:00:54 by yunjcho          ###   ########.fr       */
+/*   Updated: 2023/09/03 22:03:46 by yunjcho          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,10 +70,7 @@ void	Bureaucrat::signForm(Form &form)
 	{
 		form.beSigned(*this);
 	}
-	catch(const std::exception& e)
-	{
-		std::cout << e.what() << std::endl;
-	}
+	catch(const std::exception& e) {}
 	if (form.getIsSigned() == false)
 	{
 		std::cout << "[FAILURE] " << this->name << " couldn’t sign " << form.getFormName() \
