@@ -1,35 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Form.hpp                                           :+:      :+:    :+:   */
+/*   AForm.hpp                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yunjcho <yunjcho@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/02 21:30:23 by yunjcho           #+#    #+#             */
-/*   Updated: 2023/09/04 19:00:15 by yunjcho          ###   ########.fr       */
+/*   Updated: 2023/09/04 19:04:18 by yunjcho          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FORM_HPP
-# define FORM_HPP
+#ifndef AFORM_HPP
+# define AFORM_HPP
 
 #include <iostream>
 
 class Bureaucrat;
 
-class Form
+class AForm
 {
 	public:
-		Form();
-		Form(const std::string _formName, const int _signGrade, const int _execGrade);
-		Form(const Form &form);
-		Form& operator=(const Form &form);
-		~Form();
-		std::string	getFormName(void) const;
-		bool		getIsSigned(void) const;
-		int			getSignGrade(void) const;
-		int			getExecGrade(void) const;
-		void		beSigned(Bureaucrat &bureaucrat);
+		AForm();
+		AForm(const std::string _formName, const int _signGrade, const int _execGrade);
+		AForm(const AForm &form);
+		AForm& operator=(const AForm &form);
+		~AForm();
+		std::string		getFormName(void) const;
+		bool			getIsSigned(void) const;
+		int				getSignGrade(void) const;
+		int				getExecGrade(void) const;
+		void			beSigned(Bureaucrat &bureaucrat);
+		virtual void	execute(Bureaucrat const &executor) const = 0;
 		class GradeTooHighException : public std::exception 
 		{
 			public:
@@ -53,6 +54,6 @@ class Form
 		const int			execGrade;
 };
 
-std::ostream& operator<<(std::ostream& outputStream, const Form& form);
+std::ostream& operator<<(std::ostream& outputStream, const AForm& form);
 
 #endif
