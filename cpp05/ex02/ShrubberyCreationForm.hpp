@@ -6,7 +6,7 @@
 /*   By: yunjcho <yunjcho@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/04 18:58:45 by yunjcho           #+#    #+#             */
-/*   Updated: 2023/09/04 19:33:57 by yunjcho          ###   ########.fr       */
+/*   Updated: 2023/09/04 19:36:26 by yunjcho          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ class ShrubberyCreationForm : public AForm
 		ShrubberyCreationForm(const ShrubberyCreationForm &form);
 		ShrubberyCreationForm& operator=(const ShrubberyCreationForm &form);
 		~ShrubberyCreationForm();
+		void	execute(Bureaucrat const &executor) const;
 	private:
 		const int	signGrade;
 		const int	execGrade;
