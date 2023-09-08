@@ -6,7 +6,7 @@
 /*   By: yunjcho <yunjcho@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/01 14:42:28 by yunjcho           #+#    #+#             */
-/*   Updated: 2023/09/04 18:54:18 by yunjcho          ###   ########.fr       */
+/*   Updated: 2023/09/08 16:29:58 by yunjcho          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,8 @@ class Bureaucrat
 		int			getGrade(void) const;
 		void		increaseGrade(const unsigned int amount);
 		void		decreaseGrade(const unsigned int amount);
-		void		signForm(Form &form);
+		void		signForm(AForm &form);
+		void		executeForm(AForm const &form);
 		class GradeTooHighException : public std::exception 
 		{
 			public:

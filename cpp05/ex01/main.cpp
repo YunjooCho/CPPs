@@ -6,7 +6,7 @@
 /*   By: yunjcho <yunjcho@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/01 17:26:04 by yunjcho           #+#    #+#             */
-/*   Updated: 2023/09/03 22:07:43 by yunjcho          ###   ########.fr       */
+/*   Updated: 2023/09/08 15:54:09 by yunjcho          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ int	main(void)
 	try
 	{
 		captain.signForm(form1);
+		std::cout << captain << std::endl;
 		std::cout << form1 << std::endl;
 	}
 	catch(const std::exception& e)
@@ -45,7 +46,8 @@ int	main(void)
 	try
 	{
 		captain.signForm(form2);
-		std::cout << form1 << std::endl;
+		std::cout << captain << std::endl;
+		std::cout << form2 << std::endl;
 	}
 	catch(const std::exception& e)
 	{
@@ -58,7 +60,8 @@ int	main(void)
 	try
 	{
 		shield.signForm(form3);
-		std::cout << form1 << std::endl;
+		std::cout << shield << std::endl;
+		std::cout << form3 << std::endl;
 	}
 	catch(const std::exception& e)
 	{
@@ -71,7 +74,8 @@ int	main(void)
 	try
 	{
 		shield.signForm(form4);
-		std::cout << form1 << std::endl;
+		std::cout << shield << std::endl;
+		std::cout << form4 << std::endl;
 	}
 	catch(const std::exception& e)
 	{
@@ -85,7 +89,8 @@ int	main(void)
 	try
 	{
 		shield.signForm(form5);
-		std::cout << form1 << std::endl;
+		std::cout << shield << std::endl;
+		std::cout << form5 << std::endl;
 	}
 	catch(const std::exception& e)
 	{
