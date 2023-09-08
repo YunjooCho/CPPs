@@ -6,7 +6,7 @@
 /*   By: yunjcho <yunjcho@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/01 16:03:54 by yunjcho           #+#    #+#             */
-/*   Updated: 2023/09/04 18:54:11 by yunjcho          ###   ########.fr       */
+/*   Updated: 2023/09/08 17:17:32 by yunjcho          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ void	Bureaucrat::decreaseGrade(const unsigned int amount)
 		throw Bureaucrat::GradeTooLowException();
 }
 
-void	Bureaucrat::signForm(Form &form)
+void	Bureaucrat::signForm(AForm &form)
 {
 	try
 	{
@@ -75,7 +75,7 @@ void	Bureaucrat::signForm(Form &form)
 	{
 		std::cout << "[FAILURE] " << this->name << " couldn’t sign " << form.getFormName() \
 			<< " because ";
-		throw Form::GradeTooLowException(3);
+		throw AForm::GradeTooLowException(3);
 	}
 	else
 	{
