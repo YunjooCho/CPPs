@@ -6,15 +6,16 @@
 /*   By: yunjcho <yunjcho@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/04 18:58:45 by yunjcho           #+#    #+#             */
-/*   Updated: 2023/09/08 18:26:09 by yunjcho          ###   ########seoul.kr  */
+/*   Updated: 2023/09/08 18:35:23 by yunjcho          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef ROBOTOMYREQUESTFORM_HPP
 # define ROBOTOMYREQUESTFORM_HPP
 
-#include <iostream>
-#include "AForm.hpp"
+# include <iostream>
+# include <random>
+# include "AForm.hpp"
 # include "Bureaucrat.hpp"
 
 enum robotomyInfo
