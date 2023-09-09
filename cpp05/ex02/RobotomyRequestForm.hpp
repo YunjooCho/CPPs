@@ -6,7 +6,7 @@
 /*   By: yunjcho <yunjcho@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/04 18:58:45 by yunjcho           #+#    #+#             */
-/*   Updated: 2023/09/08 18:35:23 by yunjcho          ###   ########seoul.kr  */
+/*   Updated: 2023/09/09 14:54:48 by yunjcho          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,8 @@
 # define ROBOTOMYREQUESTFORM_HPP
 
 # include <iostream>
-# include <random>
+# include <cstdlib>
+# include <ctime>
 # include "AForm.hpp"
 # include "Bureaucrat.hpp"
 
