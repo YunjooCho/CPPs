@@ -6,7 +6,7 @@
 /*   By: yunjcho <yunjcho@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/08 16:27:36 by yunjcho           #+#    #+#             */
-/*   Updated: 2023/09/09 20:25:12 by yunjcho          ###   ########.fr       */
+/*   Updated: 2023/09/09 20:38:02 by yunjcho          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,12 +31,21 @@ int main(void)
 	Bureaucrat human1("John", 72);
 	Bureaucrat human2("Jane", 45);
 
-	RobotomyRequestForm rrf("R.r.f.");
+	RobotomyRequestForm rrf("Arm");
 	rrf.execute(human1);
 	rrf.execute(human2);
 
 	// RobotomyRequestForm rrf2("R.r.f.2"); // TODO - 위와 같은 난수가 생성되어 결과값이 동일한 문제발생
 	// rrf2.execute(human1);
 	// rrf2.execute(human2);
+
+	std::cout << std::endl;
+	std::cout << "====================== PresidentialPardonForm Testcase ======================" << std::endl;
+	Bureaucrat jailer1("Tom", 25);
+	Bureaucrat jailer2("Tim", 3);
+
+	PresidentialPardonForm ppf("Prisoner");
+	ppf.execute(jailer1);
+	ppf.execute(jailer2);
 	return (0);
 }

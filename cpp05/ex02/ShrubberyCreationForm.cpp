@@ -6,7 +6,7 @@
 /*   By: yunjcho <yunjcho@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/08 16:31:46 by yunjcho           #+#    #+#             */
-/*   Updated: 2023/09/09 20:29:15 by yunjcho          ###   ########.fr       */
+/*   Updated: 2023/09/09 20:41:45 by yunjcho          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ void	ShrubberyCreationForm::execute(Bureaucrat const &executor) const
 	{
 		// Bureaucrat tmp(executor.getName(), executor.getGrade());
 		// AForm::beSigned(tmp);
-		if (executor.getGrade() <= this->getExecGrade() && this->getIsSigned())
+		if (executor.getGrade() <= this->getExecGrade())
 		{
 			std::string		filename = this->getTarget() += "_shrubbery";
 			std::ofstream	printFile;

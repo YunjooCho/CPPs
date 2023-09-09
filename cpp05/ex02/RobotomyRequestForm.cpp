@@ -6,7 +6,7 @@
 /*   By: yunjcho <yunjcho@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/08 16:31:46 by yunjcho           #+#    #+#             */
-/*   Updated: 2023/09/09 20:28:59 by yunjcho          ###   ########.fr       */
+/*   Updated: 2023/09/09 20:41:38 by yunjcho          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ void	RobotomyRequestForm::execute(Bureaucrat const &executor) const
 	// AForm::beSigned(tmp);
 	try
 	{
-		if (executor.getGrade() <= this->getExecGrade() && this->getIsSigned())
+		if (executor.getGrade() <= this->getExecGrade())
 		{
 			std::cout << "Whirr~" << std::endl;
 			std::srand((unsigned int)time(NULL));
@@ -66,11 +66,11 @@ void	RobotomyRequestForm::execute(Bureaucrat const &executor) const
 			// std::cout << rand << std::endl;
 			if (rand == 0)
 			{
-				std::cout << "[INFO - SUCCESS] " << executor.getName() << " has been robotomized!" << std::endl;
+				std::cout << "[INFO - SUCCESS] " << this->_target << " has been robotomized!" << std::endl;
 			}
 			else
 			{
-				std::cout << "[INFO - FAILURE] " << executor.getName() << " failed robotomized..." << std::endl;
+				std::cout << "[INFO - FAILURE] " << this->_target << " failed robotomized..." << std::endl;
 			}
 		}
 		else

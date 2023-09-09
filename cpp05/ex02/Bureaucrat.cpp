@@ -6,7 +6,7 @@
 /*   By: yunjcho <yunjcho@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/01 16:03:54 by yunjcho           #+#    #+#             */
-/*   Updated: 2023/09/08 17:17:32 by yunjcho          ###   ########seoul.kr  */
+/*   Updated: 2023/09/09 20:41:18 by yunjcho          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,11 @@ void	Bureaucrat::signForm(AForm &form)
 	{
 		std::cout << "[SUCCESS] " << this->name << " signed " << form.getFormName() << std::endl;
 	}
+}
+
+void	Bureaucrat::executeForm(AForm const &form)
+{
+	
 }
 
 const char *Bureaucrat::GradeTooHighException::what(void) const throw()
