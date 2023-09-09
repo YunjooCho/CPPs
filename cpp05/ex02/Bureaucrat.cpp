@@ -6,7 +6,7 @@
 /*   By: yunjcho <yunjcho@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/01 16:03:54 by yunjcho           #+#    #+#             */
-/*   Updated: 2023/09/09 20:41:18 by yunjcho          ###   ########.fr       */
+/*   Updated: 2023/09/09 22:27:19 by yunjcho          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,23 +69,25 @@ void	Bureaucrat::signForm(AForm &form)
 	try
 	{
 		form.beSigned(*this);
+		std::cout << "[SUCCESS] " << this->name << " signed " << form.getFormName() << std::endl;
 	}
-	catch(const std::exception& e) {}
-	if (form.getIsSigned() == false)
+	catch(const std::exception& e) 
 	{
 		std::cout << "[FAILURE] " << this->name << " couldn’t sign " << form.getFormName() \
 			<< " because ";
 		throw AForm::GradeTooLowException(3);
 	}
-	else
-	{
-		std::cout << "[SUCCESS] " << this->name << " signed " << form.getFormName() << std::endl;
-	}
 }
 
 void	Bureaucrat::executeForm(AForm const &form)
 {
-	
+	Bureaucrat tmp(*this);
+	if (form.execute(tmp) == true)
+	{
+		std::cout << this->name << " executed " << form.getFormName() << std::endl;
+	}
+	else
+		throw std::runtime_error("explicit error");
 }
 
 const char *Bureaucrat::GradeTooHighException::what(void) const throw()

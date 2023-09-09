@@ -6,7 +6,7 @@
 /*   By: yunjcho <yunjcho@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/08 16:31:46 by yunjcho           #+#    #+#             */
-/*   Updated: 2023/09/09 20:41:45 by yunjcho          ###   ########.fr       */
+/*   Updated: 2023/09/09 22:13:40 by yunjcho          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,13 +52,11 @@ std::string	ShrubberyCreationForm::getTarget(void) const
 	return (this->_target);
 }
 
-void	ShrubberyCreationForm::execute(Bureaucrat const &executor) const
+bool	ShrubberyCreationForm::execute(Bureaucrat const &executor) const
 {
 	try
 	{
-		// Bureaucrat tmp(executor.getName(), executor.getGrade());
-		// AForm::beSigned(tmp);
-		if (executor.getGrade() <= this->getExecGrade())
+		if (executor.getGrade() <= this->getExecGrade() && this->getIsSigned())
 		{
 			std::string		filename = this->getTarget() += "_shrubbery";
 			std::ofstream	printFile;
@@ -73,6 +71,7 @@ void	ShrubberyCreationForm::execute(Bureaucrat const &executor) const
 			printFile << "      _ - | |   -_   " << std::endl;
 			printFile << "         // \\       " << std::endl;
 			printFile.close();
+			return (true);
 		}
 		else
 			throw AForm::GradeTooLowException(4);
@@ -83,6 +82,7 @@ void	ShrubberyCreationForm::execute(Bureaucrat const &executor) const
 		std::cout << executor << std::endl;
 		std::cout << *this << std::endl;
 	}
+	return (false);
 }
 
 // std::ostream& operator<<(std::ostream& outputStream, const ShrubberyCreationForm& form)

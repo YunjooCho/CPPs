@@ -6,7 +6,7 @@
 /*   By: yunjcho <yunjcho@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/02 21:55:13 by yunjcho           #+#    #+#             */
-/*   Updated: 2023/09/08 17:41:06 by yunjcho          ###   ########seoul.kr  */
+/*   Updated: 2023/09/09 22:14:10 by yunjcho          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ const char *AForm::GradeTooLowException::what(void) const throw()
 	else if (this->errCode == 3)
 		return "Bureaucrat's Grade lower than Form's SignGrade!";
 	else if (this->errCode == 4)
-		return "Bureaucrat's Grade lower than Form's ExecGrade!";
+		return "Bureaucrat's Grade lower than Form's ExecGrade or No signed Form!";
 	return "[Exception] Grade is too Low!";
 }
 

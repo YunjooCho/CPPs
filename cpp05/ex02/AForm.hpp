@@ -6,7 +6,7 @@
 /*   By: yunjcho <yunjcho@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/02 21:30:23 by yunjcho           #+#    #+#             */
-/*   Updated: 2023/09/08 16:24:36 by yunjcho          ###   ########seoul.kr  */
+/*   Updated: 2023/09/09 22:15:29 by yunjcho          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ class AForm
 		int				getSignGrade(void) const;
 		int				getExecGrade(void) const;
 		void			beSigned(Bureaucrat &bureaucrat);
-		virtual void	execute(Bureaucrat const &executor) const = 0;
+		virtual bool	execute(Bureaucrat const &executor) const = 0;
 		class GradeTooHighException : public std::exception 
 		{
 			public:

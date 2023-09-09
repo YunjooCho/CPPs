@@ -6,7 +6,7 @@
 /*   By: yunjcho <yunjcho@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/08 16:31:46 by yunjcho           #+#    #+#             */
-/*   Updated: 2023/09/09 20:41:38 by yunjcho          ###   ########.fr       */
+/*   Updated: 2023/09/09 22:11:02 by yunjcho          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,13 +52,13 @@ std::string	RobotomyRequestForm::getTarget(void) const
 	return (this->_target);
 }
 
-void	RobotomyRequestForm::execute(Bureaucrat const &executor) const
+bool	RobotomyRequestForm::execute(Bureaucrat const &executor) const
 {
 	// Bureaucrat tmp(executor.getName(), executor.getGrade());
 	// AForm::beSigned(tmp);
 	try
 	{
-		if (executor.getGrade() <= this->getExecGrade())
+		if (executor.getGrade() <= this->getExecGrade() && this->getIsSigned())
 		{
 			std::cout << "Whirr~" << std::endl;
 			std::srand((unsigned int)time(NULL));
@@ -72,6 +72,7 @@ void	RobotomyRequestForm::execute(Bureaucrat const &executor) const
 			{
 				std::cout << "[INFO - FAILURE] " << this->_target << " failed robotomized..." << std::endl;
 			}
+			return (true);
 		}
 		else
 			throw AForm::GradeTooLowException(4);
@@ -80,6 +81,7 @@ void	RobotomyRequestForm::execute(Bureaucrat const &executor) const
 	{
 		std::cout << e.what() << std::endl;
 	}
+	return (false);
 }
 
 // std::ostream& operator<<(std::ostream& outputStream, const ShrubberyCreationForm& form)

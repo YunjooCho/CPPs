@@ -6,7 +6,7 @@
 /*   By: yunjcho <yunjcho@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/04 18:58:45 by yunjcho           #+#    #+#             */
-/*   Updated: 2023/09/09 20:19:36 by yunjcho          ###   ########.fr       */
+/*   Updated: 2023/09/09 22:09:38 by yunjcho          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ class RobotomyRequestForm : public AForm
 		~RobotomyRequestForm();
 		// bool	getIsExecuted(void) const;
 		std::string	getTarget(void) const;
-		void		execute(Bureaucrat const &executor) const;
+		bool		execute(Bureaucrat const &executor) const;
 	private:
 		std::string	_target;
 	// 	bool	isExecuted;

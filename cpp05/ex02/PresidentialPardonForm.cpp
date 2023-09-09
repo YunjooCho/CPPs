@@ -6,7 +6,7 @@
 /*   By: yunjcho <yunjcho@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/09 19:52:30 by yunjcho           #+#    #+#             */
-/*   Updated: 2023/09/09 20:41:32 by yunjcho          ###   ########.fr       */
+/*   Updated: 2023/09/09 22:10:27 by yunjcho          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,23 +52,23 @@ std::string	PresidentialPardonForm::getTarget(void) const
 	return (this->_target);
 }
 
-void	PresidentialPardonForm::execute(Bureaucrat const &executor) const
+bool	PresidentialPardonForm::execute(Bureaucrat const &executor) const
 {
-	// Bureaucrat tmp(executor.getName(), executor.getGrade());
-	// AForm::beSigned(tmp);
 	try
 	{
-		if (executor.getGrade() <= this->getExecGrade())
+		if (executor.getGrade() <= this->getExecGrade() && this->getIsSigned())
 		{
 			std::cout << "[INFO] " << this->_target << " has been pardoned by Zaphod Beeblebrox." << std::endl;
 		}
 		else
 			throw AForm::GradeTooLowException(4);
+		return (true);
 	}
 	catch(const std::exception& e)
 	{
 		std::cout << e.what() << std::endl;
 	}
+	return (false);
 }
 
 // std::ostream& operator<<(std::ostream& outputStream, const ShrubberyCreationForm& form)
