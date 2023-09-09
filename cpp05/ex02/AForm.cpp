@@ -6,7 +6,7 @@
 /*   By: yunjcho <yunjcho@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/02 21:55:13 by yunjcho           #+#    #+#             */
-/*   Updated: 2023/09/09 22:14:10 by yunjcho          ###   ########.fr       */
+/*   Updated: 2023/09/10 01:03:22 by yunjcho          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,10 +52,10 @@ AForm::GradeTooHighException::GradeTooHighException(const int _errCode)
 const char *AForm::GradeTooHighException::what(void) const throw()
 {
 	if (this->errCode == 1)
-		return "[Exception] Form's SignGrade is too High!";
+		return "[Form::Exception] Form's SignGrade is too High!";
 	else if (this->errCode == 2)
-		return "[Exception] Form's ExecuteGrade is too High!";
-	return "[Exception] Grade is too High!";
+		return "[Form::Exception] Form's ExecuteGrade is too High!";
+	return "[Form::Exception] Grade is too High!";
 }
 
 AForm::GradeTooLowException::GradeTooLowException(const int _errCode)
@@ -64,14 +64,14 @@ AForm::GradeTooLowException::GradeTooLowException(const int _errCode)
 const char *AForm::GradeTooLowException::what(void) const throw()
 {
 	if (this->errCode == 1)
-		return "[Exception] Form's SignGrade is too Low!";
+		return "[Form::Exception] Form's SignGrade is too Low!";
 	else if (this->errCode == 2)
-		return "[Exception] Form's ExecuteGrade is too Low!";
+		return "[Form::Exception] Form's ExecuteGrade is too Low!";
 	else if (this->errCode == 3)
 		return "Bureaucrat's Grade lower than Form's SignGrade!";
 	else if (this->errCode == 4)
-		return "Bureaucrat's Grade lower than Form's ExecGrade or No signed Form!";
-	return "[Exception] Grade is too Low!";
+		return "[Form::Exception execute() FAILURE] No signed Form or Bureaucrat's Grade lower than Form's ExecGrade!";
+	return "[Form::Exception] Grade is too Low!";
 }
 
 std::string	AForm::getFormName(void) const

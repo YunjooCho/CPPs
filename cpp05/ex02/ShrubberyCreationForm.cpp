@@ -6,46 +6,36 @@
 /*   By: yunjcho <yunjcho@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/08 16:31:46 by yunjcho           #+#    #+#             */
-/*   Updated: 2023/09/09 22:13:40 by yunjcho          ###   ########.fr       */
+/*   Updated: 2023/09/10 01:17:48 by yunjcho          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ShrubberyCreationForm.hpp"
 
 ShrubberyCreationForm::ShrubberyCreationForm()
-	: AForm("Shrubbery", shru_sign, shru_exec), _target("Unknown Target") //, isExecuted(false)
+	: AForm("Shrubbery", shru_sign, shru_exec), _target("Unknown Target")
 {}
 
-// ShrubberyCreationForm::ShrubberyCreationForm(const std::string _formName) 
-// 	: AForm(_formName, shru_sign, shru_exec) //, isExecuted(false)
-// {}
-
 ShrubberyCreationForm::ShrubberyCreationForm(const std::string target) 
-	: AForm("Shrubbery", shru_sign, shru_exec), _target(target) //, isExecuted(false)
+	: AForm("Shrubbery", shru_sign, shru_exec), _target(target)
 {}
 
 ShrubberyCreationForm& ShrubberyCreationForm::operator=(const ShrubberyCreationForm &form)
 {
 	if (this != &form)
 	{
-		// this->isSigned = form.getIsSigned(); //setter?
 		this->_target = form.getTarget();
 	}
 	return (*this);
 }
 
 ShrubberyCreationForm::ShrubberyCreationForm(const ShrubberyCreationForm &form) 
-	: AForm(form.getFormName(), shru_sign, shru_exec) //, isExecuted(false) 
+	: AForm(form.getFormName(), shru_sign, shru_exec)
 {
 	*this = form;
 }
 
 ShrubberyCreationForm::~ShrubberyCreationForm() {};
-
-// bool	ShrubberyCreationForm::getIsExecuted(void) const
-// {
-// 	return (this->isExecuted);
-// }
 
 std::string	ShrubberyCreationForm::getTarget(void) const
 {
@@ -84,13 +74,3 @@ bool	ShrubberyCreationForm::execute(Bureaucrat const &executor) const
 	}
 	return (false);
 }
-
-// std::ostream& operator<<(std::ostream& outputStream, const ShrubberyCreationForm& form)
-// {
-// 	outputStream << "[ShrubberyCreationForm::INFO] Formname : " << form.getFormName() \
-// 					<< ", IsSigned : " << form.getIsSigned() \
-// 					<< ", IsExecuted : " << form.getIsExecuted() \
-// 					<< ", SignGrade : " << form.getSignGrade() \
-// 					<< ", ExecGrade : " << form.getExecGrade();
-// 	return (outputStream);
-// }

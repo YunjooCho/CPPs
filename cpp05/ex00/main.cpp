@@ -6,16 +6,11 @@
 /*   By: yunjcho <yunjcho@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/01 17:26:04 by yunjcho           #+#    #+#             */
-/*   Updated: 2023/09/02 19:59:19 by yunjcho          ###   ########.fr       */
+/*   Updated: 2023/09/10 01:24:09 by yunjcho          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Bureaucrat.hpp"
-
-void	_leaks()
-{
-	system("leaks a.out");
-}
 
 int	main(void)
 {

@@ -6,7 +6,7 @@
 /*   By: yunjcho <yunjcho@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/02 21:55:13 by yunjcho           #+#    #+#             */
-/*   Updated: 2023/09/04 19:01:40 by yunjcho          ###   ########.fr       */
+/*   Updated: 2023/09/10 01:23:02 by yunjcho          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,10 +52,10 @@ Form::GradeTooHighException::GradeTooHighException(const int _errCode)
 const char *Form::GradeTooHighException::what(void) const throw()
 {
 	if (this->errCode == 1)
-		return "[Exception] Form's SignGrade is too High!";
+		return "[Form::Exception] Form's SignGrade is too High!";
 	else if (this->errCode == 2)
-		return "[Exception] Form's Execrade is too High!";
-	return "[Exception] Grade is too High!";
+		return "[Form::Exception] Form's ExecuteGrade is too High!";
+	return "[Form::Exception] Grade is too High!";
 }
 
 Form::GradeTooLowException::GradeTooLowException(const int _errCode)
@@ -64,12 +64,12 @@ Form::GradeTooLowException::GradeTooLowException(const int _errCode)
 const char *Form::GradeTooLowException::what(void) const throw()
 {
 	if (this->errCode == 1)
-		return "[Exception] Form's SignGrade is too Low!";
+		return "[Form::Exception] Form's SignGrade is too Low!";
 	else if (this->errCode == 2)
-		return "[Exception] Form's ExecGrade is too Low!";
+		return "[Form::Exception] Form's ExecuteGrade is too Low!";
 	else if (this->errCode == 3)
 		return "Bureaucrat's Grade lower than Form's SignGrade!";
-	return "[Exception] Grade is too Low!";
+	return "[Form::Exception] Grade is too Low!";
 }
 
 std::string	Form::getFormName(void) const
