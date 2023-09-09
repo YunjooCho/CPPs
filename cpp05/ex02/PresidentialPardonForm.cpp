@@ -6,18 +6,22 @@
 /*   By: yunjcho <yunjcho@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/09 19:52:30 by yunjcho           #+#    #+#             */
-/*   Updated: 2023/09/09 19:57:06 by yunjcho          ###   ########.fr       */
+/*   Updated: 2023/09/09 20:29:09 by yunjcho          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "PresidentialPardonForm.hpp"
 
 PresidentialPardonForm::PresidentialPardonForm()
-	: AForm("Unknown", president_sign, president_exec) //, isExecuted(false)
+	: AForm("Presidential", president_sign, president_exec), _target("Unknown Target") //, isExecuted(false)
 {}
 
-PresidentialPardonForm::PresidentialPardonForm(const std::string _formName) 
-	: AForm(_formName, president_sign, president_exec) //, isExecuted(false)
+// PresidentialPardonForm::PresidentialPardonForm(const std::string _formName) 
+// 	: AForm(_formName, president_sign, president_exec) //, isExecuted(false)
+// {}
+
+PresidentialPardonForm::PresidentialPardonForm(const std::string target) 
+	: AForm("Presidential", president_sign, president_exec), _target(target) //, isExecuted(false)
 {}
 
 PresidentialPardonForm& PresidentialPardonForm::operator=(const PresidentialPardonForm &form)
@@ -25,6 +29,7 @@ PresidentialPardonForm& PresidentialPardonForm::operator=(const PresidentialPard
 	if (this != &form)
 	{
 		// this->isSigned = form.getIsSigned(); //setter?
+		this->_target = form.getTarget();
 	}
 	return (*this);
 }
@@ -42,11 +47,18 @@ PresidentialPardonForm::~PresidentialPardonForm() {};
 // 	return (this->isExecuted);
 // }
 
+std::string	PresidentialPardonForm::getTarget(void) const
+{
+	return (this->_target);
+}
+
 void	PresidentialPardonForm::execute(Bureaucrat const &executor) const
 {
+	// Bureaucrat tmp(executor.getName(), executor.getGrade());
+	// AForm::beSigned(tmp);
 	try
 	{
-		if (executor.getGrade() <= this->getExecGrade())
+		if (executor.getGrade() <= this->getExecGrade() && this->getIsSigned())
 		{
 			
 		}

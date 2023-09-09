@@ -6,18 +6,22 @@
 /*   By: yunjcho <yunjcho@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/08 16:31:46 by yunjcho           #+#    #+#             */
-/*   Updated: 2023/09/09 19:54:37 by yunjcho          ###   ########.fr       */
+/*   Updated: 2023/09/09 20:28:59 by yunjcho          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "RobotomyRequestForm.hpp"
 
 RobotomyRequestForm::RobotomyRequestForm()
-	: AForm("Unknown", robo_sign, robo_exec) //, isExecuted(false)
+	: AForm("Robotomy", robo_sign, robo_exec), _target("Unknown Target") //, isExecuted(false)
 {}
 
-RobotomyRequestForm::RobotomyRequestForm(const std::string _formName) 
-	: AForm(_formName, robo_sign, robo_exec) //, isExecuted(false)
+// RobotomyRequestForm::RobotomyRequestForm(const std::string _formName) 
+// 	: AForm(_formName, robo_sign, robo_exec) //, isExecuted(false)
+// {}
+
+RobotomyRequestForm::RobotomyRequestForm(const std::string target) 
+	: AForm("Robotomy", robo_sign, robo_exec), _target(target) //, isExecuted(false)
 {}
 
 RobotomyRequestForm& RobotomyRequestForm::operator=(const RobotomyRequestForm &form)
@@ -25,6 +29,7 @@ RobotomyRequestForm& RobotomyRequestForm::operator=(const RobotomyRequestForm &f
 	if (this != &form)
 	{
 		// this->isSigned = form.getIsSigned(); //setter?
+		this->_target = form.getTarget();
 	}
 	return (*this);
 }
@@ -42,13 +47,18 @@ RobotomyRequestForm::~RobotomyRequestForm() {};
 // 	return (this->isExecuted);
 // }
 
+std::string	RobotomyRequestForm::getTarget(void) const
+{
+	return (this->_target);
+}
+
 void	RobotomyRequestForm::execute(Bureaucrat const &executor) const
 {
 	// Bureaucrat tmp(executor.getName(), executor.getGrade());
 	// AForm::beSigned(tmp);
 	try
 	{
-		if (executor.getGrade() <= this->getExecGrade())
+		if (executor.getGrade() <= this->getExecGrade() && this->getIsSigned())
 		{
 			std::cout << "Whirr~" << std::endl;
 			std::srand((unsigned int)time(NULL));
@@ -60,7 +70,7 @@ void	RobotomyRequestForm::execute(Bureaucrat const &executor) const
 			}
 			else
 			{
-				std::cout << "[INFO - FAILURE] " << executor.getName() << " failed robotomized!" << std::endl;
+				std::cout << "[INFO - FAILURE] " << executor.getName() << " failed robotomized..." << std::endl;
 			}
 		}
 		else

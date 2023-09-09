@@ -6,7 +6,7 @@
 /*   By: yunjcho <yunjcho@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/04 18:58:45 by yunjcho           #+#    #+#             */
-/*   Updated: 2023/09/09 20:01:50 by yunjcho          ###   ########.fr       */
+/*   Updated: 2023/09/09 20:25:51 by yunjcho          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,13 +27,16 @@ class PresidentialPardonForm : public AForm
 {
 	public:
 		PresidentialPardonForm();
-		PresidentialPardonForm(const std::string _formName);
+		// PresidentialPardonForm(const std::string _formName);
+		PresidentialPardonForm(const std::string target);
 		PresidentialPardonForm(const PresidentialPardonForm &form);
 		PresidentialPardonForm& operator=(const PresidentialPardonForm &form);
 		~PresidentialPardonForm();
 		// bool	getIsExecuted(void) const;
-		void	execute(Bureaucrat const &executor) const;
-	// private:
+		std::string	getTarget(void) const;
+		void		execute(Bureaucrat const &executor) const;
+	private:
+		std::string	_target;
 	// 	bool	isExecuted;
 };
 

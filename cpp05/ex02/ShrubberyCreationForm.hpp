@@ -6,7 +6,7 @@
 /*   By: yunjcho <yunjcho@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/04 18:58:45 by yunjcho           #+#    #+#             */
-/*   Updated: 2023/09/08 18:25:35 by yunjcho          ###   ########seoul.kr  */
+/*   Updated: 2023/09/09 20:19:34 by yunjcho          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,13 +28,16 @@ class ShrubberyCreationForm : public AForm
 {
 	public:
 		ShrubberyCreationForm();
-		ShrubberyCreationForm(const std::string _formName);
+		// ShrubberyCreationForm(const std::string _formName);
+		ShrubberyCreationForm(const std::string target);
 		ShrubberyCreationForm(const ShrubberyCreationForm &form);
 		ShrubberyCreationForm& operator=(const ShrubberyCreationForm &form);
 		~ShrubberyCreationForm();
 		// bool	getIsExecuted(void) const;
-		void	execute(Bureaucrat const &executor) const;
-	// private:
+		std::string	getTarget(void) const;
+		void		execute(Bureaucrat const &executor) const;
+	private:
+		std::string	_target;
 	// 	bool	isExecuted;
 };
 

@@ -6,18 +6,22 @@
 /*   By: yunjcho <yunjcho@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/08 16:31:46 by yunjcho           #+#    #+#             */
-/*   Updated: 2023/09/08 18:22:58 by yunjcho          ###   ########seoul.kr  */
+/*   Updated: 2023/09/09 20:29:15 by yunjcho          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ShrubberyCreationForm.hpp"
 
 ShrubberyCreationForm::ShrubberyCreationForm()
-	: AForm("Unknown", shru_sign, shru_exec) //, isExecuted(false)
+	: AForm("Shrubbery", shru_sign, shru_exec), _target("Unknown Target") //, isExecuted(false)
 {}
 
-ShrubberyCreationForm::ShrubberyCreationForm(const std::string _formName) 
-	: AForm(_formName, shru_sign, shru_exec) //, isExecuted(false)
+// ShrubberyCreationForm::ShrubberyCreationForm(const std::string _formName) 
+// 	: AForm(_formName, shru_sign, shru_exec) //, isExecuted(false)
+// {}
+
+ShrubberyCreationForm::ShrubberyCreationForm(const std::string target) 
+	: AForm("Shrubbery", shru_sign, shru_exec), _target(target) //, isExecuted(false)
 {}
 
 ShrubberyCreationForm& ShrubberyCreationForm::operator=(const ShrubberyCreationForm &form)
@@ -25,6 +29,7 @@ ShrubberyCreationForm& ShrubberyCreationForm::operator=(const ShrubberyCreationF
 	if (this != &form)
 	{
 		// this->isSigned = form.getIsSigned(); //setter?
+		this->_target = form.getTarget();
 	}
 	return (*this);
 }
@@ -42,15 +47,20 @@ ShrubberyCreationForm::~ShrubberyCreationForm() {};
 // 	return (this->isExecuted);
 // }
 
+std::string	ShrubberyCreationForm::getTarget(void) const
+{
+	return (this->_target);
+}
+
 void	ShrubberyCreationForm::execute(Bureaucrat const &executor) const
 {
 	try
 	{
 		// Bureaucrat tmp(executor.getName(), executor.getGrade());
 		// AForm::beSigned(tmp);
-		if (executor.getGrade() <= this->getExecGrade())
+		if (executor.getGrade() <= this->getExecGrade() && this->getIsSigned())
 		{
-			std::string		filename = executor.getName() += "_shrubbery";
+			std::string		filename = this->getTarget() += "_shrubbery";
 			std::ofstream	printFile;
 			printFile.open(filename);
 			printFile << "          _-_         " << std::endl;
