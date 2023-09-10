@@ -6,7 +6,7 @@
 /*   By: yunjcho <yunjcho@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/04 18:58:45 by yunjcho           #+#    #+#             */
-/*   Updated: 2023/09/10 17:46:25 by yunjcho          ###   ########.fr       */
+/*   Updated: 2023/09/10 17:48:02 by yunjcho          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ class ShrubberyCreationForm : public AForm
 	public:
 		ShrubberyCreationForm();
 		ShrubberyCreationForm(const std::string target);
+		ShrubberyCreationForm(const std::string formName, const std::string target);
 		ShrubberyCreationForm(const ShrubberyCreationForm &form);
 		ShrubberyCreationForm& operator=(const ShrubberyCreationForm &form);
 		~ShrubberyCreationForm();

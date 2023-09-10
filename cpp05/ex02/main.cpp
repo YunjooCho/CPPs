@@ -6,7 +6,7 @@
 /*   By: yunjcho <yunjcho@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/08 16:27:36 by yunjcho           #+#    #+#             */
-/*   Updated: 2023/09/10 01:25:29 by yunjcho          ###   ########seoul.kr  */
+/*   Updated: 2023/09/10 15:17:36 by yunjcho          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,14 +16,8 @@
 #include "RobotomyRequestForm.hpp"
 #include "PresidentialPardonForm.hpp"
 
-// void	_leaks()
-// {
-// 	system("leaks a.out");
-// }
-
 int main(void)
 {
-	// atexit(_leaks);
 	std::cout << "====================== ShrubberyCreationForm Testcase ======================" << std::endl;
 	Bureaucrat artist1("Artist", 137);
 	Bureaucrat artist2("Aspiring Artist", 150);

@@ -1,37 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ShrubberyCreationForm.hpp                          :+:      :+:    :+:   */
+/*   RobotomyRequestForm.hpp                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yunjcho <yunjcho@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/04 18:58:45 by yunjcho           #+#    #+#             */
-/*   Updated: 2023/09/10 17:46:25 by yunjcho          ###   ########.fr       */
+/*   Updated: 2023/09/10 17:49:03 by yunjcho          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef SHRUBBERYCREATIONFORM_HPP
-# define SHRUBBERYCREATIONFORM_HPP
+#ifndef ROBOTOMYREQUESTFORM_HPP
+# define ROBOTOMYREQUESTFORM_HPP
 
 # include <iostream>
-# include <fstream>
+# include <cstdlib>
+# include <ctime>
 # include "AForm.hpp"
 # include "Bureaucrat.hpp"
 
-enum shrubberyInfo
+enum robotomyInfo
 {
-	shru_sign = 145,
-	shru_exec = 137
+	robo_sign = 72,
+	robo_exec = 45
 };
 
-class ShrubberyCreationForm : public AForm
+class RobotomyRequestForm : public AForm
 {
 	public:
-		ShrubberyCreationForm();
-		ShrubberyCreationForm(const std::string target);
-		ShrubberyCreationForm(const ShrubberyCreationForm &form);
-		ShrubberyCreationForm& operator=(const ShrubberyCreationForm &form);
-		~ShrubberyCreationForm();
+		RobotomyRequestForm();
+		RobotomyRequestForm(const std::string target);
+		RobotomyRequestForm(const std::string formName, const std::string target);
+		RobotomyRequestForm(const RobotomyRequestForm &form);
+		RobotomyRequestForm& operator=(const RobotomyRequestForm &form);
+		~RobotomyRequestForm();
 		std::string	getTarget(void) const;
 		bool		execute(Bureaucrat const &executor) const;
 	private:
