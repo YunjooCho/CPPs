@@ -6,14 +6,14 @@
 #    By: yunjcho <yunjcho@student.42seoul.kr>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/06/14 15:31:29 by yunjcho           #+#    #+#              #
-#    Updated: 2023/09/10 19:50:21 by yunjcho          ###   ########.fr        #
+#    Updated: 2023/09/14 18:19:24 by yunjcho          ###   ########seoul.kr   #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = a.out
 CXX = c++
 CXXFLAGS = -Wall -Werror -Wextra -std=c++98
-SRCS = main.cpp
+SRCS = main.cpp ScalarConverter.cpp
 OBJS = $(SRCS:.cpp=.o)
 
 ifdef SANITIZE
