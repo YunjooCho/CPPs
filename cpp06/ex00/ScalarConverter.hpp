@@ -6,7 +6,7 @@
 /*   By: yunjcho <yunjcho@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/14 18:19:28 by yunjcho           #+#    #+#             */
-/*   Updated: 2023/09/17 20:44:20 by yunjcho          ###   ########.fr       */
+/*   Updated: 2023/09/17 23:18:04 by yunjcho          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,22 +15,19 @@
 
 # include <iostream>
 # include <sstream>
-# include <cstdlib>
-# include <iomanip>
+# include <cstdlib> //std::strtod
+# include <iomanip> //std::setprecision(1)
+# include <limits>  //std::numeric_limits<type>::max(), min()
 
 class ScalarConverter
 {
 	public:
-		static void 	convert(std::string &argv);
-		// static double	doubleVal;
-		// static double	getDoubleVal(void);
+		static void	convert(std::string &argv);
 	private:
 		ScalarConverter();
 		ScalarConverter(const ScalarConverter &form);
 		ScalarConverter& operator=(const ScalarConverter &form);
 		~ScalarConverter();
 };
-
-// std::ostream& operator<<(std::ostream& outputStream, const ScalarConverter& converter);
 
 #endif
