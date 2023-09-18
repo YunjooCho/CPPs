@@ -6,7 +6,7 @@
 /*   By: yunjcho <yunjcho@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/14 18:19:28 by yunjcho           #+#    #+#             */
-/*   Updated: 2023/09/18 21:15:04 by yunjcho          ###   ########.fr       */
+/*   Updated: 2023/09/18 21:47:17 by yunjcho          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ class ScalarConverter
 		static void			convertInt(std::stringstream &convertStr);
 		static void			convertFloat(std::stringstream &convertStr);
 		static void			convertDouble(std::stringstream &convertStr);
-		static std::string	convertStrCharToChar(std::stringstream &convertStr);
+		// static std::string	convertStrCharToChar(std::stringstream &convertStr);
 		static void			printValues(void);
 	private:
 		static std::string	_convertChar;

@@ -6,7 +6,7 @@
 /*   By: yunjcho <yunjcho@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/17 17:58:51 by yunjcho           #+#    #+#             */
-/*   Updated: 2023/09/18 21:15:02 by yunjcho          ###   ########.fr       */
+/*   Updated: 2023/09/18 21:52:30 by yunjcho          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -142,7 +142,7 @@ int	ScalarConverter::checkArgsType(std::string &argv)
 {
 	const std::string	NUMBERS = "0123456789";
 
-	if (argv.length() == 1)
+	if (argv.length() == 1 && argv.find_first_of(NUMBERS) == std::string::npos)
 	{
 		if (argv.c_str()[0] >= 0 && argv.c_str()[0] <= 127)
 			return (CHAR_TYPE);
@@ -167,28 +167,50 @@ int	ScalarConverter::checkArgsType(std::string &argv)
 	return (ETC_TYPE);
 }
 
-std::string	ScalarConverter::convertStrCharToChar(std::stringstream &convertStr)
-{
-	char	charVal = '\0';
+// std::string	ScalarConverter::convertStrCharToChar(std::stringstream &convertStr)
+// {
+// 	int	charVal = 0;
 
-	charVal = static_cast<char>(convertStr.str().c_str()[0]);
+// 	charVal = convertStr.str().c_str()[0];
+
+// 	std::cout << "charVal : " << charVal << std::endl;
+
+// 	if (charVal >= ' ' && charVal <= '~')
+// 	{
+// 		std::string	tmp(1, static_cast<char>(convertStr.str().c_str()[0]));
+// 		return (tmp);
+// 	}
+// 	else
+// 	{
+// 		_argvType = NOND_CHAR_TYPE;
+// 		return ("Non displayable");
+// 	}
+// }
+
+void	ScalarConverter::convertChar(std::stringstream &convertStr)
+{
+	int	charVal = 0;
+
+	charVal = convertStr.str().c_str()[0];
+
+	//Debugging
+	std::cout << "charVal : " << charVal << std::endl;
+
 	if (charVal >= ' ' && charVal <= '~')
 	{
-		std::string	tmp(1, charVal);
-		return (tmp);
+		std::string	tmp(1, static_cast<char>(convertStr.str().c_str()[0]));
+		_convertChar = tmp;
 	}
 	else
 	{
 		_argvType = NOND_CHAR_TYPE;
-		return (" Non displayable");
+		_convertChar = "Non displayable";
 	}
-}
-
-void	ScalarConverter::convertChar(std::stringstream &convertStr)
-{
-	_convertChar = convertStrCharToChar(convertStr);
-	_convertInt = convertStrCharToInt(convertStr);
-	
+	_convertInt = std::to_string(charVal);
+	_convertFloat = std::to_string(static_cast<float>(charVal));
+	_convertDouble = std::to_string(static_cast<double>(charVal));
+	// _convertChar = convertStrCharToChar(convertStr);
+	// _convertInt = convertStrCharToInt(convertStr);
 }
 
 void	ScalarConverter::convertInt(std::stringstream &convertStr)
@@ -209,6 +231,7 @@ void	ScalarConverter::convertDouble(std::stringstream &convertStr)
 void	ScalarConverter::convert(std::string &argv)
 {
 	std::stringstream	convertStr(argv);
+
 	if (checkArgsPseudo(argv) == true)
 	{
 		printValues();
@@ -235,10 +258,10 @@ void	ScalarConverter::convert(std::string &argv)
 
 void	ScalarConverter::printValues(void)
 {
-	if (CHAR_TYPE)
+	if (_argvType == CHAR_TYPE)
 		std::cout << "char: \'" << _convertChar << "\'" << std::endl;
-	else if (NOND_CHAR_TYPE)
-		std::cout << "char: " << _convertInt << std::endl;
+	else
+		std::cout << "char: " << _convertChar << std::endl;
 	std::cout << "int: " << _convertInt << std::endl;
 	std::cout << "float: " << _convertFloat << std::endl;
 	std::cout << "double: " << _convertDouble << std::endl;
