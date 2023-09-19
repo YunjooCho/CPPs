@@ -6,7 +6,7 @@
 /*   By: yunjcho <yunjcho@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/17 17:58:51 by yunjcho           #+#    #+#             */
-/*   Updated: 2023/09/18 21:52:30 by yunjcho          ###   ########.fr       */
+/*   Updated: 2023/09/19 22:06:06 by yunjcho          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -167,71 +167,109 @@ int	ScalarConverter::checkArgsType(std::string &argv)
 	return (ETC_TYPE);
 }
 
-// std::string	ScalarConverter::convertStrCharToChar(std::stringstream &convertStr)
-// {
-// 	int	charVal = 0;
-
-// 	charVal = convertStr.str().c_str()[0];
-
-// 	std::cout << "charVal : " << charVal << std::endl;
-
-// 	if (charVal >= ' ' && charVal <= '~')
-// 	{
-// 		std::string	tmp(1, static_cast<char>(convertStr.str().c_str()[0]));
-// 		return (tmp);
-// 	}
-// 	else
-// 	{
-// 		_argvType = NOND_CHAR_TYPE;
-// 		return ("Non displayable");
-// 	}
-// }
-
-void	ScalarConverter::convertChar(std::stringstream &convertStr)
+void	ScalarConverter::convertChar(std::string &argv)
 {
-	int	charVal = 0;
+	std::stringstream	stream(argv);
+	char				charVal = '\0';
 
-	charVal = convertStr.str().c_str()[0];
-
+	charVal = argv.c_str()[0];
 	//Debugging
-	std::cout << "charVal : " << charVal << std::endl;
-
+	// std::cout << "charVal : " << charVal << std::endl;
 	if (charVal >= ' ' && charVal <= '~')
 	{
-		std::string	tmp(1, static_cast<char>(convertStr.str().c_str()[0]));
-		_convertChar = tmp;
+		_convertChar = charVal;
+	}
+	// else
+	// {
+	// 	_convertChar = "Non displayable";
+	// }
+	_convertInt = std::to_string(charVal);
+
+	stream << std::fixed << std::setprecision(1) << static_cast<double>(charVal);
+	std::string convertStr = stream.str();
+	_convertFloat = convertStr + "f";
+	_convertDouble = convertStr;
+}
+
+void	ScalarConverter::convertInt(std::string &argv)
+{
+	std::stringstream	stream(argv);
+	long				intVal = 0;
+	// double				intVal = 0.0;
+
+	// intVal = std::strtod(stream.str().c_str(), NULL);
+	stream >> intVal;
+	//Debugging
+	std::cout << "intVal : " << intVal << std::endl;
+	if (intVal >= ' ' && intVal <= '~')
+		_convertChar = static_cast<char>(intVal);
+	else if (intVal >= 0 && intVal <= 127)
+		_convertChar = "Non displayable";
+	else
+		_convertChar = "impossible";
+	if (intVal > std::numeric_limits<int>::max() \
+		|| intVal < std::numeric_limits<int>::min()) 
+	{
+		_convertInt = "impossible";
 	}
 	else
 	{
-		_argvType = NOND_CHAR_TYPE;
-		_convertChar = "Non displayable";
+		_convertInt = std::to_string(static_cast<int>(intVal));
 	}
-	_convertInt = std::to_string(charVal);
-	_convertFloat = std::to_string(static_cast<float>(charVal));
-	_convertDouble = std::to_string(static_cast<double>(charVal));
-	// _convertChar = convertStrCharToChar(convertStr);
-	// _convertInt = convertStrCharToInt(convertStr);
+	std::stringstream	floatStream;
+    floatStream << std::fixed << std::setprecision(1) << static_cast<float>(intVal);
+    _convertFloat = floatStream.str() + "f";
+	_convertDouble = floatStream.str();
 }
 
-void	ScalarConverter::convertInt(std::stringstream &convertStr)
+void	ScalarConverter::convertFloat(std::string &argv)
 {
-	(void) convertStr;
+	std::stringstream	stream(argv);
+	float				floatVal = 0.0;
+	int					intVal = 0;
+	
+	stream >> floatVal;
+	intVal = static_cast<int>(floatVal);
+	//Debugging
+	std::cout << "floatVal : " << floatVal << std::endl;
+	if (intVal >= ' ' && intVal <= '~')
+		_convertChar = static_cast<char>(intVal);
+	else if (intVal >= 0 && intVal <= 127)
+		_convertChar = "Non displayable";
+	else
+		_convertChar = "impossible";
+	if (intVal > std::numeric_limits<int>::max() \
+		|| intVal < std::numeric_limits<int>::min())
+	{
+		_convertInt = "impossible";
+	}
+	else
+	{
+		_convertInt = std::to_string(intVal);
+	}
+	stream << std::fixed << std::setprecision(2) << floatVal;
+	std::string convertStr = stream.str();
+
+	std::cout << "convertStr : " << convertStr << std::endl;
+
+	if ((floatVal > std::numeric_limits<float>::max() \
+		|| floatVal < std::numeric_limits<float>::min()) \
+		&& floatVal != 0.0)
+			_convertFloat  = "impossible";
+	else
+		_convertFloat = convertStr;
+	int	fIndex = convertStr.find("f");
+	convertStr.erase(fIndex);
+	_convertDouble = convertStr;
 }
 
-void	ScalarConverter::convertFloat(std::stringstream &convertStr)
+void	ScalarConverter::convertDouble(std::string &argv)
 {
-	(void) convertStr;
-}
-
-void	ScalarConverter::convertDouble(std::stringstream &convertStr)
-{
-	(void) convertStr;
+	(void) argv;
 }
 
 void	ScalarConverter::convert(std::string &argv)
 {
-	std::stringstream	convertStr(argv);
-
 	if (checkArgsPseudo(argv) == true)
 	{
 		printValues();
@@ -241,16 +279,16 @@ void	ScalarConverter::convert(std::string &argv)
 	switch (_argvType)
 	{
 		case CHAR_TYPE:
-			convertChar(convertStr);
+			convertChar(argv);
 			break ;
 		case INT_TYPE:
-			convertInt(convertStr);
+			convertInt(argv);
 			break ;
 		case FLOAT_TYPE:
-			convertFloat(convertStr);
+			convertFloat(argv);
 			break ;
 		case DOUBLE_TYPE:
-			convertDouble(convertStr);
+			convertDouble(argv);
 	}
 	printValues();
 }
@@ -258,10 +296,10 @@ void	ScalarConverter::convert(std::string &argv)
 
 void	ScalarConverter::printValues(void)
 {
-	if (_argvType == CHAR_TYPE)
-		std::cout << "char: \'" << _convertChar << "\'" << std::endl;
-	else
-		std::cout << "char: " << _convertChar << std::endl;
+	//Debugging
+	std::cout << "argument type : " << _argvType << std::endl;
+	
+	std::cout << "char: " << _convertChar << std::endl;
 	std::cout << "int: " << _convertInt << std::endl;
 	std::cout << "float: " << _convertFloat << std::endl;
 	std::cout << "double: " << _convertDouble << std::endl;
