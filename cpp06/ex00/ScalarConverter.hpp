@@ -6,7 +6,7 @@
 /*   By: yunjcho <yunjcho@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/14 18:19:28 by yunjcho           #+#    #+#             */
-/*   Updated: 2023/09/19 18:33:39 by yunjcho          ###   ########seoul.kr  */
+/*   Updated: 2023/09/20 01:30:50 by yunjcho          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,10 @@ enum argvType
 {
 	PSEUDO_INF_M_TYPE,
 	PSEUDO_INF_P_TYPE,
+	PSEUDO_INF_N_TYPE,
 	PSEUDO_NAN_M_TYPE,
 	PSEUDO_NAN_P_TYPE,
+	PSEUDO_NAN_N_TYPE,
 	CHAR_TYPE,
 	INT_TYPE,
 	FLOAT_TYPE,
@@ -42,7 +44,7 @@ class ScalarConverter
 		static void			convertInt(std::string &argv);
 		static void			convertFloat(std::string &argv);
 		static void			convertDouble(std::string &argv);
-		// static std::string	convertStrCharToChar(std::stringstream &convertStr);
+		static void			convertInvalid(std::string &argv);
 		static void			printValues(void);
 	private:
 		static std::string	_convertChar;
