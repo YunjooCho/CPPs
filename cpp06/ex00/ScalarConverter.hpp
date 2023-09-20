@@ -6,7 +6,7 @@
 /*   By: yunjcho <yunjcho@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/14 18:19:28 by yunjcho           #+#    #+#             */
-/*   Updated: 2023/09/20 01:30:50 by yunjcho          ###   ########seoul.kr  */
+/*   Updated: 2023/09/20 18:13:20 by yunjcho          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 # include <iostream>
 # include <sstream>
 # include <cstdlib> //std::strtod
-# include <iomanip> //std::setprecision(1)
+# include <iomanip> //std::setprecision()
 # include <limits>  //std::numeric_limits<type>::max(), min()
 
 enum argvType
