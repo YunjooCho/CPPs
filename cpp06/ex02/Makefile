@@ -6,14 +6,14 @@
 #    By: yunjcho <yunjcho@student.42seoul.kr>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/06/14 15:31:29 by yunjcho           #+#    #+#              #
-#    Updated: 2023/09/24 22:22:58 by yunjcho          ###   ########seoul.kr   #
+#    Updated: 2023/09/25 14:15:43 by yunjcho          ###   ########seoul.kr   #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = serializer
+NAME = dynamic
 CXX = c++
 CXXFLAGS = -Wall -Werror -Wextra -std=c++98
-SRCS = main.cpp Base.cpp A.cpp B.cpp C.cpp
+SRCS = main.cpp Base.cpp
 OBJS = $(SRCS:.cpp=.o)
 
 all : $(NAME)
