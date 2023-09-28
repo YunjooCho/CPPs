@@ -6,7 +6,7 @@
 /*   By: yunjcho <yunjcho@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/08 16:27:36 by yunjcho           #+#    #+#             */
-/*   Updated: 2023/09/10 19:42:17 by yunjcho          ###   ########.fr       */
+/*   Updated: 2023/09/28 16:15:15 by yunjcho          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,14 +17,8 @@
 #include "PresidentialPardonForm.hpp"
 #include "Intern.hpp"
 
-// void	_leaks()
-// {
-// 	system("leaks a.out");
-// }
-
 int main(void)
 {
-	// atexit(_leaks);
 	Bureaucrat	president("president", 1);
 	Intern		someRandomIntern;
 
@@ -144,5 +138,9 @@ int main(void)
 		std::cout << e.what() << std::endl;
 	}
 
+	delete sct;
+	delete rrf;
+	delete pp;
+	// delete excep;
 	return (0);
 }

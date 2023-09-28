@@ -6,7 +6,7 @@
 /*   By: yunjcho <yunjcho@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/02 21:30:23 by yunjcho           #+#    #+#             */
-/*   Updated: 2023/09/09 22:15:29 by yunjcho          ###   ########.fr       */
+/*   Updated: 2023/09/28 16:04:36 by yunjcho          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ class AForm
 		AForm(const std::string _formName, const int _signGrade, const int _execGrade);
 		AForm(const AForm &form);
 		AForm& operator=(const AForm &form);
-		~AForm();
+		virtual~AForm();
 		std::string		getFormName(void) const;
 		bool			getIsSigned(void) const;
 		int				getSignGrade(void) const;
