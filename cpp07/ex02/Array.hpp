@@ -6,7 +6,7 @@
 /*   By: yunjcho <yunjcho@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/28 15:40:33 by yunjcho           #+#    #+#             */
-/*   Updated: 2023/09/28 20:52:08 by yunjcho          ###   ########.fr       */
+/*   Updated: 2023/09/28 21:22:39 by yunjcho          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,10 +49,20 @@ class Array
 
 		T& operator[](const int idx) const
 		{
+			std::cout << "[] idx : " << idx << std::endl;
 			try
 			{
-				if (!arr || idx < 0 || idx > (length - 1))
-					throw std::out_of_range("Invalid Index!");
+				// if (!arr[idx])
+				// 	throw std::out_of_range("Not exist Array!");
+				if (idx < 0)
+					throw std::out_of_range("Invalid Index!1");
+				else if (idx > (length - 1))
+					throw std::out_of_range("Invalid Index!2");
+				// if (idx < 0)
+				// 	throw std::exception("1");
+				// else if (idx > (length - 1))
+				// 	throw std::exception("2");
+				return (arr[idx]);
 			}
 			catch(const std::exception& e)
 			{
