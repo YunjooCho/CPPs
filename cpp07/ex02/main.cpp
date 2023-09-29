@@ -19,6 +19,7 @@ int main(int, char**)
         Array<int> test(tmp);
     }
 
+    // mirror[0] = 7;
     for (int i = 0; i < MAX_VAL; i++)
     {
         if (mirror[i] != numbers[i])
