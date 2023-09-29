@@ -6,7 +6,7 @@
 /*   By: yunjcho <yunjcho@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/28 15:40:33 by yunjcho           #+#    #+#             */
-/*   Updated: 2023/09/28 21:22:39 by yunjcho          ###   ########.fr       */
+/*   Updated: 2023/09/29 21:50:13 by yunjcho          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,58 +24,54 @@ class Array
 		int	capacity;
 		int	length;
 	public:
-		Array() : arr(new T[0], capacity(0), length(0)) {}
+		Array() : arr(new T[0]), capacity(0), length(0) {}
  
-		Array(unsigned int n) : arr(new T[n]), capacity(n), length(0) {}
+		Array(unsigned int n) : arr(new T[n]), capacity(n), length(0) 
+		{
+			for (unsigned int i = 0; i < n; i++)
+			{
+				T tmp = T();
+				arr[i] = tmp;
+				++length;
+			}
+		}
 
-		Array(const Array &array) 
+		Array(const Array &array) : arr(new T[0]), capacity(0), length(0)
 		{
 			*this = array;
 		}
 
-		Array& operator=(const Array &array) 
+		Array& operator=(const Array &array)
 		{
 			if (this != &array)
 			{
-				T	*newArr;
-				newArr = new T[array.length];
-				for (int i = 0; i < array.size(); i++)
+				T	*newArr = new T[array.length];
+				for (int i = 0; i < array.length; i++)
 				{
 					newArr[i] = array.arr[i];
 				}
+				if (this->length > 0)
+					delete[] arr;
+				this->arr = newArr;
+				this->capacity = array.capacity;
+				this->length = array.length;
 			}
 			return (*this);
 		}
 
-		T& operator[](const int idx) const
+		T& operator[](const int &idx) const
 		{
-			std::cout << "[] idx : " << idx << std::endl;
-			try
+			if (idx < 0 || idx > (length - 1))
 			{
-				// if (!arr[idx])
-				// 	throw std::out_of_range("Not exist Array!");
-				if (idx < 0)
-					throw std::out_of_range("Invalid Index!1");
-				else if (idx > (length - 1))
-					throw std::out_of_range("Invalid Index!2");
-				// if (idx < 0)
-				// 	throw std::exception("1");
-				// else if (idx > (length - 1))
-				// 	throw std::exception("2");
-				return (arr[idx]);
-			}
-			catch(const std::exception& e)
-			{
-				//Debugging
-				std::cout << "<<<<<<<<<<<<<<< Test exception <<<<<<<<<<<" << std::endl;
-				std::cout << e.what() << std::endl;
+				std::cout << "idx : " << idx << std::endl;
+				throw std::out_of_range("Invalid Index!");
 			}
 			return (arr[idx]);
 		}
 
 		~Array()
 		{
-			if (arr)
+			if (length > 0)
 				delete[] arr;
 		}
 

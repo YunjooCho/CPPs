@@ -6,7 +6,7 @@
 #    By: yunjcho <yunjcho@student.42seoul.kr>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/06/14 15:31:29 by yunjcho           #+#    #+#              #
-#    Updated: 2023/09/28 17:39:05 by yunjcho          ###   ########.fr        #
+#    Updated: 2023/09/29 21:39:15 by yunjcho          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +17,7 @@ SRCS = main.cpp
 OBJS = $(SRCS:.cpp=.o)
 
 ifdef SANITIZE
-	CXXFLAGS += -g -fsanitize=address
+	CXXFLAGS += -g3 -fsanitize=address
 endif
 
 all : $(NAME)

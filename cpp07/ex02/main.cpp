@@ -1,35 +1,53 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   main.cpp                                           :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: yunjcho <yunjcho@student.42seoul.kr>       +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/28 18:04:15 by yunjcho           #+#    #+#             */
-/*   Updated: 2023/09/28 21:15:29 by yunjcho          ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
+#include <iostream>
 #include "Array.hpp"
 
-int	main(void)
+#define MAX_VAL 750
+int main(int, char**)
 {
-	std::cout << "---------- Subject TestCase ----------" << std::endl;
-	int	*a = new int();
+    Array<int> numbers(MAX_VAL);
+    int* mirror = new int[MAX_VAL];
+    srand(time(NULL));
+    for (int i = 0; i < MAX_VAL; i++)
+    {
+        const int value = rand();
+        numbers[i] = value;
+        mirror[i] = value;
+    }
+    //SCOPE
+    {
+        Array<int> tmp = numbers;
+        Array<int> test(tmp);
+    }
 
-	*a = 42;
-	std::cout << "a : " << *a << std::endl;
+    for (int i = 0; i < MAX_VAL; i++)
+    {
+        if (mirror[i] != numbers[i])
+        {
+            std::cerr << "didn't save the same value!!" << std::endl;
+            return 1;
+        }
+    }
+    try
+    {
+        numbers[-2] = 0;
+    }
+    catch(const std::exception& e)
+    {
+        std::cerr << e.what() << '\n';
+    }
+    try
+    {
+        numbers[MAX_VAL] = 0;
+    }
+    catch(const std::exception& e)
+    {
+        std::cerr << e.what() << '\n';
+    }
 
-
-	std::cout << "---------- Out Of Range Exception ----------" << std::endl;
-	Array<int>	intArr(7);
-	int tmp = intArr[4];
-	std::cout << "intArr[4] : " << tmp << std::endl;
-
-	std::cout << "---------- No Out Of Range Exception ----------" << std::endl;
-	Array<int>	intArr2(3);
-	int tmp2 = intArr2[0];
-	std::cout << "intArr2[2] : " << tmp2 << std::endl;
-
-	return (0);
+    for (int i = 0; i < MAX_VAL; i++)
+    {
+        numbers[i] = rand();
+    }
+    delete [] mirror;//
+    return 0;
 }
