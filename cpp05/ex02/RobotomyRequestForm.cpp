@@ -6,7 +6,7 @@
 /*   By: yunjcho <yunjcho@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/08 16:31:46 by yunjcho           #+#    #+#             */
-/*   Updated: 2023/09/10 01:18:27 by yunjcho          ###   ########seoul.kr  */
+/*   Updated: 2023/09/29 19:33:31 by yunjcho          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ RobotomyRequestForm::RobotomyRequestForm()
 	: AForm("Robotomy", robo_sign, robo_exec), _target("Unknown Target")
 {}
 
-RobotomyRequestForm::RobotomyRequestForm(const std::string target) 
+RobotomyRequestForm::RobotomyRequestForm(const std::string &target) 
 	: AForm("Robotomy", robo_sign, robo_exec), _target(target)
 {}
 
@@ -24,7 +24,7 @@ RobotomyRequestForm& RobotomyRequestForm::operator=(const RobotomyRequestForm &f
 {
 	if (this != &form)
 	{
-		this->_target = form.getTarget();
+		_target = form._target;
 	}
 	return (*this);
 }
@@ -39,7 +39,7 @@ RobotomyRequestForm::~RobotomyRequestForm() {};
 
 std::string	RobotomyRequestForm::getTarget(void) const
 {
-	return (this->_target);
+	return (_target);
 }
 
 bool	RobotomyRequestForm::execute(Bureaucrat const &executor) const
@@ -51,15 +51,10 @@ bool	RobotomyRequestForm::execute(Bureaucrat const &executor) const
 			std::cout << "Whirr~" << std::endl;
 			std::srand((unsigned int)time(NULL));
 			int rand = std::rand() % 2;
-			// std::cout << rand << std::endl;
 			if (rand == 0)
-			{
-				std::cout << "[INFO - SUCCESS] " << this->_target << " has been robotomized!" << std::endl;
-			}
+				std::cout << "[INFO - SUCCESS] " << _target << " has been robotomized!" << std::endl;
 			else
-			{
-				std::cout << "[INFO - FAILURE] " << this->_target << " failed robotomized..." << std::endl;
-			}
+				std::cout << "[INFO - FAILURE] " << _target << " failed robotomized..." << std::endl;
 			return (true);
 		}
 		else

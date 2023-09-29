@@ -6,7 +6,7 @@
 /*   By: yunjcho <yunjcho@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/09 19:52:30 by yunjcho           #+#    #+#             */
-/*   Updated: 2023/09/10 19:35:06 by yunjcho          ###   ########.fr       */
+/*   Updated: 2023/09/29 19:32:59 by yunjcho          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,11 @@ PresidentialPardonForm::PresidentialPardonForm()
 	: AForm("Presidential", president_sign, president_exec), _target("Unknown Target")
 {}
 
-PresidentialPardonForm::PresidentialPardonForm(const std::string target) 
+PresidentialPardonForm::PresidentialPardonForm(const std::string &target) 
 	: AForm("Presidential", president_sign, president_exec), _target(target)
 {}
 
-PresidentialPardonForm::PresidentialPardonForm(const std::string formName, const std::string target) 
+PresidentialPardonForm::PresidentialPardonForm(const std::string &formName, const std::string &target) 
 	: AForm(formName, president_sign, president_exec), _target(target)
 {}
 
@@ -28,7 +28,7 @@ PresidentialPardonForm& PresidentialPardonForm::operator=(const PresidentialPard
 {
 	if (this != &form)
 	{
-		this->_target = form.getTarget();
+		_target = form._target;
 	}
 	return (*this);
 }
@@ -43,7 +43,7 @@ PresidentialPardonForm::~PresidentialPardonForm() {};
 
 std::string	PresidentialPardonForm::getTarget(void) const
 {
-	return (this->_target);
+	return (_target);
 }
 
 bool	PresidentialPardonForm::execute(Bureaucrat const &executor) const
@@ -52,7 +52,7 @@ bool	PresidentialPardonForm::execute(Bureaucrat const &executor) const
 	{
 		if (executor.getGrade() <= this->getExecGrade() && this->getIsSigned())
 		{
-			std::cout << "[INFO] " << this->_target << " has been pardoned by Zaphod Beeblebrox." << std::endl;
+			std::cout << "[INFO] " << _target << " has been pardoned by Zaphod Beeblebrox." << std::endl;
 		}
 		else
 			throw AForm::GradeTooLowException(4);

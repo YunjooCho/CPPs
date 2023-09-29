@@ -6,7 +6,7 @@
 /*   By: yunjcho <yunjcho@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/08 16:27:36 by yunjcho           #+#    #+#             */
-/*   Updated: 2023/09/28 16:24:56 by yunjcho          ###   ########.fr       */
+/*   Updated: 2023/09/29 19:26:43 by yunjcho          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,52 +36,25 @@ int main(void)
 		std::cout << artist1 << std::endl;
 		std::cout << art1 << std::endl;
 	}
+
 	std::cout << std::endl;
-	try
-	{
-		artist1.executeForm(art1);
-	}
-	catch(const std::exception& e)
-	{
-		std::cout << e.what() << std::endl;
-		std::cout << artist1 << std::endl;
-		std::cout << art1 << std::endl;
-	}
+	artist1.executeForm(art1);
+	
 	std::cout << std::endl;
-	try
-	{
-		artist2.executeForm(art1);
-	}
-	catch(const std::exception& e)
-	{
-		std::cout << e.what() << std::endl;
-	}
+	artist2.executeForm(art1);
+	
 	std::cout << std::endl;
+	artist1.executeForm(art2);
+	
 	std::cout << std::endl;
-	try
-	{
-		artist1.executeForm(art2);
-	}
-	catch(const std::exception& e)
-	{
-		std::cout << e.what() << std::endl;
-	}
-	std::cout << std::endl;
-	try
-	{
-		artist2.executeForm(art2);
-	}
-	catch(const std::exception& e)
-	{
-		std::cout << e.what() << std::endl;
-	}
+	artist2.executeForm(art2);
 
 	std::cout << std::endl;
 	std::cout << std::endl;
 	std::cout << std::endl;
 	std::cout << "====================== RobotomyRequestForm Testcase ======================" << std::endl;
-	Bureaucrat human1("John", 72);
-	Bureaucrat human2("Jane", 45);
+	Bureaucrat human1("John", 45);
+	Bureaucrat human2("Jane", 72);
 
 	RobotomyRequestForm rrf1("Arm");
 	try
@@ -96,52 +69,30 @@ int main(void)
 		std::cout << human1 << std::endl;
 		std::cout << rrf1 << std::endl;
 	}
+
 	std::cout << std::endl;
-	try
-	{
-		human1.executeForm(rrf1);
-	}
-	catch(const std::exception& e)
-	{
-		std::cout << e.what() << std::endl;
-	}
+	human1.executeForm(rrf1);
+	
 	std::cout << std::endl;
-	try
-	{
-		human2.executeForm(rrf1);
-	}
-	catch(const std::exception& e)
-	{
-		std::cout << e.what() << std::endl;
-	}
+	human2.executeForm(rrf1);
+
 	std::cout << std::endl;
+	RobotomyRequestForm rrf2("Leg");
+
 	std::cout << std::endl;
-	RobotomyRequestForm rrf2("Leg"); // TODO - 위와 같은 난수가 생성되어 결과값이 동일한 문제발생
-	try
-	{
-		human1.executeForm(rrf2);
-	}
-	catch(const std::exception& e)
-	{
-		std::cout << e.what() << std::endl;
-	}
+	human1.executeForm(rrf2);
+	
 	std::cout << std::endl;
-	try
-	{
-		human2.executeForm(rrf2);
-	}
-	catch(const std::exception& e)
-	{
-		std::cout << e.what() << std::endl;
-	}
+	human2.executeForm(rrf2);
+
 	std::cout << std::endl;
 	std::cout << std::endl;
 	std::cout << std::endl;
 	std::cout << "====================== PresidentialPardonForm Testcase ======================" << std::endl;
-	Bureaucrat jailer1("Tom", 25);
-	Bureaucrat jailer2("Tim", 3);
-
+	Bureaucrat jailer1("Tom", 3);
+	Bureaucrat jailer2("Tim", 25);
 	PresidentialPardonForm ppf1("Prisoner1");
+
 	try
 	{
 		jailer1.signForm(ppf1);
@@ -154,43 +105,22 @@ int main(void)
 		std::cout << jailer1 << std::endl;
 		std::cout << ppf1 << std::endl;
 	}
+
 	std::cout << std::endl;
-	try
-	{
-		jailer1.executeForm(ppf1);
-	}
-	catch(const std::exception& e)
-	{
-		std::cout << e.what() << std::endl;
-	}
+	jailer1.executeForm(ppf1);
+
 	std::cout << std::endl;
-	try
-	{
-		jailer2.executeForm(ppf1);
-	}
-	catch(const std::exception& e)
-	{
-		std::cout << e.what() << std::endl;
-	}
+	jailer2.executeForm(ppf1);
+
+
 	std::cout << std::endl;
 	std::cout << std::endl;
 	PresidentialPardonForm ppf2("Prisoner2");
-		try
-	{
-		jailer1.executeForm(ppf2);
-	}
-	catch(const std::exception& e)
-	{
-		std::cout << e.what() << std::endl;
-	}
+
+	jailer1.executeForm(ppf2);
+
 	std::cout << std::endl;
-	try
-	{
-		jailer2.executeForm(ppf2);
-	}
-	catch(const std::exception& e)
-	{
-		std::cout << e.what() << std::endl;
-	}
+	jailer2.executeForm(ppf2);
+
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: yunjcho <yunjcho@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/08 16:31:46 by yunjcho           #+#    #+#             */
-/*   Updated: 2023/09/10 01:17:48 by yunjcho          ###   ########seoul.kr  */
+/*   Updated: 2023/09/29 19:30:37 by yunjcho          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ ShrubberyCreationForm::ShrubberyCreationForm()
 	: AForm("Shrubbery", shru_sign, shru_exec), _target("Unknown Target")
 {}
 
-ShrubberyCreationForm::ShrubberyCreationForm(const std::string target) 
+ShrubberyCreationForm::ShrubberyCreationForm(const std::string &target) 
 	: AForm("Shrubbery", shru_sign, shru_exec), _target(target)
 {}
 
@@ -24,7 +24,7 @@ ShrubberyCreationForm& ShrubberyCreationForm::operator=(const ShrubberyCreationF
 {
 	if (this != &form)
 	{
-		this->_target = form.getTarget();
+		_target = form._target;
 	}
 	return (*this);
 }
@@ -39,7 +39,7 @@ ShrubberyCreationForm::~ShrubberyCreationForm() {};
 
 std::string	ShrubberyCreationForm::getTarget(void) const
 {
-	return (this->_target);
+	return (_target);
 }
 
 bool	ShrubberyCreationForm::execute(Bureaucrat const &executor) const

@@ -6,7 +6,7 @@
 /*   By: yunjcho <yunjcho@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/08 16:27:36 by yunjcho           #+#    #+#             */
-/*   Updated: 2023/09/28 16:15:15 by yunjcho          ###   ########.fr       */
+/*   Updated: 2023/09/29 19:42:12 by yunjcho          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,16 +45,9 @@ int main(void)
 		std::cout << *sct << std::endl;
 	}
 	std::cout << std::endl;
-	try
-	{
-		president.executeForm(*sct);
-	}
-	catch(const std::exception& e)
-	{
-		std::cout << e.what() << std::endl;
-		std::cout << president << std::endl;
-		std::cout << *sct << std::endl;
-	}
+	president.executeForm(*sct);
+	std::cout << president << std::endl;
+	std::cout << *sct << std::endl;
 
 	std::cout << std::endl;
 	std::cout << "====================== RobotomyRequestForm Testcase ======================" << std::endl;
@@ -129,14 +122,8 @@ int main(void)
 	std::cout << std::endl;
 	std::cout << "====================== makeForm() Exceptions Testcase ======================" << std::endl;
 	AForm*	excep;
-	try
-	{
-		excep = someRandomIntern.makeForm("Unknown", "Prisoner");
-	}
-	catch(const std::exception& e)
-	{
-		std::cout << e.what() << std::endl;
-	}
+
+	excep = someRandomIntern.makeForm("Unknown", "Prisoner");
 
 	delete sct;
 	delete rrf;

@@ -6,7 +6,7 @@
 /*   By: yunjcho <yunjcho@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/02 21:30:23 by yunjcho           #+#    #+#             */
-/*   Updated: 2023/09/09 22:15:29 by yunjcho          ###   ########.fr       */
+/*   Updated: 2023/09/29 19:03:57 by yunjcho          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,10 @@ class AForm
 {
 	public:
 		AForm();
-		AForm(const std::string _formName, const int _signGrade, const int _execGrade);
+		AForm(const std::string &formName, const int &signGrade, const int &execGrade);
 		AForm(const AForm &form);
 		AForm& operator=(const AForm &form);
-		~AForm();
+		virtual ~AForm();
 		std::string		getFormName(void) const;
 		bool			getIsSigned(void) const;
 		int				getSignGrade(void) const;
@@ -34,24 +34,24 @@ class AForm
 		class GradeTooHighException : public std::exception 
 		{
 			public:
-				GradeTooHighException(const int _errCode);
+				GradeTooHighException(const int &errCode);
 				const char *what(void) const throw();
 			private:
-				const int	errCode;
+				const int	_errCode;
 		};
 		class GradeTooLowException : public std::exception 
 		{
 			public:
-				GradeTooLowException(const int _errCode);
+				GradeTooLowException(const int &errCode);
 				const char *what(void) const throw();
 			private:
-				const int	errCode;
+				const int	_errCode;
 		};
 	private:
-		const std::string	formName;
-		bool				isSigned;
-		const int			signGrade;
-		const int			execGrade;
+		const std::string	_formName;
+		bool				_isSigned;
+		const int			_signGrade;
+		const int			_execGrade;
 };
 
 std::ostream& operator<<(std::ostream& outputStream, const AForm& form);

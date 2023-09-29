@@ -6,7 +6,7 @@
 /*   By: yunjcho <yunjcho@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/10 15:30:08 by yunjcho           #+#    #+#             */
-/*   Updated: 2023/09/10 19:22:18 by yunjcho          ###   ########.fr       */
+/*   Updated: 2023/09/29 19:39:02 by yunjcho          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ AForm *Intern::makeForm(std::string formName, std::string target)
 		case PRESIDENTIAL:
 			return (new PresidentialPardonForm(formName, target));
 		case -1:
-			throw std::runtime_error("[Intern::INFO makeForm() FAILURE] Explicit error -  Formname doesn’t exist");
+			std::cout << "[Intern::INFO makeForm() FAILURE] Explicit error -  Formname doesn’t exist" << std::endl;
 	}
 	return (NULL);
 }

@@ -6,7 +6,7 @@
 /*   By: yunjcho <yunjcho@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/08 16:31:46 by yunjcho           #+#    #+#             */
-/*   Updated: 2023/09/10 19:35:58 by yunjcho          ###   ########.fr       */
+/*   Updated: 2023/09/29 19:30:12 by yunjcho          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,11 @@ ShrubberyCreationForm::ShrubberyCreationForm()
 	: AForm("Shrubbery", shru_sign, shru_exec), _target("Unknown Target")
 {}
 
-ShrubberyCreationForm::ShrubberyCreationForm(const std::string target) 
+ShrubberyCreationForm::ShrubberyCreationForm(const std::string &target) 
 	: AForm("Shrubbery", shru_sign, shru_exec), _target(target)
 {}
 
-ShrubberyCreationForm::ShrubberyCreationForm(const std::string formName, const std::string target) 
+ShrubberyCreationForm::ShrubberyCreationForm(const std::string &formName, const std::string &target) 
 	: AForm(formName, shru_sign, shru_exec), _target(target)
 {}
 
@@ -28,7 +28,7 @@ ShrubberyCreationForm& ShrubberyCreationForm::operator=(const ShrubberyCreationF
 {
 	if (this != &form)
 	{
-		this->_target = form.getTarget();
+		_target = form._target;
 	}
 	return (*this);
 }
@@ -43,7 +43,7 @@ ShrubberyCreationForm::~ShrubberyCreationForm() {};
 
 std::string	ShrubberyCreationForm::getTarget(void) const
 {
-	return (this->_target);
+	return (_target);
 }
 
 bool	ShrubberyCreationForm::execute(Bureaucrat const &executor) const

@@ -6,7 +6,7 @@
 /*   By: yunjcho <yunjcho@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/01 17:26:04 by yunjcho           #+#    #+#             */
-/*   Updated: 2023/09/28 16:28:39 by yunjcho          ###   ########.fr       */
+/*   Updated: 2023/09/29 18:31:31 by yunjcho          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,10 @@ int	main(void)
 	}
 	std::cout << std::endl;
 	std::cout << "=============== S.H.E.I.L.D Agent Decreasing Grade - Contacts ===============" << std::endl;
-	shield.decreaseGrade(50);
+	for (int i = 0; i < 50; i++)
+	{
+		shield.decreaseGrade();
+	}
 	try
 	{
 		shield.signForm(form5);
