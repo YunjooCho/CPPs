@@ -6,20 +6,26 @@
 /*   By: yunjcho <yunjcho@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/14 17:33:47 by yunjcho           #+#    #+#             */
-/*   Updated: 2023/09/20 20:28:29 by yunjcho          ###   ########seoul.kr  */
+/*   Updated: 2023/10/15 15:46:32 by yunjcho          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ScalarConverter.hpp"
 
-#include <stdio.h> //TODO - delete
+// void _leaks()
+// {
+// 	system("leaks convert");
+// }
 
 int	main(int ac, char **av)
 {
+	// atexit(_leaks);
 	if (ac == 2)
 	{
 		std::string argv(av[1]);
 		ScalarConverter::convert(argv);
 	}
+	else
+		std::cout << "Error: Please input argument." << std::endl;
 	return (0);
 }

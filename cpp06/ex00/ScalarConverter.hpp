@@ -6,7 +6,7 @@
 /*   By: yunjcho <yunjcho@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/14 18:19:28 by yunjcho           #+#    #+#             */
-/*   Updated: 2023/09/20 18:13:20 by yunjcho          ###   ########seoul.kr  */
+/*   Updated: 2023/10/15 13:39:59 by yunjcho          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,9 @@
 
 # include <iostream>
 # include <sstream>
-# include <cstdlib> //std::strtod
-# include <iomanip> //std::setprecision()
-# include <limits>  //std::numeric_limits<type>::max(), min()
+# include <cstdlib>
+# include <iomanip>
+# include <limits>
 
 enum argvType
 {
@@ -44,7 +44,7 @@ class ScalarConverter
 		static void			convertInt(std::string &argv);
 		static void			convertFloat(std::string &argv);
 		static void			convertDouble(std::string &argv);
-		static void			convertInvalid(std::string &argv);
+		static void			convertInvalid(void);
 		static void			printValues(void);
 	private:
 		static std::string	_convertChar;
