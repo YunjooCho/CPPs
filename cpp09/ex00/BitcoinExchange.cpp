@@ -6,7 +6,7 @@
 /*   By: yunjcho <yunjcho@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/12 21:11:49 by yunjcho           #+#    #+#             */
-/*   Updated: 2023/10/12 22:32:27 by yunjcho          ###   ########seoul.kr  */
+/*   Updated: 2023/10/14 14:33:53 by yunjcho          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,19 @@ BitcoinExchange::BitcoinExchange() {}
 
 BitcoinExchange::~BitcoinExchange() {}
 
-// BitcoinExchange::BitcoinExchange(const BitcoinExchange& instance) {}
+BitcoinExchange& BitcoinExchange::operator=(const BitcoinExchange& instance) 
+{
+	if (this != &instance)
+	{
+		_database = instance._database;
+	}
+	return (*this);
+}
 
-// BitcoinExchange& BitcoinExchange::operator=(const BitcoinExchange& instance) {}
+BitcoinExchange::BitcoinExchange(const BitcoinExchange& instance) 
+{
+	*this = instance;
+}
 
 void	BitcoinExchange::printError(int errCode, std::string info)
 {
@@ -27,16 +37,31 @@ void	BitcoinExchange::printError(int errCode, std::string info)
 	if (errCode == FILEOPENFAIL)
 		errMsg = "Error: could not open file.";
 	else if (errCode == INVALIDNUM)
-		errMsg = "Error: not a positive number.";
+	{
+		if (info.empty())
+			errMsg = info;
+		else
+			errMsg = "Error: invalid number.";
+	}
 	else if (errCode == INVALIDDATE)
 	{
 		if (!info.empty())
-			errMsg = "Error: bad input =>" + info;
+			errMsg = "Error: bad input => " + info;
 		else
-			errMsg = "Error: bad input";
+			errMsg = "Error: bad input.";
 	}
-	else if (errCode == TOOLARGENUM)
-		errMsg = "Error: too large a number.";
+	else if (errCode == INVALIDARG)
+	{
+		if (!info.empty())
+			errMsg = "Error: invalid argument => " + info;
+		else
+			errMsg = "Error: invalid argument.";
+	}
+	else if (errCode == ETC)
+	{
+		if (info.empty())
+			errMsg = info;
+	}
 	std::cerr << errMsg << std::endl;
 }
 
@@ -61,26 +86,87 @@ std::string BitcoinExchange::strtrim(const std::string &str)
 	return rtrim(ltrim(str));
 }
 
+std::vector<int> 	BitcoinExchange::split(std::string input, char delimiter)
+{
+	std::vector<int>	result;
+	std::stringstream	ss(input);
+	std::stringstream	ss2;
+	std::string			tmp;
+	int					val;
+
+	while (std::getline(ss, tmp, delimiter))
+	{
+		ss2 << tmp;
+		ss2 >> val;
+
+		//Debugging
+		// std::cout << "val : " << val << std::endl;
+		result.push_back(val);
+		ss2.clear();
+	}
+	ss.clear();
+	ss.str("");
+	ss2.clear();
+	ss2.str("");
+	return (result);
+}
+
 bool	BitcoinExchange::checkDate(std::string date)
 {
-	(void) date;
-	return true;
+	std::vector<int>	result;
+	std::tm				tmDate;
+
+	result = split(date, '-');
+	if (result.size() != 3)
+	{
+		printError(INVALIDDATE, date);
+		return (false);
+	}
+	if (result[0] < 1900 || result[0] > 9999 || result[1] < 1 || result[1] > 12 || result[2] < 1 || result[2] > 31)
+		return (false);
+	
+	tmDate.tm_year = result[0] - 1900;
+	tmDate.tm_mon = result[1] - 1; //0 ~ 11
+	tmDate.tm_mday = result[2];
+	if (std::mktime(&tmDate) == -1)
+		return (false);
+	return (true);
 }
 
-bool	BitcoinExchange::checkNumber(std::string	number)
+bool	BitcoinExchange::checkNumber(double doubleVal, int flag)
 {
-	(void) number;
-	return true;
+	if (doubleVal < 0)
+	{
+		printError(INVALIDNUM, "Error: not a positive number. =>" + std::to_string(doubleVal));
+		return (false);
+	}
+	else if ((flag == BTC_INPUT && doubleVal > 1000) || doubleVal > std::numeric_limits<int>::max())
+	{
+		printError(INVALIDNUM, "Error: too large a number. =>" + std::to_string(doubleVal));
+		return (false);
+	}
+	return (true);
 }
 
-void	BitcoinExchange::exchange(char *argv)
+void	BitcoinExchange::readFile(std::string fileName, int flag)
 {
-	std::string 	fileName(argv);
 	std::string		str;
 	std::string		date;
 	std::string		value;
+	std::string		sep;
+	std::string		headline;
 	std::size_t		findIdx = 0;
 
+	if (flag == BTC_INPUT)
+	{
+		sep = "|";
+		headline = "date | value";
+	}
+	else if (flag == BTC_DATABASE)
+	{
+		sep = ",";
+		headline = "date,exchange_rate";
+	}
 	//1. 파일 유무 및 open 확인
 	fileName = strtrim(fileName);
 	_readArgs.open(fileName);
@@ -94,26 +180,51 @@ void	BitcoinExchange::exchange(char *argv)
 			// std::cout << "str : " << str << std::endl;
 			if (!str.empty() || str.length() > 0)
 			{
-				if (str.find("|", findIdx) != std::string::npos)
+				findIdx = 0;
+				if (!str.compare(headline))
+					continue ;
+				if (str.find(sep, findIdx) != std::string::npos)
 				{
-					findIdx = str.find("|", findIdx);
+					findIdx = str.find(sep, findIdx);
 					date = strtrim(str.substr(0, findIdx));
 					value = strtrim(str.substr(findIdx + 1, str.length()));
 					std::cout << "date : " << date << std::endl;
 					std::cout << "value : " << value << std::endl;
-					checkDate(date);
-					checkNumber(value);
 				}
 				else
 				{
 					date = str;
 					std::cout << "date2 : " << date << std::endl;
 				}
+				double	doubleVal = 0.0;
+				doubleVal = std::strtod(value.c_str(), NULL); //부동 소수점 변환이 안되므로 >> 로는 제대로 변환 불가
+				if (checkDate(date) || checkNumber(doubleVal, flag))
+				{
+					if (flag == BTC_DATABASE)
+						//map 추가
+					else
+						//계산한 값 출력
+				}
+				else
+				{
+					if (flag == BTC_DATABASE)
+						break ;
+					else
+						continue ;
+				}
 			}
-			
+			else
+				continue ;
 		}
-		//3. 출력값 저장하기 또는 출력 - outputStream?
 	}
 	else
 		printError(FILEOPENFAIL, fileName);
+}
+
+void	BitcoinExchange::exchange(char *argv)
+{
+	std::string		database = "data.csv";
+	std::string 	fileName(argv);
+	(void) argv;
+	readFile(database, BTC_DATABASE);
 }
