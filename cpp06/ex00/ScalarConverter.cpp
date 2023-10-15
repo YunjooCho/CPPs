@@ -6,7 +6,7 @@
 /*   By: yunjcho <yunjcho@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/17 17:58:51 by yunjcho           #+#    #+#             */
-/*   Updated: 2023/10/15 17:05:05 by yunjcho          ###   ########.fr       */
+/*   Updated: 2023/10/15 18:22:56 by yunjcho          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,41 +130,32 @@ void	ScalarConverter::convertInt(std::string &argv)
 	std::stringstream	convertIntStream(argv);
 	std::stringstream	intStream;
 	int					intVal = 0;
-	long				longVal = 0;
 	double				doubleVal = 0.0;
 	float				floatVal = 0.0;
 
-	convertIntStream >> longVal;
-	convertIntStream << static_cast<int>(longVal);
 	convertIntStream >> intVal;
-	// floatVal = static_cast<float>(intVal);
-	// doubleVal = static_cast<double>(intVal);
-	floatVal = std::strtof(argv.c_str(), NULL); //부동 소수점 변환이 안되므로 >> 로는 제대로 변환 불가
 	doubleVal = std::strtod(argv.c_str(), NULL);
-	std::cout << "intVal : " << intVal << std::endl;
-	std::cout << "longVal : " << longVal << std::endl;
-	std::cout << "floatVal : " << floatVal << std::endl;	
-	std::cout << "doubleVal : " << doubleVal << std::endl;
+	floatVal = std::strtof(argv.c_str(), NULL);
 
-	if (longVal > std::numeric_limits<char>::max() \
-		|| longVal < std::numeric_limits<char>::min())
+	if (intVal > std::numeric_limits<char>::max() \
+		|| intVal < std::numeric_limits<char>::min())
 		_convertChar = "impossible";
-	else if (longVal >= ' ' && longVal <= '~')
-		_convertChar = static_cast<char>(longVal);
+	else if (intVal >= ' ' && intVal <= '~')
+		_convertChar = static_cast<char>(intVal);
 	else
 		_convertChar = "Non displayable";
 
-	if (longVal > std::numeric_limits<int>::max() \
-		|| longVal < std::numeric_limits<int>::min())
+	if (doubleVal > std::numeric_limits<int>::max() \
+		|| doubleVal < std::numeric_limits<int>::min())
 	{
 		_convertInt = "impossible";
 	}
 	else
-		_convertInt = std::to_string(longVal);
-	intStream << std::fixed << std::setprecision(1) << static_cast<double>(longVal);
+		_convertInt = std::to_string(intVal);
+	intStream << std::fixed << std::setprecision(1) << static_cast<double>(doubleVal);
 	std::string convertStr = intStream.str();
-	if (floatVal > std::numeric_limits<float>::max() \
-		|| floatVal < std::numeric_limits<float>::min())
+	if ((floatVal > std::numeric_limits<float>::max() \
+		|| floatVal < -std::numeric_limits<float>::max()))
 	{
 		_convertFloat = "impossible";
 	}
@@ -172,8 +163,8 @@ void	ScalarConverter::convertInt(std::string &argv)
 	{
 		_convertFloat = convertStr + "f";
 	}
-	if (doubleVal > std::numeric_limits<double>::max() \
-		|| doubleVal < std::numeric_limits<double>::min())
+	if ((doubleVal > std::numeric_limits<double>::max() \
+		|| doubleVal < -std::numeric_limits<double>::max()) )
 	{
 		_convertDouble = "impossible";
 	}

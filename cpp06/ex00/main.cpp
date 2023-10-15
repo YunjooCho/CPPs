@@ -6,7 +6,7 @@
 /*   By: yunjcho <yunjcho@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/14 17:33:47 by yunjcho           #+#    #+#             */
-/*   Updated: 2023/10/15 15:46:32 by yunjcho          ###   ########.fr       */
+/*   Updated: 2023/10/15 18:21:41 by yunjcho          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@
 // {
 // 	system("leaks convert");
 // }
+
+#include <stdio.h>
 
 int	main(int ac, char **av)
 {
