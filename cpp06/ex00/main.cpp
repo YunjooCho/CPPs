@@ -6,22 +6,14 @@
 /*   By: yunjcho <yunjcho@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/14 17:33:47 by yunjcho           #+#    #+#             */
-/*   Updated: 2023/10/15 18:21:41 by yunjcho          ###   ########.fr       */
+/*   Updated: 2023/10/15 18:42:07 by yunjcho          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ScalarConverter.hpp"
 
-// void _leaks()
-// {
-// 	system("leaks convert");
-// }
-
-#include <stdio.h>
-
 int	main(int ac, char **av)
 {
-	// atexit(_leaks);
 	if (ac == 2)
 	{
 		std::string argv(av[1]);
