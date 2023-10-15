@@ -6,7 +6,7 @@
 /*   By: yunjcho <yunjcho@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/17 17:58:51 by yunjcho           #+#    #+#             */
-/*   Updated: 2023/10/15 20:29:19 by yunjcho          ###   ########.fr       */
+/*   Updated: 2023/10/15 20:49:10 by yunjcho          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -197,9 +197,9 @@ void	ScalarConverter::convertFloat(std::string &argv)
 	std::string convertStr = floatStream.str();
 	_convertFloat = convertStr + "f";
 	_convertDouble = convertStr;
-	
-	if (convertStr.compare(argv) || ((intVal > std::numeric_limits<float>::max() \
-		|| intVal < std::numeric_limits<float>::min())
+
+	if (convertStr.compare(argv.substr(0, convertStr.length())) || ((doubleVal > std::numeric_limits<float>::max() \
+		|| doubleVal < std::numeric_limits<float>::min())
 		&& floatVal != 0.0))
 	{	
 		_convertInt = "impossible";
@@ -244,13 +244,13 @@ void	ScalarConverter::convertDouble(std::string &argv)
 	_convertFloat = convertStr + "f";
 	_convertDouble = convertStr;
 
-	if ((intVal > std::numeric_limits<float>::max() \
-		|| intVal < std::numeric_limits<float>::min()) \
+	if ((doubleVal > std::numeric_limits<float>::max() \
+		|| doubleVal < std::numeric_limits<float>::min()) \
 		&& floatVal != 0.0)
 	{
 		_convertFloat = "impossible";
 	}
-	if (_convertFloat.compare(argv))
+	if (_convertDouble.compare(argv))
 	{	
 		_convertInt = "impossible";
 		_convertFloat = "impossible";
