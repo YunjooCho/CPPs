@@ -6,11 +6,14 @@
 /*   By: yunjcho <yunjcho@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/14 17:33:47 by yunjcho           #+#    #+#             */
-/*   Updated: 2023/10/15 18:42:07 by yunjcho          ###   ########.fr       */
+/*   Updated: 2023/10/15 21:27:11 by yunjcho          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ScalarConverter.hpp"
+
+#include <stdio.h>
+#include <float.h>
 
 int	main(int ac, char **av)
 {

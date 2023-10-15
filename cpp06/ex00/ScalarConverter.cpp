@@ -6,7 +6,7 @@
 /*   By: yunjcho <yunjcho@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/17 17:58:51 by yunjcho           #+#    #+#             */
-/*   Updated: 2023/10/15 20:51:07 by yunjcho          ###   ########.fr       */
+/*   Updated: 2023/10/15 21:21:26 by yunjcho          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -198,6 +198,8 @@ void	ScalarConverter::convertFloat(std::string &argv)
 	_convertFloat = convertStr + "f";
 	_convertDouble = convertStr;
 
+	std::cout << convertStr.compare(argv.substr(0, convertStr.length())) << std::endl;
+	
 	if (convertStr.compare(argv.substr(0, convertStr.length())) || ((doubleVal > std::numeric_limits<float>::max() \
 		|| doubleVal < std::numeric_limits<float>::min())
 		&& floatVal != 0.0))
@@ -216,9 +218,11 @@ void	ScalarConverter::convertDouble(std::string &argv)
 	int					intVal = 0;
 	float				floatVal = 0.0;
 	double 				doubleVal = 0.0;
+	long double			longDoubleVal = 0.0;
 
 	floatVal = std::strtof(argv.c_str(), NULL);
 	doubleVal = std::strtod(argv.c_str(), NULL);
+	longDoubleVal = std::strtold(argv.c_str(), NULL);
 	intVal = static_cast<int>(doubleVal);
 	if (intVal > std::numeric_limits<char>::max() \
 		|| intVal < std::numeric_limits<char>::min())
@@ -250,7 +254,15 @@ void	ScalarConverter::convertDouble(std::string &argv)
 	{
 		_convertFloat = "impossible";
 	}
-	if (_convertDouble.compare(argv))
+
+	std::cout << argv << std::endl;
+	std::cout << convertStr << std::endl;
+	std::cout << convertStr.compare(argv.substr(0, convertStr.length())) << std::endl;
+	
+	if (convertStr.compare(argv.substr(0, convertStr.length())) \
+		|| ((longDoubleVal > std::numeric_limits<double>::max() \
+		|| longDoubleVal < std::numeric_limits<double>::min())
+		&& floatVal != 0.0))
 	{	
 		_convertInt = "impossible";
 		_convertFloat = "impossible";
