@@ -6,7 +6,7 @@
 /*   By: yunjcho <yunjcho@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/17 17:58:51 by yunjcho           #+#    #+#             */
-/*   Updated: 2023/10/16 00:13:56 by yunjcho          ###   ########seoul.kr  */
+/*   Updated: 2023/10/16 17:39:29 by yunjcho          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,30 +94,41 @@ int	ScalarConverter::checkArgsType(std::string &argv)
 	return (ETC_TYPE);
 }
 
+std::string	ScalarConverter::createChrStr(int intVal)
+{
+	if (intVal > std::numeric_limits<char>::max() \
+		|| intVal < std::numeric_limits<char>::min())
+		_convertChar = "impossible";
+	else if (intVal >= ' ' && intVal <= '~')
+		_convertChar = static_cast<char>(intVal);
+	else
+		_convertChar = "Non displayable";
+	return (_convertChar);
+}
+
 void	ScalarConverter::convertChar(std::string &argv)
 {
 	std::stringstream	charStream;
-	int					charIntVal = 0;
+	int					intVal = 0;
 
 	if (argv.length() == 2 && argv.c_str()[0] == '-')
 	{
-		charIntVal = static_cast<int>(argv.c_str()[1]);
-		charIntVal *= -1;
+		intVal = static_cast<int>(argv.c_str()[1]);
+		intVal *= -1;
 	}
 	else
 	{
-		charIntVal = static_cast<int>(argv.c_str()[0]);
+		intVal = static_cast<int>(argv.c_str()[0]);
 	}
 
-	if (charIntVal > std::numeric_limits<char>::max() \
-		|| charIntVal < std::numeric_limits<char>::min())
-		_convertChar = "impossible";
-	else if (charIntVal >= ' ' && charIntVal <= '~')
-		_convertChar = static_cast<char>(charIntVal);
-	else
-		_convertChar = "Non displayable";
-	_convertInt = std::to_string(charIntVal);
-	charStream << std::fixed << std::setprecision(1) << static_cast<float>(charIntVal);
+	_convertChar = createChrStr(intVal);
+	if (!_convertChar.compare("impossible"))
+	{
+		convertInvalid();
+		return ;
+	}
+	_convertInt = std::to_string(intVal);
+	charStream << std::fixed << std::setprecision(1) << static_cast<float>(intVal);
 	std::string convertStr = charStream.str();
 	_convertFloat = convertStr + "f";
 	_convertDouble = convertStr;
@@ -135,15 +146,8 @@ void	ScalarConverter::convertInt(std::string &argv)
 
 	convertIntStream >> intVal;
 	doubleVal = std::strtod(argv.c_str(), NULL);
-
-	if (intVal > std::numeric_limits<char>::max() \
-		|| intVal < std::numeric_limits<char>::min())
-		_convertChar = "impossible";
-	else if (intVal >= ' ' && intVal <= '~')
-		_convertChar = static_cast<char>(intVal);
-	else
-		_convertChar = "Non displayable";
-
+	
+	_convertChar = createChrStr(intVal);
 	if (doubleVal > std::numeric_limits<int>::max() \
 		|| doubleVal < std::numeric_limits<int>::min())
 	{
@@ -173,13 +177,12 @@ void	ScalarConverter::convertFloat(std::string &argv)
 	floatVal = std::strtof(argv.c_str(), NULL);
 	doubleVal = std::strtod(argv.c_str(), NULL);
 	intVal = static_cast<int>(floatVal);
-	if (intVal > std::numeric_limits<char>::max() \
-		|| intVal < std::numeric_limits<char>::min())
-		_convertChar = "impossible";
-	else if (intVal >= ' ' && intVal <= '~')
-		_convertChar = static_cast<char>(intVal);
-	else
-		_convertChar = "Non displayable";
+
+	std::cout << "argv : " << argv << std::endl;
+	std::cout << "floatVal : " << floatVal << std::endl;
+	std::cout << "doubleVal : " << doubleVal << std::endl;
+
+	_convertChar = createChrStr(intVal);
 	if (doubleVal > std::numeric_limits<int>::max() \
 		|| doubleVal < std::numeric_limits<int>::min())
 	{
@@ -222,13 +225,7 @@ void	ScalarConverter::convertDouble(std::string &argv)
 	longDoubleVal = std::strtold(argv.c_str(), NULL);
 	intVal = static_cast<int>(doubleVal);
 
-	if (intVal > std::numeric_limits<char>::max() \
-		|| intVal < std::numeric_limits<char>::min())
-		_convertChar = "impossible";
-	else if (intVal >= ' ' && intVal <= '~')
-		_convertChar = static_cast<char>(intVal);
-	else
-		_convertChar = "Non displayable";
+	_convertChar = createChrStr(intVal);
 	if (doubleVal > std::numeric_limits<int>::max() \
 		|| doubleVal < std::numeric_limits<int>::min())
 	{
