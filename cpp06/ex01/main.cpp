@@ -6,7 +6,7 @@
 /*   By: yunjcho <yunjcho@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/24 17:37:52 by yunjcho           #+#    #+#             */
-/*   Updated: 2023/09/24 17:50:40 by yunjcho          ###   ########seoul.kr  */
+/*   Updated: 2023/10/16 21:26:30 by yunjcho          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,19 +14,12 @@
 #include "Serializer.hpp"
 #include "iostream"
 
-// void	_leaks()
-// {
-// 	system("leaks serializer");
-// }
-
 int	main(void)
 {
 	Data		data;
 	uintptr_t	serialVal;
 	Data		*deserialVal;
 	
-
-	// atexit(_leaks);
 	data.val = -10;
 	serialVal = Serializer::serialize(&data);
 	deserialVal = Serializer::deserialize(serialVal);
