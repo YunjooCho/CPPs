@@ -6,7 +6,7 @@
 /*   By: yunjcho <yunjcho@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/17 17:58:51 by yunjcho           #+#    #+#             */
-/*   Updated: 2023/10/16 17:39:29 by yunjcho          ###   ########.fr       */
+/*   Updated: 2023/10/16 21:11:55 by yunjcho          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,6 +106,67 @@ std::string	ScalarConverter::createChrStr(int intVal)
 	return (_convertChar);
 }
 
+std::string ScalarConverter::createIntStr(int intVal, double checkVal)
+{
+	if (checkVal > std::numeric_limits<int>::max() \
+		|| checkVal < std::numeric_limits<int>::min())
+		_convertInt = "impossible";
+	else
+		_convertInt = std::to_string(static_cast<int>(intVal));
+	return (_convertInt);
+}
+
+std::string	ScalarConverter::createFloatStr(float floatVal, double checkVal, std::string &argv)
+{
+	std::stringstream	floatStream;
+
+	if ((_argvType == FLOAT_TYPE || _argvType == DOUBLE_TYPE) \
+		&&((argv.find("e") != std::string::npos \
+		|| argv.substr(argv.find("."), argv.length()).length() > 2)))
+		floatStream << floatVal;
+	else
+		floatStream << std::fixed << std::setprecision(1) << floatVal;
+	std::string convertStr = floatStream.str();
+	if ((checkVal > std::numeric_limits<float>::max() \
+		|| checkVal < std::numeric_limits<float>::min()) \
+		&& checkVal != 0.0)
+		_convertFloat = "impossible";
+	else if (checkVal == 0.0)
+	{
+		_convertFloat = "0.0f";
+	}
+	else
+	{
+		_convertFloat = convertStr + "f";
+	}
+	floatStream.str("");
+	floatStream.clear();
+	return (_convertFloat);
+}
+
+std::string	ScalarConverter::createDoubleStr(double doubleVal, double checkVal, std::string &argv)
+{
+	std::stringstream	doubleStream;
+
+	if ((_argvType == FLOAT_TYPE || _argvType == DOUBLE_TYPE) \
+		&& (argv.find("e") != std::string::npos \
+		|| argv.substr(argv.find("."), argv.length()).length() > 2))
+		doubleStream << doubleVal;
+	else
+		doubleStream << std::fixed << std::setprecision(1) << doubleVal;
+	std::string convertStr = doubleStream.str();
+	if ( _argvType == DOUBLE_TYPE && convertStr.compare(argv.substr(0, convertStr.length()))\
+		&& checkVal != 0.0)
+		_convertDouble = "impossible";
+	else if (checkVal == 0.0)
+		_convertDouble = "0.0";
+	else
+		_convertDouble = convertStr;
+	doubleStream.str("");
+	doubleStream.clear();
+	return (_convertDouble);
+}
+
 void	ScalarConverter::convertChar(std::string &argv)
 {
 	std::stringstream	charStream;
@@ -121,151 +182,89 @@ void	ScalarConverter::convertChar(std::string &argv)
 		intVal = static_cast<int>(argv.c_str()[0]);
 	}
 
-	_convertChar = createChrStr(intVal);
-	if (!_convertChar.compare("impossible"))
-	{
-		convertInvalid();
-		return ;
-	}
+	createChrStr(intVal);
 	_convertInt = std::to_string(intVal);
+
 	charStream << std::fixed << std::setprecision(1) << static_cast<float>(intVal);
 	std::string convertStr = charStream.str();
 	_convertFloat = convertStr + "f";
-	_convertDouble = convertStr;
-
 	charStream.str("");
 	charStream.clear();
+
+	charStream << std::fixed << std::setprecision(1) << static_cast<double>(intVal);
+	convertStr = charStream.str();
+	_convertDouble = convertStr;
 }
 
 void	ScalarConverter::convertInt(std::string &argv)
 {
 	std::stringstream	convertIntStream(argv);
-	std::stringstream	intStream;
+	double				checkVal = 0;
 	int					intVal = 0;
+	float				floatVal = 0.0;
 	double				doubleVal = 0.0;
 
+	checkVal = std::strtod(argv.c_str(), NULL);
 	convertIntStream >> intVal;
-	doubleVal = std::strtod(argv.c_str(), NULL);
-	
-	_convertChar = createChrStr(intVal);
-	if (doubleVal > std::numeric_limits<int>::max() \
-		|| doubleVal < std::numeric_limits<int>::min())
+	floatVal = static_cast<float>(intVal);
+	doubleVal = static_cast<double>(intVal);
+
+	if (checkVal > std::numeric_limits<int>::max() \
+		|| checkVal < std::numeric_limits<int>::min())
 	{
 		convertInvalid();
+		return ;
 	}
-	else
-	{
-		_convertInt = std::to_string(intVal);
-		intStream << std::fixed << std::setprecision(1) << doubleVal;
-		std::string convertStr = intStream.str();
-		_convertFloat = convertStr + "f";
-		_convertDouble = convertStr;
-	}
-	convertIntStream.str("");
-	convertIntStream.clear();
-	intStream.str("");
-	intStream.clear();
+
+	createChrStr(intVal);
+	createIntStr(intVal, checkVal);
+	createFloatStr(floatVal, checkVal, argv);
+	createDoubleStr(doubleVal, checkVal, argv);
 }
 
 void	ScalarConverter::convertFloat(std::string &argv)
 {
-	std::stringstream	floatStream;
+	double				checkVal = 0.0;
 	int					intVal = 0;
 	float				floatVal = 0.0;
 	double 				doubleVal = 0.0;
 
+	checkVal = std::strtod(argv.c_str(), NULL);
 	floatVal = std::strtof(argv.c_str(), NULL);
-	doubleVal = std::strtod(argv.c_str(), NULL);
 	intVal = static_cast<int>(floatVal);
+	doubleVal = static_cast<double>(floatVal);
 
-	std::cout << "argv : " << argv << std::endl;
-	std::cout << "floatVal : " << floatVal << std::endl;
-	std::cout << "doubleVal : " << doubleVal << std::endl;
-
-	_convertChar = createChrStr(intVal);
-	if (doubleVal > std::numeric_limits<int>::max() \
-		|| doubleVal < std::numeric_limits<int>::min())
+	if ((checkVal > std::numeric_limits<float>::max() \
+		|| checkVal < std::numeric_limits<float>::min()) \
+		&& checkVal != 0.0)
 	{
-		_convertInt = "impossible";
-	}
-	else
-	{
-		_convertInt = std::to_string(intVal);
-	}
-	if (argv.find("e") != std::string::npos \
-		|| argv.substr(argv.find("."), argv.length()).length() > 2)
-		floatStream << floatVal;
-	else
-		floatStream << std::fixed << std::setprecision(1) << floatVal;
-	std::string convertStr = floatStream.str();
-	_convertFloat = convertStr + "f";
-	_convertDouble = convertStr;
-	
-	if (convertStr.compare(argv.substr(0, convertStr.length())) || ((doubleVal > std::numeric_limits<float>::max() \
-		|| doubleVal < std::numeric_limits<float>::min())
-		&& floatVal != 0.0))
-	{	
 		convertInvalid();
+		return ;
 	}
-	floatStream.str("");
-	floatStream.clear();
+
+	createChrStr(intVal);
+	createIntStr(intVal, checkVal);
+	createFloatStr(floatVal, checkVal, argv);
+	createDoubleStr(doubleVal, checkVal, argv);
 }
 
 void	ScalarConverter::convertDouble(std::string &argv)
 {
-	std::stringstream	floatStream;
-	std::stringstream	doubleStream;
 	int					intVal = 0;
 	float				floatVal = 0.0;
 	double 				doubleVal = 0.0;
-	long double			longDoubleVal = 0.0;
 
-	floatVal = std::strtof(argv.c_str(), NULL);
-	doubleVal = std::strtod(argv.c_str(), NULL);
-	longDoubleVal = std::strtold(argv.c_str(), NULL);
-	intVal = static_cast<int>(doubleVal);
-
-	_convertChar = createChrStr(intVal);
-	if (doubleVal > std::numeric_limits<int>::max() \
-		|| doubleVal < std::numeric_limits<int>::min())
-	{
-		_convertInt = "impossible";
-	}
-	else
-	{
-		_convertInt = std::to_string(intVal);
-	}
-	if (argv.find("e") != std::string::npos || argv.substr(argv.find("."), argv.length()).length() > 2)
-	{
-		doubleStream << doubleVal;
-		floatStream << floatVal;
-	}
-	else
-	{
-		doubleStream << std::fixed << std::setprecision(1) << doubleVal;
-		floatStream << std::fixed << std::setprecision(1) << floatVal;
-	}
-	std::string convertStrDouble = doubleStream.str();
-	std::string convertStrFloat = floatStream.str();
-	_convertFloat = convertStrFloat + "f";
-	_convertDouble = convertStrDouble;
-
-	if (convertStrFloat.compare(argv.substr(0, convertStrFloat.length())) || ((doubleVal > std::numeric_limits<float>::max() \
-		|| doubleVal < std::numeric_limits<float>::min())
-		&& floatVal != 0.0))
-	{	
-		_convertFloat = "impossible";
-	}
 	
-	if (convertStrDouble.compare(argv.substr(0, convertStrDouble.length())) \
-		|| ((longDoubleVal > std::numeric_limits<double>::max() \
-		|| longDoubleVal < std::numeric_limits<double>::min())
-		&& doubleVal != 0.0))
-	{
+	doubleVal = std::strtod(argv.c_str(), NULL);
+	intVal = static_cast<int>(doubleVal);
+	floatVal = static_cast<float>(doubleVal);
+
+	createChrStr(intVal);
+	createIntStr(intVal, doubleVal);
+	createFloatStr(floatVal, doubleVal, argv);
+	createDoubleStr(doubleVal, doubleVal, argv);
+	if (!_convertDouble.compare("impossible"))
 		convertInvalid();
-	}
-	doubleStream.str("");
-	doubleStream.clear();
 }
 
 void	ScalarConverter::convertInvalid(void)
