@@ -6,7 +6,7 @@
 /*   By: yunjcho <yunjcho@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/14 18:19:28 by yunjcho           #+#    #+#             */
-/*   Updated: 2023/10/16 20:28:44 by yunjcho          ###   ########.fr       */
+/*   Updated: 2023/10/17 19:00:49 by yunjcho          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ class ScalarConverter
 	public:
 		static void			convert(std::string &argv);
 		static bool			checkArgsPseudo(std::string &argv);
-		static int			checkArgsType(std::string &argv);
+		static argvType		checkArgsType(std::string &argv);
 		static void			convertChar(std::string &argv);
 		static void			convertInt(std::string &argv);
 		static void			convertFloat(std::string &argv);
