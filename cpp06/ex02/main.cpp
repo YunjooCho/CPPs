@@ -6,7 +6,7 @@
 /*   By: yunjcho <yunjcho@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/24 22:29:37 by yunjcho           #+#    #+#             */
-/*   Updated: 2023/09/25 14:34:58 by yunjcho          ###   ########seoul.kr  */
+/*   Updated: 2023/10/17 16:15:01 by yunjcho          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,26 +65,6 @@ void identify(Base* p)
 	}
 }
 
-// void identify(Base& p)
-// {
-// 	if (dynamic_cast<A &>(p) != NULL)
-// 	{
-// 		std::cout << "A" << std::endl;
-// 	}
-// 	else if (dynamic_cast<B &>(p) != NULL)
-// 	{
-// 		std::cout << "B" << std::endl;
-// 	}
-// 	else if (dynamic_cast<C &>(p) != NULL)
-// 	{
-// 		std::cout << "C" << std::endl;
-// 	}
-// 	else
-// 	{
-// 		std::cout << "Error" << std::endl;
-// 	}
-// }
-
 void identify(Base& p)
 {
 	try
@@ -125,6 +105,7 @@ int main(void)
 		identify(newInstance);
 		identify(*newInstance);
 		std::cout << std::endl;
+		delete newInstance;
 	}
 	return (0);
 }
