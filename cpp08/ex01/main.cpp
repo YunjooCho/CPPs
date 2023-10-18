@@ -6,14 +6,20 @@
 /*   By: yunjcho <yunjcho@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/05 17:15:32 by yunjcho           #+#    #+#             */
-/*   Updated: 2023/10/06 19:15:10 by yunjcho          ###   ########seoul.kr  */
+/*   Updated: 2023/10/18 21:53:46 by yunjcho          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Span.hpp"
 
+void	_leaks()
+{
+	system("leaks ex01");
+}
+
 int main()
 {
+	atexit(_leaks);
 	Span sp = Span(5);
 
 	sp.addNumber(6);

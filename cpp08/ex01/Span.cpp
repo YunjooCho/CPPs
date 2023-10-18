@@ -6,7 +6,7 @@
 /*   By: yunjcho <yunjcho@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/06 17:45:10 by yunjcho           #+#    #+#             */
-/*   Updated: 2023/10/06 19:13:22 by yunjcho          ###   ########seoul.kr  */
+/*   Updated: 2023/10/18 22:00:06 by yunjcho          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ Span::~Span() {}
 
 void	Span::addNumber(int val)
 {
-	if (_n > _vec.size())
+	if (_n >= _vec.size())
 		_vec.push_back(val);
 	else
 		throw std::runtime_error("[Exception::addNumber()] Vector already full");
