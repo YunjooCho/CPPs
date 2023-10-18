@@ -6,7 +6,7 @@
 /*   By: yunjcho <yunjcho@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/27 18:57:54 by yunjcho           #+#    #+#             */
-/*   Updated: 2023/10/17 21:51:05 by yunjcho          ###   ########.fr       */
+/*   Updated: 2023/10/18 15:00:34 by yunjcho          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,22 +17,20 @@
 # include <string>
 
 template <typename T>
-T	plus(T& fir, T& sec)
+T	plus(T& val)
 {
-	return (fir + sec);
+	val += 1;
+	return (val);
 }
 
-template <typename T1, typename T2, typename T3>
-void	iter(T1 addr, T2 len, T3 func)
+template <typename T1>
+void	iter(T1 addr, unsigned long len, T1 (*const funcPtr)(T1))
 {
-	T1	*arr = new T1[len + 1];
-	*arr = addr;
-	for (int i = 0; i < static_cast<int>(len); i++)
+	for (unsigned long i = 0; i < len; i++)
 	{
-		arr[i] = &func;
-		std::cout << "idx : " << i << ", value : " << *arr[i] << std::endl;
+		addr[i] = funcPtr(T1);
+		std::cout << "idx : " << i << ", value : " << addr[i] << std::endl;
 	}
-	delete[] arr;
 };
 
 #endif

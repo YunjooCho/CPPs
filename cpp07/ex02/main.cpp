@@ -3,14 +3,8 @@
 
 #define MAX_VAL 750
 
-void	_leaks()
-{
-	system("leaks a.out");
-}
-
 int main(int, char**)
 {
-	atexit(_leaks);
 	Array<int> numbers(MAX_VAL);
 	int* mirror = new int[MAX_VAL];
 	std::srand(std::time(NULL));
@@ -57,6 +51,6 @@ int main(int, char**)
 	{
 		numbers[i] = rand();
 	}
-	delete [] mirror;
+	delete[] mirror;
 	return 0;
 }
