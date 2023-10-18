@@ -6,7 +6,7 @@
 /*   By: yunjcho <yunjcho@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/27 18:57:54 by yunjcho           #+#    #+#             */
-/*   Updated: 2023/10/18 15:00:34 by yunjcho          ###   ########.fr       */
+/*   Updated: 2023/10/18 16:07:40 by yunjcho          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,20 +15,21 @@
 
 # include <iostream>
 # include <string>
+# include <typeinfo>
 
 template <typename T>
-T	plus(T& val)
+T&	plusOne(T& val)
 {
-	val += 1;
+	val = val + 1;
 	return (val);
 }
 
-template <typename T1>
-void	iter(T1 addr, unsigned long len, T1 (*const funcPtr)(T1))
+template <typename T1, typename T2>
+void	iter(T1 addr, unsigned long len, T2 func)
 {
 	for (unsigned long i = 0; i < len; i++)
 	{
-		addr[i] = funcPtr(T1);
+		addr[i] = func;
 		std::cout << "idx : " << i << ", value : " << addr[i] << std::endl;
 	}
 };
