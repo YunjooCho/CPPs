@@ -6,7 +6,7 @@
 /*   By: yunjcho <yunjcho@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/27 18:57:54 by yunjcho           #+#    #+#             */
-/*   Updated: 2023/10/18 16:07:40 by yunjcho          ###   ########.fr       */
+/*   Updated: 2023/10/18 18:49:40 by yunjcho          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,12 +24,32 @@ T&	plusOne(T& val)
 	return (val);
 }
 
+// template <typename T1, typename T2>
+// void	iter(T1 addr, unsigned long len, T2 func)
+// {
+// 	for (unsigned long i = 0; i < len; i++)
+// 	{
+// 		addr[i] = func;
+// 		std::cout << "idx : " << i << ", value : " << addr[i] << std::endl;
+// 	}
+// };
+
 template <typename T1, typename T2>
-void	iter(T1 addr, unsigned long len, T2 func)
+void	iter(T1 *addr, unsigned long len, void(*f)(T2&))
 {
 	for (unsigned long i = 0; i < len; i++)
 	{
-		addr[i] = func;
+		f(addr[i]);
+		std::cout << "idx : " << i << ", value : " << addr[i] << std::endl;
+	}
+};
+
+template <typename T1, typename T2>
+void	iter(const T1 *addr, unsigned long len, void(*f)(const T2&))
+{
+	for (unsigned long i = 0; i < len; i++)
+	{
+		f(addr[i]);
 		std::cout << "idx : " << i << ", value : " << addr[i] << std::endl;
 	}
 };
