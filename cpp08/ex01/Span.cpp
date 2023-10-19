@@ -6,7 +6,7 @@
 /*   By: yunjcho <yunjcho@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/06 17:45:10 by yunjcho           #+#    #+#             */
-/*   Updated: 2023/10/18 22:00:06 by yunjcho          ###   ########.fr       */
+/*   Updated: 2023/10/19 15:22:09 by yunjcho          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ int		Span::longestSpan(void)
 	int	result = 0;
 
 	if (_vec.size() <= 1)
-		throw std::runtime_error("[Exception::shortestSpan()] Not enough elements");
+		throw std::runtime_error("[Exception::longestSpan()] Not enough elements");
 	std::sort(_vec.begin(), _vec.end());
 	result = _vec[_vec.size() - 1] - _vec[0];
 	return (result);
