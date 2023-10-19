@@ -6,7 +6,7 @@
 /*   By: yunjcho <yunjcho@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/05 17:15:32 by yunjcho           #+#    #+#             */
-/*   Updated: 2023/10/18 21:53:40 by yunjcho          ###   ########.fr       */
+/*   Updated: 2023/10/19 16:29:26 by yunjcho          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 int	main(void)
 {
-	atexit(_leaks);
 	std::vector<int> vec;
 	int	tmpVal = 10;
 	std::cout << "----------------Input Infomation----------------" << std::endl;
