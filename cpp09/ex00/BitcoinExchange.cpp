@@ -6,7 +6,7 @@
 /*   By: yunjcho <yunjcho@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/12 21:11:49 by yunjcho           #+#    #+#             */
-/*   Updated: 2023/10/19 20:59:48 by yunjcho          ###   ########.fr       */
+/*   Updated: 2023/10/19 22:16:12 by yunjcho          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -204,6 +204,10 @@ void	BitcoinExchange::readFile(std::string fileName, int flag)
 					if (flag == BTC_DATABASE)
 					{
 						//map 추가
+						_database.insert(std::pair<std::string, double>(date, doubleVal));
+
+						//Debugging
+						std::cout << "check insert : " <<  std::fixed << std::setprecision(2) << _database.find(date)->second << std::endl;
 
 					}
 					else
