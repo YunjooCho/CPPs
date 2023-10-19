@@ -6,7 +6,7 @@
 /*   By: yunjcho <yunjcho@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/06 17:45:10 by yunjcho           #+#    #+#             */
-/*   Updated: 2023/10/19 16:24:54 by yunjcho          ###   ########.fr       */
+/*   Updated: 2023/10/19 19:41:53 by yunjcho          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ Span& Span::operator=(const Span& span)
 	if (this != &span)
 	{
 		_n = span._n;
+		_vec.clear();
 		_vec.insert(_vec.begin(), span._vec.begin(),  span._vec.end());
 	}
 	return (*this);
@@ -71,7 +72,10 @@ int		Span::longestSpan(void)
 
 void	Span::addNumbers(const std::vector<int>& args)
 {
-	_vec.insert(_vec.begin(), args.begin(), args.end());
+	if (args.size() <= _n)
+		_vec.insert(_vec.begin(), args.begin(), args.end());
+	else
+		throw std::runtime_error("[Exception::addNumbers()] Argument Container bigger than Member Container.");
 }
 
 std::vector<int>	Span::getVectors() const
