@@ -6,7 +6,7 @@
 /*   By: yunjcho <yunjcho@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/12 21:11:49 by yunjcho           #+#    #+#             */
-/*   Updated: 2023/10/14 14:33:53 by yunjcho          ###   ########seoul.kr  */
+/*   Updated: 2023/10/19 20:59:48 by yunjcho          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,6 +101,7 @@ std::vector<int> 	BitcoinExchange::split(std::string input, char delimiter)
 
 		//Debugging
 		// std::cout << "val : " << val << std::endl;
+
 		result.push_back(val);
 		ss2.clear();
 	}
@@ -201,9 +202,14 @@ void	BitcoinExchange::readFile(std::string fileName, int flag)
 				if (checkDate(date) || checkNumber(doubleVal, flag))
 				{
 					if (flag == BTC_DATABASE)
+					{
 						//map 추가
+
+					}
 					else
+					{
 						//계산한 값 출력
+					}
 				}
 				else
 				{
