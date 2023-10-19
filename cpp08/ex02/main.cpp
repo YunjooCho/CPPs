@@ -6,7 +6,7 @@
 /*   By: yunjcho <yunjcho@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/08 14:35:27 by yunjcho           #+#    #+#             */
-/*   Updated: 2023/10/09 18:58:11 by yunjcho          ###   ########seoul.kr  */
+/*   Updated: 2023/10/19 16:07:46 by yunjcho          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ int main()
 	++it;	
 	--it;
 	int	i = 0;
-	while (it != ite) //stack이 비어있지 않으면
+	while (it != ite)
 	{
 		std::cout << "MutantStack[" << i << "]: " <<  *it << std::endl;
 		++it;
@@ -51,7 +51,6 @@ int main()
 	i = 0;
 	while (!s.empty())
 	{
-		// std::cout << s[i] << std::endl; // 컴파일 에러
 		std::cout << "Stack[" << i << "]: " << s.top() << std::endl;
 		s.pop();
 		++i;
@@ -81,7 +80,7 @@ int main()
 	++it2;
 	--it2;
 	i = 0;
-	while (it2 != ite2) //stack이 비어있지 않으면
+	while (it2 != ite2)
 	{
 		std::cout << "MutantStack[" << i << "]: " <<  *it2 << std::endl;
 		++it2;

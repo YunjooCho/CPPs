@@ -6,7 +6,7 @@
 /*   By: yunjcho <yunjcho@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/05 17:47:35 by yunjcho           #+#    #+#             */
-/*   Updated: 2023/10/06 19:12:54 by yunjcho          ###   ########seoul.kr  */
+/*   Updated: 2023/10/19 16:17:45 by yunjcho          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@
 # include <vector>
 # include <algorithm>
 # include <exception>
-# include <iterator> //back_insert_iterator
 
 class Span
 {
