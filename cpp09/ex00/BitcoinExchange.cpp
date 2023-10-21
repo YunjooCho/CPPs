@@ -6,7 +6,7 @@
 /*   By: yunjcho <yunjcho@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/12 21:11:49 by yunjcho           #+#    #+#             */
-/*   Updated: 2023/10/19 22:16:12 by yunjcho          ###   ########.fr       */
+/*   Updated: 2023/10/21 16:12:07 by yunjcho          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -149,6 +149,44 @@ bool	BitcoinExchange::checkNumber(double doubleVal, int flag)
 	return (true);
 }
 
+std::string	BitcoinExchange::createClosestDate(std::string date)
+{
+	std::vector<int>	result;
+	std::tm				tmDate;
+	char				buffer[100];
+	time_t				rawTime;
+
+	result = split(date, '-');
+	if (result.size() != 3)
+	{
+		printError(INVALIDDATE, date);
+		return (NULL);
+	}
+	if (result[0] < 1900 || result[0] > 9999 || result[1] < 1 || result[1] > 12 || result[2] < 1 || result[2] > 31)
+		return (NULL);
+	
+	tmDate.tm_year = result[0] - 1900;
+	tmDate.tm_mon = result[1] - 1; //0 ~ 11
+	tmDate.tm_mday = result[2];
+
+	std::cout << "btmDate : " << tmDate.tm_year << std::endl;
+	std::cout << "btmDate : " << tmDate.tm_mon << std::endl;
+	std::cout << "btmDate : " << tmDate.tm_mday << std::endl;
+
+	// --tmDate.tm_mday;
+	rawTime = std::mktime(&tmDate);
+	// rawTime -= (3600 * 24);
+	tmDate = *(std::localtime(&rawTime));
+
+	std::cout << "atmDate : " << tmDate.tm_year << std::endl;
+	std::cout << "atmDate : " << tmDate.tm_mon << std::endl;
+	std::cout << "atmDate : " << tmDate.tm_mday << std::endl;
+
+	if (std::mktime(&tmDate) == -1)
+		return (NULL);
+	return (std::to_string(std::strftime(buffer, 100, "%Y-%m-%d", &tmDate)));
+}
+
 void	BitcoinExchange::readFile(std::string fileName, int flag)
 {
 	std::string		str;
@@ -189,13 +227,16 @@ void	BitcoinExchange::readFile(std::string fileName, int flag)
 					findIdx = str.find(sep, findIdx);
 					date = strtrim(str.substr(0, findIdx));
 					value = strtrim(str.substr(findIdx + 1, str.length()));
-					std::cout << "date : " << date << std::endl;
-					std::cout << "value : " << value << std::endl;
+					if (flag == BTC_INPUT)
+					{
+						std::cout << "date : " << date << std::endl;
+						std::cout << "value : " << value << std::endl;
+					}
 				}
 				else
 				{
 					date = str;
-					std::cout << "date2 : " << date << std::endl;
+					// std::cout << "date2 : " << date << std::endl;
 				}
 				double	doubleVal = 0.0;
 				doubleVal = std::strtod(value.c_str(), NULL); //부동 소수점 변환이 안되므로 >> 로는 제대로 변환 불가
@@ -207,12 +248,38 @@ void	BitcoinExchange::readFile(std::string fileName, int flag)
 						_database.insert(std::pair<std::string, double>(date, doubleVal));
 
 						//Debugging
-						std::cout << "check insert : " <<  std::fixed << std::setprecision(2) << _database.find(date)->second << std::endl;
+						// std::cout << "check insert : " <<  std::fixed << std::setprecision(2) << _database.find(date)->second << std::endl;
 
 					}
 					else
 					{
+						std::cout << "Hello" << std::endl;
 						//계산한 값 출력
+						std::map<std::string, double>::iterator iter = _database.find(date);
+						std::string	originDate = date;
+						if (_database.find(date) != _database.end())
+						{
+							double result = _database.find(date)->second * doubleVal;
+							std::cout << date << " => " << value << " = " << result << std::endl;
+							// std::cout << "check insert : " <<  std::fixed << std::setprecision(2) << _database.find(date)->second << std::endl;
+						}
+						else
+						{
+							while (_database.find(date) == _database.end())
+							{
+								date = createClosestDate(date);          
+								std::cout << "date : " << date << std::endl;
+								iter = _database.find(date);
+								if (_database.find(date) != _database.end())
+								{
+									double result = _database.find(date)->second * doubleVal;
+									std::cout << date << " => " << value << " = " << result << std::endl;
+									break ;
+									// std::cout << "check insert : " <<  std::fixed << std::setprecision(2) << _database.find(date)->second << std::endl;
+								}
+							}
+							printError(ETC, originDate + " doesn't exist.");
+						}
 					}
 				}
 				else
@@ -229,12 +296,14 @@ void	BitcoinExchange::readFile(std::string fileName, int flag)
 	}
 	else
 		printError(FILEOPENFAIL, fileName);
+	_readArgs.close();
 }
 
 void	BitcoinExchange::exchange(char *argv)
 {
 	std::string		database = "data.csv";
 	std::string 	fileName(argv);
-	(void) argv;
+
 	readFile(database, BTC_DATABASE);
+	readFile(fileName, BTC_INPUT);
 }
