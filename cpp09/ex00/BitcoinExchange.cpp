@@ -6,7 +6,7 @@
 /*   By: yunjcho <yunjcho@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/12 21:11:49 by yunjcho           #+#    #+#             */
-/*   Updated: 2023/10/21 16:12:07 by yunjcho          ###   ########.fr       */
+/*   Updated: 2023/10/21 19:48:55 by yunjcho          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,11 +125,10 @@ bool	BitcoinExchange::checkDate(std::string date)
 	}
 	if (result[0] < 1900 || result[0] > 9999 || result[1] < 1 || result[1] > 12 || result[2] < 1 || result[2] > 31)
 		return (false);
-	
 	tmDate.tm_year = result[0] - 1900;
 	tmDate.tm_mon = result[1] - 1; //0 ~ 11
 	tmDate.tm_mday = result[2];
-	if (std::mktime(&tmDate) == -1)
+	if (std::mktime(&tmDate) == -1) //TODO
 		return (false);
 	return (true);
 }
@@ -141,71 +140,129 @@ bool	BitcoinExchange::checkNumber(double doubleVal, int flag)
 		printError(INVALIDNUM, "Error: not a positive number. =>" + std::to_string(doubleVal));
 		return (false);
 	}
-	else if ((flag == BTC_INPUT && doubleVal > 1000) || doubleVal > std::numeric_limits<int>::max())
+	else if (flag == BTC_INPUT)
 	{
-		printError(INVALIDNUM, "Error: too large a number. =>" + std::to_string(doubleVal));
+		if (doubleVal > 1000 || doubleVal > std::numeric_limits<int>::max())
+			printError(INVALIDNUM, "Error: too large a number. =>" + std::to_string(doubleVal));
+		else if (doubleVal < 0.0)
+			printError(ETC, "Error: not a positive number.");
 		return (false);
 	}
 	return (true);
 }
 
-std::string	BitcoinExchange::createClosestDate(std::string date)
+// std::string	BitcoinExchange::createClosestDate(std::string date, std::string minDate)
+// {
+// 	std::vector<int>	result;
+// 	std::vector<int>	result2;
+// 	std::tm				tmDate;
+// 	std::tm				mintmDate;
+// 	char				buffer[100];
+
+
+// 	std::cout << "minDate : " << minDate << std::endl;
+
+// 	result = split(date, '-');
+// 	result2 = split(minDate, '-');
+
+// 	tmDate.tm_year = result[0] - 1900;
+// 	tmDate.tm_mon = result[1] - 1; //0 ~ 11
+// 	tmDate.tm_mday = result[2];
+
+// 	mintmDate.tm_year = result2[0] - 1900;
+// 	mintmDate.tm_mon = result2[1] - 1; //0 ~ 11
+// 	mintmDate.tm_mday = result2[2];
+
+// 	std::cout << "btm year : " << tmDate.tm_year + 1900 << std::endl;
+// 	std::cout << "btm month : " << tmDate.tm_mon + 1 << std::endl;
+// 	std::cout << "btm day : " << tmDate.tm_mday << std::endl;
+// 	std::cout << "btest mktime : " << std::mktime(&tmDate) << std::endl;
+
+// 	--tmDate.tm_mday;
+
+// 	std::strftime(buffer, sizeof(buffer), "%Y-%m-%d", &tmDate);
+
+// 	std::cout << "atm year : " << tmDate.tm_year + 1900 << std::endl;
+// 	std::cout << "atm month : " << tmDate.tm_mon + 1 << std::endl;
+// 	std::cout << "atm day : " << tmDate.tm_mday << std::endl;
+// 	std::cout << "buffer : " << buffer << std::endl;
+// 	std::cout << "atest mktime : " << std::mktime(&tmDate) << std::endl;
+
+// 	if (std::mktime(&tmDate) == -1 \
+// 		|| std::difftime(std::mktime(&tmDate), std::mktime(&mintmDate)) < 0.0)
+// 	{
+// 		std::cout << "test difftime : " << std::difftime(std::mktime(&tmDate), std::mktime(&mintmDate)) << std::endl;
+// 		return ("NULL");
+// 	}
+// 	return (buffer);
+// }
+
+int		BitcoinExchange::calculateDates(std::string date)
 {
-	std::vector<int>	result;
+	std::vector<int>	sp;
 	std::tm				tmDate;
-	char				buffer[100];
-	time_t				rawTime;
+	int					year_;
+	int					month_;
+	int					days[12] = {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
+	int					result = 0;
 
-	result = split(date, '-');
-	if (result.size() != 3)
+	sp = split(date, '-');
+	tmDate.tm_year = sp[0];
+	tmDate.tm_mon = sp[1]; //0 ~ 11
+	tmDate.tm_mday = sp[2];
+
+	month_ = days[tmDate.tm_mon - 1];
+ 	if ((tmDate.tm_year % 4 == 0 && tmDate.tm_year % 100 != 0) \
+		|| tmDate.tm_year % 400 == 0)
 	{
-		printError(INVALIDDATE, date);
-		return (NULL);
+		year_ = 366;
+		if (tmDate.tm_mon == 2)
+			month_ = 29;
 	}
-	if (result[0] < 1900 || result[0] > 9999 || result[1] < 1 || result[1] > 12 || result[2] < 1 || result[2] > 31)
-		return (NULL);
-	
-	tmDate.tm_year = result[0] - 1900;
-	tmDate.tm_mon = result[1] - 1; //0 ~ 11
-	tmDate.tm_mday = result[2];
-
-	std::cout << "btmDate : " << tmDate.tm_year << std::endl;
-	std::cout << "btmDate : " << tmDate.tm_mon << std::endl;
-	std::cout << "btmDate : " << tmDate.tm_mday << std::endl;
-
-	// --tmDate.tm_mday;
-	rawTime = std::mktime(&tmDate);
-	// rawTime -= (3600 * 24);
-	tmDate = *(std::localtime(&rawTime));
-
-	std::cout << "atmDate : " << tmDate.tm_year << std::endl;
-	std::cout << "atmDate : " << tmDate.tm_mon << std::endl;
-	std::cout << "atmDate : " << tmDate.tm_mday << std::endl;
-
-	if (std::mktime(&tmDate) == -1)
-		return (NULL);
-	return (std::to_string(std::strftime(buffer, 100, "%Y-%m-%d", &tmDate)));
+	else
+		year_ = 365;
+	result = (tmDate.tm_year * year_) + (tmDate.tm_mon * month_) + tmDate.tm_mday;
+	return (result);
 }
 
-void	BitcoinExchange::readFile(std::string fileName, int flag)
+std::string BitcoinExchange::compareDates(std::string inputDate)
 {
-	std::string		str;
-	std::string		date;
-	std::string		value;
-	std::string		sep;
-	std::string		headline;
-	std::size_t		findIdx = 0;
+	int					dbDate;
+	int					inpDate;
+	
+	inpDate = calculateDates(inputDate);
+	std::map<std::string, double>::iterator iter = _database.begin();
+	while (iter != _database.end())
+	{
+		dbDate = calculateDates(iter->first);
+		// std::cout << "inpDate : " << inpDate << ", dbDate : " << dbDate << std::endl;
+		if (dbDate > inpDate) //1월 10일 & 1월 9일
+		{
+			if (iter == _database.begin())
+				return ("NULL");
+			// --iter; // TODO - 왜 안 했을 때 예시랑 같음?
 
-	if (flag == BTC_INPUT)
-	{
-		sep = "|";
-		headline = "date | value";
+			//Debugging
+			// std::cout << "inputDate : " << inputDate << std::endl;
+			// std::cout << "dbDate : " << iter->first << std::endl;
+			// std::cout << "database date : " << iter->first << std::endl;
+			return (iter->first);
+		}
+		++iter;
 	}
-	else if (flag == BTC_DATABASE)
-	{
-		sep = ",";
-		headline = "date,exchange_rate";
-	}
+	return ("NULL");
+}
+
+void	BitcoinExchange::readDataBaseFile(std::string fileName)
+{
+	const std::string	sep = ",";
+	const std::string	headline = "date,exchange_rate";
+	std::string			str;
+	std::string			date;
+	std::string			value;
+	std::size_t			findIdx = 0;
+	double				doubleVal = 0.0;
+
 	//1. 파일 유무 및 open 확인
 	fileName = strtrim(fileName);
 	_readArgs.open(fileName);
@@ -227,68 +284,104 @@ void	BitcoinExchange::readFile(std::string fileName, int flag)
 					findIdx = str.find(sep, findIdx);
 					date = strtrim(str.substr(0, findIdx));
 					value = strtrim(str.substr(findIdx + 1, str.length()));
-					if (flag == BTC_INPUT)
-					{
-						std::cout << "date : " << date << std::endl;
-						std::cout << "value : " << value << std::endl;
-					}
+
+					//Debugging
+					// std::cout << "date : " << date << std::endl;
+					// std::cout << "value : " << value << std::endl;
+				}
+				else
+				{
+					date = str;
+
+					//Debugging
+					// std::cout << "date2 : " << date << std::endl;
+				}
+				doubleVal = std::strtod(value.c_str(), NULL); //부동 소수점 변환이 안되므로 >> 로는 제대로 변환 불가
+				if (checkDate(date) && checkNumber(doubleVal, BTC_DATABASE))
+				{
+					//map 추가
+					_database.insert(std::pair<std::string, double>(date, doubleVal));
+
+					//Debugging
+					// std::cout << "check insert : " <<  std::fixed << std::setprecision(2) << _database.find(date)->second << std::endl;
+				}
+				else
+					break ;
+			}
+			else
+				continue ;
+		}
+	}
+	else
+		printError(FILEOPENFAIL, fileName);
+	_readArgs.close();
+}
+
+void	BitcoinExchange::readInputFile(std::string fileName)
+{
+	const std::string	sep = "|";
+	const std::string	headline = "date | value";
+	std::string			str;
+	std::string			date;
+	std::string			value;
+	std::size_t			findIdx = 0;
+	double				doubleVal = 0.0;
+
+	//1. 파일 유무 및 open 확인
+	fileName = strtrim(fileName);
+	_readArgs.open(fileName);
+	if (_readArgs.is_open())
+	{
+		//2. 파일 한줄씩 읽어들이면서 파싱
+		while (!_readArgs.eof())
+		{
+			std::getline(_readArgs, str);
+			str = strtrim(str);
+			// std::cout << "str : " << str << std::endl;
+			if (!str.empty() || str.length() > 0)
+			{
+				findIdx = 0;
+				if (!str.compare(headline))
+					continue ;
+				if (str.find(sep, findIdx) != std::string::npos)
+				{
+					findIdx = str.find(sep, findIdx);
+					date = strtrim(str.substr(0, findIdx));
+					value = strtrim(str.substr(findIdx + 1, str.length()));
+
+					//Debugging
+					// std::cout << "date : " << date << std::endl;
+					// std::cout << "value : " << value << std::endl;
 				}
 				else
 				{
 					date = str;
 					// std::cout << "date2 : " << date << std::endl;
 				}
-				double	doubleVal = 0.0;
 				doubleVal = std::strtod(value.c_str(), NULL); //부동 소수점 변환이 안되므로 >> 로는 제대로 변환 불가
-				if (checkDate(date) || checkNumber(doubleVal, flag))
+				if (checkDate(date) || checkNumber(doubleVal, BTC_INPUT))
 				{
-					if (flag == BTC_DATABASE)
+					//계산한 값 출력
+					std::map<std::string, double>::iterator iter = _database.find(date);
+					std::string	originDate = date;
+					if (iter == _database.end())
 					{
-						//map 추가
-						_database.insert(std::pair<std::string, double>(date, doubleVal));
-
-						//Debugging
-						// std::cout << "check insert : " <<  std::fixed << std::setprecision(2) << _database.find(date)->second << std::endl;
-
-					}
-					else
-					{
-						std::cout << "Hello" << std::endl;
-						//계산한 값 출력
-						std::map<std::string, double>::iterator iter = _database.find(date);
-						std::string	originDate = date;
-						if (_database.find(date) != _database.end())
+						date = compareDates(date);
+						if (!date.compare("NULL"))
 						{
-							double result = _database.find(date)->second * doubleVal;
-							std::cout << date << " => " << value << " = " << result << std::endl;
-							// std::cout << "check insert : " <<  std::fixed << std::setprecision(2) << _database.find(date)->second << std::endl;
+							printError(ETC, originDate + "doesn't exist DataBase");
+							return ;
 						}
-						else
-						{
-							while (_database.find(date) == _database.end())
-							{
-								date = createClosestDate(date);          
-								std::cout << "date : " << date << std::endl;
-								iter = _database.find(date);
-								if (_database.find(date) != _database.end())
-								{
-									double result = _database.find(date)->second * doubleVal;
-									std::cout << date << " => " << value << " = " << result << std::endl;
-									break ;
-									// std::cout << "check insert : " <<  std::fixed << std::setprecision(2) << _database.find(date)->second << std::endl;
-								}
-							}
-							printError(ETC, originDate + " doesn't exist.");
-						}
+						// date = createClosestDate(date, _database.begin()->first);
+						// if (!date.compare("NULL"))
+						// 	printError(ETC, originDate + "doesn't exist DataBase");
 					}
+					double result = _database.find(date)->second * doubleVal;
+					std::cout << originDate << " => " << value << " = " << result << std::endl;
+					
 				}
 				else
-				{
-					if (flag == BTC_DATABASE)
-						break ;
-					else
-						continue ;
-				}
+					continue ; 
 			}
 			else
 				continue ;
@@ -304,6 +397,6 @@ void	BitcoinExchange::exchange(char *argv)
 	std::string		database = "data.csv";
 	std::string 	fileName(argv);
 
-	readFile(database, BTC_DATABASE);
-	readFile(fileName, BTC_INPUT);
+	readDataBaseFile(database);
+	readInputFile(fileName);
 }

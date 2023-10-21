@@ -6,7 +6,7 @@
 /*   By: yunjcho <yunjcho@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/12 20:29:31 by yunjcho           #+#    #+#             */
-/*   Updated: 2023/10/21 16:15:15 by yunjcho          ###   ########.fr       */
+/*   Updated: 2023/10/21 19:05:07 by yunjcho          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,10 +56,11 @@ class BitcoinExchange
 		std::vector<int>			split(std::string input, char delimiter);
 		bool						checkDate(std::string date);
 		bool						checkNumber(double number, int flag);
-		std::string					createClosestDate(std::string date);
-		void						readFile(std::string fileName, int flag);
-		// void						readDataBaseFile(std::string fileName, int flag);
-		// void						readInputFile(std::string fileName, int flag);
+		// std::string					createClosestDate(std::string date, std::string minDate);
+		int							calculateDates(std::string date);
+		std::string					compareDates(std::string inputDate);
+		void						readDataBaseFile(std::string fileName);
+		void						readInputFile(std::string fileName);
 };
 
 #endif
