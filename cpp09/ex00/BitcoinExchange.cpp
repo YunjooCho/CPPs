@@ -6,7 +6,7 @@
 /*   By: yunjcho <yunjcho@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/12 21:11:49 by yunjcho           #+#    #+#             */
-/*   Updated: 2023/10/23 21:28:00 by yunjcho          ###   ########seoul.kr  */
+/*   Updated: 2023/10/23 21:34:19 by yunjcho          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,7 +131,7 @@ bool	BitcoinExchange::checkDate(std::string date)
 double	BitcoinExchange::checkDBNumber(std::string value)
 {
 	double	doubleVal = std::strtod(value.c_str(), NULL);
-	if (value.empty() || doubleVal < 0)
+	if (value.empty() || doubleVal < 0 || doubleVal > std::numeric_limits<int>::max())
 		throw std::runtime_error("Error: invalid value in DataBase. => " + value);
 	return (doubleVal);
 }
@@ -146,7 +146,7 @@ double	BitcoinExchange::checkInputNumber(std::string value)
 		printError(ETC, "Error: not a positive number.");
 		doubleVal = -1.0;
 	}
-	else if (doubleVal > std::numeric_limits<int>::max())
+	else if (doubleVal > 1000)
 	{
 		printError(ETC, "Error: too large a number.");
 		doubleVal = -1.0;
