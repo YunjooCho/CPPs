@@ -6,7 +6,7 @@
 /*   By: yunjcho <yunjcho@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/12 20:29:31 by yunjcho           #+#    #+#             */
-/*   Updated: 2023/10/21 19:05:07 by yunjcho          ###   ########.fr       */
+/*   Updated: 2023/10/23 18:10:02 by yunjcho          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 # include <map>
 # include <vector>
 # include <ctime>
+# include <algorithm>
 
 const std::string WHITESPACE = " \n\r\t\f\v";
 
@@ -57,8 +58,8 @@ class BitcoinExchange
 		bool						checkDate(std::string date);
 		bool						checkNumber(double number, int flag);
 		// std::string					createClosestDate(std::string date, std::string minDate);
-		int							calculateDates(std::string date);
-		std::string					compareDates(std::string inputDate);
+		// int							calculateDates(std::string date);
+		// std::string					compareDates(std::string inputDate);
 		void						readDataBaseFile(std::string fileName);
 		void						readInputFile(std::string fileName);
 };

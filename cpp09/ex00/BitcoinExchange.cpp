@@ -6,7 +6,7 @@
 /*   By: yunjcho <yunjcho@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/12 21:11:49 by yunjcho           #+#    #+#             */
-/*   Updated: 2023/10/21 19:48:55 by yunjcho          ###   ########.fr       */
+/*   Updated: 2023/10/23 18:13:38 by yunjcho          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -144,114 +144,98 @@ bool	BitcoinExchange::checkNumber(double doubleVal, int flag)
 	{
 		if (doubleVal > 1000 || doubleVal > std::numeric_limits<int>::max())
 			printError(INVALIDNUM, "Error: too large a number. =>" + std::to_string(doubleVal));
-		else if (doubleVal < 0.0)
+		else if (doubleVal <= 0)
 			printError(ETC, "Error: not a positive number.");
 		return (false);
 	}
 	return (true);
 }
 
-// std::string	BitcoinExchange::createClosestDate(std::string date, std::string minDate)
+// int		BitcoinExchange::calculateDates(std::string date)
 // {
-// 	std::vector<int>	result;
-// 	std::vector<int>	result2;
+// 	std::vector<int>	sp;
 // 	std::tm				tmDate;
-// 	std::tm				mintmDate;
-// 	char				buffer[100];
+// 	int					year_;
+// 	int					month_;
+// 	int					days[12] = {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
+// 	int					result = 0;
 
+// 	sp = split(date, '-');
+// 	tmDate.tm_year = sp[0] - 1900;
+// 	tmDate.tm_mon = sp[1] - 1; //0 ~ 11
+// 	tmDate.tm_mday = sp[2];
 
-// 	std::cout << "minDate : " << minDate << std::endl;
-
-// 	result = split(date, '-');
-// 	result2 = split(minDate, '-');
-
-// 	tmDate.tm_year = result[0] - 1900;
-// 	tmDate.tm_mon = result[1] - 1; //0 ~ 11
-// 	tmDate.tm_mday = result[2];
-
-// 	mintmDate.tm_year = result2[0] - 1900;
-// 	mintmDate.tm_mon = result2[1] - 1; //0 ~ 11
-// 	mintmDate.tm_mday = result2[2];
-
-// 	std::cout << "btm year : " << tmDate.tm_year + 1900 << std::endl;
-// 	std::cout << "btm month : " << tmDate.tm_mon + 1 << std::endl;
-// 	std::cout << "btm day : " << tmDate.tm_mday << std::endl;
-// 	std::cout << "btest mktime : " << std::mktime(&tmDate) << std::endl;
-
-// 	--tmDate.tm_mday;
-
-// 	std::strftime(buffer, sizeof(buffer), "%Y-%m-%d", &tmDate);
-
-// 	std::cout << "atm year : " << tmDate.tm_year + 1900 << std::endl;
-// 	std::cout << "atm month : " << tmDate.tm_mon + 1 << std::endl;
-// 	std::cout << "atm day : " << tmDate.tm_mday << std::endl;
-// 	std::cout << "buffer : " << buffer << std::endl;
-// 	std::cout << "atest mktime : " << std::mktime(&tmDate) << std::endl;
-
-// 	if (std::mktime(&tmDate) == -1 \
-// 		|| std::difftime(std::mktime(&tmDate), std::mktime(&mintmDate)) < 0.0)
+// 	month_ = days[tmDate.tm_mon];
+//  	if ((tmDate.tm_year % 4 == 0 && tmDate.tm_year % 100 != 0) \
+// 		|| tmDate.tm_year % 400 == 0)
 // 	{
-// 		std::cout << "test difftime : " << std::difftime(std::mktime(&tmDate), std::mktime(&mintmDate)) << std::endl;
-// 		return ("NULL");
+// 		year_ = 366;
+// 		if (tmDate.tm_mon == 1)
+// 			month_ = 29;
 // 	}
-// 	return (buffer);
+// 	else
+// 		year_ = 365;
+// 	result = ((tmDate.tm_year + 1900) * year_) + ((tmDate.tm_mon + 1) * month_) + tmDate.tm_mday;
+// 	// std::cout << "inputDate : " << date << ", result : " << result << std::endl;
+// 	return (result);
 // }
 
-int		BitcoinExchange::calculateDates(std::string date)
-{
-	std::vector<int>	sp;
-	std::tm				tmDate;
-	int					year_;
-	int					month_;
-	int					days[12] = {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
-	int					result = 0;
+// int		BitcoinExchange::calculateDates(std::string date)
+// {
+// 	std::vector<int>	sp;
+// 	int					year_;
+// 	int					month_;
+// 	int					days[12] = {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
+// 	int					result = 0;
 
-	sp = split(date, '-');
-	tmDate.tm_year = sp[0];
-	tmDate.tm_mon = sp[1]; //0 ~ 11
-	tmDate.tm_mday = sp[2];
+// 	sp = split(date, '-');
+// 	tmDate.tm_year = sp[0] - 1900;
+// 	tmDate.tm_mon = sp[1] - 1; //0 ~ 11
+// 	tmDate.tm_mday = sp[2];
 
-	month_ = days[tmDate.tm_mon - 1];
- 	if ((tmDate.tm_year % 4 == 0 && tmDate.tm_year % 100 != 0) \
-		|| tmDate.tm_year % 400 == 0)
-	{
-		year_ = 366;
-		if (tmDate.tm_mon == 2)
-			month_ = 29;
-	}
-	else
-		year_ = 365;
-	result = (tmDate.tm_year * year_) + (tmDate.tm_mon * month_) + tmDate.tm_mday;
-	return (result);
-}
+// 	month_ = days[tmDate.tm_mon];
+//  	if ((tmDate.tm_year % 4 == 0 && tmDate.tm_year % 100 != 0) \
+// 		|| tmDate.tm_year % 400 == 0)
+// 	{
+// 		year_ = 366;
+// 		if (tmDate.tm_mon == 1)
+// 			month_ = 29;
+// 	}
+// 	else
+// 		year_ = 365;
+// 	result = ((tmDate.tm_year + 1900) * year_) + ((tmDate.tm_mon + 1) * month_) + tmDate.tm_mday;
+// 	// std::cout << "inputDate : " << date << ", result : " << result << std::endl;
+// 	return (result);
+// }
 
-std::string BitcoinExchange::compareDates(std::string inputDate)
-{
-	int					dbDate;
-	int					inpDate;
+// std::string BitcoinExchange::compareDates(std::string inputDate)
+// {
+// 	int					dbDate;
+// 	int					inpDate;
 	
-	inpDate = calculateDates(inputDate);
-	std::map<std::string, double>::iterator iter = _database.begin();
-	while (iter != _database.end())
-	{
-		dbDate = calculateDates(iter->first);
-		// std::cout << "inpDate : " << inpDate << ", dbDate : " << dbDate << std::endl;
-		if (dbDate > inpDate) //1월 10일 & 1월 9일
-		{
-			if (iter == _database.begin())
-				return ("NULL");
-			// --iter; // TODO - 왜 안 했을 때 예시랑 같음?
+// 	inpDate = calculateDates(inputDate);
 
-			//Debugging
-			// std::cout << "inputDate : " << inputDate << std::endl;
-			// std::cout << "dbDate : " << iter->first << std::endl;
-			// std::cout << "database date : " << iter->first << std::endl;
-			return (iter->first);
-		}
-		++iter;
-	}
-	return ("NULL");
-}
+// 	//Debugging
+// 	std::cout << "inputDate : " << inputDate << ", inpDate : " << inpDate << std::endl;
+
+// 	std::map<std::string, double>::iterator iter = _database.begin();
+// 	while (iter != _database.end())
+// 	{
+// 		dbDate = calculateDates(iter->first);
+// 		//Debugging
+// 		std::cout << "dbDate : " << iter->first << ", " << dbDate << std::endl;
+// 		if (dbDate > inpDate) //1월 10일 & 1월 9일
+// 		{
+// 			if (iter == _database.begin())
+// 				return ("NULL");
+// 			// --iter; // TODO - 왜 안 했을 때 예시랑 같음?
+
+// 			return (iter->first);
+// 		}
+// 		++iter;
+// 	}
+// 	return ("NULL");
+// }
 
 void	BitcoinExchange::readDataBaseFile(std::string fileName)
 {
@@ -362,22 +346,38 @@ void	BitcoinExchange::readInputFile(std::string fileName)
 				if (checkDate(date) || checkNumber(doubleVal, BTC_INPUT))
 				{
 					//계산한 값 출력
-					std::map<std::string, double>::iterator iter = _database.find(date);
-					std::string	originDate = date;
-					if (iter == _database.end())
+					// std::map<std::string, double>::iterator iter = _database.find(date);
+					// std::string	originDate = date;
+					// if (iter == _database.end())
+					// {
+						
+					// 	// date = compareDates(date);
+					// 	// if (!date.compare("NULL"))
+					// 	// {
+					// 	// 	printError(ETC, originDate + "doesn't exist DataBase");
+					// 	// 	return ;
+					// 	// }
+					// 	// date = createClosestDate(date, _database.begin()->first);
+					// 	// if (!date.compare("NULL"))
+					// 	// 	printError(ETC, originDate + "doesn't exist DataBase");
+					// }
+					std::map<std::string, double>::iterator iter = _database.lower_bound(date);
+					if (iter->first.compare(date))
 					{
-						date = compareDates(date);
-						if (!date.compare("NULL"))
+						if (iter != _database.begin())
+							--iter;
+						else
 						{
-							printError(ETC, originDate + "doesn't exist DataBase");
-							return ;
+							printError(ETC, date + "doesn't exist invalid date in DataBase");
+							continue ;
 						}
-						// date = createClosestDate(date, _database.begin()->first);
-						// if (!date.compare("NULL"))
-						// 	printError(ETC, originDate + "doesn't exist DataBase");
 					}
-					double result = _database.find(date)->second * doubleVal;
-					std::cout << originDate << " => " << value << " = " << result << std::endl;
+
+					//Debugging
+					std::cout << "date : " << date << ", result date : " << iter->first << std::endl;
+					
+					// double result = static_cast<double>(iter->second) * doubleVal;
+					// std::cout << date << " => " << value << " = " << result << std::endl;
 					
 				}
 				else
