@@ -6,7 +6,7 @@
 /*   By: yunjcho <yunjcho@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 22:09:28 by yunjcho           #+#    #+#             */
-/*   Updated: 2023/10/24 22:48:49 by yunjcho          ###   ########.fr       */
+/*   Updated: 2023/10/24 22:55:01 by yunjcho          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,14 +39,8 @@ void	PmergeMe::parsing(char **argv)
 	int					value;
 	size_t 				idx = 1;
 
-	// (void) NUMBERS;
-	// (void) convert;
-	// (void) value;
 	while (argv[idx])
 	{
-		// std::cout << argv[idx] << std::endl;
-		// if (argv[idx][0] == ' ')
-		// 	continue ;
 		convert.str("");
 		convert.clear();
 		convert << argv[idx];
