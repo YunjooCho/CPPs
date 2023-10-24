@@ -6,7 +6,7 @@
 /*   By: yunjcho <yunjcho@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 22:09:28 by yunjcho           #+#    #+#             */
-/*   Updated: 2023/10/24 22:55:01 by yunjcho          ###   ########.fr       */
+/*   Updated: 2023/10/24 23:03:07 by yunjcho          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,8 +44,13 @@ void	PmergeMe::parsing(char **argv)
 		convert.str("");
 		convert.clear();
 		convert << argv[idx];
-		if (argv[idx][0] == '-' || convert.str().find_first_of(NUMBERS) == std::string::npos)
-			throw std::runtime_error("Error: not a positive number. => " + convert.str());
+		if (argv[idx][0] == '-')
+			throw std::runtime_error("Error"); //throw std::runtime_error("Error: not a positive number. => " + convert.str());
+		else if (convert.str().find_first_of(NUMBERS) == std::string::npos \
+			&& convert.str().find_first_of(" | ") != std::string::npos) // ./PmergeMe shuf -i 1-100000 -n 3000 | tr "\n" " " & ./PmergeMe jot -r 3000 1 100000 | tr '\n' ' '
+		{
+			
+		}
 		convert >> value;
 
 		//debugging
