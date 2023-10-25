@@ -6,7 +6,7 @@
 /*   By: yunjcho <yunjcho@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/12 20:32:01 by yunjcho           #+#    #+#             */
-/*   Updated: 2023/10/24 23:00:26 by yunjcho          ###   ########.fr       */
+/*   Updated: 2023/10/25 17:26:53 by yunjcho          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int	main(int ac, char** av)
 		try
 		{
 			sort.parsing(av);
-			//sort.sort();
+			sort.sort();
 		}
 		catch(const std::exception& e)
 		{

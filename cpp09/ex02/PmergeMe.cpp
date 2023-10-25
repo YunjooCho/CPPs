@@ -6,7 +6,7 @@
 /*   By: yunjcho <yunjcho@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 22:09:28 by yunjcho           #+#    #+#             */
-/*   Updated: 2023/10/24 23:03:07 by yunjcho          ###   ########.fr       */
+/*   Updated: 2023/10/25 18:00:29 by yunjcho          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void	PmergeMe::parsing(char **argv)
 {
 	const std::string	NUMBERS = "0123456789";
 	std::stringstream	convert;
-	int					value;
+	long				value;
 	size_t 				idx = 1;
 
 	while (argv[idx])
@@ -44,15 +44,16 @@ void	PmergeMe::parsing(char **argv)
 		convert.str("");
 		convert.clear();
 		convert << argv[idx];
-		if (argv[idx][0] == '-')
+		if (argv[idx][0] == '-' || convert.str().find_first_of(NUMBERS) == std::string::npos)
 			throw std::runtime_error("Error"); //throw std::runtime_error("Error: not a positive number. => " + convert.str());
-		else if (convert.str().find_first_of(NUMBERS) == std::string::npos \
-			&& convert.str().find_first_of(" | ") != std::string::npos) // ./PmergeMe shuf -i 1-100000 -n 3000 | tr "\n" " " & ./PmergeMe jot -r 3000 1 100000 | tr '\n' ' '
-		{
+		// else if (convert.str().find_first_of(NUMBERS) == std::string::npos \
+		// 	&& convert.str().find_first_of(" | ") != std::string::npos) // ./PmergeMe shuf -i 1-100000 -n 3000 | tr "\n" " " & ./PmergeMe jot -r 3000 1 100000 | tr '\n' ' '
+		// {
 			
-		}
+		// }
 		convert >> value;
-
+		if (value > std::numeric_limits<int>::max())
+			throw std::runtime_error("Error: too large a number." + std::to_string(value)); 
 		//debugging
 		// std::cout << "argv[idx] : " << argv[idx] << std::endl;
 		// std::cout << "convert.str() : " << convert.str() << std::endl;
@@ -65,19 +66,89 @@ void	PmergeMe::parsing(char **argv)
 	//debugging
 	for (std::list<int>::iterator iter = _con.begin(); iter != _con.end(); iter++)
 	{
-		std::cout << *iter << std::endl;
+		std::cout << *iter << " ";;
 	}
+	std::cout << std::endl;
+
+}
+
+void	PmergeMe::pairSort(void)
+{
+	size_t	targetIdx = _con.size() - 2;
+
+	if (_con.size() % 2 != 0)
+		targetIdx -= 1;
+
+	std::list<int>::iterator iter = _con.begin();
+	std::list<int>::iterator iter2 = ++_con.begin();
+	for (size_t i = 0; i < targetIdx; i++)
+	{
+		//debugging
+		std::cout << "iter : " << *iter << std::endl;
+		std::cout << "iter2 : " << *iter2 << std::endl;
+
+		if (*iter < *iter2)
+		{
+			_sortCon.push_back(*iter2);
+			_sortCon.push_back(*iter);
+		}
+		else
+		{
+			_sortCon.push_back(*iter);
+			_sortCon.push_back(*iter2);
+		}
+		for (size_t j = 0; j < 2; j++)
+		{
+			++iter;
+			++iter2;
+			_con.pop_front();
+		}
+	}
+	
+	if (_con.size() > 0)
+	{
+		
+	}
+	while (iter != _con.end())
+	{
+		// iter = _con.begin();
+		//debugging
+		std::cout << "!iter : " << *iter << std::endl;
+
+		_sortCon.push_back(*iter);
+		++iter;
+	}
+
+	//debugging
+	for (std::list<int>::iterator iter = _sortCon.begin(); iter != _sortCon.end(); iter++)
+	{
+		std::cout << *iter << " ";
+	}
+	std::cout << std::endl;
+}
+
+void	PmergeMe::mainChainSort(void)
+{
+	size_t		targetIdx = _con.size() - 2;
+	int			val1 = -1;
+	int 		val2 = -1;
+	std::list<int> tmp;
+
+	(void) val1;
+	(void) val2;
+	(void) tmp;
+	if (_sortCon.size() % 2 != 0)
+		targetIdx -= 1;
 }
 
 void	PmergeMe::sort(void)
 {
-	
+	if (_con.size() == 1)
+		return ;
+	pairSort();
+	mainChainSort();
+	//mergeInsertionSort();
 }
 
 // Container	PmergeMe::parsing(char **argv) 
 // {}
-
-// void	PmergeMe::sort(Container target)
-// {
-	
-// }
