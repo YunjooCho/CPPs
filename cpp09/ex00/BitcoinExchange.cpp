@@ -6,7 +6,7 @@
 /*   By: yunjcho <yunjcho@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/12 21:11:49 by yunjcho           #+#    #+#             */
-/*   Updated: 2023/10/23 21:34:19 by yunjcho          ###   ########seoul.kr  */
+/*   Updated: 2023/10/26 18:52:16 by yunjcho          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -267,7 +267,7 @@ void	BitcoinExchange::readInputFile(std::string fileName)
 		}
 	}
 	else
-		throw std::runtime_error("Error: " + fileName + "can't open the file.");
+		throw std::runtime_error("Error: " + fileName + " can't open the file.");
 	_readArgs.close();
 }
 
