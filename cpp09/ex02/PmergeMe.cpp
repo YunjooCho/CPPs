@@ -6,7 +6,7 @@
 /*   By: yunjcho <yunjcho@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 22:09:28 by yunjcho           #+#    #+#             */
-/*   Updated: 2023/10/25 18:00:29 by yunjcho          ###   ########.fr       */
+/*   Updated: 2023/10/26 17:42:47 by yunjcho          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,21 +44,13 @@ void	PmergeMe::parsing(char **argv)
 		convert.str("");
 		convert.clear();
 		convert << argv[idx];
-		if (argv[idx][0] == '-' || convert.str().find_first_of(NUMBERS) == std::string::npos)
-			throw std::runtime_error("Error"); //throw std::runtime_error("Error: not a positive number. => " + convert.str());
-		// else if (convert.str().find_first_of(NUMBERS) == std::string::npos \
-		// 	&& convert.str().find_first_of(" | ") != std::string::npos) // ./PmergeMe shuf -i 1-100000 -n 3000 | tr "\n" " " & ./PmergeMe jot -r 3000 1 100000 | tr '\n' ' '
-		// {
-			
-		// }
+		if (argv[idx][0] == '-' \
+			|| convert.str().find_first_not_of(NUMBERS) != std::string::npos)
+			throw std::runtime_error("Error"); 
+
 		convert >> value;
 		if (value > std::numeric_limits<int>::max())
 			throw std::runtime_error("Error: too large a number." + std::to_string(value)); 
-		//debugging
-		// std::cout << "argv[idx] : " << argv[idx] << std::endl;
-		// std::cout << "convert.str() : " << convert.str() << std::endl;
-		// std::cout << "value : " << value << std::endl;
-
 		_con.push_back(value);
 		idx++;
 	}
@@ -81,11 +73,12 @@ void	PmergeMe::pairSort(void)
 
 	std::list<int>::iterator iter = _con.begin();
 	std::list<int>::iterator iter2 = ++_con.begin();
-	for (size_t i = 0; i < targetIdx; i++)
+	for (size_t i = 0; i <= targetIdx; i += 2)
 	{
 		//debugging
-		std::cout << "iter : " << *iter << std::endl;
-		std::cout << "iter2 : " << *iter2 << std::endl;
+		// std::cout << "i : " << i << std::endl;
+		// std::cout << "iter : " << *iter << std::endl;
+		// std::cout << "iter2 : " << *iter2 << std::endl;
 
 		if (*iter < *iter2)
 		{
@@ -107,16 +100,13 @@ void	PmergeMe::pairSort(void)
 	
 	if (_con.size() > 0)
 	{
-		
-	}
-	while (iter != _con.end())
-	{
-		// iter = _con.begin();
-		//debugging
-		std::cout << "!iter : " << *iter << std::endl;
-
-		_sortCon.push_back(*iter);
-		++iter;
+		while (iter != _con.end())
+		{
+			//debugging
+			// std::cout << "!iter : " << *iter << std::endl;
+			_sortCon.push_back(*iter);
+			++iter;
+		}		
 	}
 
 	//debugging
