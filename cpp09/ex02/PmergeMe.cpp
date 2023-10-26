@@ -6,7 +6,7 @@
 /*   By: yunjcho <yunjcho@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 22:09:28 by yunjcho           #+#    #+#             */
-/*   Updated: 2023/10/26 22:18:09 by yunjcho          ###   ########.fr       */
+/*   Updated: 2023/10/27 01:31:08 by yunjcho          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ void	PmergeMe::parsing(char **argv)
 
 }
 
-void	PmergeMe::createMainchain(void)
+void	PmergeMe::createChains(void)
 {
 	size_t			targetIdx = _con.size() - 2;
 	std::list<int>	_copyCon(_con);
@@ -77,10 +77,8 @@ void	PmergeMe::createMainchain(void)
 	{
 		if (*iter < *iter2)
 			_mainChain.push_back(std::make_pair(*iter2, *iter));
-			// _mainChain.insert(std::make_pair(*iter2, *iter));
 		else if(*iter > *iter2)
 			_mainChain.push_back(std::make_pair(*iter, *iter2));
-			// _mainChain.insert(std::make_pair(*iter, *iter2));
 		else
 			throw std::runtime_error("Error: Duplicate values existed.");
 		for (size_t j = 0; j < 2; j++)
@@ -95,33 +93,53 @@ void	PmergeMe::createMainchain(void)
 	{
 		while (iter != _copyCon.end())
 		{
-			// _mainChain.insert(std::make_pair(2147483647, *iter));
 			_mainChain.push_back(std::make_pair(2147483647, *iter));
 			++iter;
 		}		
 	}
 
-	// debugging
-	// for (std::set<std::pair<int, int> >::iterator iter = _mainChain.begin(); iter != _mainChain.end(); iter++)
-	// {
-	// 	std::cout << "set key : " << iter->first << ", value : " << iter->second << std::endl;
-	// }
 	_mainChain.sort();
 	for (std::list<std::pair<int, int> >::iterator iter = _mainChain.begin(); iter != _mainChain.end(); iter++)
 	{
+		_peChain.push_back(iter->second);
 		std::cout << "set key : " << iter->first << ", value : " << iter->second << std::endl;
+	}
+	for (std::list<int>::iterator iter = _peChain.begin(); iter != _peChain.end(); iter++)
+	{
+		std::cout << "peChain : " << *iter << std::endl;
 	}
 }
 
-// void	PmergeMe::mergeInsertionSort(void)
-// {
-	
-// }
+int		PmergeMe::jacobstalNum(int n)
+{
+	if (n == 0)
+		return 0;
+	else if (n == 1)
+		return 1;
+	else
+		return jacobstalNum(n - 1) + 2 * jacobstalNum(n - 2);
+}
+
+void	PmergeMe::mergeInsertionSort(void)
+{
+	// int		cnt = 0; // jacobstalNum()을 호출한 횟수
+	// size_t	targetIdx = jacobstalNum(cnt);
+
+	std::cout << "jacob0 : " << jacobstalNum(0) << std::endl;
+	std::cout << "jacob1 : " << jacobstalNum(1) << std::endl;
+	std::cout << "jacob2 : " << jacobstalNum(2) << std::endl;
+
+	std::cout << "jacob3 : " << jacobstalNum(3) << std::endl;
+	std::cout << "jacob4 : " << jacobstalNum(4) << std::endl;
+	std::cout << "jacob5 : " << jacobstalNum(5) << std::endl;
+	std::cout << "jacob6 : " << jacobstalNum(6) << std::endl;
+	std::cout << "jacob7 : " << jacobstalNum(7) << std::endl;
+}
 
 void	PmergeMe::sort(void)
 {
 	if (_con.size() == 1)
 		return ;
-	createMainchain();
-	// mergeInsertionSort();
+	createChains();
+	mergeInsertionSort();
 }

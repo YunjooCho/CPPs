@@ -6,7 +6,7 @@
 /*   By: yunjcho <yunjcho@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 22:02:48 by yunjcho           #+#    #+#             */
-/*   Updated: 2023/10/26 22:23:39 by yunjcho          ###   ########.fr       */
+/*   Updated: 2023/10/27 01:25:05 by yunjcho          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,13 +26,14 @@ class PmergeMe
 		PmergeMe();
 		~PmergeMe();
 		void	parsing(char **argv);
-		void	createMainchain(void);
-		// void	mergeInsertionSort(void);
+		void	createChains(void);
+		int		jacobstalNum(int n);
+		void	mergeInsertionSort(void);
 		void	sort(void);
 	private:
 		std::list<int>					_con;
 		std::list<std::pair<int, int> > _mainChain;
-		// std::set<std::pair<int, int> >	_mainChain;
+		std::list<int>					_peChain;
 		PmergeMe(const PmergeMe& instance);
 		PmergeMe& operator=(const PmergeMe& instance);
 };
