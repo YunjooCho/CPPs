@@ -6,7 +6,7 @@
 /*   By: yunjcho <yunjcho@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 22:09:28 by yunjcho           #+#    #+#             */
-/*   Updated: 2023/10/26 18:19:28 by yunjcho          ###   ########.fr       */
+/*   Updated: 2023/10/26 19:50:10 by yunjcho          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -132,5 +132,5 @@ void	PmergeMe::sort(void)
 		return ;
 	pairSort();
 	mainChainSort();
-	mergeInsertionSort();
+	// mergeInsertionSort();
 }

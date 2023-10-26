@@ -6,7 +6,7 @@
 /*   By: yunjcho <yunjcho@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 22:02:48 by yunjcho           #+#    #+#             */
-/*   Updated: 2023/10/26 18:19:42 by yunjcho          ###   ########.fr       */
+/*   Updated: 2023/10/26 19:50:12 by yunjcho          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ class PmergeMe
 		void	parsing(char **argv);
 		void	pairSort(void);
 		void	mainChainSort(void);
-		void	mergeInsertionSort(void);
+		// void	mergeInsertionSort(void);
 		void	sort(void);
 	private:
 		std::list<int>	_con;
