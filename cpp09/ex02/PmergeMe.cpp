@@ -6,7 +6,7 @@
 /*   By: yunjcho <yunjcho@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 22:09:28 by yunjcho           #+#    #+#             */
-/*   Updated: 2023/10/26 17:42:47 by yunjcho          ###   ########.fr       */
+/*   Updated: 2023/10/26 18:19:28 by yunjcho          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,11 +75,6 @@ void	PmergeMe::pairSort(void)
 	std::list<int>::iterator iter2 = ++_con.begin();
 	for (size_t i = 0; i <= targetIdx; i += 2)
 	{
-		//debugging
-		// std::cout << "i : " << i << std::endl;
-		// std::cout << "iter : " << *iter << std::endl;
-		// std::cout << "iter2 : " << *iter2 << std::endl;
-
 		if (*iter < *iter2)
 		{
 			_sortCon.push_back(*iter2);
@@ -137,8 +132,5 @@ void	PmergeMe::sort(void)
 		return ;
 	pairSort();
 	mainChainSort();
-	//mergeInsertionSort();
+	mergeInsertionSort();
 }
-
-// Container	PmergeMe::parsing(char **argv) 
-// {}

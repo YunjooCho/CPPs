@@ -6,7 +6,7 @@
 /*   By: yunjcho <yunjcho@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 22:02:48 by yunjcho           #+#    #+#             */
-/*   Updated: 2023/10/26 17:35:42 by yunjcho          ###   ########.fr       */
+/*   Updated: 2023/10/26 18:19:42 by yunjcho          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ class PmergeMe
 		void	parsing(char **argv);
 		void	pairSort(void);
 		void	mainChainSort(void);
+		void	mergeInsertionSort(void);
 		void	sort(void);
 	private:
 		std::list<int>	_con;
@@ -34,19 +35,5 @@ class PmergeMe
 		PmergeMe(const PmergeMe& instance);
 		PmergeMe& operator=(const PmergeMe& instance);
 };
-
-// template<typename T = int, typename Container> //TODO - 추후 불필요한 경우 삭제
-// class PmergeMe
-// {
-// 	public:
-// 		PmergeMe();
-// 		~PmergeMe();
-// 		Container	parsing(char **argv);
-// 		void		sort(Container target);
-// 	private:
-// 		Container	_con;
-// 		PmergeMe(const PmergeMe& instance);
-// 		PmergeMe& operator=(const PmergeMe& instance);
-// };
 
 #endif
