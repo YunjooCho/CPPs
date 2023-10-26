@@ -6,7 +6,7 @@
 /*   By: yunjcho <yunjcho@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/12 21:11:49 by yunjcho           #+#    #+#             */
-/*   Updated: 2023/10/26 18:52:16 by yunjcho          ###   ########.fr       */
+/*   Updated: 2023/10/26 19:48:28 by yunjcho          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -184,7 +184,7 @@ void	BitcoinExchange::readDataBaseFile(std::string fileName)
 				}
 				else
 				{
-					date = str;
+					throw std::runtime_error("Error: cannot found delimiter.");
 				}
 				if (checkDate(date))
 				{
