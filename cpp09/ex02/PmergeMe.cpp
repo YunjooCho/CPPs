@@ -6,7 +6,7 @@
 /*   By: yunjcho <yunjcho@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 22:09:28 by yunjcho           #+#    #+#             */
-/*   Updated: 2023/10/28 01:57:14 by yunjcho          ###   ########seoul.kr  */
+/*   Updated: 2023/10/28 02:07:49 by yunjcho          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,6 +99,9 @@ void	PmergeMe::createChains(void)
 		_solo = *iter;
 	}
 
+	//debugging
+	std::cout << "_sortChain size() : " << _sortChain.size() << std::endl;
+
 	std::sort(_sortChain.begin(), _sortChain.end());
 	for (std::deque<std::pair<int, int> >::iterator iter = _sortChain.begin(); iter != _sortChain.end(); iter++)
 	{
@@ -118,7 +121,7 @@ void	PmergeMe::createChains(void)
 }
 
 void	PmergeMe::createChainsVec(void)
-{
+{	
 	size_t								targetIdx = _conVec.size() - 2;
 	std::vector<int>					_copyConVec(_conVec);
 	std::vector<std::pair<int, int> >	_sortChainVec;
@@ -145,6 +148,9 @@ void	PmergeMe::createChainsVec(void)
 	{
 		_solo = *iter; //TODO - pair가 없는 경우 따로 저장
 	}
+
+		//debugging
+	std::cout << "_sortChainVec size() : " << _sortChainVec.size() << std::endl;
 
 	std::sort(_sortChainVec.begin(), _sortChainVec.end());
 	for (std::vector<std::pair<int, int> >::iterator iter = _sortChainVec.begin(); iter != _sortChainVec.end(); iter++)
@@ -195,23 +201,13 @@ std::vector<int> PmergeMe::createOrder(void)
 			targetIdx = jacobstalNum(n);
 			if (targetIdx > _peChain.size())
 			{
-				//debugging
-				// std::cout << "targetIdx last : " << targetIdx << std::endl;
 				_order.push_back(targetIdx);
 				break ;
 			}
-			// std::cout << "targetIdx : " << targetIdx << std::endl;
 			_order.push_back(targetIdx);
-
-			// std::cout << "before standIdx : " << standIdx << std::endl;
-			
 			curIdx = (std::find(_order.begin(), _order.end(), targetIdx) - _order.begin());
 			distance = _order[curIdx] - _order[standIdx] - 1;
 			standIdx = curIdx;
-			//debugging
-			// std::cout << "distance : " << std::find(_order.begin(), _order.end(), targetIdx) - _order.begin() << std::endl;
-			// std::cout << "after standIdx : " << standIdx << std::endl;
-
 			for (int i = 1; i < distance + 1; i++)
 			{
 				_order.push_back(targetIdx - i);
@@ -313,7 +309,7 @@ void	PmergeMe::mergeInsertionSortVec(void)
 	//debugging
 	for (size_t i = 0; i < _orderVec.size(); i++)
 	{
-		std::cout << "_order: " << _orderVec[i] << std::endl;
+		std::cout << "_orderVec: " << _orderVec[i] << std::endl;
 	}
 
 	
