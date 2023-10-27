@@ -6,7 +6,7 @@
 /*   By: yunjcho <yunjcho@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/12 21:11:49 by yunjcho           #+#    #+#             */
-/*   Updated: 2023/10/26 19:48:28 by yunjcho          ###   ########.fr       */
+/*   Updated: 2023/10/27 22:17:44 by yunjcho          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,9 +85,9 @@ std::string BitcoinExchange::strtrim(const std::string &str)
 	return rtrim(ltrim(str));
 }
 
-std::vector<int> 	BitcoinExchange::split(std::string input, char delimiter)
+std::list<int> 	BitcoinExchange::split(std::string input, char delimiter)
 {
-	std::vector<int>	result;
+	std::list<int>		result;
 	std::stringstream	ss(input);
 	std::stringstream	ss2;
 	std::string			tmp;
@@ -109,8 +109,8 @@ std::vector<int> 	BitcoinExchange::split(std::string input, char delimiter)
 
 bool	BitcoinExchange::checkDate(std::string date)
 {
-	std::vector<int>	result;
-	std::tm				tmDate = {};
+	std::list<int>	result;
+	std::tm			tmDate = {};
 	
 	result = split(date, '-');
 	if (result.size() != 3)
@@ -118,11 +118,31 @@ bool	BitcoinExchange::checkDate(std::string date)
 		printError(INVALIDDATE, date);
 		return (false);
 	}
-	if (result[0] < 1900 || result[0] > 9999 || result[1] < 1 || result[1] > 12 || result[2] < 1 || result[2] > 31)
-		return (false);
-	tmDate.tm_year = result[0] - 1900;
-	tmDate.tm_mon = result[1] - 1;
-	tmDate.tm_mday = result[2];
+
+	std::list<int>::iterator iter = result.begin();
+	for (int i = 0; i < 3; i++)
+	{
+		if ((i == 0 && (*iter < 1900 || *iter > 9999)) \
+			|| (i == 1 && (*iter < 1 || *iter > 12)) \
+			|| (i == 2 && (*iter < 1 || *iter > 31))
+			)
+		{
+			return (false);
+		}
+		else if (i == 0)
+		{
+			tmDate.tm_year = *iter - 1900;
+		}
+		else if (i == 1)
+		{
+			tmDate.tm_mon = *iter - 1;
+		}
+		else if (i == 2)
+		{
+			tmDate.tm_mday = *iter;
+		}
+		iter++;
+	}
 	if (std::mktime(&tmDate) == -1)
 		return (false);
 	return (true);
@@ -247,7 +267,7 @@ void	BitcoinExchange::readInputFile(std::string fileName)
 								--iter;
 							else
 							{
-								printError(ETC, date + "doesn't exist invalid date in DataBase");
+								printError(ETC, date + " doesn't exist in DataBase");
 								continue ;
 							}
 						}
