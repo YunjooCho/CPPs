@@ -6,7 +6,7 @@
 /*   By: yunjcho <yunjcho@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 22:09:28 by yunjcho           #+#    #+#             */
-/*   Updated: 2023/10/27 21:50:19 by yunjcho          ###   ########.fr       */
+/*   Updated: 2023/10/28 01:57:14 by yunjcho          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,23 +52,29 @@ void	PmergeMe::parsing(char **argv)
 		if (value > std::numeric_limits<int>::max())
 			throw std::runtime_error("Error: too large a number." + std::to_string(value)); 
 		_con.push_back(value);
+		_conVec.push_back(value);
 		idx++;
 	}
 
 	//debugging
 	for (std::deque<int>::iterator iter = _con.begin(); iter != _con.end(); iter++)
 	{
-		std::cout << *iter << " ";;
+		std::cout << "deq: " << *iter << " ";;
 	}
 	std::cout << std::endl;
 
+	for (std::vector<int>::iterator iter = _conVec.begin(); iter != _conVec.end(); iter++)
+	{
+		std::cout << "vec: " << *iter << " ";;
+	}
+	std::cout << std::endl;
 }
 
 void	PmergeMe::createChains(void)
 {
-	size_t			targetIdx = _con.size() - 2;
-	std::deque<int>	_copyCon(_con);
-	std::deque<std::pair<int, int> > _sortChain;
+	size_t								targetIdx = _con.size() - 2;
+	std::deque<int>						_copyCon(_con);
+	std::deque<std::pair<int, int> >	_sortChain;
 
 	if (_con.size() % 2 != 0)
 		targetIdx -= 1;
@@ -80,8 +86,6 @@ void	PmergeMe::createChains(void)
 			_sortChain.push_back(std::make_pair(*iter2, *iter));
 		else if(*iter > *iter2)
 			_sortChain.push_back(std::make_pair(*iter, *iter2));
-		else
-			throw std::runtime_error("Error: Duplicate values existed.");
 		for (size_t j = 0; j < 2; j++)
 		{
 			++iter;
@@ -92,7 +96,7 @@ void	PmergeMe::createChains(void)
 	
 	if (_copyCon.size() > 0)
 	{
-		_solo = *iter; //TODO - pair가 없는 경우 따로 저장
+		_solo = *iter;
 	}
 
 	std::sort(_sortChain.begin(), _sortChain.end());
@@ -100,20 +104,64 @@ void	PmergeMe::createChains(void)
 	{
 		_mainChain.push_back(iter->first);
 		_peChain.push_back(iter->second);
-
-		//debugging
-		// std::cout << "set key : " << iter->first << ", value : " << iter->second << std::endl;
 	}
 
 	// debugging
-	// for (std::deque<int>::iterator iter = _mainChain.begin(); iter != _mainChain.end(); iter++)
-	// {
-	// 	std::cout << "mainChain : " << *iter << std::endl;
-	// }
-	// for (std::deque<int>::iterator iter = _peChain.begin(); iter != _peChain.end(); iter++)
-	// {
-	// 	std::cout << "peChain : " << *iter << std::endl;
-	// }
+	for (std::deque<int>::iterator iter = _mainChain.begin(); iter != _mainChain.end(); iter++)
+	{
+		std::cout << "mainChain : " << *iter << std::endl;
+	}
+	for (std::deque<int>::iterator iter = _peChain.begin(); iter != _peChain.end(); iter++)
+	{
+		std::cout << "peChain : " << *iter << std::endl;
+	}
+}
+
+void	PmergeMe::createChainsVec(void)
+{
+	size_t								targetIdx = _conVec.size() - 2;
+	std::vector<int>					_copyConVec(_conVec);
+	std::vector<std::pair<int, int> >	_sortChainVec;
+
+	if (_conVec.size() % 2 != 0)
+		targetIdx -= 1;
+	std::vector<int>::iterator iter = _copyConVec.begin();
+	std::vector<int>::iterator iter2 = ++_copyConVec.begin();
+	for (size_t i = 0; i <= targetIdx; i += 2)
+	{
+		if (*iter < *iter2)
+			_sortChainVec.push_back(std::make_pair(*iter2, *iter));
+		else if(*iter > *iter2)
+			_sortChainVec.push_back(std::make_pair(*iter, *iter2));
+		for (size_t j = 0; j < 2; j++)
+		{
+			++iter;
+			++iter2;
+			_copyConVec.erase(_copyConVec.begin());
+		}
+	}
+	
+	if (_copyConVec.size() > 0)
+	{
+		_solo = *iter; //TODO - pair가 없는 경우 따로 저장
+	}
+
+	std::sort(_sortChainVec.begin(), _sortChainVec.end());
+	for (std::vector<std::pair<int, int> >::iterator iter = _sortChainVec.begin(); iter != _sortChainVec.end(); iter++)
+	{
+		_mainChainVec.push_back(iter->first);
+		_peChainVec.push_back(iter->second);
+	}
+
+	// debugging
+	for (std::vector<int>::iterator iter = _mainChainVec.begin(); iter != _mainChainVec.end(); iter++)
+	{
+		std::cout << "_mainChainVec : " << *iter << std::endl;
+	}
+	for (std::vector<int>::iterator iter = _peChainVec.begin(); iter != _peChainVec.end(); iter++)
+	{
+		std::cout << "_peChainVec : " << *iter << std::endl;
+	}
 }
 
 int		PmergeMe::jacobstalNum(int n)
@@ -136,10 +184,6 @@ std::vector<int> PmergeMe::createOrder(void)
 	int					n = 3;          // 야콥스탈 수를 구하기 위한 변수(야콥스탈 함수 호출 횟수)
 
 	_order.push_back(1);
-
-	//debugging
-	// std::cout << "peChain size : " << _peChain.size() << std::endl;
-
 	if (_peChain.size() < 2) // pendingElements의 첫번째 값은 무조건 먼저 넣음
 	{
 		_order.push_back(2); // pendingElements의 첫번째를 제외한 두번째 값의 순서만 정렬 -> 원소개수가 2개만 있는 경우 순서 없이 바로 하드코딩?
@@ -184,7 +228,8 @@ std::vector<int> PmergeMe::createOrder(void)
 	return (_order);
 }
 
-void	PmergeMe::insertionSolo(std::deque<int> result)
+template <typename Container>
+void	PmergeMe::insertionSolo(Container result)
 {
 	size_t	startIdx = 0;
 	size_t	endIdx = 0;
@@ -196,7 +241,11 @@ void	PmergeMe::insertionSolo(std::deque<int> result)
 			startIdx = midIdx + 1;
 		else if (result[midIdx] > _solo)
 			endIdx = midIdx;
-
+		else
+		{
+			startIdx = midIdx + 1;
+			break ;
+		}
 	}
 	result.insert(result.begin() + startIdx, _solo);
 }
@@ -210,6 +259,13 @@ void	PmergeMe::mergeInsertionSort(void)
 	size_t				endIdx = 0;
 
 	_order = createOrder();
+	//debugging
+	for (size_t i = 0; i < _order.size(); i++)
+	{
+		std::cout << "_order: " << _order[i] << std::endl;
+	}
+
+
 	for (std::vector<int>::iterator iter = _order.begin(); iter != _order.end(); iter++)
 	{
 		if (*iter == 1)
@@ -228,7 +284,11 @@ void	PmergeMe::mergeInsertionSort(void)
 				startIdx = midIdx + 1;
 			else if (result[midIdx] > curVal)
 				endIdx = midIdx;
-
+			else
+			{
+				startIdx = midIdx;
+				break ;
+			}
 		}
 		result.insert(result.begin() + startIdx, _peChain[*iter - 1]);
 	}
@@ -241,11 +301,91 @@ void	PmergeMe::mergeInsertionSort(void)
 	}
 }
 
+void	PmergeMe::mergeInsertionSortVec(void)
+{
+	std::vector<int>	resultVec(_mainChainVec);
+	std::vector<int>	_orderVec;
+	int					curVal;
+	size_t				startIdx = 0;
+	size_t				endIdx = 0;
+
+	_orderVec = createOrder();
+	//debugging
+	for (size_t i = 0; i < _orderVec.size(); i++)
+	{
+		std::cout << "_order: " << _orderVec[i] << std::endl;
+	}
+
+	
+	for (std::vector<int>::iterator iter = _orderVec.begin(); iter != _orderVec.end(); iter++)
+	{
+		if (*iter == 1)
+		{
+			resultVec.insert(resultVec.begin(), _peChainVec[0]);
+			continue ;
+		}
+		
+		startIdx = 0;
+		endIdx = std::find(resultVec.begin(), resultVec.end(), _mainChainVec[*iter - 1]) - resultVec.begin();
+		while (startIdx < endIdx)
+		{
+			curVal = _peChainVec[*iter - 1];
+			size_t midIdx = (startIdx + endIdx) / 2;
+			if (resultVec[midIdx] < curVal)
+				startIdx = midIdx + 1;
+			else if (resultVec[midIdx] > curVal)
+				endIdx = midIdx;
+			else
+			{
+				startIdx = midIdx;
+				break ;
+			}
+		}
+		resultVec.insert(resultVec.begin() + startIdx, _peChainVec[*iter - 1]);
+	}
+	if (_solo != -1)
+		insertionSolo(resultVec);
+	//debugging
+	for (size_t i = 0; i < resultVec.size(); i++)
+	{
+		std::cout << "resultVec : " << resultVec[i] << std::endl;
+	}
+}
+
 void	PmergeMe::sort(void)
 {
+	clock_t	startTime;
+	clock_t	deqTime;
+	clock_t	vecTime;
+
+	
 	_solo = -1;
-	if (_con.size() == 1)
+	startTime = clock();
+	if (_con.size() == 1 || _conVec.size() == 1)
+	{
+		deqTime = clock() - startTime;
+		vecTime = clock() - startTime;
+		printTimes(deqTime, vecTime);
 		return ;
+	}
+
+	_solo = -1;
+	startTime = clock();
 	createChains();
 	mergeInsertionSort();
+	deqTime = clock() - startTime;
+
+	_solo = -1;
+	startTime = clock();
+	createChainsVec();
+	mergeInsertionSortVec();
+	vecTime = clock() - startTime;
+
+	printTimes(deqTime, vecTime);
+}
+
+void	PmergeMe::printTimes(clock_t deqTime, clock_t vecTime)
+{
+	std::cout << "Time to process a range of " << _con.size() << " elements with std::deque : " << deqTime * 0.001 << " us" << std::endl;
+	std::cout << "Time to process a range of " << _con.size() << " elements with std::list : " << vecTime * 0.001 << " us" << std::endl;
 }
