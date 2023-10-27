@@ -6,7 +6,7 @@
 /*   By: yunjcho <yunjcho@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 22:02:48 by yunjcho           #+#    #+#             */
-/*   Updated: 2023/10/27 16:49:52 by yunjcho          ###   ########.fr       */
+/*   Updated: 2023/10/27 21:21:25 by yunjcho          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ class PmergeMe
 		std::deque<int>	_con;
 		std::deque<int>	_mainChain;
 		std::deque<int>	_peChain;
+		int				_solo;
 		PmergeMe(const PmergeMe& instance);
 		PmergeMe& operator=(const PmergeMe& instance);
 };

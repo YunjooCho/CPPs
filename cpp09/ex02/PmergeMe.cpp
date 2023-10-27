@@ -6,7 +6,7 @@
 /*   By: yunjcho <yunjcho@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 22:09:28 by yunjcho           #+#    #+#             */
-/*   Updated: 2023/10/27 19:29:10 by yunjcho          ###   ########.fr       */
+/*   Updated: 2023/10/27 21:24:32 by yunjcho          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,11 +92,7 @@ void	PmergeMe::createChains(void)
 	
 	if (_copyCon.size() > 0)
 	{
-		while (iter != _copyCon.end())
-		{
-			_sortChain.push_back(std::make_pair(2147483647, *iter)); //TODO - pair가 없는 경우 따로 저장
-			++iter;
-		}		
+		_solo = *iter; //TODO - pair가 없는 경우 따로 저장
 	}
 
 	std::sort(_sortChain.begin(), _sortChain.end());
@@ -188,71 +184,55 @@ std::vector<int> PmergeMe::createOrder(void)
 	return (_order);
 }
 
-void	PmergeMe::mergeInsertionSort(void)
+void	PmergeMe::mergeInsertionSort(void) //solo 추가
 {
 	std::deque<int>		result(_mainChain);
 	std::vector<int>	_order;
-	// int					orderCnt = _peChain.size();
-	// int					pos; //result 컨테이너 안에 들어갈 위치
+	int					curVal;
+	size_t				startIdx = 0;
+	size_t				endIdx = 0;
+
 
 	_order = createOrder();
 	//debugging
-	for (size_t i = 0; i < _order.size(); i++)
-	{
-		std::cout << "order : " << _order[i] << std::endl;
-	}
+	// for (size_t i = 0; i < _order.size(); i++)
+	// {
+	// 	std::cout << "order : " << _order[i] << std::endl;
+	// }
 
 	for (std::vector<int>::iterator iter = _order.begin(); iter != _order.end(); iter++)
 	{
-		// std::cout << "*iter : " << *iter << std::endl;
+		if (*iter == 1)
+		{
+			result.push_front(_peChain[0]);
+			continue ;
+		}
+		
+		startIdx = 0;
+		endIdx = std::find(result.begin(), result.end(), _mainChain[*iter - 1]) - result.begin();
 
-		// //position 구하기 - 이진 탐색
-		// if (*iter == 1)
-		// {
-		// 	result.push_front(_peChain[0]);
-		// 	continue ;
-		// }
+		while (startIdx < endIdx)
+		{
+			curVal = _peChain[*iter - 1];
+			size_t midIdx = (startIdx + endIdx) / 2;
+			// debugging
+			// std::cout << "startIdx : " << startIdx << std::endl;
+			// std::cout << "endIdx : " << endIdx << std::endl;
+			// std::cout << "curVal : " << curVal << std::endl;
+			// std::cout << "pairVal : " << _mainChain[*iter - 1] << std::endl;
+			// std::cout << "midIdx : " << midIdx << std::endl;
+			// std::cout << "compareVal (result[midIdx]): " << result[midIdx] << std::endl;
+			if (result[midIdx] < curVal)
+			{
+				startIdx = midIdx + 1;
+			}
+			else if (result[midIdx] > curVal)
+			{
+				endIdx = midIdx;
+			}
 
-		// //debugging
-		// // std::cout << "result size : " << result.size() << std::endl;
-
-		// size_t	pairIdx = std::find(result.begin(), result.end(), _mainChain[*iter]) - result.begin();
-		// size_t	midIdx = (pairIdx + 1) / 2;
-		// //debugging
-		// std::cout << "result size : " << result.size() << std::endl;
-		// // std::cout << "pairIdx : " << pairIdx << std::endl;
-		// // std::cout << "midIdx : " << midIdx << std::endl;
-		// while (true)
-		// {
-		// 	if ((result[midIdx] > _peChain[*iter - 1] \
-		// 		&& result[midIdx - 1] < _peChain[*iter - 1]) \
-		// 		|| midIdx == 0 || midIdx > _peChain.size())
-		// 	{	
-		// 		break ;
-		// 	}
-		// 	if (result[midIdx] < _peChain[*iter - 1])
-		// 	{
-		// 		midIdx -= 1;
-		// 	}
-		// 	else
-		// 	{
-		// 		midIdx += 1;
-		// 	}
-		// 	std::cout << "*iter : " << *iter << std::endl;
-		// 	std::cout << "[curValue]_peChain[*iter - 1] : " << _peChain[*iter - 1] << std::endl;
-		// 	std::cout << "midIdx : " << midIdx << ", value : " << result[midIdx] << std::endl;
-		// 	std::cout << "result[midIdx] : " << result[midIdx] << std::endl;
-		// }
-		// //debugging
-		// std::cout << "!!!midIdx : " << midIdx << std::endl;
-		// // std::cout << "result[midIdx] : " << result[midIdx] << std::endl;
-		// // std::cout << "_peChain[*iter] : " << _peChain[*iter] << std::endl;
-		// if (_peChain[*iter] < result[0])
-		// 	result.push_front(_peChain[*iter - 1]);
-		// else if (midIdx > result.size())
-		// 	result.push_back(_peChain[*iter - 1]);
-		// else
-		// 	result.insert(result.begin() + midIdx, _peChain[*iter - 1]);
+		}
+		result.insert(result.begin() + startIdx, _peChain[*iter - 1]);
 	}
 
 	//debugging
