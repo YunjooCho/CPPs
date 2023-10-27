@@ -6,7 +6,7 @@
 #    By: yunjcho <yunjcho@student.42seoul.kr>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/06/14 15:31:29 by yunjcho           #+#    #+#              #
-#    Updated: 2023/10/24 22:02:09 by yunjcho          ###   ########.fr        #
+#    Updated: 2023/10/27 19:10:52 by yunjcho          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,6 +15,7 @@ CXX = c++
 CXXFLAGS = -Wall -Werror -Wextra -std=c++98
 SRCS = main.cpp PmergeMe.cpp
 OBJS = $(SRCS:.cpp=.o)
+EXEC =	PmergeMe
 
 all : $(NAME)
 
@@ -33,5 +34,11 @@ fclean : clean
 re : 
 	make fclean 
 	make all
+
+test: all 
+	./$(EXEC) 5 8 10 20 30 1 2 4 6 9 11 21
+
+test1: all 
+	./$(EXEC) 5 8 10 20 30 1 2 4 6 9 11 21 31
 
 .PHONY: all clean fclean re

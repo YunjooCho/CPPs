@@ -6,7 +6,7 @@
 /*   By: yunjcho <yunjcho@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 22:09:28 by yunjcho           #+#    #+#             */
-/*   Updated: 2023/10/27 17:21:57 by yunjcho          ###   ########.fr       */
+/*   Updated: 2023/10/27 19:29:10 by yunjcho          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,8 +104,12 @@ void	PmergeMe::createChains(void)
 	{
 		_mainChain.push_back(iter->first);
 		_peChain.push_back(iter->second);
-		std::cout << "set key : " << iter->first << ", value : " << iter->second << std::endl;
+
+		//debugging
+		// std::cout << "set key : " << iter->first << ", value : " << iter->second << std::endl;
 	}
+
+	// debugging
 	for (std::deque<int>::iterator iter = _mainChain.begin(); iter != _mainChain.end(); iter++)
 	{
 		std::cout << "mainChain : " << *iter << std::endl;
@@ -128,17 +132,17 @@ int		PmergeMe::jacobstalNum(int n)
 
 std::vector<int> PmergeMe::createOrder(void)
 {
-		std::vector<int> _order;
-	size_t	targetIdx = -1; // _peChain.size()와 비교하기 위해 size_t
-	int		standIdx = 0;   // 야곱스탈 수로 구한 3, 5, 11, 21 등이 _order 안에 저장된 위치(인덱스)
-	int		curIdx = 0;     // 야콥스탈 함수를 통해 마지막으로 구한 값이 _order 안에 저장된 위치(인덱스)
-	int		distance = 0;   // 야곱스탈 수 끼리의 간격, 1 ~ 3 이면 2, 3 ~ 5 이면 2
-	int		n = 3;          // 야콥스탈 수를 구하기 위한 변수(야콥스탈 함수 호출 횟수)
+	std::vector<int>	_order;
+	size_t				targetIdx = -1; // _peChain.size()와 비교하기 위해 size_t
+	int					standIdx = 0;   // 야곱스탈 수로 구한 3, 5, 11, 21 등이 _order 안에 저장된 위치(인덱스)
+	int					curIdx = 0;     // 야콥스탈 함수를 통해 마지막으로 구한 값이 _order 안에 저장된 위치(인덱스)
+	int					distance = 0;   // 야곱스탈 수 끼리의 간격, 1 ~ 3 이면 2, 3 ~ 5 이면 2
+	int					n = 3;          // 야콥스탈 수를 구하기 위한 변수(야콥스탈 함수 호출 횟수)
 
 	_order.push_back(1);
 
 	//debugging
-	std::cout << "peChain size : " << _peChain.size() << std::endl;
+	// std::cout << "peChain size : " << _peChain.size() << std::endl;
 
 	if (_peChain.size() < 2) // pendingElements의 첫번째 값은 무조건 먼저 넣음
 	{
@@ -149,24 +153,24 @@ std::vector<int> PmergeMe::createOrder(void)
 		while (true)
 		{
 			targetIdx = jacobstalNum(n);
-			if (targetIdx >= _peChain.size())
+			if (targetIdx > _peChain.size())
 			{
 				//debugging
-				std::cout << "targetIdx last : " << targetIdx << std::endl;
+				// std::cout << "targetIdx last : " << targetIdx << std::endl;
 				_order.push_back(targetIdx);
 				break ;
 			}
-			std::cout << "targetIdx : " << targetIdx << std::endl;
+			// std::cout << "targetIdx : " << targetIdx << std::endl;
 			_order.push_back(targetIdx);
 
-			std::cout << "before standIdx : " << standIdx << std::endl;
+			// std::cout << "before standIdx : " << standIdx << std::endl;
 			
 			curIdx = (std::find(_order.begin(), _order.end(), targetIdx) - _order.begin());
 			distance = _order[curIdx] - _order[standIdx] - 1;
 			standIdx = curIdx;
 			//debugging
-			std::cout << "distance : " << std::find(_order.begin(), _order.end(), targetIdx) - _order.begin() << std::endl;
-			std::cout << "after standIdx : " << standIdx << std::endl;
+			// std::cout << "distance : " << std::find(_order.begin(), _order.end(), targetIdx) - _order.begin() << std::endl;
+			// std::cout << "after standIdx : " << standIdx << std::endl;
 
 			for (int i = 1; i < distance + 1; i++)
 			{
@@ -175,11 +179,12 @@ std::vector<int> PmergeMe::createOrder(void)
 			n++;
 		}
 	}
-	//debugging
-	for (size_t i = 0; i < _order.size(); i++)
+	if (_order.size() > _peChain.size())
 	{
-		std::cout << "order : " << _order[i] << std::endl;
+		int max = *std::max_element(_order.begin(), _order.end());
+		_order.erase(std::find(_order.begin(), _order.end(), max));
 	}
+	*std::max_element(_order.begin(), _order.end()) = _peChain.size();
 	return (_order);
 }
 
@@ -191,33 +196,69 @@ void	PmergeMe::mergeInsertionSort(void)
 	// int					pos; //result 컨테이너 안에 들어갈 위치
 
 	_order = createOrder();
+	//debugging
+	for (size_t i = 0; i < _order.size(); i++)
+	{
+		std::cout << "order : " << _order[i] << std::endl;
+	}
+
 	for (std::vector<int>::iterator iter = _order.begin(); iter != _order.end(); iter++)
 	{
-		//position 구하기 - 이진 탐색
-		if (*iter == 1)
-			result.push_front(_peChain[0]);
-		else
-		{
-			//debugging
-			std::cout << "result size : " << result.size() << std::endl;
+		// std::cout << "*iter : " << *iter << std::endl;
 
-			int	pairIdx = std::find(result.begin(), result.end(), _mainChain[*iter]) - result.begin();
+		// //position 구하기 - 이진 탐색
+		// if (*iter == 1)
+		// {
+		// 	result.push_front(_peChain[0]);
+		// 	continue ;
+		// }
 
-			
-			int	midIdx = (pairIdx + 1) / 2;
-			//debugging
-			std::cout << "pairIdx : " << pairIdx << std::endl;
-			std::cout << "midIdx : " << midIdx << std::endl;
-			// while (true)
-			// {
-			// 	if (result[midIdx] < _peChain[*iter])
-			// 		midIdx = 
-			// 	else
-					
-			// }
-				
-			// _mainChain.insert(pos, 1, _peChain[*iter]);
-		}
+		// //debugging
+		// // std::cout << "result size : " << result.size() << std::endl;
+
+		// size_t	pairIdx = std::find(result.begin(), result.end(), _mainChain[*iter]) - result.begin();
+		// size_t	midIdx = (pairIdx + 1) / 2;
+		// //debugging
+		// std::cout << "result size : " << result.size() << std::endl;
+		// // std::cout << "pairIdx : " << pairIdx << std::endl;
+		// // std::cout << "midIdx : " << midIdx << std::endl;
+		// while (true)
+		// {
+		// 	if ((result[midIdx] > _peChain[*iter - 1] \
+		// 		&& result[midIdx - 1] < _peChain[*iter - 1]) \
+		// 		|| midIdx == 0 || midIdx > _peChain.size())
+		// 	{	
+		// 		break ;
+		// 	}
+		// 	if (result[midIdx] < _peChain[*iter - 1])
+		// 	{
+		// 		midIdx -= 1;
+		// 	}
+		// 	else
+		// 	{
+		// 		midIdx += 1;
+		// 	}
+		// 	std::cout << "*iter : " << *iter << std::endl;
+		// 	std::cout << "[curValue]_peChain[*iter - 1] : " << _peChain[*iter - 1] << std::endl;
+		// 	std::cout << "midIdx : " << midIdx << ", value : " << result[midIdx] << std::endl;
+		// 	std::cout << "result[midIdx] : " << result[midIdx] << std::endl;
+		// }
+		// //debugging
+		// std::cout << "!!!midIdx : " << midIdx << std::endl;
+		// // std::cout << "result[midIdx] : " << result[midIdx] << std::endl;
+		// // std::cout << "_peChain[*iter] : " << _peChain[*iter] << std::endl;
+		// if (_peChain[*iter] < result[0])
+		// 	result.push_front(_peChain[*iter - 1]);
+		// else if (midIdx > result.size())
+		// 	result.push_back(_peChain[*iter - 1]);
+		// else
+		// 	result.insert(result.begin() + midIdx, _peChain[*iter - 1]);
+	}
+
+	//debugging
+	for (size_t i = 0; i < result.size(); i++)
+	{
+		std::cout << "result : " << result[i] << std::endl;
 	}
 }
 
