@@ -6,7 +6,7 @@
 /*   By: yunjcho <yunjcho@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 22:02:48 by yunjcho           #+#    #+#             */
-/*   Updated: 2023/10/27 21:21:25 by yunjcho          ###   ########.fr       */
+/*   Updated: 2023/10/27 22:19:49 by yunjcho          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ class PmergeMe
 		void				createChains(void);
 		int					jacobstalNum(int n);
 		std::vector<int>	createOrder(void);
+		void				insertionSolo(std::deque<int> result);
 		void				mergeInsertionSort(void);
 		void				sort(void);
 	private:
@@ -43,3 +44,10 @@ class PmergeMe
 };
 
 #endif
+
+
+//시간 측정
+//벡터로 구현
+//결과 프린트
+//중복 처리
+//인자 개수 많으면 터짐

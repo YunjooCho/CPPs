@@ -6,7 +6,7 @@
 /*   By: yunjcho <yunjcho@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 22:09:28 by yunjcho           #+#    #+#             */
-/*   Updated: 2023/10/27 21:24:32 by yunjcho          ###   ########.fr       */
+/*   Updated: 2023/10/27 21:50:19 by yunjcho          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,14 +106,14 @@ void	PmergeMe::createChains(void)
 	}
 
 	// debugging
-	for (std::deque<int>::iterator iter = _mainChain.begin(); iter != _mainChain.end(); iter++)
-	{
-		std::cout << "mainChain : " << *iter << std::endl;
-	}
-	for (std::deque<int>::iterator iter = _peChain.begin(); iter != _peChain.end(); iter++)
-	{
-		std::cout << "peChain : " << *iter << std::endl;
-	}
+	// for (std::deque<int>::iterator iter = _mainChain.begin(); iter != _mainChain.end(); iter++)
+	// {
+	// 	std::cout << "mainChain : " << *iter << std::endl;
+	// }
+	// for (std::deque<int>::iterator iter = _peChain.begin(); iter != _peChain.end(); iter++)
+	// {
+	// 	std::cout << "peChain : " << *iter << std::endl;
+	// }
 }
 
 int		PmergeMe::jacobstalNum(int n)
@@ -184,7 +184,24 @@ std::vector<int> PmergeMe::createOrder(void)
 	return (_order);
 }
 
-void	PmergeMe::mergeInsertionSort(void) //solo 추가
+void	PmergeMe::insertionSolo(std::deque<int> result)
+{
+	size_t	startIdx = 0;
+	size_t	endIdx = 0;
+
+	while (startIdx < endIdx)
+	{
+		size_t midIdx = (startIdx + endIdx) / 2;
+		if (result[midIdx] < _solo)
+			startIdx = midIdx + 1;
+		else if (result[midIdx] > _solo)
+			endIdx = midIdx;
+
+	}
+	result.insert(result.begin() + startIdx, _solo);
+}
+
+void	PmergeMe::mergeInsertionSort(void)
 {
 	std::deque<int>		result(_mainChain);
 	std::vector<int>	_order;
@@ -192,14 +209,7 @@ void	PmergeMe::mergeInsertionSort(void) //solo 추가
 	size_t				startIdx = 0;
 	size_t				endIdx = 0;
 
-
 	_order = createOrder();
-	//debugging
-	// for (size_t i = 0; i < _order.size(); i++)
-	// {
-	// 	std::cout << "order : " << _order[i] << std::endl;
-	// }
-
 	for (std::vector<int>::iterator iter = _order.begin(); iter != _order.end(); iter++)
 	{
 		if (*iter == 1)
@@ -210,31 +220,20 @@ void	PmergeMe::mergeInsertionSort(void) //solo 추가
 		
 		startIdx = 0;
 		endIdx = std::find(result.begin(), result.end(), _mainChain[*iter - 1]) - result.begin();
-
 		while (startIdx < endIdx)
 		{
 			curVal = _peChain[*iter - 1];
 			size_t midIdx = (startIdx + endIdx) / 2;
-			// debugging
-			// std::cout << "startIdx : " << startIdx << std::endl;
-			// std::cout << "endIdx : " << endIdx << std::endl;
-			// std::cout << "curVal : " << curVal << std::endl;
-			// std::cout << "pairVal : " << _mainChain[*iter - 1] << std::endl;
-			// std::cout << "midIdx : " << midIdx << std::endl;
-			// std::cout << "compareVal (result[midIdx]): " << result[midIdx] << std::endl;
 			if (result[midIdx] < curVal)
-			{
 				startIdx = midIdx + 1;
-			}
 			else if (result[midIdx] > curVal)
-			{
 				endIdx = midIdx;
-			}
 
 		}
 		result.insert(result.begin() + startIdx, _peChain[*iter - 1]);
 	}
-
+	if (_solo != -1)
+		insertionSolo(result);
 	//debugging
 	for (size_t i = 0; i < result.size(); i++)
 	{
@@ -244,6 +243,7 @@ void	PmergeMe::mergeInsertionSort(void) //solo 추가
 
 void	PmergeMe::sort(void)
 {
+	_solo = -1;
 	if (_con.size() == 1)
 		return ;
 	createChains();
