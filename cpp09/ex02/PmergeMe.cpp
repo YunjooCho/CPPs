@@ -6,7 +6,7 @@
 /*   By: yunjcho <yunjcho@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 22:09:28 by yunjcho           #+#    #+#             */
-/*   Updated: 2023/10/28 09:39:04 by yunjcho          ###   ########seoul.kr  */
+/*   Updated: 2023/10/28 09:58:29 by yunjcho          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,19 +55,6 @@ void	PmergeMe::parsing(char **argv)
 		_conVec.push_back(value);
 		idx++;
 	}
-
-	//debugging
-	for (std::deque<int>::iterator iter = _con.begin(); iter != _con.end(); iter++)
-	{
-		std::cout << "deq: " << *iter << " ";;
-	}
-	std::cout << std::endl;
-
-	for (std::vector<int>::iterator iter = _conVec.begin(); iter != _conVec.end(); iter++)
-	{
-		std::cout << "vec: " << *iter << " ";;
-	}
-	std::cout << std::endl;
 }
 
 void	PmergeMe::createChains(void)
@@ -94,7 +81,7 @@ void	PmergeMe::createChains(void)
 		}
 	}
 	
-	if (_copyCon.size() > 0)
+	if (_copyCon.size() % 2 != 0)
 	{
 		_solo = *iter;
 	}
@@ -104,16 +91,6 @@ void	PmergeMe::createChains(void)
 		_mainChain.push_back(iter->first);
 		_peChain.push_back(iter->second);
 	}
-
-	// debugging
-// 	for (std::deque<int>::iterator iter = _mainChain.begin(); iter != _mainChain.end(); iter++)
-// 	{
-// 		std::cout << "mainChain : " << *iter << std::endl;
-// 	}
-// 	for (std::deque<int>::iterator iter = _peChain.begin(); iter != _peChain.end(); iter++)
-// 	{
-// 		std::cout << "peChain : " << *iter << std::endl;
-// 	}
 }
 
 void	PmergeMe::createChainsVec(void)
@@ -149,16 +126,6 @@ void	PmergeMe::createChainsVec(void)
 		_mainChainVec.push_back(iter->first);
 		_peChainVec.push_back(iter->second);
 	}
-
-	// debugging
-	// for (std::vector<int>::iterator iter = _mainChainVec.begin(); iter != _mainChainVec.end(); iter++)
-	// {
-	// 	std::cout << "_mainChainVec : " << *iter << std::endl;
-	// }
-	// for (std::vector<int>::iterator iter = _peChainVec.begin(); iter != _peChainVec.end(); iter++)
-	// {
-	// 	std::cout << "_peChainVec : " << *iter << std::endl;
-	// }
 }
 
 int		PmergeMe::jacobstalNum(int n)
@@ -275,10 +242,7 @@ void	PmergeMe::mergeInsertionSort(void)
 	}
 	if (_solo != -1)
 		insertionSolo(result);
-	for (size_t i = 0; i < result.size(); i++)
-	{
-		std::cout << "result : " << result[i] << std::endl;
-	}
+	_result = result;
 }
 
 void	PmergeMe::mergeInsertionSortVec(void)
@@ -318,10 +282,7 @@ void	PmergeMe::mergeInsertionSortVec(void)
 	}
 	if (_solo != -1)
 		insertionSolo(resultVec);
-	for (size_t i = 0; i < resultVec.size(); i++)
-	{
-		std::cout << "resultVec : " << resultVec[i] << std::endl;
-	}
+	_resultVec = resultVec;
 }
 
 void	PmergeMe::sort(void)
@@ -330,8 +291,6 @@ void	PmergeMe::sort(void)
 	clock_t	deqTime;
 	clock_t	vecTime;
 
-	
-	_solo = -1;
 	startTime = clock();
 	if (_con.size() == 1 || _conVec.size() == 1)
 	{
@@ -353,11 +312,35 @@ void	PmergeMe::sort(void)
 	mergeInsertionSortVec();
 	vecTime = clock() - startTime;
 
+	printArgs();
 	printTimes(deqTime, vecTime);
+}
+
+void	PmergeMe::printArgs(void)
+{
+	std::cout << "before:		";
+	for (size_t i = 0; i < _con.size(); i++)
+	{
+		std::cout << _con[i] << " ";
+	}
+	std::cout << std::endl;
+
+	std::cout << "after(deque):	";
+	for (size_t i = 0; i < _result.size(); i++)
+	{
+		std::cout << _result[i] << " ";
+	}
+	std::cout << std::endl;
+	std::cout << "after(vec):	";
+	for (size_t i = 0; i < _resultVec.size(); i++)
+	{
+		std::cout << _result[i] << " ";
+	}
+	std::cout << std::endl;
 }
 
 void	PmergeMe::printTimes(clock_t deqTime, clock_t vecTime)
 {
-	std::cout << "Time to process a range of " << _con.size() << " elements with std::deque : " << deqTime * 0.001 << " us" << std::endl;
-	std::cout << "Time to process a range of " << _con.size() << " elements with std::list : " << vecTime * 0.001 << " us" << std::endl;
+	std::cout << "Time to process a range of " << _con.size() << " elements with std::deque : " << std::fixed << std::setprecision(5) << deqTime * 0.001 << " us" << std::endl;
+	std::cout << "Time to process a range of " << _con.size() << " elements with std::vector : " << std::fixed << std::setprecision(5) << vecTime * 0.001 << " us" << std::endl;
 }
