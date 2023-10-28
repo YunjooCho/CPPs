@@ -6,7 +6,7 @@
 /*   By: yunjcho <yunjcho@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 22:02:48 by yunjcho           #+#    #+#             */
-/*   Updated: 2023/10/28 21:47:03 by yunjcho          ###   ########.fr       */
+/*   Updated: 2023/10/29 08:33:24 by yunjcho          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,9 +35,11 @@ class PmergeMe
 		std::vector<int>	createOrder(void);
 		template <typename Container>
 		void				insertionSolo(Container& result);
-		void				merge(std::deque<std::pair<int, int> >& _sortChain, int startIdx, int endIdx, int depth);
-		void				mergeSortMainChain(std::deque<std::pair<int, int> >&_sortChain, int startIdx, int endIdx, int depth);
+		void				merge(std::deque<std::pair<int, int> >& _sortChain, size_t startIdx, size_t midIdx, size_t endIdx);
+		void				mergeSortMainChain(std::deque<std::pair<int, int> >&_sortChain, size_t startIdx, size_t endIdx);
 		void				mergeInsertionSort(void);
+		void				mergeVec(std::vector<std::pair<int, int> >& _sortChainVec, size_t startIdx, size_t midIdx, size_t endIdx);
+		void				mergeSortMainChainVec(std::vector<std::pair<int, int> >&_sortChainVec, size_t startIdx, size_t endIdx);
 		void				mergeInsertionSortVec(void);
 		void				sort(void);
 		void				printArgs(void);

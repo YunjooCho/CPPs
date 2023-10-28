@@ -6,7 +6,7 @@
 /*   By: yunjcho <yunjcho@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 22:09:28 by yunjcho           #+#    #+#             */
-/*   Updated: 2023/10/28 23:29:11 by yunjcho          ###   ########.fr       */
+/*   Updated: 2023/10/29 08:36:31 by yunjcho          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,63 +59,110 @@ void	PmergeMe::parsing(char **argv)
 
 //많은 수정 요망
 void	PmergeMe::merge(std::deque<std::pair<int, int> >&_sortChain, \
-	int startIdx, int endIdx, int depth)
+	size_t startIdx, size_t midIdx, size_t endIdx)
 {	
-	std::deque<std::pair<int, int> >	left;
-	std::deque<std::pair<int, int> >	right;
+	size_t n1 = midIdx - startIdx + 1;
+	size_t n2 = endIdx - midIdx;
+	std::deque<std::pair<int, int> > left(n1);
+	std::deque<std::pair<int, int> > right(n2);
 
-	size_t	midIdx = (startIdx + endIdx) / 2;
-	size_t	leftIdx = 0;
-	size_t	rightIdx = 0;
-
-	static_cast<void>(depth);
-	for (size_t i = 0; i < midIdx + 1; i++)
+	for (size_t i = 0; i < n1; i++)
+		left[i] = _sortChain[startIdx + i];
+	for (size_t i = 0; i < n2; i++)
+		right[i] = _sortChain[midIdx + 1 + i];
+	size_t i = 0, j = 0, k = startIdx;
+	while (i < n1 && j < n2) 
 	{
-		left.push_back(std::make_pair(_sortChain[i].first, _sortChain[i].second));
-		// std::cout << "left key   : " << left[i].first << std::endl;
-		// std::cout << "left value : " << left[i].second << std::endl;
-	}
-	for (size_t i = midIdx + 1; i < _sortChain.size(); i++)
-	{
-		right.push_back(std::make_pair(_sortChain[i].first, _sortChain[i].second));
-		// std::cout << "right key   : " << right[i].first << std::endl;
-		// std::cout << "right value : " << right[i].second << std::endl;
-	}
-	for (size_t i = 0; i < _sortChain.size(); i++)
-	{
-		if (rightIdx > right.size() - 1 || left[leftIdx] < right[rightIdx])
+		if (left[i] <= right[j]) 
 		{
-			_sortChain.insert(_sortChain.begin() + i, std::make_pair(left[leftIdx].first, left[leftIdx].second));
-			++leftIdx;
-		}
-		else if (leftIdx > left.size() - 1 || left[leftIdx] > right[rightIdx])
-		{
-			_sortChain.insert(_sortChain.begin() + i, std::make_pair(right[rightIdx].first, right[rightIdx].second));
-			++rightIdx;
-		}
+			_sortChain[k] = left[i];
+			i++;
+		} 
 		else
 		{
-			_sortChain.insert(_sortChain.begin() + i, std::make_pair(left[leftIdx].first, left[leftIdx].second));
-			++i;
-			_sortChain.insert(_sortChain.begin() + i, std::make_pair(right[rightIdx].first, right[rightIdx].second));
-			++leftIdx;
-			++rightIdx;
+			_sortChain[k] = right[j];
+			j++;
 		}
+		k++;
+	}
+	while (i < n1) 
+	{
+		_sortChain[k] = left[i];
+		i++;
+		k++;
+	}
+	while (j < n2) 
+	{
+		_sortChain[k] = right[j];
+		j++;
+		k++;
 	}
 }
 
 void	PmergeMe::mergeSortMainChain(std::deque<std::pair<int, int> >& _sortChain, \
-	int startIdx, int endIdx, int depth)
+	size_t startIdx, size_t endIdx)
 {
 	if (startIdx < endIdx)
 	{
-		int midIdx = (startIdx + endIdx) / 2;
-		mergeSortMainChain(_sortChain, startIdx, midIdx, depth + 1);
-		mergeSortMainChain(_sortChain, midIdx + 1, endIdx, depth + 1);
-		merge(_sortChain, startIdx, endIdx, depth + 1);
+		size_t midIdx = (startIdx + endIdx) / 2;
+		mergeSortMainChain(_sortChain, startIdx, midIdx);
+		mergeSortMainChain(_sortChain, midIdx + 1, endIdx);
+		merge(_sortChain, startIdx, midIdx, endIdx);
 	}
 }
 
+void	PmergeMe::mergeVec(std::vector<std::pair<int, int> >&_sortChainVec, \
+	size_t startIdx, size_t midIdx, size_t endIdx)
+{	
+	size_t n1 = midIdx - startIdx + 1;
+	size_t n2 = endIdx - midIdx;
+	std::vector<std::pair<int, int> > left(n1);
+	std::vector<std::pair<int, int> > right(n2);
+
+	for (size_t i = 0; i < n1; i++)
+		left[i] = _sortChainVec[startIdx + i];
+	for (size_t i = 0; i < n2; i++)
+		right[i] = _sortChainVec[midIdx + 1 + i];
+	size_t i = 0, j = 0, k = startIdx;
+	while (i < n1 && j < n2) 
+	{
+		if (left[i] <= right[j]) 
+		{
+			_sortChainVec[k] = left[i];
+			i++;
+		} 
+		else
+		{
+			_sortChainVec[k] = right[j];
+			j++;
+		}
+		k++;
+	}
+	while (i < n1) 
+	{
+		_sortChainVec[k] = left[i];
+		i++;
+		k++;
+	}
+	while (j < n2) 
+	{
+		_sortChainVec[k] = right[j];
+		j++;
+		k++;
+	}
+}
+
+void	PmergeMe::mergeSortMainChainVec(std::vector<std::pair<int, int> >& _sortChainVec, \
+	size_t startIdx, size_t endIdx)
+{
+	if (startIdx < endIdx)
+	{
+		size_t midIdx = (startIdx + endIdx) / 2;
+		mergeSortMainChainVec(_sortChainVec, startIdx, midIdx);
+		mergeSortMainChainVec(_sortChainVec, midIdx + 1, endIdx);
+		mergeVec(_sortChainVec, startIdx, midIdx, endIdx);
+	}
+}
 
 
 void	PmergeMe::createChains(void)
@@ -145,21 +192,20 @@ void	PmergeMe::createChains(void)
 	{
 		_solo = *iter;
 	}
-	// std::sort(_sortChain.begin(), _sortChain.end());
 	//debugging
-	for (std::deque<std::pair<int, int> >::iterator iter = _sortChain.begin(); iter != _sortChain.end(); iter++)
-	{
-		std::cout << "Bkey   : " << iter->first << std::endl;
-		std::cout << "Bvalue : " << iter->second << std::endl;
-	}
+	// for (std::deque<std::pair<int, int> >::iterator iter = _sortChain.begin(); iter != _sortChain.end(); iter++)
+	// {
+	// 	std::cout << "Bkey   : " << iter->first << std::endl;
+	// 	std::cout << "Bvalue : " << iter->second << std::endl;
+	// }
 	
-	mergeSortMainChain(_sortChain, 0, _sortChain.size(), 0);
+	mergeSortMainChain(_sortChain, 0, _sortChain.size() - 1);
 	//debugging
-	for (std::deque<std::pair<int, int> >::iterator iter = _sortChain.begin(); iter != _sortChain.end(); iter++)
-	{
-		std::cout << "Akey   : " << iter->first << std::endl;
-		std::cout << "Avalue : " << iter->second << std::endl;
-	}
+	// for (std::deque<std::pair<int, int> >::iterator iter = _sortChain.begin(); iter != _sortChain.end(); iter++)
+	// {
+	// 	std::cout << "Akey   : " << iter->first << std::endl;
+	// 	std::cout << "Avalue : " << iter->second << std::endl;
+	// }
 
 	for (std::deque<std::pair<int, int> >::iterator iter = _sortChain.begin(); iter != _sortChain.end(); iter++)
 	{
@@ -190,12 +236,11 @@ void	PmergeMe::createChainsVec(void)
 			++iter2;
 		}
 	}
-	
 	if (_copyConVec.size() % 2 != 0)
 	{
 		_solo = _copyConVec[_copyConVec.size() - 1];
 	}
-	std::sort(_sortChainVec.begin(), _sortChainVec.end());
+	mergeSortMainChainVec(_sortChainVec, 0, _sortChainVec.size() - 1);
 	for (std::vector<std::pair<int, int> >::iterator iter = _sortChainVec.begin(); iter != _sortChainVec.end(); iter++)
 	{
 		_mainChainVec.push_back(iter->first);
