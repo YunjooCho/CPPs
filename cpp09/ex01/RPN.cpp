@@ -6,7 +6,7 @@
 /*   By: yunjcho <yunjcho@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/23 22:07:48 by yunjcho           #+#    #+#             */
-/*   Updated: 2023/10/28 19:09:06 by yunjcho          ###   ########.fr       */
+/*   Updated: 2023/10/28 19:13:35 by yunjcho          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,9 @@ void	RPN::calculate(const std::string& argv)
 			continue ;
 		else if (std::isdigit(argv[i]))
 		{
+			if ((i + 1 < argv.length() && argv[i + 1] != ' ') \
+				|| (i - 1 > 0 && argv[i - 1] != ' '))
+				throw std::runtime_error("Error: invalid elements.");
 			_stack.push(argv[i] - '0');
 		}
 		else if (isOperator(argv[i]) == true)
