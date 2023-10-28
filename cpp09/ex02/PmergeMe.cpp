@@ -6,7 +6,7 @@
 /*   By: yunjcho <yunjcho@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 22:09:28 by yunjcho           #+#    #+#             */
-/*   Updated: 2023/10/28 09:34:29 by yunjcho          ###   ########seoul.kr  */
+/*   Updated: 2023/10/28 09:39:04 by yunjcho          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -247,12 +247,6 @@ void	PmergeMe::mergeInsertionSort(void)
 	size_t				endIdx = 0;
 
 	_order = createOrder();
-	//debugging
-	// for (size_t i = 0; i < _order.size(); i++)
-	// {
-	// 	std::cout << "_order: " << _order[i] << std::endl;
-	// }
-
 	for (std::vector<int>::iterator iter = _order.begin(); iter != _order.end(); iter++)
 	{
 		if (*iter == 1)
@@ -281,8 +275,6 @@ void	PmergeMe::mergeInsertionSort(void)
 	}
 	if (_solo != -1)
 		insertionSolo(result);
-	//debugging
-	// std::cout << "solo : " << _solo << std::endl;
 	for (size_t i = 0; i < result.size(); i++)
 	{
 		std::cout << "result : " << result[i] << std::endl;
@@ -298,13 +290,6 @@ void	PmergeMe::mergeInsertionSortVec(void)
 	size_t				endIdx = 0;
 
 	_orderVec = createOrder();
-	//debugging
-	for (size_t i = 0; i < _orderVec.size(); i++)
-	{
-		std::cout << "_orderVec: " << _orderVec[i] << std::endl;
-	}
-
-	
 	for (std::vector<int>::iterator iter = _orderVec.begin(); iter != _orderVec.end(); iter++)
 	{
 		if (*iter == 1)
@@ -333,8 +318,6 @@ void	PmergeMe::mergeInsertionSortVec(void)
 	}
 	if (_solo != -1)
 		insertionSolo(resultVec);
-	//debugging
-	// std::cout << "solo2 : " << _solo << std::endl;
 	for (size_t i = 0; i < resultVec.size(); i++)
 	{
 		std::cout << "resultVec : " << resultVec[i] << std::endl;
