@@ -6,7 +6,7 @@
 /*   By: yunjcho <yunjcho@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/12 20:29:31 by yunjcho           #+#    #+#             */
-/*   Updated: 2023/10/27 21:54:28 by yunjcho          ###   ########.fr       */
+/*   Updated: 2023/10/28 18:31:55 by yunjcho          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,7 @@ class BitcoinExchange
 		std::string					rtrim(const std::string &str);
 		std::string					strtrim(const std::string &str);
 		std::list<int>				split(std::string input, char delimiter);
+		bool						checkLeafYear(const std::tm& tmDate);
 		bool						checkDate(std::string date);
 		double						checkDBNumber(std::string value);
 		double						checkInputNumber(std::string value);

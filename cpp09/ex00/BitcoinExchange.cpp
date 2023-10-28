@@ -6,7 +6,7 @@
 /*   By: yunjcho <yunjcho@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/12 21:11:49 by yunjcho           #+#    #+#             */
-/*   Updated: 2023/10/27 22:17:44 by yunjcho          ###   ########.fr       */
+/*   Updated: 2023/10/28 18:50:30 by yunjcho          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,6 +107,19 @@ std::list<int> 	BitcoinExchange::split(std::string input, char delimiter)
 	return (result);
 }
 
+bool	BitcoinExchange::checkLeafYear(const std::tm& tmDate)
+{
+	int	targetYear = tmDate.tm_year + 1900;
+	
+	if ((targetYear % 4 == 0 \
+		&& targetYear % 100 != 0) \
+		|| targetYear % 400 == 0)
+	{
+		return (true);
+	}
+	return (false);
+}
+
 bool	BitcoinExchange::checkDate(std::string date)
 {
 	std::list<int>	result;
@@ -143,6 +156,9 @@ bool	BitcoinExchange::checkDate(std::string date)
 		}
 		iter++;
 	}
+	if (tmDate.tm_mon == 1 && tmDate.tm_mday == 29
+		&& !checkLeafYear(tmDate))
+		return (false);
 	if (std::mktime(&tmDate) == -1)
 		return (false);
 	return (true);
@@ -151,17 +167,18 @@ bool	BitcoinExchange::checkDate(std::string date)
 double	BitcoinExchange::checkDBNumber(std::string value)
 {
 	double	doubleVal = std::strtod(value.c_str(), NULL);
-	if (value.empty() || doubleVal < 0 || doubleVal > std::numeric_limits<int>::max())
+	if (value.empty() || doubleVal < 0 \
+		|| doubleVal > std::numeric_limits<int>::max())
 		throw std::runtime_error("Error: invalid value in DataBase. => " + value);
 	return (doubleVal);
 }
 
 double	BitcoinExchange::checkInputNumber(std::string value)
 {
-	double	doubleVal = std::strtod(value.c_str(), NULL);
-	if (value.empty())
-		doubleVal = -1.0;
-	else if (doubleVal < 0)
+	double	doubleVal;
+
+	doubleVal = std::strtod(value.c_str(), NULL);
+	if (doubleVal < 0)
 	{
 		printError(ETC, "Error: not a positive number.");
 		doubleVal = -1.0;
@@ -187,6 +204,10 @@ void	BitcoinExchange::readDataBaseFile(std::string fileName)
 	_readArgs.open(fileName);
 	if (_readArgs.is_open())
 	{
+		std::getline(_readArgs, str);
+		str = strtrim(str);
+		if (str.compare(headline))
+			printError(ETC, "Error: The header line is incorrect.");
 		while (!_readArgs.eof())
 		{
 			std::getline(_readArgs, str);
@@ -236,6 +257,13 @@ void	BitcoinExchange::readInputFile(std::string fileName)
 	_readArgs.open(fileName);
 	if (_readArgs.is_open())
 	{
+		std::getline(_readArgs, str);
+		str = strtrim(str);
+		if (str.compare(headline))
+		{
+			printError(ETC, "Error: The header line is incorrect.");
+			return ;
+		}
 		while (!_readArgs.eof())
 		{
 			std::getline(_readArgs, str);
@@ -253,7 +281,19 @@ void	BitcoinExchange::readInputFile(std::string fileName)
 				}
 				else
 				{
-					date = str;
+					findIdx = 10;
+					date = strtrim(str.substr(0, findIdx));
+					if (findIdx != str.size())
+					{
+						value = strtrim(str.substr(findIdx + 1, str.length() - 1));
+						if (value.find_first_not_of("0123456789") != std::string::npos)
+						{
+							printError(INVALIDARG, value);
+							continue;
+						}
+					}
+					else
+						value = "";
 				}
 				if (checkDate(date))
 				{
@@ -271,10 +311,14 @@ void	BitcoinExchange::readInputFile(std::string fileName)
 								continue ;
 							}
 						}
-						double result = iter->second * doubleVal;
-						std::cout << date << " => " << value << " = " << result << std::endl;
+						if (value.compare(""))
+						{
+							double result = iter->second * doubleVal;
+							std::cout << date << " => " << value << " = " << result << std::endl;
+						}
+						else
+							printError(ETC, "Error: value is empty. => " + date);
 					}
-					
 				}
 				else
 				{
