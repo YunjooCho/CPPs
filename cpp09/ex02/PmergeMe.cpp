@@ -6,7 +6,7 @@
 /*   By: yunjcho <yunjcho@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 22:09:28 by yunjcho           #+#    #+#             */
-/*   Updated: 2023/10/28 09:58:29 by yunjcho          ###   ########seoul.kr  */
+/*   Updated: 2023/10/28 12:54:24 by yunjcho          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -189,6 +189,11 @@ void	PmergeMe::insertionSolo(Container& result)
 	size_t	endIdx = result.size() - 1;
 	int		curVal = _solo;
 
+	if (curVal > result[result.size() - 1])
+	{
+		result.push_back(curVal);
+		return ;
+	}
 	while (startIdx < endIdx)
 	{
 		size_t midIdx = (startIdx + endIdx) / 2;
@@ -294,9 +299,7 @@ void	PmergeMe::sort(void)
 	startTime = clock();
 	if (_con.size() == 1 || _conVec.size() == 1)
 	{
-		deqTime = clock() - startTime;
-		vecTime = clock() - startTime;
-		printTimes(deqTime, vecTime);
+		std::cout << "Error: at least 2 arguments are required." << std::endl;
 		return ;
 	}
 
@@ -318,20 +321,20 @@ void	PmergeMe::sort(void)
 
 void	PmergeMe::printArgs(void)
 {
-	std::cout << "before:		";
+	std::cout << "Before:		";
 	for (size_t i = 0; i < _con.size(); i++)
 	{
 		std::cout << _con[i] << " ";
 	}
 	std::cout << std::endl;
 
-	std::cout << "after(deque):	";
+	std::cout << "After(deque):	";
 	for (size_t i = 0; i < _result.size(); i++)
 	{
 		std::cout << _result[i] << " ";
 	}
 	std::cout << std::endl;
-	std::cout << "after(vec):	";
+	std::cout << "After(vec):	";
 	for (size_t i = 0; i < _resultVec.size(); i++)
 	{
 		std::cout << _result[i] << " ";
