@@ -6,7 +6,7 @@
 /*   By: yunjcho <yunjcho@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 22:09:28 by yunjcho           #+#    #+#             */
-/*   Updated: 2023/10/29 08:36:31 by yunjcho          ###   ########seoul.kr  */
+/*   Updated: 2023/10/29 08:37:26 by yunjcho          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -192,21 +192,7 @@ void	PmergeMe::createChains(void)
 	{
 		_solo = *iter;
 	}
-	//debugging
-	// for (std::deque<std::pair<int, int> >::iterator iter = _sortChain.begin(); iter != _sortChain.end(); iter++)
-	// {
-	// 	std::cout << "Bkey   : " << iter->first << std::endl;
-	// 	std::cout << "Bvalue : " << iter->second << std::endl;
-	// }
-	
 	mergeSortMainChain(_sortChain, 0, _sortChain.size() - 1);
-	//debugging
-	// for (std::deque<std::pair<int, int> >::iterator iter = _sortChain.begin(); iter != _sortChain.end(); iter++)
-	// {
-	// 	std::cout << "Akey   : " << iter->first << std::endl;
-	// 	std::cout << "Avalue : " << iter->second << std::endl;
-	// }
-
 	for (std::deque<std::pair<int, int> >::iterator iter = _sortChain.begin(); iter != _sortChain.end(); iter++)
 	{
 		_mainChain.push_back(iter->first);
