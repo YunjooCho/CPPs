@@ -6,7 +6,7 @@
 /*   By: yunjcho <yunjcho@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 22:09:28 by yunjcho           #+#    #+#             */
-/*   Updated: 2023/10/28 02:07:49 by yunjcho          ###   ########seoul.kr  */
+/*   Updated: 2023/10/28 09:34:29 by yunjcho          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,10 +98,6 @@ void	PmergeMe::createChains(void)
 	{
 		_solo = *iter;
 	}
-
-	//debugging
-	std::cout << "_sortChain size() : " << _sortChain.size() << std::endl;
-
 	std::sort(_sortChain.begin(), _sortChain.end());
 	for (std::deque<std::pair<int, int> >::iterator iter = _sortChain.begin(); iter != _sortChain.end(); iter++)
 	{
@@ -110,14 +106,14 @@ void	PmergeMe::createChains(void)
 	}
 
 	// debugging
-	for (std::deque<int>::iterator iter = _mainChain.begin(); iter != _mainChain.end(); iter++)
-	{
-		std::cout << "mainChain : " << *iter << std::endl;
-	}
-	for (std::deque<int>::iterator iter = _peChain.begin(); iter != _peChain.end(); iter++)
-	{
-		std::cout << "peChain : " << *iter << std::endl;
-	}
+// 	for (std::deque<int>::iterator iter = _mainChain.begin(); iter != _mainChain.end(); iter++)
+// 	{
+// 		std::cout << "mainChain : " << *iter << std::endl;
+// 	}
+// 	for (std::deque<int>::iterator iter = _peChain.begin(); iter != _peChain.end(); iter++)
+// 	{
+// 		std::cout << "peChain : " << *iter << std::endl;
+// 	}
 }
 
 void	PmergeMe::createChainsVec(void)
@@ -140,18 +136,13 @@ void	PmergeMe::createChainsVec(void)
 		{
 			++iter;
 			++iter2;
-			_copyConVec.erase(_copyConVec.begin());
 		}
 	}
 	
-	if (_copyConVec.size() > 0)
+	if (_copyConVec.size() % 2 != 0)
 	{
-		_solo = *iter; //TODO - pair가 없는 경우 따로 저장
+		_solo = _copyConVec[_copyConVec.size() - 1];
 	}
-
-		//debugging
-	std::cout << "_sortChainVec size() : " << _sortChainVec.size() << std::endl;
-
 	std::sort(_sortChainVec.begin(), _sortChainVec.end());
 	for (std::vector<std::pair<int, int> >::iterator iter = _sortChainVec.begin(); iter != _sortChainVec.end(); iter++)
 	{
@@ -160,14 +151,14 @@ void	PmergeMe::createChainsVec(void)
 	}
 
 	// debugging
-	for (std::vector<int>::iterator iter = _mainChainVec.begin(); iter != _mainChainVec.end(); iter++)
-	{
-		std::cout << "_mainChainVec : " << *iter << std::endl;
-	}
-	for (std::vector<int>::iterator iter = _peChainVec.begin(); iter != _peChainVec.end(); iter++)
-	{
-		std::cout << "_peChainVec : " << *iter << std::endl;
-	}
+	// for (std::vector<int>::iterator iter = _mainChainVec.begin(); iter != _mainChainVec.end(); iter++)
+	// {
+	// 	std::cout << "_mainChainVec : " << *iter << std::endl;
+	// }
+	// for (std::vector<int>::iterator iter = _peChainVec.begin(); iter != _peChainVec.end(); iter++)
+	// {
+	// 	std::cout << "_peChainVec : " << *iter << std::endl;
+	// }
 }
 
 int		PmergeMe::jacobstalNum(int n)
@@ -225,25 +216,26 @@ std::vector<int> PmergeMe::createOrder(void)
 }
 
 template <typename Container>
-void	PmergeMe::insertionSolo(Container result)
+void	PmergeMe::insertionSolo(Container& result)
 {
 	size_t	startIdx = 0;
-	size_t	endIdx = 0;
+	size_t	endIdx = result.size() - 1;
+	int		curVal = _solo;
 
 	while (startIdx < endIdx)
 	{
 		size_t midIdx = (startIdx + endIdx) / 2;
-		if (result[midIdx] < _solo)
+		if (result[midIdx] < curVal)
 			startIdx = midIdx + 1;
-		else if (result[midIdx] > _solo)
+		else if (result[midIdx] > curVal)
 			endIdx = midIdx;
 		else
 		{
-			startIdx = midIdx + 1;
+			startIdx = midIdx;
 			break ;
 		}
 	}
-	result.insert(result.begin() + startIdx, _solo);
+	result.insert(result.begin() + startIdx, curVal);
 }
 
 void	PmergeMe::mergeInsertionSort(void)
@@ -256,11 +248,10 @@ void	PmergeMe::mergeInsertionSort(void)
 
 	_order = createOrder();
 	//debugging
-	for (size_t i = 0; i < _order.size(); i++)
-	{
-		std::cout << "_order: " << _order[i] << std::endl;
-	}
-
+	// for (size_t i = 0; i < _order.size(); i++)
+	// {
+	// 	std::cout << "_order: " << _order[i] << std::endl;
+	// }
 
 	for (std::vector<int>::iterator iter = _order.begin(); iter != _order.end(); iter++)
 	{
@@ -291,6 +282,7 @@ void	PmergeMe::mergeInsertionSort(void)
 	if (_solo != -1)
 		insertionSolo(result);
 	//debugging
+	// std::cout << "solo : " << _solo << std::endl;
 	for (size_t i = 0; i < result.size(); i++)
 	{
 		std::cout << "result : " << result[i] << std::endl;
@@ -342,6 +334,7 @@ void	PmergeMe::mergeInsertionSortVec(void)
 	if (_solo != -1)
 		insertionSolo(resultVec);
 	//debugging
+	// std::cout << "solo2 : " << _solo << std::endl;
 	for (size_t i = 0; i < resultVec.size(); i++)
 	{
 		std::cout << "resultVec : " << resultVec[i] << std::endl;

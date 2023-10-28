@@ -6,7 +6,7 @@
 /*   By: yunjcho <yunjcho@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 22:02:48 by yunjcho           #+#    #+#             */
-/*   Updated: 2023/10/28 01:34:55 by yunjcho          ###   ########seoul.kr  */
+/*   Updated: 2023/10/28 09:32:40 by yunjcho          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ class PmergeMe
 		int					jacobstalNum(int n);
 		std::vector<int>	createOrder(void);
 		template <typename Container>
-		void				insertionSolo(Container result);
+		void				insertionSolo(Container& result);
 		void				mergeInsertionSort(void);
 		void				mergeInsertionSortVec(void);
 		void				sort(void);
