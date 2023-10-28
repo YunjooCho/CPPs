@@ -6,7 +6,7 @@
 /*   By: yunjcho <yunjcho@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 22:02:48 by yunjcho           #+#    #+#             */
-/*   Updated: 2023/10/28 09:57:47 by yunjcho          ###   ########seoul.kr  */
+/*   Updated: 2023/10/28 21:47:03 by yunjcho          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,8 @@ class PmergeMe
 		std::vector<int>	createOrder(void);
 		template <typename Container>
 		void				insertionSolo(Container& result);
+		void				merge(std::deque<std::pair<int, int> >& _sortChain, int startIdx, int endIdx, int depth);
+		void				mergeSortMainChain(std::deque<std::pair<int, int> >&_sortChain, int startIdx, int endIdx, int depth);
 		void				mergeInsertionSort(void);
 		void				mergeInsertionSortVec(void);
 		void				sort(void);

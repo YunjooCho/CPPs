@@ -6,7 +6,7 @@
 /*   By: yunjcho <yunjcho@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 22:09:28 by yunjcho           #+#    #+#             */
-/*   Updated: 2023/10/28 12:54:24 by yunjcho          ###   ########.fr       */
+/*   Updated: 2023/10/28 23:29:11 by yunjcho          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,67 @@ void	PmergeMe::parsing(char **argv)
 	}
 }
 
+//많은 수정 요망
+void	PmergeMe::merge(std::deque<std::pair<int, int> >&_sortChain, \
+	int startIdx, int endIdx, int depth)
+{	
+	std::deque<std::pair<int, int> >	left;
+	std::deque<std::pair<int, int> >	right;
+
+	size_t	midIdx = (startIdx + endIdx) / 2;
+	size_t	leftIdx = 0;
+	size_t	rightIdx = 0;
+
+	static_cast<void>(depth);
+	for (size_t i = 0; i < midIdx + 1; i++)
+	{
+		left.push_back(std::make_pair(_sortChain[i].first, _sortChain[i].second));
+		// std::cout << "left key   : " << left[i].first << std::endl;
+		// std::cout << "left value : " << left[i].second << std::endl;
+	}
+	for (size_t i = midIdx + 1; i < _sortChain.size(); i++)
+	{
+		right.push_back(std::make_pair(_sortChain[i].first, _sortChain[i].second));
+		// std::cout << "right key   : " << right[i].first << std::endl;
+		// std::cout << "right value : " << right[i].second << std::endl;
+	}
+	for (size_t i = 0; i < _sortChain.size(); i++)
+	{
+		if (rightIdx > right.size() - 1 || left[leftIdx] < right[rightIdx])
+		{
+			_sortChain.insert(_sortChain.begin() + i, std::make_pair(left[leftIdx].first, left[leftIdx].second));
+			++leftIdx;
+		}
+		else if (leftIdx > left.size() - 1 || left[leftIdx] > right[rightIdx])
+		{
+			_sortChain.insert(_sortChain.begin() + i, std::make_pair(right[rightIdx].first, right[rightIdx].second));
+			++rightIdx;
+		}
+		else
+		{
+			_sortChain.insert(_sortChain.begin() + i, std::make_pair(left[leftIdx].first, left[leftIdx].second));
+			++i;
+			_sortChain.insert(_sortChain.begin() + i, std::make_pair(right[rightIdx].first, right[rightIdx].second));
+			++leftIdx;
+			++rightIdx;
+		}
+	}
+}
+
+void	PmergeMe::mergeSortMainChain(std::deque<std::pair<int, int> >& _sortChain, \
+	int startIdx, int endIdx, int depth)
+{
+	if (startIdx < endIdx)
+	{
+		int midIdx = (startIdx + endIdx) / 2;
+		mergeSortMainChain(_sortChain, startIdx, midIdx, depth + 1);
+		mergeSortMainChain(_sortChain, midIdx + 1, endIdx, depth + 1);
+		merge(_sortChain, startIdx, endIdx, depth + 1);
+	}
+}
+
+
+
 void	PmergeMe::createChains(void)
 {
 	size_t								targetIdx = _con.size() - 2;
@@ -80,12 +141,26 @@ void	PmergeMe::createChains(void)
 			_copyCon.pop_front();
 		}
 	}
-	
 	if (_copyCon.size() % 2 != 0)
 	{
 		_solo = *iter;
 	}
-	std::sort(_sortChain.begin(), _sortChain.end());
+	// std::sort(_sortChain.begin(), _sortChain.end());
+	//debugging
+	for (std::deque<std::pair<int, int> >::iterator iter = _sortChain.begin(); iter != _sortChain.end(); iter++)
+	{
+		std::cout << "Bkey   : " << iter->first << std::endl;
+		std::cout << "Bvalue : " << iter->second << std::endl;
+	}
+	
+	mergeSortMainChain(_sortChain, 0, _sortChain.size(), 0);
+	//debugging
+	for (std::deque<std::pair<int, int> >::iterator iter = _sortChain.begin(); iter != _sortChain.end(); iter++)
+	{
+		std::cout << "Akey   : " << iter->first << std::endl;
+		std::cout << "Avalue : " << iter->second << std::endl;
+	}
+
 	for (std::deque<std::pair<int, int> >::iterator iter = _sortChain.begin(); iter != _sortChain.end(); iter++)
 	{
 		_mainChain.push_back(iter->first);
