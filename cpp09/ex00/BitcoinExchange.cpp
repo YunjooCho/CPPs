@@ -6,7 +6,7 @@
 /*   By: yunjcho <yunjcho@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/12 21:11:49 by yunjcho           #+#    #+#             */
-/*   Updated: 2023/10/29 16:08:15 by yunjcho          ###   ########.fr       */
+/*   Updated: 2023/10/29 16:40:15 by yunjcho          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -166,24 +166,29 @@ bool	BitcoinExchange::checkDate(std::string date)
 
 double	BitcoinExchange::checkDBNumber(std::string value)
 {
-	double	doubleVal = std::strtod(value.c_str(), NULL);
+	char	*check = NULL;
+	double	doubleVal = std::strtod(value.c_str(), &check);
+
 	if (value.empty() || doubleVal < 0 \
 		|| doubleVal > std::numeric_limits<int>::max() \
-		|| value.find_first_not_of("0123456789.") != std::string::npos)
+		|| value.find_first_not_of("0123456789.") != std::string::npos \
+		|| strtrim(std::string(check)).empty() == false)
 		throw std::runtime_error("Error: invalid value in DataBase. => " + value);
 	return (doubleVal);
 }
 
 double	BitcoinExchange::checkInputNumber(std::string value)
 {
-	double	doubleVal = std::strtod(value.c_str(), NULL);
+	char	*check = NULL;
+	double	doubleVal = std::strtod(value.c_str(), &check);
 	
-	if (value.find_first_not_of("0123456789.") != std::string::npos)
+	if (value.find_first_not_of("0123456789.") != std::string::npos \
+		|| strtrim(std::string(check)).empty() == false)
 	{
-		printError(ETC, "Error: invalid number.");
+		printError(INVALIDNUM, value);
 		doubleVal = -1.0;
 	}
-	if (doubleVal < 0)
+	else if (doubleVal < 0)
 	{
 		printError(ETC, "Error: not a positive number.");
 		doubleVal = -1.0;
