@@ -6,7 +6,7 @@
 /*   By: yunjcho <yunjcho@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/12 21:11:49 by yunjcho           #+#    #+#             */
-/*   Updated: 2023/10/29 16:40:15 by yunjcho          ###   ########.fr       */
+/*   Updated: 2023/10/29 21:34:50 by yunjcho          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -211,13 +211,23 @@ void	BitcoinExchange::readDataBaseFile(std::string fileName)
 	std::size_t			findIdx = 0;
 
 	fileName = strtrim(fileName);
+	_readArgs.open(fileName, std::ios::binary);
+	if (_readArgs.is_open())
+	{
+		_readArgs.seekg(0, std::ios::end);
+		size_t length = _readArgs.tellg();
+		if (length <= 0)
+			throw std::runtime_error("Error: database is empty.");
+		_readArgs.seekg (0);
+		_readArgs.close();
+	}
 	_readArgs.open(fileName);
 	if (_readArgs.is_open())
 	{
 		std::getline(_readArgs, str);
 		str = strtrim(str);
 		if (str.compare(headline))
-			printError(ETC, "Error: The header line is incorrect.");
+			throw std::runtime_error("Error: The header line is incorrect.");
 		while (!_readArgs.eof())
 		{
 			std::getline(_readArgs, str);
@@ -311,7 +321,11 @@ void	BitcoinExchange::readInputFile(std::string fileName)
 					double doubleVal = checkInputNumber(value);
 					if (doubleVal != -1.0)
 					{
-						std::map<std::string, double>::iterator iter = _database.lower_bound(date);
+						std::map<std::string, double>::iterator iter = _database.lower_bound(date);						
+						if (iter == _database.end()) //db 보다 큰 날짜면 마지막 날짜로 매핑되도록 함
+						{
+							iter = --_database.end();
+						}
 						if (iter->first.compare(date))
 						{
 							if (iter != _database.begin())
@@ -358,6 +372,7 @@ void	BitcoinExchange::exchange(char *argv)
 	}
 	catch(const std::exception& e)
 	{
+		_readArgs.close();
 		std::cout << e.what() << std::endl;
 	}
 }
