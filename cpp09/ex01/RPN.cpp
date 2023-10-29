@@ -6,7 +6,7 @@
 /*   By: yunjcho <yunjcho@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/23 22:07:48 by yunjcho           #+#    #+#             */
-/*   Updated: 2023/10/29 15:35:54 by yunjcho          ###   ########.fr       */
+/*   Updated: 2023/10/29 16:58:40 by yunjcho          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,38 +42,23 @@ bool	RPN::isOperator(char c)
 void	RPN::calculate(const std::string& argv)
 {
 
-	std::stringstream ss(argv);
-	std::string a;
-
-	while (ss >> a)
-	{
-		std::cout << a << std::endl;
-		//a유효성검사하고
-		// if 연산자 
-			// 연산자일때 스택의 요소가 2개보다 적으면 에러
-		// else value
-	}
-	
-	// 결과 출력할때 스택에 요소가 1개가아니면 에러
-
+	std::stringstream	ss(argv);
+	std::string 		inputStr;
 	int	operCnt = 0;
 
-	for (size_t i = 0; i < argv.length(); i++)
+	if (std::string(argv).length() < 2)
+		throw std::runtime_error("Error: not enough elements.");
+	while (ss >> inputStr)
 	{
-		if (argv[i] == ' ')
-			continue ;
-		else if (std::isdigit(argv[i]))
+		char c = inputStr.c_str()[0];
+		if (inputStr.size() > 1)
+			throw std::runtime_error("Error");
+		else if (std::isdigit(c))
 		{
-			if ((i + 1 < argv.length() - 1 && argv[i + 1] != ' ') \
-				|| (i - 1 > 0 && argv[i - 1] != ' '))
-				throw std::runtime_error("Error: invalid elements.");
-			_stack.push(argv[i] - '0');
+			_stack.push(c - '0');
 		}
-		else if (isOperator(argv[i]) == true)
+		else if (isOperator(c) == true)
 		{
-			if ((i + 1 < argv.length() && argv[i + 1] != ' ') \
-				|| (i - 1 > 0 && argv[i - 1] != ' '))
-				throw std::runtime_error("Error: invalid elements.");
 			++operCnt;
 			if (_stack.size() < 2)
 				throw std::runtime_error("Error: not enough numbers elements.");
@@ -81,19 +66,19 @@ void	RPN::calculate(const std::string& argv)
 			_stack.pop();
 			int num1 = _stack.top();
 			_stack.pop();
-			if (argv[i] == '+')
+			if (c == '+')
 				_stack.push(num1 + num2);
-			else if (argv[i] == '-')
+			else if (c == '-')
 			{
 				_stack.push(num1 - num2);
 			}
-			else if (argv[i] == '/')
+			else if (c == '/')
 			{
 				if (num2 == 0)
 					throw std::runtime_error("Error: You cannot divide by zero.");
 				_stack.push(num1 / num2);
 			}
-			else if (argv[i] == '*')
+			else if (c == '*')
 			{
 				_stack.push(num1 * num2);
 			}
@@ -102,12 +87,11 @@ void	RPN::calculate(const std::string& argv)
 			throw std::runtime_error("Error");
 	}
 	if (operCnt == 0)
-		throw std::runtime_error("Error: At least one operator is required.");
+		throw std::runtime_error("Error: Operator is required.");
 	if (_stack.size() == 1)
 	{
 		std::cout << _stack.top() << std::endl;
 	}
 	else
 		throw std::runtime_error("Error: Stack does not have just one element.");
-
 }
