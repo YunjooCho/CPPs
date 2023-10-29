@@ -6,7 +6,7 @@
 /*   By: yunjcho <yunjcho@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 22:02:48 by yunjcho           #+#    #+#             */
-/*   Updated: 2023/10/29 08:33:24 by yunjcho          ###   ########seoul.kr  */
+/*   Updated: 2023/10/29 13:19:35 by yunjcho          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,19 +29,19 @@ class PmergeMe
 		PmergeMe();
 		~PmergeMe();
 		void				parsing(char **argv);
-		void				createChains(void);
-		void				createChainsVec(void);
-		int					jacobstalNum(int n);
-		std::vector<int>	createOrder(void);
-		template <typename Container>
-		void				insertionSolo(Container& result);
-		void				merge(std::deque<std::pair<int, int> >& _sortChain, size_t startIdx, size_t midIdx, size_t endIdx);
-		void				mergeSortMainChain(std::deque<std::pair<int, int> >&_sortChain, size_t startIdx, size_t endIdx);
-		void				mergeInsertionSort(void);
-		void				mergeVec(std::vector<std::pair<int, int> >& _sortChainVec, size_t startIdx, size_t midIdx, size_t endIdx);
-		void				mergeSortMainChainVec(std::vector<std::pair<int, int> >&_sortChainVec, size_t startIdx, size_t endIdx);
-		void				mergeInsertionSortVec(void);
 		void				sort(void);
+		std::vector<int>	createOrder(void);
+		int					jacobstalNum(int n);
+		void				createChains(void);
+		void				mergeSortMainChain(std::deque<std::pair<int, int> >&_sortChain, size_t startIdx, size_t endIdx);
+		void				merge(std::deque<std::pair<int, int> >& _sortChain, size_t startIdx, size_t midIdx, size_t endIdx);
+		void				mergeInsertionSort(void);
+		void				insertionSolo(std::deque<int>& result);
+		void				createChainsVec(void);
+		void				mergeSortMainChainVec(std::vector<std::pair<int, int> >&_sortChainVec, size_t startIdx, size_t endIdx);
+		void				mergeVec(std::vector<std::pair<int, int> >& _sortChainVec, size_t startIdx, size_t midIdx, size_t endIdx);
+		void				mergeInsertionSortVec(void);
+		void				insertionSoloVec(std::vector<int>& result);
 		void				printArgs(void);
 		void				printTimes(clock_t deqTime, clock_t vecTime);
 	private:

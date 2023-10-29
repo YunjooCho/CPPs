@@ -6,7 +6,7 @@
 /*   By: yunjcho <yunjcho@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 22:09:28 by yunjcho           #+#    #+#             */
-/*   Updated: 2023/10/29 08:37:26 by yunjcho          ###   ########seoul.kr  */
+/*   Updated: 2023/10/29 13:06:08 by yunjcho          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,14 @@ PmergeMe& PmergeMe::operator=(const PmergeMe& instance)
 	if (this != &instance)
 	{
 		_con = instance._con;
+		_mainChain = instance._mainChain;
+		_peChain = instance._peChain;
+		_result = instance._result;
+		_conVec = instance._conVec;
+		_mainChainVec = instance._mainChainVec;
+		_peChainVec = instance._peChainVec;
+		_resultVec = instance._resultVec;
+		_solo = instance._solo;
 	}
 	return (*this);
 }
@@ -57,191 +65,33 @@ void	PmergeMe::parsing(char **argv)
 	}
 }
 
-//많은 수정 요망
-void	PmergeMe::merge(std::deque<std::pair<int, int> >&_sortChain, \
-	size_t startIdx, size_t midIdx, size_t endIdx)
-{	
-	size_t n1 = midIdx - startIdx + 1;
-	size_t n2 = endIdx - midIdx;
-	std::deque<std::pair<int, int> > left(n1);
-	std::deque<std::pair<int, int> > right(n2);
-
-	for (size_t i = 0; i < n1; i++)
-		left[i] = _sortChain[startIdx + i];
-	for (size_t i = 0; i < n2; i++)
-		right[i] = _sortChain[midIdx + 1 + i];
-	size_t i = 0, j = 0, k = startIdx;
-	while (i < n1 && j < n2) 
-	{
-		if (left[i] <= right[j]) 
-		{
-			_sortChain[k] = left[i];
-			i++;
-		} 
-		else
-		{
-			_sortChain[k] = right[j];
-			j++;
-		}
-		k++;
-	}
-	while (i < n1) 
-	{
-		_sortChain[k] = left[i];
-		i++;
-		k++;
-	}
-	while (j < n2) 
-	{
-		_sortChain[k] = right[j];
-		j++;
-		k++;
-	}
-}
-
-void	PmergeMe::mergeSortMainChain(std::deque<std::pair<int, int> >& _sortChain, \
-	size_t startIdx, size_t endIdx)
+void	PmergeMe::sort(void)
 {
-	if (startIdx < endIdx)
-	{
-		size_t midIdx = (startIdx + endIdx) / 2;
-		mergeSortMainChain(_sortChain, startIdx, midIdx);
-		mergeSortMainChain(_sortChain, midIdx + 1, endIdx);
-		merge(_sortChain, startIdx, midIdx, endIdx);
-	}
-}
+	clock_t	startTime;
+	clock_t	deqTime;
+	clock_t	vecTime;
 
-void	PmergeMe::mergeVec(std::vector<std::pair<int, int> >&_sortChainVec, \
-	size_t startIdx, size_t midIdx, size_t endIdx)
-{	
-	size_t n1 = midIdx - startIdx + 1;
-	size_t n2 = endIdx - midIdx;
-	std::vector<std::pair<int, int> > left(n1);
-	std::vector<std::pair<int, int> > right(n2);
+	startTime = clock();
+	if (_con.size() == 1 || _conVec.size() == 1)
+	{
+		std::cout << "Error: at least 2 arguments are required." << std::endl;
+		return ;
+	}
 
-	for (size_t i = 0; i < n1; i++)
-		left[i] = _sortChainVec[startIdx + i];
-	for (size_t i = 0; i < n2; i++)
-		right[i] = _sortChainVec[midIdx + 1 + i];
-	size_t i = 0, j = 0, k = startIdx;
-	while (i < n1 && j < n2) 
-	{
-		if (left[i] <= right[j]) 
-		{
-			_sortChainVec[k] = left[i];
-			i++;
-		} 
-		else
-		{
-			_sortChainVec[k] = right[j];
-			j++;
-		}
-		k++;
-	}
-	while (i < n1) 
-	{
-		_sortChainVec[k] = left[i];
-		i++;
-		k++;
-	}
-	while (j < n2) 
-	{
-		_sortChainVec[k] = right[j];
-		j++;
-		k++;
-	}
-}
+	_solo = -1;
+	startTime = clock();
+	createChains();
+	mergeInsertionSort();
+	deqTime = clock() - startTime;
 
-void	PmergeMe::mergeSortMainChainVec(std::vector<std::pair<int, int> >& _sortChainVec, \
-	size_t startIdx, size_t endIdx)
-{
-	if (startIdx < endIdx)
-	{
-		size_t midIdx = (startIdx + endIdx) / 2;
-		mergeSortMainChainVec(_sortChainVec, startIdx, midIdx);
-		mergeSortMainChainVec(_sortChainVec, midIdx + 1, endIdx);
-		mergeVec(_sortChainVec, startIdx, midIdx, endIdx);
-	}
-}
+	_solo = -1;
+	startTime = clock();
+	createChainsVec();
+	mergeInsertionSortVec();
+	vecTime = clock() - startTime;
 
-
-void	PmergeMe::createChains(void)
-{
-	size_t								targetIdx = _con.size() - 2;
-	std::deque<int>						_copyCon(_con);
-	std::deque<std::pair<int, int> >	_sortChain;
-
-	if (_con.size() % 2 != 0)
-		targetIdx -= 1;
-	std::deque<int>::iterator iter = _copyCon.begin();
-	std::deque<int>::iterator iter2 = ++_copyCon.begin();
-	for (size_t i = 0; i <= targetIdx; i += 2)
-	{
-		if (*iter < *iter2)
-			_sortChain.push_back(std::make_pair(*iter2, *iter));
-		else if(*iter > *iter2)
-			_sortChain.push_back(std::make_pair(*iter, *iter2));
-		for (size_t j = 0; j < 2; j++)
-		{
-			++iter;
-			++iter2;
-			_copyCon.pop_front();
-		}
-	}
-	if (_copyCon.size() % 2 != 0)
-	{
-		_solo = *iter;
-	}
-	mergeSortMainChain(_sortChain, 0, _sortChain.size() - 1);
-	for (std::deque<std::pair<int, int> >::iterator iter = _sortChain.begin(); iter != _sortChain.end(); iter++)
-	{
-		_mainChain.push_back(iter->first);
-		_peChain.push_back(iter->second);
-	}
-}
-
-void	PmergeMe::createChainsVec(void)
-{	
-	size_t								targetIdx = _conVec.size() - 2;
-	std::vector<int>					_copyConVec(_conVec);
-	std::vector<std::pair<int, int> >	_sortChainVec;
-
-	if (_conVec.size() % 2 != 0)
-		targetIdx -= 1;
-	std::vector<int>::iterator iter = _copyConVec.begin();
-	std::vector<int>::iterator iter2 = ++_copyConVec.begin();
-	for (size_t i = 0; i <= targetIdx; i += 2)
-	{
-		if (*iter < *iter2)
-			_sortChainVec.push_back(std::make_pair(*iter2, *iter));
-		else if(*iter > *iter2)
-			_sortChainVec.push_back(std::make_pair(*iter, *iter2));
-		for (size_t j = 0; j < 2; j++)
-		{
-			++iter;
-			++iter2;
-		}
-	}
-	if (_copyConVec.size() % 2 != 0)
-	{
-		_solo = _copyConVec[_copyConVec.size() - 1];
-	}
-	mergeSortMainChainVec(_sortChainVec, 0, _sortChainVec.size() - 1);
-	for (std::vector<std::pair<int, int> >::iterator iter = _sortChainVec.begin(); iter != _sortChainVec.end(); iter++)
-	{
-		_mainChainVec.push_back(iter->first);
-		_peChainVec.push_back(iter->second);
-	}
-}
-
-int		PmergeMe::jacobstalNum(int n)
-{
-	if (n == 0)
-		return 0;
-	else if (n == 1)
-		return 1;
-	else
-		return jacobstalNum(n - 1) + 2 * jacobstalNum(n - 2);
+	printArgs();
+	printTimes(deqTime, vecTime);
 }
 
 std::vector<int> PmergeMe::createOrder(void)
@@ -288,32 +138,106 @@ std::vector<int> PmergeMe::createOrder(void)
 	return (_order);
 }
 
-template <typename Container>
-void	PmergeMe::insertionSolo(Container& result)
+int		PmergeMe::jacobstalNum(int n)
 {
-	size_t	startIdx = 0;
-	size_t	endIdx = result.size() - 1;
-	int		curVal = _solo;
+	if (n == 0)
+		return 0;
+	else if (n == 1)
+		return 1;
+	else
+		return jacobstalNum(n - 1) + 2 * jacobstalNum(n - 2);
+}
 
-	if (curVal > result[result.size() - 1])
+
+/* 
+	std::deque
+*/
+void	PmergeMe::createChains(void)
+{
+	size_t								targetIdx = _con.size() - 2;
+	std::deque<int>						_copyCon(_con);
+	std::deque<std::pair<int, int> >	_sortChain;
+
+	if (_con.size() % 2 != 0)
+		targetIdx -= 1;
+	std::deque<int>::iterator iter = _copyCon.begin();
+	std::deque<int>::iterator iter2 = ++_copyCon.begin();
+	for (size_t i = 0; i <= targetIdx; i += 2)
 	{
-		result.push_back(curVal);
-		return ;
-	}
-	while (startIdx < endIdx)
-	{
-		size_t midIdx = (startIdx + endIdx) / 2;
-		if (result[midIdx] < curVal)
-			startIdx = midIdx + 1;
-		else if (result[midIdx] > curVal)
-			endIdx = midIdx;
-		else
+		if (*iter < *iter2)
+			_sortChain.push_back(std::make_pair(*iter2, *iter));
+		else if(*iter > *iter2)
+			_sortChain.push_back(std::make_pair(*iter, *iter2));
+		for (size_t j = 0; j < 2; j++)
 		{
-			startIdx = midIdx;
-			break ;
+			++iter;
+			++iter2;
+			_copyCon.pop_front();
 		}
 	}
-	result.insert(result.begin() + startIdx, curVal);
+	if (_copyCon.size() % 2 != 0)
+	{
+		_solo = *iter;
+	}
+	mergeSortMainChain(_sortChain, 0, _sortChain.size() - 1);
+	for (std::deque<std::pair<int, int> >::iterator iter = _sortChain.begin(); iter != _sortChain.end(); iter++)
+	{
+		_mainChain.push_back(iter->first);
+		_peChain.push_back(iter->second);
+	}
+}
+
+void	PmergeMe::mergeSortMainChain(std::deque<std::pair<int, int> >& _sortChain, \
+	size_t startIdx, size_t endIdx)
+{
+	if (startIdx < endIdx)
+	{
+		size_t midIdx = (startIdx + endIdx) / 2;
+		mergeSortMainChain(_sortChain, startIdx, midIdx);
+		mergeSortMainChain(_sortChain, midIdx + 1, endIdx);
+		merge(_sortChain, startIdx, midIdx, endIdx);
+	}
+}
+
+void	PmergeMe::merge(std::deque<std::pair<int, int> >&_sortChain, \
+	size_t startIdx, size_t midIdx, size_t endIdx)
+{	
+	size_t n1 = midIdx - startIdx + 1;
+	size_t n2 = endIdx - midIdx;
+	std::deque<std::pair<int, int> > left(n1);
+	std::deque<std::pair<int, int> > right(n2);
+
+	for (size_t i = 0; i < n1; i++)
+		left[i] = _sortChain[startIdx + i];
+	for (size_t i = 0; i < n2; i++)
+		right[i] = _sortChain[midIdx + 1 + i];
+	size_t i = 0, j = 0, k = startIdx;
+	while (i < n1 && j < n2) 
+	{
+		if (left[i] <= right[j]) 
+		{
+			_sortChain[k] = left[i];
+			i++;
+		} 
+		else
+		{
+			_sortChain[k] = right[j];
+			j++;
+		}
+		k++;
+	}
+	while (i < n1) 
+	{
+		_sortChain[k] = left[i];
+		i++;
+		k++;
+	}
+	while (j < n2) 
+	{
+		_sortChain[k] = right[j];
+		j++;
+		k++;
+	}
 }
 
 void	PmergeMe::mergeInsertionSort(void)
@@ -356,6 +280,130 @@ void	PmergeMe::mergeInsertionSort(void)
 	_result = result;
 }
 
+void	PmergeMe::insertionSolo(std::deque<int>& result)
+{
+	size_t	startIdx = 0;
+	size_t	endIdx = result.size() - 1;
+	int		curVal = _solo;
+
+	if (curVal > result[result.size() - 1])
+	{
+		result.push_back(curVal);
+		return ;
+	}
+	while (startIdx < endIdx)
+	{
+		size_t midIdx = (startIdx + endIdx) / 2;
+		if (result[midIdx] < curVal)
+			startIdx = midIdx + 1;
+		else if (result[midIdx] > curVal)
+			endIdx = midIdx;
+		else
+		{
+			startIdx = midIdx;
+			break ;
+		}
+	}
+	result.insert(result.begin() + startIdx, curVal);
+}
+
+
+
+
+
+
+
+
+/* 
+	std::vector
+*/
+void	PmergeMe::createChainsVec(void)
+{	
+	size_t								targetIdx = _conVec.size() - 2;
+	std::vector<int>					_copyConVec(_conVec);
+	std::vector<std::pair<int, int> >	_sortChainVec;
+
+	if (_conVec.size() % 2 != 0)
+		targetIdx -= 1;
+	std::vector<int>::iterator iter = _copyConVec.begin();
+	std::vector<int>::iterator iter2 = ++_copyConVec.begin();
+	for (size_t i = 0; i <= targetIdx; i += 2)
+	{
+		if (*iter < *iter2)
+			_sortChainVec.push_back(std::make_pair(*iter2, *iter));
+		else if(*iter > *iter2)
+			_sortChainVec.push_back(std::make_pair(*iter, *iter2));
+		for (size_t j = 0; j < 2; j++)
+		{
+			++iter;
+			++iter2;
+		}
+	}
+	if (_copyConVec.size() % 2 != 0)
+	{
+		_solo = _copyConVec[_copyConVec.size() - 1];
+	}
+	mergeSortMainChainVec(_sortChainVec, 0, _sortChainVec.size() - 1);
+	for (std::vector<std::pair<int, int> >::iterator iter = _sortChainVec.begin(); iter != _sortChainVec.end(); iter++)
+	{
+		_mainChainVec.push_back(iter->first);
+		_peChainVec.push_back(iter->second);
+	}
+}
+
+void	PmergeMe::mergeSortMainChainVec(std::vector<std::pair<int, int> >& _sortChainVec, \
+	size_t startIdx, size_t endIdx)
+{
+	if (startIdx < endIdx)
+	{
+		size_t midIdx = (startIdx + endIdx) / 2;
+		mergeSortMainChainVec(_sortChainVec, startIdx, midIdx);
+		mergeSortMainChainVec(_sortChainVec, midIdx + 1, endIdx);
+		mergeVec(_sortChainVec, startIdx, midIdx, endIdx);
+	}
+}
+
+void	PmergeMe::mergeVec(std::vector<std::pair<int, int> >&_sortChainVec, \
+	size_t startIdx, size_t midIdx, size_t endIdx)
+{	
+	size_t n1 = midIdx - startIdx + 1;
+	size_t n2 = endIdx - midIdx;
+	std::vector<std::pair<int, int> > left(n1);
+	std::vector<std::pair<int, int> > right(n2);
+
+	for (size_t i = 0; i < n1; i++)
+		left[i] = _sortChainVec[startIdx + i];
+	for (size_t i = 0; i < n2; i++)
+		right[i] = _sortChainVec[midIdx + 1 + i];
+	size_t i = 0, j = 0, k = startIdx;
+	while (i < n1 && j < n2) 
+	{
+		if (left[i] <= right[j]) 
+		{
+			_sortChainVec[k] = left[i];
+			i++;
+		} 
+		else
+		{
+			_sortChainVec[k] = right[j];
+			j++;
+		}
+		k++;
+	}
+	while (i < n1) 
+	{
+		_sortChainVec[k] = left[i];
+		i++;
+		k++;
+	}
+	while (j < n2) 
+	{
+		_sortChainVec[k] = right[j];
+		j++;
+		k++;
+	}
+}
+
 void	PmergeMe::mergeInsertionSortVec(void)
 {
 	std::vector<int>	resultVec(_mainChainVec);
@@ -392,37 +440,35 @@ void	PmergeMe::mergeInsertionSortVec(void)
 		resultVec.insert(resultVec.begin() + startIdx, _peChainVec[*iter - 1]);
 	}
 	if (_solo != -1)
-		insertionSolo(resultVec);
+		insertionSoloVec(resultVec);
 	_resultVec = resultVec;
 }
 
-void	PmergeMe::sort(void)
+void	PmergeMe::insertionSoloVec(std::vector<int>& result)
 {
-	clock_t	startTime;
-	clock_t	deqTime;
-	clock_t	vecTime;
+	size_t	startIdx = 0;
+	size_t	endIdx = result.size() - 1;
+	int		curVal = _solo;
 
-	startTime = clock();
-	if (_con.size() == 1 || _conVec.size() == 1)
+	if (curVal > result[result.size() - 1])
 	{
-		std::cout << "Error: at least 2 arguments are required." << std::endl;
+		result.push_back(curVal);
 		return ;
 	}
-
-	_solo = -1;
-	startTime = clock();
-	createChains();
-	mergeInsertionSort();
-	deqTime = clock() - startTime;
-
-	_solo = -1;
-	startTime = clock();
-	createChainsVec();
-	mergeInsertionSortVec();
-	vecTime = clock() - startTime;
-
-	printArgs();
-	printTimes(deqTime, vecTime);
+	while (startIdx < endIdx)
+	{
+		size_t midIdx = (startIdx + endIdx) / 2;
+		if (result[midIdx] < curVal)
+			startIdx = midIdx + 1;
+		else if (result[midIdx] > curVal)
+			endIdx = midIdx;
+		else
+		{
+			startIdx = midIdx;
+			break ;
+		}
+	}
+	result.insert(result.begin() + startIdx, curVal);
 }
 
 void	PmergeMe::printArgs(void)
