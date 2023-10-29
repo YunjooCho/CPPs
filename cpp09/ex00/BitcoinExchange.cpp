@@ -6,7 +6,7 @@
 /*   By: yunjcho <yunjcho@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/12 21:11:49 by yunjcho           #+#    #+#             */
-/*   Updated: 2023/10/29 21:34:50 by yunjcho          ###   ########.fr       */
+/*   Updated: 2023/10/29 21:36:18 by yunjcho          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -321,7 +321,7 @@ void	BitcoinExchange::readInputFile(std::string fileName)
 					double doubleVal = checkInputNumber(value);
 					if (doubleVal != -1.0)
 					{
-						std::map<std::string, double>::iterator iter = _database.lower_bound(date);						
+						std::map<std::string, double>::iterator iter = _database.lower_bound(date);
 						if (iter == _database.end()) //db 보다 큰 날짜면 마지막 날짜로 매핑되도록 함
 						{
 							iter = --_database.end();
