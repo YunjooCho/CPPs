@@ -6,7 +6,7 @@
 /*   By: yunjcho <yunjcho@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/23 22:07:48 by yunjcho           #+#    #+#             */
-/*   Updated: 2023/10/28 19:13:35 by yunjcho          ###   ########.fr       */
+/*   Updated: 2023/10/29 15:35:54 by yunjcho          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,21 @@ bool	RPN::isOperator(char c)
 
 void	RPN::calculate(const std::string& argv)
 {
+
+	std::stringstream ss(argv);
+	std::string a;
+
+	while (ss >> a)
+	{
+		std::cout << a << std::endl;
+		//a유효성검사하고
+		// if 연산자 
+			// 연산자일때 스택의 요소가 2개보다 적으면 에러
+		// else value
+	}
+	
+	// 결과 출력할때 스택에 요소가 1개가아니면 에러
+
 	int	operCnt = 0;
 
 	for (size_t i = 0; i < argv.length(); i++)
@@ -49,7 +64,7 @@ void	RPN::calculate(const std::string& argv)
 			continue ;
 		else if (std::isdigit(argv[i]))
 		{
-			if ((i + 1 < argv.length() && argv[i + 1] != ' ') \
+			if ((i + 1 < argv.length() - 1 && argv[i + 1] != ' ') \
 				|| (i - 1 > 0 && argv[i - 1] != ' '))
 				throw std::runtime_error("Error: invalid elements.");
 			_stack.push(argv[i] - '0');

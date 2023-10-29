@@ -6,7 +6,7 @@
 /*   By: yunjcho <yunjcho@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/23 22:04:49 by yunjcho           #+#    #+#             */
-/*   Updated: 2023/10/23 23:01:35 by yunjcho          ###   ########seoul.kr  */
+/*   Updated: 2023/10/29 15:33:24 by yunjcho          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define RPN_HPP
 
 # include <iostream>
+# include <sstream>
 # include <stack>
 
 class RPN
