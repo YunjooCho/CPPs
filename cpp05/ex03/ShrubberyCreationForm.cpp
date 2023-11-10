@@ -6,7 +6,7 @@
 /*   By: yunjcho <yunjcho@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/08 16:31:46 by yunjcho           #+#    #+#             */
-/*   Updated: 2023/09/29 19:30:12 by yunjcho          ###   ########.fr       */
+/*   Updated: 2023/11/10 14:29:36 by yunjcho          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,8 +67,10 @@ bool	ShrubberyCreationForm::execute(Bureaucrat const &executor) const
 			printFile.close();
 			return (true);
 		}
-		else
+		else if (!this->getIsSigned())
 			throw AForm::GradeTooLowException(4);
+		else if (executor.getGrade() > this->getExecGrade())
+			throw AForm::GradeTooLowException(5);
 	}
 	catch(const std::exception& e)
 	{

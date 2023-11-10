@@ -6,7 +6,7 @@
 /*   By: yunjcho <yunjcho@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/09 19:52:30 by yunjcho           #+#    #+#             */
-/*   Updated: 2023/09/29 19:32:56 by yunjcho          ###   ########.fr       */
+/*   Updated: 2023/11/10 14:29:11 by yunjcho          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,10 +49,12 @@ bool	PresidentialPardonForm::execute(Bureaucrat const &executor) const
 		if (executor.getGrade() <= this->getExecGrade() && this->getIsSigned())
 		{
 			std::cout << "[INFO] " << _target << " has been pardoned by Zaphod Beeblebrox." << std::endl;
+			return (true);
 		}
-		else
+		else if (!this->getIsSigned())
 			throw AForm::GradeTooLowException(4);
-		return (true);
+		else if (executor.getGrade() > this->getExecGrade())
+			throw AForm::GradeTooLowException(5);
 	}
 	catch(const std::exception& e)
 	{
