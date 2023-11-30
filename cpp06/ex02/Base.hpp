@@ -6,17 +6,16 @@
 /*   By: yunjcho <yunjcho@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/24 22:23:13 by yunjcho           #+#    #+#             */
-/*   Updated: 2023/09/24 22:23:59 by yunjcho          ###   ########seoul.kr  */
+/*   Updated: 2023/11/30 20:41:28 by yunjcho          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef BASE_HPP
-# define BASE_HPP
+#define BASE_HPP
 
-class Base
-{
-	public:
-		virtual ~Base();
+class Base {
+ public:
+  virtual ~Base();
 };
 
 #endif

@@ -6,18 +6,15 @@
 /*   By: yunjcho <yunjcho@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/24 22:26:30 by yunjcho           #+#    #+#             */
-/*   Updated: 2023/09/24 22:28:52 by yunjcho          ###   ########seoul.kr  */
+/*   Updated: 2023/11/30 20:41:26 by yunjcho          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef B_HPP
-# define B_HPP
+#define B_HPP
 
-# include "Base.hpp"
+#include "Base.hpp"
 
-class B : public Base
-{
-
-};
+class B : public Base {};
 
 #endif
