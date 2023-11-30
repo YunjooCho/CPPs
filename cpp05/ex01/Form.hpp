@@ -6,7 +6,7 @@
 /*   By: yunjcho <yunjcho@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/02 21:30:23 by yunjcho           #+#    #+#             */
-/*   Updated: 2023/09/29 18:38:18 by yunjcho          ###   ########.fr       */
+/*   Updated: 2023/11/30 17:07:59 by yunjcho          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,6 @@ class Form
 	public:
 		Form();
 		Form(const std::string &formName, const int &signGrade, const int &execGrade);
-		Form(const Form &form);
-		Form& operator=(const Form &form);
 		~Form();
 		std::string	getFormName(void) const;
 		bool		getIsSigned(void) const;
@@ -51,6 +49,8 @@ class Form
 		bool				_isSigned;
 		const int			_signGrade;
 		const int			_execGrade;
+		Form(const Form &form);
+		Form& operator=(const Form &form);
 };
 
 std::ostream& operator<<(std::ostream& outputStream, const Form& form);

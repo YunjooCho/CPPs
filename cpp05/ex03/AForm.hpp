@@ -6,7 +6,7 @@
 /*   By: yunjcho <yunjcho@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/02 21:30:23 by yunjcho           #+#    #+#             */
-/*   Updated: 2023/09/29 19:18:45 by yunjcho          ###   ########.fr       */
+/*   Updated: 2023/11/30 17:08:49 by yunjcho          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,6 @@ class AForm
 	public:
 		AForm();
 		AForm(const std::string &formName, const int &signGrade, const int &execGrade);
-		AForm(const AForm &form);
-		AForm& operator=(const AForm &form);
 		virtual ~AForm();
 		std::string		getFormName(void) const;
 		bool			getIsSigned(void) const;
@@ -52,6 +50,8 @@ class AForm
 		bool				_isSigned;
 		const int			_signGrade;
 		const int			_execGrade;
+		AForm(const AForm &form);
+		AForm& operator=(const AForm &form);
 };
 
 std::ostream& operator<<(std::ostream& outputStream, const AForm& form);
